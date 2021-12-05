@@ -100,3 +100,9 @@ bool CompareY(T Dest, T Sour)
 {
 	return Dest->Get_Info().y < Sour->Get_Info().y;
 }
+
+template<typename T>
+bool CompareDead(T temp1, T temp2)
+{
+	return temp1->Get_Dead() > temp2->Get_Dead();
+}

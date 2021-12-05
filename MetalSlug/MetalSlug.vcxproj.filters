@@ -25,9 +25,6 @@
     <Filter Include="소스 파일\00.Main">
       <UniqueIdentifier>{57cac5e7-cc5a-4808-926a-2e8460104526}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\99.Default">
-      <UniqueIdentifier>{65eedaf6-9700-44ae-9908-2f2ab4f1b46d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\01.Manager\01.ObjPoolMgr">
       <UniqueIdentifier>{1f054931-f6c3-4274-ab30-5e1215532827}</UniqueIdentifier>
     </Filter>
@@ -102,6 +99,27 @@
     </Filter>
     <Filter Include="소스 파일\01.Manager\06.SceneMgr\01.Scene\02.Game\01.Stage1">
       <UniqueIdentifier>{f984788e-72c8-4521-9ff2-8093df5bb843}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.Weapon">
+      <UniqueIdentifier>{343ef793-91fb-4586-a1e6-7b7f149ea685}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99.Default">
+      <UniqueIdentifier>{65eedaf6-9700-44ae-9908-2f2ab4f1b46d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.Weapon\01.Pistol">
+      <UniqueIdentifier>{52f97206-8fe5-4202-a02b-e32a10b02d06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.Weapon\02.Heavy">
+      <UniqueIdentifier>{5f9f628c-fced-4944-97d2-0c7e5daaec4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\05.Bullet\01.Heavy">
+      <UniqueIdentifier>{d26d0df1-04dd-4f19-b78c-b64550286a91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\06.Grenade">
+      <UniqueIdentifier>{6b0eb9fd-2ae0-48be-bf60-f81b66cdd9a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\02.Enemy\01.Soldier">
+      <UniqueIdentifier>{c92c15aa-c634-4a64-a162-0ddcb3abe2bb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +213,33 @@
     <ClInclude Include="ScrollMgr.h">
       <Filter>소스 파일\01.Manager\04.ScrollMgr</Filter>
     </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>소스 파일\03.Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Pistol.h">
+      <Filter>소스 파일\03.Weapon\01.Pistol</Filter>
+    </ClInclude>
+    <ClInclude Include="HeavyMachine.h">
+      <Filter>소스 파일\03.Weapon\02.Heavy</Filter>
+    </ClInclude>
+    <ClInclude Include="HeavyBullet.h">
+      <Filter>소스 파일\02.Object\05.Bullet\01.Heavy</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>소스 파일\02.Object\04.Prop\01.Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapons.h">
+      <Filter>소스 파일\03.Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Grenade.h">
+      <Filter>소스 파일\02.Object\06.Grenade</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>소스 파일\02.Object\02.Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Soldier.h">
+      <Filter>소스 파일\02.Object\02.Enemy\01.Soldier</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MetalSlug.rc">
@@ -266,6 +311,30 @@
     </ClCompile>
     <ClCompile Include="ScrollMgr.cpp">
       <Filter>소스 파일\01.Manager\04.ScrollMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>소스 파일\03.Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Pistol.cpp">
+      <Filter>소스 파일\03.Weapon\01.Pistol</Filter>
+    </ClCompile>
+    <ClCompile Include="HeavyMachine.cpp">
+      <Filter>소스 파일\03.Weapon\02.Heavy</Filter>
+    </ClCompile>
+    <ClCompile Include="HeavyBullet.cpp">
+      <Filter>소스 파일\02.Object\05.Bullet\01.Heavy</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>소스 파일\02.Object\04.Prop\01.Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Grenade.cpp">
+      <Filter>소스 파일\02.Object\06.Grenade</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>소스 파일\02.Object\02.Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Soldier.cpp">
+      <Filter>소스 파일\02.Object\02.Enemy\01.Soldier</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

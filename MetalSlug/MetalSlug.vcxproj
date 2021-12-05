@@ -156,10 +156,15 @@
     <ClInclude Include="CollisionMgr.h" />
     <ClInclude Include="DataMgr.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enum.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Grenade.h" />
+    <ClInclude Include="HeavyBullet.h" />
+    <ClInclude Include="HeavyMachine.h" />
     <ClInclude Include="Include.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="KeyMgr.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="LineMgr.h" />
@@ -169,14 +174,18 @@
     <ClInclude Include="MetalSlug.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="ObjPoolMgr.h" />
+    <ClInclude Include="Pistol.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneMgr.h" />
     <ClInclude Include="ScrollMgr.h" />
+    <ClInclude Include="Soldier.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Title.h" />
+    <ClInclude Include="Weapon.h" />
+    <ClInclude Include="Weapons.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BmpMgr.cpp" />
@@ -184,7 +193,12 @@
     <ClCompile Include="CBitMap.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />
     <ClCompile Include="DataMgr.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Grenade.cpp" />
+    <ClCompile Include="HeavyBullet.cpp" />
+    <ClCompile Include="HeavyMachine.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="LineMgr.cpp" />
@@ -193,11 +207,14 @@
     <ClCompile Include="MetalSlug.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="ObjPoolMgr.cpp" />
+    <ClCompile Include="Pistol.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneMgr.cpp" />
     <ClCompile Include="ScrollMgr.cpp" />
+    <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="Title.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MetalSlug.rc" />

@@ -1,0 +1,21 @@
+전체 8000 2800
+ 상태 x 14 
+ 200 x 200
+idle 6
+up 12
+walk 12
+
+
+
+1 idle 6
+2 move 
+3 fire
+4 up
+5 stab
+6 grenade
+7 die
+8 jump 
+9 jump_up
+10 jump_down
+11 down
+12 down fire 

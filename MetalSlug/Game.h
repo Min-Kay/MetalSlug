@@ -16,9 +16,22 @@ public:
 public:
 	virtual void	Check_GameState();
 
+public:
+	void	Init_Information(); 
+	void	Render_Information(HDC _hdc);
+
 protected:
 	bool	isClear;
 	bool	isFail;
+
+	TCHAR	bulletCount[5] = L"";
+	TCHAR	lifeCount[5] = L"";
+	TCHAR	scoreCount[5] = L"";
+
+	RECT	bulletRect;
+	RECT	lifeRect;
+	RECT	scoreRect;
+
 
 };
 

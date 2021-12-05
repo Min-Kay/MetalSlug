@@ -43,4 +43,5 @@ void Menu::Render(HDC _hdc)
 
 void Menu::Release()
 {
+	ReleaseDC(g_hwnd,drawingDC);
 }

@@ -26,20 +26,28 @@ public:
 	void	Set_Pos(float _x, float _y) { info.x = _x; info.y = _y; }
 	void	Set_Size(float _cx, float _cy) { info.cx = _cx; info.cy = _cy; }
 	void	Set_Dead(bool _dead) { isDead = _dead; }
+	void	Set_ID(OBJ::ID _id) { id = _id; }
+	void	Set_Angle(float _ang) { angle = _ang; }
 	virtual void	Update_Rect();
 
 public:
 	const INFO& Get_Info() const { return info; }
 	const RECT& Get_Rect() const { return rect; }
 	const bool& Get_Dead() const { return isDead; }
+	const OBJ::ID& Get_ID()	const { return id; }
 	const RENDER::ID& Get_RenderId() const { return render; }
+	const float& Get_Angle() const { return angle; }
 
 protected:
 	HDC		drawingDC;
+	HDC		stretchDC;
+
 	INFO	info;
 	RECT	rect;
 	DIR::ID dir; 
+	OBJ::ID	id;
 	RENDER::ID render;
 	bool	isDead;
+	float	angle;
 };
 

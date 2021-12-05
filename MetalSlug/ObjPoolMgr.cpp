@@ -1,7 +1,10 @@
 #include "ObjPoolMgr.h"
 #include "Obj.h"
+#include "Player.h"
 #include "Manager.h"
 #include "AbstractFactory.h"
+#include "Bullet.h"
+#include "HeavyBullet.h"
 
 ObjPoolMgr* ObjPoolMgr::pInstance = nullptr;
 
@@ -15,6 +18,8 @@ ObjPoolMgr::~ObjPoolMgr()
 
 void ObjPoolMgr::Initialize()
 {
+	player = nullptr; 
+	player_Dead = false;
 }
 
 void ObjPoolMgr::Update()
@@ -49,8 +54,6 @@ void ObjPoolMgr::Late_Update()
 			render[iter->Get_RenderId()].push_back(iter);
 		}
 	}
-
-	
 }
 
 void ObjPoolMgr::Render(HDC _hdc)
@@ -91,133 +94,81 @@ void ObjPoolMgr::Add_Object(OBJ::ID _id, Obj* _obj)
 	onScreen[_id].push_back(_obj);
 }
 
-//void ObjPoolMgr::Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _dir)
-//{
-//	for (auto& i : bullet[_bullet])
-//	{
-//		if (i->Get_Dead())
-//		{
-//			i->Initialize();
-//			i->Set_Pos(_X, _Y);
-//			i->Set_Dir(_dir);
-//			i->Update_Rect();
-//			i->Set_Dead(false);
-//			return;
-//		}
-//	}
-//
-//	switch (_bullet)
-//	{
-//	case BULLET::PISTOL:
-//		bullet_pool[_bullet].push_back(CAbstractFactory<Bullet>::Create(_X, _Y, _dir));
-//		break;
-//	case BULLET::HEAVY:
-//		bullet_pool[_bullet].push_back(CAbstractFactory<CKoopa_bullet>::Create(_X, _Y, _dir));
-//		break;
-//	case BULLET::ROCKET:
-//		bullet_pool[_bullet].push_back(CAbstractFactory<CFlowerBullet>::Create(_X, _Y, _dir));
-//		break;
-//	default:
-//		return;
-//	}
-//
-//	Add_Object(OBJ::BULLET, bullet_pool[_bullet].back());
-//}
-//
-//void ObjPoolMgr::Spawn_Item(ITEM::ID _item, float _X, float _Y, DIR::DIR _dir)
-//{
-//	for (auto& i : item_pool[_item])
-//	{
-//		if (i->Get_Dead())
-//		{
-//			i->Initialize();
-//			i->Set_Pos(_X, _Y);
-//			i->Set_Direction(_dir);
-//			i->Update_Rect();
-//			i->Set_Dead(false);
-//			CObjMgr::Get_Instance()->Add_Object(OBJ::ITEM, i);
-//			return;
-//		}
-//	}
-//
-//	switch (_item)
-//	{
-//	case ITEM::COIN:
-//		item_pool[_item].push_back(CAbstractFactory<CCoin>::Create(_X, _Y));
-//		break;
-//	case ITEM::MUSHROOM:
-//		item_pool[_item].push_back(CAbstractFactory<CMushroom>::Create(_X, _Y));
-//		break;
-//	case ITEM::FLOWER:
-//		item_pool[_item].push_back(CAbstractFactory<CFlower>::Create(_X, _Y));
-//		break;
-//	default:
-//		return;
-//	}
-//
-//	CObjMgr::Get_Instance()->Add_Object(OBJ::ITEM, item_pool[_item].back());
-//}
-//
-//void ObjPoolMgr::Spawn_Obstacle(BLOCK::ID _item, float _X, float _Y)
-//{
-//	for (auto& i : obstacle_pool[_item])
-//	{
-//		if (i->Get_Dead())
-//		{
-//			i->Initialize();
-//			i->Set_Pos(_X, _Y);
-//			i->Update_Rect();
-//			i->Set_Dead(false);
-//			CObjMgr::Get_Instance()->Add_Object(OBJ::OBSTACLE, i);
-//			return;
-//		}
-//	}
-//
-//	switch (_item)
-//	{
-//	case BLOCK::DEFAULT:
-//		obstacle_pool[_item].push_back(CAbstractFactory<CBlock>::Create(_X, _Y));
-//		break;
-//	case BLOCK::ITEM:
-//		obstacle_pool[_item].push_back(CAbstractFactory<CItemBlock>::Create(_X, _Y));
-//		break;
-//	case BLOCK::INVISIBLE:
-//	{
-//		CObj* temp = CAbstractFactory<CItemBlock>::Create(_X, _Y);
-//		static_cast<CItemBlock*>(temp)->Setup(BLOCK::INVISIBLE,true);
-//		obstacle_pool[_item].push_back(temp);
-//	}
-//		break;
-//	case BLOCK::BREAKABLE:
-//		obstacle_pool[_item].push_back(CAbstractFactory<CBreakableBlock>::Create(_X, _Y));
-//		break;
-//	case BLOCK::PIPE:
-//		obstacle_pool[_item].push_back(CAbstractFactory<CPipe>::Create(_X,_Y));
-//		break;
-//	default:
-//		return;
-//	}
-//
-//	CObjMgr::Get_Instance()->Add_Object(OBJ::OBSTACLE, obstacle_pool[_item].back());
-//}
-//
-//void ObjPoolMgr::Load_Obstacles(const TCHAR* _file)
-//{
-//	HANDLE			hFile = CreateFile(_file, GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-//
-//	DWORD		dwByte = 0;
-//	BLOCKINFO	binfo{};
-//
-//	while (true)
-//	{
-//		ReadFile(hFile, &binfo, sizeof(BLOCKINFO), &dwByte, NULL);
-//
-//		if (0 == dwByte)
-//			break;
-//
-//		Spawn_Obstacle(binfo.id,binfo.pos.x, binfo.pos.y);
-//	}
-//
-//	CloseHandle(hFile);
-//}
+float ObjPoolMgr::Check_Distance(Obj* _target)
+{
+	if (onScreen[OBJ::PLAYER].empty())
+		return 10000;
+
+	float x = _target->Get_Info().x - onScreen[OBJ::PLAYER].front()->Get_Info().x;
+	float y = _target->Get_Info().y - onScreen[OBJ::PLAYER].front()->Get_Info().y;
+
+	return sqrtf(x * x + y * y);
+}
+
+void ObjPoolMgr::Spawn_Player(float _X, float _Y)
+{
+	if (player)
+	{
+		player->Set_Pos(_X,_Y);
+		player->Initialize(); 
+	}
+	else
+	{
+		player = new Player;
+		player->Set_Pos(_X, _Y);
+		player->Initialize();
+	}
+	Add_Object(OBJ::PLAYER,player);
+}
+
+void ObjPoolMgr::Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _dir, float _angle)
+{
+	sort(bullet[_bullet].begin(), bullet[_bullet].end(), CompareDead<Obj*>);
+
+	for (auto& i : bullet[_bullet])
+	{
+		if (i->Get_Dead())
+		{
+			i->Initialize();
+			i->Set_Pos(_X, _Y);
+			i->Set_Dir(_dir);
+			i->Set_Angle(_angle);
+			i->Update_Rect();
+			i->Set_Dead(false);
+			Add_Object(OBJ::BULLET, i);
+			return;
+		}
+		else
+			break;
+	}
+
+	switch (_bullet)
+	{
+	case BULLET::PISTOL:
+		bullet[_bullet].push_back(CAbstractFactory<Bullet>::Create(_X, _Y, _dir));
+		break;
+	case BULLET::HEAVY:
+		bullet[_bullet].push_back(CAbstractFactory<HeavyBullet>::Create(_X, _Y, _dir,_angle));
+		break;
+	case BULLET::ROCKET:
+		//bullet[_bullet].push_back(CAbstractFactory<CFlowerBullet>::Create(_X, _Y, _dir));
+		break;
+	default:
+		return;
+	}
+
+	Add_Object(OBJ::BULLET, bullet[_bullet].back());
+}
+
+const INFO& ObjPoolMgr::Get_Player_Info() const
+{
+	INFO info{};
+	if (onScreen[OBJ::PLAYER].empty())
+		return info;
+
+
+	return onScreen[OBJ::PLAYER].front()->Get_Info();
+}
+
+
 

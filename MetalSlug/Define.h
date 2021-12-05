@@ -25,6 +25,13 @@
 
 
 // Blt Color 
-#define		PLAYER_COLOR	RGB(75, 169, 218)
+#define		PLAYER_COLOR	RGB(86, 177, 222)
+
+
+// Key Setting
+#define		VK_ATTACK		'X'
+#define		VK_JUMP			'Z'
+#define		VK_GRENADE		'A'
+#define		VK_INTERACTION	'S'
 
 extern		HWND			g_hwnd;
