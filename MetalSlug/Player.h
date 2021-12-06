@@ -37,6 +37,8 @@ private:
 
 	float	init_CY;
 
+	bool	isStab;
+
 	bool	isDying; 
 	bool	isFiring;
 	bool	isGrenading;

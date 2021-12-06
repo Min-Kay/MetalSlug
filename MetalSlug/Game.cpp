@@ -17,6 +17,9 @@ void Game::Initialize()
 	CScrollMgr::Get_Instance()->Set_ScrollLockY(600);
 	CLineMgr::Get_Instance()->Load(STAGE1_SAVE);
 	ObjPoolMgr::Get_Instance()->Spawn_Player(100,100);
+	ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER,300,300,DIR::LEFT,SOLDIER::PRIVATE);
+	ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 300, 300, DIR::LEFT, SOLDIER::SERGENT);
+
 }
 
 void Game::Update()

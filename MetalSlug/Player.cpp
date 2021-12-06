@@ -18,6 +18,8 @@ void Player::Initialize()
 	speed = walkSpeed;
 	sitSpeed = walkSpeed * 0.5f;
 
+	isStab = false;
+
 	isDying = false;
 	isFiring = false;
 	isGrenading = false;
@@ -26,7 +28,7 @@ void Player::Initialize()
 
 	isJump = false;
 	jumpY = 0.f;
-	jumpForce = 30.f;
+	jumpForce = 20.f;
 	jumpTime = 0.f;
 
 	isValid = true; 
@@ -64,7 +66,10 @@ void Player::Late_Update()
 
 void Player::Render(HDC _hdc)
 {
-	Rectangle(_hdc, rect.left, rect.top, rect.right, rect.bottom);
+	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
+	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
+
+	Rectangle(_hdc, rect.left + scrollX, rect.top + scrollY, rect.right + scrollX, rect.bottom + scrollY);
 	switch (action)
 	{
 	case ACTION::IDLE:
@@ -90,6 +95,9 @@ void Player::KeyInput()
 {
 	if (isDead || isDying || isValid)
 		return;
+
+	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
+	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
 	action = jumping ? ACTION::JUMP : ACTION::IDLE;
 
@@ -134,7 +142,7 @@ void Player::KeyInput()
 
 	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LEFT))
 	{
-		if (rect.left - speed < 0)
+		if (rect.left - speed < 0 - scrollX)
 			return; 
 
 		action = ACTION::MOVE;
@@ -146,7 +154,7 @@ void Player::KeyInput()
 
 	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_RIGHT))
 	{
-		if (rect.right + speed > WINCX)
+		if (rect.right + speed > WINCX - scrollX)
 			return;
 
 		action = ACTION::MOVE;
@@ -160,8 +168,10 @@ void Player::KeyInput()
 		isJump = true;
 		canRide = true;
 	}
-	else
+	else if (!isJump && canRide)
+	{
 		canRide = false;
+	}
 
 
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_JUMP) && !isJump)

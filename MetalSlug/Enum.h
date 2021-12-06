@@ -27,7 +27,7 @@ namespace ITEM
 
 namespace ENEMY
 {
-	enum ID {SOLIDER,TANK,END};
+	enum ID {SOLDIER,TANK,END};
 }
 
 namespace SCENE

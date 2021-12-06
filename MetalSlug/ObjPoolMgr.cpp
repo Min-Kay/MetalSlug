@@ -5,6 +5,7 @@
 #include "AbstractFactory.h"
 #include "Bullet.h"
 #include "HeavyBullet.h"
+#include "Soldier.h"
 
 ObjPoolMgr* ObjPoolMgr::pInstance = nullptr;
 
@@ -24,12 +25,15 @@ void ObjPoolMgr::Initialize()
 
 void ObjPoolMgr::Update()
 {
+	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
+	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
+
 	for (int i = 0; i < OBJ::END; ++i)
 	{
 		list<Obj*>::iterator iter = onScreen[i].begin();
 		for ( ; iter != onScreen[i].end();)
 		{
-			if ((*iter)->Get_Dead() || ((*iter)->Get_Info().x - onScreen[OBJ::PLAYER].front()->Get_Info().x > WINCX - 100.f))
+			if ((*iter)->Get_Dead() || ((*iter)->Get_Info().x - onScreen[OBJ::PLAYER].front()->Get_Info().x > WINCX - 100.f - scrollX))
 			{
 				(*iter)->Set_Dead(true);
 				iter = onScreen[i].erase(iter);
@@ -121,6 +125,43 @@ void ObjPoolMgr::Spawn_Player(float _X, float _Y)
 	Add_Object(OBJ::PLAYER,player);
 }
 
+void ObjPoolMgr::Spawn_Enemy(ENEMY::ID _enemy, float _X, float _Y, DIR::ID _dir, SOLDIER::CLASS _class)
+{
+	sort(enemy[_enemy].begin(), enemy[_enemy].end(), CompareDead<Obj*>);
+	for (auto& i : enemy[_enemy])
+	{
+		if (i->Get_Dead())
+		{
+			i->Initialize();
+			if (_enemy == ENEMY::SOLDIER)
+				static_cast<Soldier*>(i)->Set_Class(_class);
+			i->Set_Pos(_X, _Y);
+			i->Set_Dir(_dir);
+			i->Update_Rect();
+			i->Set_Dead(false);
+			Add_Object(OBJ::ENEMY, i);
+			return;
+		}
+		else
+			break;
+	}
+
+	switch (_enemy)
+	{
+	case ENEMY::SOLDIER:
+	{
+		Obj* temp = CAbstractFactory<Soldier>::Create(_X, _Y, _dir);
+		static_cast<Soldier*>(temp)->Set_Class(_class);
+		enemy[_enemy].push_back(temp);
+	}
+		break;
+	default:
+		return;
+	}
+
+	Add_Object(OBJ::ENEMY, enemy[_enemy].back());
+}
+
 void ObjPoolMgr::Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _dir, float _angle)
 {
 	sort(bullet[_bullet].begin(), bullet[_bullet].end(), CompareDead<Obj*>);
@@ -168,6 +209,16 @@ const INFO& ObjPoolMgr::Get_Player_Info() const
 
 
 	return onScreen[OBJ::PLAYER].front()->Get_Info();
+}
+
+const RECT& ObjPoolMgr::Get_Player_Rect() const
+{
+	RECT rect{};
+	if (onScreen[OBJ::PLAYER].empty())
+		return rect;
+
+
+	return onScreen[OBJ::PLAYER].front()->Get_Rect();
 }
 
 

@@ -28,10 +28,11 @@ public:
 	const bool& Get_Player_Dead() const { return player_Dead; }
 public:
 	void	Spawn_Player(float _X, float _Y);
-	void	Spawn_Enemy(ENEMY::ID _enemy, float _X, float _Y, DIR::ID _dir = DIR::LEFT);
+	void	Spawn_Enemy(ENEMY::ID _enemy, float _X, float _Y, DIR::ID _dir = DIR::LEFT, SOLDIER::CLASS _class = SOLDIER::PRIVATE);
 	void	Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _dir, float _angle);
 	void	Spawn_Item(ITEM::ID _item, float _X, float _Y, DIR::ID _dir = DIR::RIGHT);
 	const	INFO& Get_Player_Info() const;
+	const	RECT& Get_Player_Rect() const;
 
 private:
 	list<Obj*> onScreen[OBJ::END];
