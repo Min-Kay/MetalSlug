@@ -4,7 +4,7 @@
 void Pistol::Initialize()
 {
 	wep_id = WEAPON::PISTOL;
-	ammo = 1;
+	ammo = -1;
 	damage = 10;
 	isFire = false; 
 	coolTime = 200.f;

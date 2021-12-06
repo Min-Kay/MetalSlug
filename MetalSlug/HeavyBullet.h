@@ -14,7 +14,14 @@ public:
 	const OBJ::ID& Get_ParentID() const { return parentID; }
 
 public:
-	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir) { if (_opponent->Get_ID() != parentID) isDead = true; }
+	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir);
 
+
+private:
+	float	init_CX;
+	float	init_CY;
+
+	float	spread;
+	bool	minus;
 };
 

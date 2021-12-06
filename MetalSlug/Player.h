@@ -62,6 +62,8 @@ private:
 	DWORD	animTimer;
 	int		animValidIndex;
 
+	DWORD	dyingTimer;
+
 	int		animIndex[ANIM::PLAYER_END]{};
 	int		animIndexPos[ANIM::PLAYER_END]{0,2,10,3,8,9,13,5,6,7,11,4,12};
 

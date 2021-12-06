@@ -121,6 +121,21 @@
     <Filter Include="소스 파일\02.Object\02.Enemy\01.Soldier">
       <UniqueIdentifier>{c92c15aa-c634-4a64-a162-0ddcb3abe2bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02.Object\04.Prop\01.Item\01.WepItem">
+      <UniqueIdentifier>{32c057da-8402-45cf-863a-75cd437c363a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\04.Prop\01.Item\02.AmmoBox">
+      <UniqueIdentifier>{3af1d973-af99-461b-8f7e-413f7d3ae17b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\04.Prop\01.Item\03.GrenadeBox">
+      <UniqueIdentifier>{0e73803f-b2b8-4986-859b-0f5f0bff1c8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\04.Prop\01.Item\04.LifeStone">
+      <UniqueIdentifier>{f0c8445e-78fb-4e6a-95bc-a03156280256}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\04.Prop\01.Item\05.ItemBox">
+      <UniqueIdentifier>{09aee3b9-dd29-463b-9853-afc027f6f69a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -240,6 +255,27 @@
     <ClInclude Include="Soldier.h">
       <Filter>소스 파일\02.Object\02.Enemy\01.Soldier</Filter>
     </ClInclude>
+    <ClInclude Include="Stage2.h">
+      <Filter>소스 파일\01.Manager\06.SceneMgr\01.Scene\02.Game\01.Stage1</Filter>
+    </ClInclude>
+    <ClInclude Include="WepItem.h">
+      <Filter>소스 파일\02.Object\04.Prop\01.Item\01.WepItem</Filter>
+    </ClInclude>
+    <ClInclude Include="AmmoBox.h">
+      <Filter>소스 파일\02.Object\04.Prop\01.Item\02.AmmoBox</Filter>
+    </ClInclude>
+    <ClInclude Include="GrenadeBox.h">
+      <Filter>소스 파일\02.Object\04.Prop\01.Item\03.GrenadeBox</Filter>
+    </ClInclude>
+    <ClInclude Include="Items.h">
+      <Filter>소스 파일\02.Object\04.Prop\01.Item</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeStone.h">
+      <Filter>소스 파일\02.Object\04.Prop\01.Item\04.LifeStone</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBox.h">
+      <Filter>소스 파일\02.Object\04.Prop\01.Item\05.ItemBox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MetalSlug.rc">
@@ -335,6 +371,24 @@
     </ClCompile>
     <ClCompile Include="Soldier.cpp">
       <Filter>소스 파일\02.Object\02.Enemy\01.Soldier</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2.cpp">
+      <Filter>소스 파일\01.Manager\06.SceneMgr\01.Scene\02.Game\01.Stage1</Filter>
+    </ClCompile>
+    <ClCompile Include="WepItem.cpp">
+      <Filter>소스 파일\02.Object\04.Prop\01.Item\01.WepItem</Filter>
+    </ClCompile>
+    <ClCompile Include="AmmoBox.cpp">
+      <Filter>소스 파일\02.Object\04.Prop\01.Item\02.AmmoBox</Filter>
+    </ClCompile>
+    <ClCompile Include="GrenadeBox.cpp">
+      <Filter>소스 파일\02.Object\04.Prop\01.Item\03.GrenadeBox</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeStone.cpp">
+      <Filter>소스 파일\02.Object\04.Prop\01.Item\04.LifeStone</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBox.cpp">
+      <Filter>소스 파일\02.Object\04.Prop\01.Item\05.ItemBox</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

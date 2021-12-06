@@ -28,7 +28,7 @@ void Player::Initialize()
 
 	isJump = false;
 	jumpY = 0.f;
-	jumpForce = 20.f;
+	jumpForce = 30.f;
 	jumpTime = 0.f;
 
 	isValid = true; 
@@ -173,15 +173,9 @@ void Player::KeyInput()
 		canRide = false;
 	}
 
-
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_JUMP) && !isJump)
 	{
 		isJump = true;
-	}
-
-	if (CKeyMgr::Get_Instance()->Key_Down('D'))
-	{
-		Set_Weapon(new HeavyMachine);
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down('F'))
@@ -223,7 +217,7 @@ void Player::Jump()
 	if (isJump)
 	{
 		if(action != ACTION::DIE)	action = ACTION::JUMP;
-		jumpingState = (jumpForce * jumpTime - 9.8f * jumpTime * jumpTime * 0.7f) / 2.f;
+		jumpingState = (jumpForce * jumpTime - 9.8f * jumpTime * jumpTime * 0.7f) / 3.f;
 		info.y -= jumpingState;
 		jumpTime += 0.2f;
 		jumping = true; 
@@ -281,21 +275,7 @@ void Player::Anim_Idle(HDC _hdc)
 	drawingDC = BmpMgr::Get_Instance()->Find_Image(PLAYER_KEY);
 	stretchDC = BmpMgr::Get_Instance()->Find_Image(STRETCH_KEY);
 
-	if (isValid)
-	{
-		if (validTick + 10.f < GetTickCount())
-		{
-			validTick = GetTickCount(); 
-			switch (dir)
-			{
-			case DIR::RIGHT:
-				Anim_Counter(ANIM::PLAYER_IDLE, 5, 100.f);
-				GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx, info.cy, drawingDC, animIndex[ANIM::PLAYER_IDLE] * 200 + 80, animIndexPos[ANIM::PLAYER_IDLE] * 200 + 70, info.cx * 0.5f, info.cy * 0.5f, PLAYER_COLOR);
-				break;
-			}
-		}
-	}
-	else if (isFiring)
+	if (isFiring)
 	{
 		switch (dir)
 		{
@@ -620,6 +600,12 @@ void Player::Anim_Dying(HDC _hdc)
 	stretchDC = BmpMgr::Get_Instance()->Find_Image(STRETCH_KEY);
 
 	Anim_Counter(ANIM::PLAYER_DIE, 12, 70.f, false);
+	if (animIndex[ANIM::PLAYER_DIE] == 12 && dyingTimer + 1000.f < GetTickCount())
+	{
+		Set_Dead(true);
+		ObjPoolMgr::Get_Instance()->Set_Player_Dead(true);
+		DataMgr::Get_Instance()->Add_Life(-1);
+	}
 	switch (onlySide)
 	{
 	case DIR::RIGHT:
@@ -636,13 +622,6 @@ void Player::Anim_Dying(HDC _hdc)
 			StretchBlt(stretchDC, 0, 0, info.cx * 0.5f, info.cy * 0.5f, drawingDC, animIndex[ANIM::PLAYER_DIE] * 200 + 80 + info.cx * 0.5f, animIndexPos[ANIM::PLAYER_DIE] * 200 + 70, -info.cx * 0.5f, info.cy * 0.5f, SRCCOPY);
 			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx, info.cy, stretchDC, 0, 0, info.cx * 0.5f, info.cy * 0.5f, PLAYER_COLOR);
 		break;
-	}
-	
-	if (animIndex[ANIM::PLAYER_DIE] == 12)
-	{
-		Set_Dead(true);
-		ObjPoolMgr::Get_Instance()->Set_Player_Dead(true);
-		DataMgr::Get_Instance()->Add_Life(-1);
 	}
 }
 
@@ -672,7 +651,7 @@ void Player::Set_Weapon(Weapon* _wep)
 
 void Player::Check_WeaponState()
 {
-	if (weapon && weapon->Get_Ammo() <= 0)
+	if (weapon && weapon->Get_Ammo() == 0)
 		Set_Weapon(new Pistol);
 }
 
@@ -703,5 +682,7 @@ void Player::Set_Dying(DIR::ID _dir)
 {
 	dir = _dir;
 	action = ACTION::DIE;
+	info.cy = init_CY;
 	isDying = true;
+	dyingTimer = GetTickCount(); 
 }

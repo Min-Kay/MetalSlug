@@ -1,4 +1,5 @@
 #include "Bullet.h"
+#include "Items.h"
 
 void Bullet::Initialize()
 {
@@ -52,4 +53,41 @@ void Bullet::Render(HDC _hdc)
 
 void Bullet::Release()
 {
+}
+
+void Bullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
+{
+	switch (_id)
+	{
+	case OBJ::PLAYER:
+		if (_opponent->Get_ID() != parentID)
+			isDead = true;
+		break;
+	case OBJ::ENEMY:
+		if (_opponent->Get_ID() != parentID)
+			isDead = true;
+		break;
+	case OBJ::PROP:
+		if (static_cast<Item*>(_opponent)->Get_ItemID() == ITEM::ITEMBOX)
+			isDead = true;
+		break;
+	}
+}
+
+void Bullet::Anim_Counter(int count, float _timer, bool _roop, int start)
+{
+	if (animIndex < start)
+		animIndex = start;
+
+	if (animTimer + _timer < GetTickCount())
+	{
+		if (_roop && animIndex >= start + count)
+		{
+			animIndex = start;
+		}
+		else  if (animIndex < start + count)
+			++animIndex;
+
+		animTimer = GetTickCount();
+	}
 }

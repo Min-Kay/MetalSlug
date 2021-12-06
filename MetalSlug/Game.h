@@ -19,19 +19,17 @@ public:
 public:
 	void	Init_Information(); 
 	void	Render_Information(HDC _hdc);
-
+	int		Check_Number(TCHAR name);
+	int		Check_NumSize(int i); 
 protected:
 	bool	isClear;
 	bool	isFail;
 
-	TCHAR	bulletCount[5] = L"";
-	TCHAR	lifeCount[5] = L"";
-	TCHAR	scoreCount[5] = L"";
+	TCHAR	scoreCount[10] = L"";
+	TCHAR	bulletCount[10] = L"";
+	TCHAR	lifeCount[10] = L"";
+	TCHAR	grenadeCount[10] = L"";
 
-	RECT	bulletRect;
-	RECT	lifeRect;
-	RECT	scoreRect;
-
-
+	RECT	uiRect;
 };
 

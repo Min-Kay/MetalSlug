@@ -6,6 +6,7 @@
 #include "Bullet.h"
 #include "HeavyBullet.h"
 #include "Soldier.h"
+#include "Items.h"
 
 ObjPoolMgr* ObjPoolMgr::pInstance = nullptr;
 
@@ -52,6 +53,8 @@ void ObjPoolMgr::Late_Update()
 {
 	CCollisionMgr::Collision_Rect(onScreen[OBJ::PLAYER], onScreen[OBJ::BULLET]);
 	CCollisionMgr::Collision_Rect(onScreen[OBJ::ENEMY], onScreen[OBJ::BULLET]);
+	CCollisionMgr::Collision_Rect(onScreen[OBJ::PLAYER], onScreen[OBJ::PROP]);
+	CCollisionMgr::Collision_Rect(onScreen[OBJ::BULLET], onScreen[OBJ::PROP]);
 
 	for (int i = 0; i < OBJ::END; ++i)
 	{
@@ -145,8 +148,6 @@ void ObjPoolMgr::Spawn_Enemy(ENEMY::ID _enemy, float _X, float _Y, DIR::ID _dir,
 			Add_Object(OBJ::ENEMY, i);
 			return;
 		}
-		else
-			break;
 	}
 
 	switch (_enemy)
@@ -183,8 +184,6 @@ void ObjPoolMgr::Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _d
 			Add_Object(OBJ::BULLET, i);
 			return;
 		}
-		else
-			break;
 	}
 
 	Obj* temp = nullptr;
@@ -212,6 +211,76 @@ void ObjPoolMgr::Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _d
 	}
 
 	Add_Object(OBJ::BULLET, bullet[_bullet].back());
+}
+
+void ObjPoolMgr::Spawn_Item(ITEM::ID _item, float _X, float _Y, WEAPON::ID _wep)
+{
+	sort(item[_item].begin(), item[_item].end(), CompareDead<Obj*>);
+
+	for (auto& i : item[_item])
+	{
+		if (i->Get_Dead())
+		{
+			i->Initialize();
+			if (_item == ITEM::WEAPON)
+				static_cast<WepItem*>(i)->Set_WepID(_wep);
+			i->Set_Pos(_X, _Y);
+			i->Update_Rect();
+			i->Set_Dead(false);
+			Add_Object(OBJ::PROP, i);
+			return;
+		}
+	}
+
+	Obj* temp;
+	switch (_item)
+	{
+	case ITEM::AMMO:
+		item[_item].push_back(CAbstractFactory<AmmoBox>::Create(_X, _Y));
+		break;
+	case ITEM::GRENADE:
+		item[_item].push_back(CAbstractFactory<GrenadeBox>::Create(_X, _Y));
+		break;
+	case ITEM::LIFE:
+		item[_item].push_back(CAbstractFactory<LifeStone>::Create(_X, _Y));
+		break;
+	case ITEM::WEAPON:
+	{
+		switch (_wep)
+		{
+		case WEAPON::PISTOL:
+			return;
+		case WEAPON::HEAVY:
+			temp = CAbstractFactory<WepItem>::Create(_X, _Y);
+			static_cast<WepItem*>(temp)->Set_WepID(WEAPON::HEAVY);
+			item[_item].push_back(temp);
+			break;
+		case WEAPON::ROCKET:
+			temp = CAbstractFactory<WepItem>::Create(_X, _Y);
+			static_cast<WepItem*>(temp)->Set_WepID(WEAPON::ROCKET);
+			item[_item].push_back(temp);
+			break;
+		default:
+			break;
+		}
+	}
+		break;
+	case ITEM::ITEMBOX:
+		item[_item].push_back(CAbstractFactory<ItemBox>::Create(_X, _Y));
+		break;
+	default:
+		return;
+	}
+
+	Add_Object(OBJ::PROP, item[_item].back());
+}
+
+void ObjPoolMgr::Set_Player_Wep(Weapon* _wep)
+{
+	if (onScreen[OBJ::PLAYER].empty())
+		return;
+
+	static_cast<Player*>(onScreen[OBJ::PLAYER].front())->Set_Weapon(_wep);
 }
 
 const INFO& ObjPoolMgr::Get_Player_Info() const

@@ -2,6 +2,7 @@
 #include "Menu.h"
 #include "Title.h"
 #include "Game.h"
+#include "Stage2.h"
 
 SceneMgr* SceneMgr::pInstance = nullptr;
 
@@ -64,6 +65,9 @@ void SceneMgr::Change_Scene(SCENE::ID _id)
 		break;
 	case SCENE::GAME:
 		scene = new Game;
+		break;
+	case SCENE::GAME1:
+		scene = new Stage2;
 		break;
 	default:
 		scene = new Menu;

@@ -76,9 +76,10 @@ void Soldier::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 	case OBJ::BULLET:
 		if (static_cast<Bullet*>(_opponent)->Get_ParentID() != id)
 		{
+			DataMgr::Get_Instance()->Add_Score(100);
 			isDead = true;
+			break;
 		}
-		break;
 	}
 }
 
