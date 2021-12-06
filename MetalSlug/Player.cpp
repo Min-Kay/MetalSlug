@@ -186,7 +186,7 @@ void Player::KeyInput()
 
 	if (CKeyMgr::Get_Instance()->Key_Down('F'))
 	{
-		Set_Dying();
+		Set_Dying(dir);
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_DOWN))
@@ -619,7 +619,7 @@ void Player::Anim_Dying(HDC _hdc)
 	drawingDC = BmpMgr::Get_Instance()->Find_Image(PLAYER_KEY);
 	stretchDC = BmpMgr::Get_Instance()->Find_Image(STRETCH_KEY);
 
-	Anim_Counter(ANIM::PLAYER_DIE, 12, 100.f, false);
+	Anim_Counter(ANIM::PLAYER_DIE, 12, 70.f, false);
 	switch (onlySide)
 	{
 	case DIR::RIGHT:
@@ -627,9 +627,14 @@ void Player::Anim_Dying(HDC _hdc)
 		break;
 	case DIR::LEFT:
 		StretchBlt(stretchDC, 0, 0, info.cx * 0.5f, info.cy * 0.5f, drawingDC, animIndex[ANIM::PLAYER_DIE] * 200 + 80 + info.cx * 0.5f, animIndexPos[ANIM::PLAYER_DIE] * 200 + 70, -info.cx * 0.5f, info.cy * 0.5f, SRCCOPY);
-
 		GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx, info.cy, stretchDC, 0, 0, info.cx * 0.5f, info.cy * 0.5f, PLAYER_COLOR);
-
+		break;
+	default:
+		if(onlySide == DIR::RIGHT)
+			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx, info.cy, drawingDC, animIndex[ANIM::PLAYER_DIE] * 200 + 80, animIndexPos[ANIM::PLAYER_DIE] * 200 + 70, info.cx * 0.5f, info.cy * 0.5f, PLAYER_COLOR);
+		else 
+			StretchBlt(stretchDC, 0, 0, info.cx * 0.5f, info.cy * 0.5f, drawingDC, animIndex[ANIM::PLAYER_DIE] * 200 + 80 + info.cx * 0.5f, animIndexPos[ANIM::PLAYER_DIE] * 200 + 70, -info.cx * 0.5f, info.cy * 0.5f, SRCCOPY);
+			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx, info.cy, stretchDC, 0, 0, info.cx * 0.5f, info.cy * 0.5f, PLAYER_COLOR);
 		break;
 	}
 	
@@ -651,8 +656,9 @@ void Player::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 	case OBJ::BULLET:
 		if (static_cast<Bullet*>(_opponent)->Get_ParentID() != id)
 		{
-			Set_Dying();
+			Set_Dying(_dir);
 		}
+		break;
 	}
 }
 
@@ -693,8 +699,9 @@ void Player::Anim_Counter(ANIM::PLAYER _action, int count, float _timer, bool _r
 	}
 }
 
-void Player::Set_Dying()
+void Player::Set_Dying(DIR::ID _dir)
 {
+	dir = _dir;
 	action = ACTION::DIE;
 	isDying = true;
 }

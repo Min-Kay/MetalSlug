@@ -31,7 +31,7 @@ public:
 	void	Set_Weapon(Weapon* _wep);
 	void	Check_WeaponState();
 	void	Anim_Counter(ANIM::PLAYER _action, int count, float _timer, bool _roop = true, int start = 0);
-	void	Set_Dying();
+	void	Set_Dying(DIR::ID _dir);
 private:
 	ACTION::ID	action;
 	DIR::ID		onlySide;
