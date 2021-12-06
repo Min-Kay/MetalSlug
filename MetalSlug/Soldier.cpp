@@ -1,6 +1,8 @@
 #include "Soldier.h"
 #include "Include.h"
 #include "Manager.h"
+#include "Weapons.h"
+
 void Soldier::Initialize()
 {
 	id = OBJ::ENEMY;
@@ -10,7 +12,7 @@ void Soldier::Initialize()
 	info.cx = 100.f; 
 	info.cy = 100.f;
 
-	speed = 3.f; 
+	speed = 2.f; 
 	hp = 10;
 	isMove = false;
 	ranAway = false;
@@ -25,6 +27,9 @@ int Soldier::Update()
 {
 	if (isDead)
 		return OBJ_DEAD;
+
+	if (ObjPoolMgr::Get_Instance()->Get_Player_Dead())
+		action = ACTION::IDLE;
 	
 	State_Machine(); 
 	Jump();
@@ -61,8 +66,20 @@ void Soldier::Release()
 {
 }
 
-void Soldier::Set_Collision(Obj* _opponent, DIR::ID _dir)
+void Soldier::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 {
+	if (isDead)
+		return;
+
+	switch (_id)
+	{
+	case OBJ::BULLET:
+		if (static_cast<Bullet*>(_opponent)->Get_ParentID() != id)
+		{
+			isDead = true;
+		}
+		break;
+	}
 }
 
 void Soldier::Jump()
@@ -200,19 +217,19 @@ void Soldier::State_Machine()
 		{
 			if (ObjPoolMgr::Get_Instance()->Get_Player_Rect().bottom < rect.top)
 			{
-				ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x, info.y, DIR::UP, 0);
+				ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x, info.y, DIR::UP, 0, OBJ::ENEMY);
 			}
 			else if (ObjPoolMgr::Get_Instance()->Get_Player_Rect().top > rect.bottom)
 			{
-				ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x, info.y, DIR::DOWN, 0);
+				ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x, info.y, DIR::DOWN, 0, OBJ::ENEMY);
 			}
 			else if (ObjPoolMgr::Get_Instance()->Get_Player_Info().x < info.x)
 			{
-				ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x, info.y, DIR::LEFT, 0);
+				ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x, info.y, DIR::LEFT, 0, OBJ::ENEMY);
 			}
 			else if (ObjPoolMgr::Get_Instance()->Get_Player_Info().x > info.x)
 			{
-				ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x, info.y, DIR::RIGHT, 0);
+				ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x, info.y, DIR::RIGHT, 0, OBJ::ENEMY);
 			}
 			fireTime = GetTickCount();
 		}

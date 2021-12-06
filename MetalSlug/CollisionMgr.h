@@ -10,8 +10,8 @@ public:
 	~CCollisionMgr();
 
 public:
-	static void	Collision_Rect(vector<Obj*> _Dest, vector<Obj*> _Src);
-	static void	Collision_RectPush(vector<Obj*> _Dest, vector<Obj*> _Src);
+	static void	Collision_Rect(list<Obj*> _Dest, list<Obj*> _Src);
+	static void	Collision_RectPush(list<Obj*> _Dest, list<Obj*> _Src);
 
 private:
 	static DIR::ID Set_Dir(RECT& _coll, const RECT* _target);

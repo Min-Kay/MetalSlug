@@ -10,7 +10,7 @@ public:
 	virtual void Render(HDC _hdc) override;
 	virtual void Release() override;
 
-	virtual void Set_Collision(Obj* _opponent, DIR::ID _dir);
+	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir);
 public:
 	void Set_Class(SOLDIER::CLASS _sol) { sol_Class = _sol;  }
 	void Jump();

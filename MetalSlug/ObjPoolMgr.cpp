@@ -33,7 +33,7 @@ void ObjPoolMgr::Update()
 		list<Obj*>::iterator iter = onScreen[i].begin();
 		for ( ; iter != onScreen[i].end();)
 		{
-			if ((*iter)->Get_Dead() || ((*iter)->Get_Info().x - onScreen[OBJ::PLAYER].front()->Get_Info().x > WINCX - 100.f - scrollX))
+			if ((*iter)->Get_Dead() || (!onScreen[OBJ::PLAYER].empty() && ((*iter)->Get_Info().x - onScreen[OBJ::PLAYER].front()->Get_Info().x > WINCX - 100.f - scrollX)))
 			{
 				(*iter)->Set_Dead(true);
 				iter = onScreen[i].erase(iter);
@@ -50,6 +50,9 @@ void ObjPoolMgr::Update()
 
 void ObjPoolMgr::Late_Update()
 {
+	CCollisionMgr::Collision_Rect(onScreen[OBJ::PLAYER], onScreen[OBJ::BULLET]);
+	CCollisionMgr::Collision_Rect(onScreen[OBJ::ENEMY], onScreen[OBJ::BULLET]);
+
 	for (int i = 0; i < OBJ::END; ++i)
 	{
 		for (auto& iter : onScreen[i])
@@ -162,7 +165,7 @@ void ObjPoolMgr::Spawn_Enemy(ENEMY::ID _enemy, float _X, float _Y, DIR::ID _dir,
 	Add_Object(OBJ::ENEMY, enemy[_enemy].back());
 }
 
-void ObjPoolMgr::Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _dir, float _angle)
+void ObjPoolMgr::Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _dir, float _angle, OBJ::ID _parent)
 {
 	sort(bullet[_bullet].begin(), bullet[_bullet].end(), CompareDead<Obj*>);
 
@@ -171,6 +174,7 @@ void ObjPoolMgr::Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _d
 		if (i->Get_Dead())
 		{
 			i->Initialize();
+			static_cast<Bullet*>(i)->Set_ParentID(_parent);
 			i->Set_Pos(_X, _Y);
 			i->Set_Dir(_dir);
 			i->Set_Angle(_angle);
@@ -183,13 +187,22 @@ void ObjPoolMgr::Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _d
 			break;
 	}
 
+	Obj* temp = nullptr;
 	switch (_bullet)
 	{
 	case BULLET::PISTOL:
-		bullet[_bullet].push_back(CAbstractFactory<Bullet>::Create(_X, _Y, _dir));
+	{
+		temp = CAbstractFactory<Bullet>::Create(_X, _Y, _dir);
+		static_cast<Bullet*>(temp)->Set_ParentID(_parent);
+		bullet[_bullet].push_back(temp);
+	}
 		break;
 	case BULLET::HEAVY:
-		bullet[_bullet].push_back(CAbstractFactory<HeavyBullet>::Create(_X, _Y, _dir,_angle));
+	{
+		temp = CAbstractFactory<Bullet>::Create(_X, _Y, _dir);
+		static_cast<Bullet*>(temp)->Set_ParentID(_parent);
+		bullet[_bullet].push_back(CAbstractFactory<HeavyBullet>::Create(_X, _Y, _dir, _angle));
+	}
 		break;
 	case BULLET::ROCKET:
 		//bullet[_bullet].push_back(CAbstractFactory<CFlowerBullet>::Create(_X, _Y, _dir));

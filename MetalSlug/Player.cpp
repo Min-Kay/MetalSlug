@@ -93,7 +93,7 @@ void Player::Release()
 
 void Player::KeyInput()
 {
-	if (isDead || isDying || isValid)
+	if (isDead || isDying)
 		return;
 
 	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
@@ -186,8 +186,7 @@ void Player::KeyInput()
 
 	if (CKeyMgr::Get_Instance()->Key_Down('F'))
 	{
-		action = ACTION::DIE;
-		isDying = true; 
+		Set_Dying();
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_DOWN))
@@ -642,8 +641,19 @@ void Player::Anim_Dying(HDC _hdc)
 	}
 }
 
-void Player::Set_Collision(Obj* _opponent, DIR::ID _dir)
+void Player::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 {
+	if (isDying || isDead || isValid)
+		return; 
+
+	switch (_id)
+	{
+	case OBJ::BULLET:
+		if (static_cast<Bullet*>(_opponent)->Get_ParentID() != id)
+		{
+			Set_Dying();
+		}
+	}
 }
 
 void Player::Set_Weapon(Weapon* _wep)
@@ -681,4 +691,10 @@ void Player::Anim_Counter(ANIM::PLAYER _action, int count, float _timer, bool _r
 
 		animTimer = GetTickCount();
 	}
+}
+
+void Player::Set_Dying()
+{
+	action = ACTION::DIE;
+	isDying = true;
 }

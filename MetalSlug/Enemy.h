@@ -10,7 +10,7 @@ public:
 	virtual void Render(HDC _hdc) PURE;
 	virtual void Release()PURE;
 
-	virtual void Set_Collision(Obj* _opponent, DIR::ID _dir) { isDead = true; }
+	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir) { isDead = true; }
 public:
 	void	Set_HP(int _hp) { hp = _hp; }
 	void	Add_HP(int _hp) { hp += _hp; }

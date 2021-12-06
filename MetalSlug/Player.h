@@ -25,12 +25,13 @@ private:
 	void	Anim_Dying(HDC _hdc);
 
 public:
-	virtual void Set_Collision(Obj* _opponent, DIR::ID _dir) override;
+	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir) override;
 
 public:
 	void	Set_Weapon(Weapon* _wep);
 	void	Check_WeaponState();
 	void	Anim_Counter(ANIM::PLAYER _action, int count, float _timer, bool _roop = true, int start = 0);
+	void	Set_Dying();
 private:
 	ACTION::ID	action;
 	DIR::ID		onlySide;

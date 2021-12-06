@@ -29,7 +29,7 @@ public:
 public:
 	void	Spawn_Player(float _X, float _Y);
 	void	Spawn_Enemy(ENEMY::ID _enemy, float _X, float _Y, DIR::ID _dir = DIR::LEFT, SOLDIER::CLASS _class = SOLDIER::PRIVATE);
-	void	Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _dir, float _angle);
+	void	Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _dir, float _angle = 0, OBJ::ID parent = OBJ::PLAYER);
 	void	Spawn_Item(ITEM::ID _item, float _X, float _Y, DIR::ID _dir = DIR::RIGHT);
 	const	INFO& Get_Player_Info() const;
 	const	RECT& Get_Player_Rect() const;

@@ -14,7 +14,7 @@ public:
 	virtual void Release()PURE;
 
 public:
-	virtual void Set_Collision(Obj* _opponent, DIR::ID _dir) { isDead = true; }
+	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir) { isDead = true; }
 
 public:
 	void	Set_Dir(DIR::ID _dir) { dir = _dir; }

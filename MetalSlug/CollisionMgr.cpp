@@ -11,7 +11,7 @@ CCollisionMgr::~CCollisionMgr()
 {
 }
 
-void CCollisionMgr::Collision_Rect(vector<Obj*> _Dest, vector<Obj*> _Src)
+void CCollisionMgr::Collision_Rect(list<Obj*> _Dest, list<Obj*> _Src)
 {
 	for (auto Dest : _Dest)
 	{
@@ -23,14 +23,14 @@ void CCollisionMgr::Collision_Rect(vector<Obj*> _Dest, vector<Obj*> _Src)
 			RECT rc{};
 			if (IntersectRect(&rc, &Dest->Get_Rect(), &Src->Get_Rect()))
 			{
-				Dest->Set_Collision(Src, Set_Dir(rc, &(Dest->Get_Rect())));
-				Src->Set_Collision(Dest, Set_Dir(rc, &(Src->Get_Rect())));
+				Dest->Set_Collision(Src->Get_ID(), Src, Set_Dir(rc, &(Dest->Get_Rect())));
+				Src->Set_Collision(Dest->Get_ID(), Dest, Set_Dir(rc, &(Src->Get_Rect())));
 			}
 		}
 	}
 }
 
-void CCollisionMgr::Collision_RectPush(vector<Obj*> _Dest, vector<Obj*> _Src)
+void CCollisionMgr::Collision_RectPush(list<Obj*> _Dest, list<Obj*> _Src)
 {
 	for (auto Dest : _Dest)
 	{
