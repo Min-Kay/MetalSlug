@@ -16,6 +16,7 @@ public:
 	void	KeyInput();
 	virtual void	Gravity();
 	void	Valid();
+	void	Offset();
 
 private:
 	void	Anim_Idle(HDC _hdc);
@@ -33,6 +34,7 @@ public:
 	void	Check_WeaponState();
 	void	Anim_Counter(ANIM::PLAYER _action, int count, float _timer, bool _roop = true, int start = 0);
 	void	Set_Dying(DIR::ID _dir);
+
 private:
 	ACTION::ID	action;
 	DIR::ID		onlySide;
@@ -59,6 +61,9 @@ private:
 
 	float	collisionY;
 	bool	boxCollide;
+
+	float   m_iOffSetX;
+	float   m_iOffSetY;
 
 	bool	isValid;
 	DWORD	validTimer;

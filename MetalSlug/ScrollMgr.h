@@ -18,12 +18,12 @@ public:
 public:
 	float			Get_ScrollX() { return m_fScrollX; }
 	float			Get_ScrollY() { return m_fScrollY; }
-	void			Set_ScrollX(float _fX) {m_fScrollX += _fX;  }
-	void			Set_ScrollY(float _fy) { m_fScrollY += _fy; }
-	void			Init_Scroll(float _fX, float _fY = 0.f) {m_fScrollX = _fX; m_fScrollY = 0.f;}
+	void			Set_ScrollX(float _fX) { if(!isLock) m_fScrollX += _fX;  }
+	void			Set_ScrollY(float _fy) { if (!isLock) m_fScrollY += _fy; }
+	void			Init_Scroll(float _fX = 0, float _fY = 0) {m_fScrollX = _fX; m_fScrollY = _fY;}
 
-	void			Set_ScrollLockX(float _fx) { scrollXLock = _fx - WINCX; }
-	void			Set_ScrollLockY(float _fy) { scrollYLock = _fy - WINCY; }
+	void			Set_ScrollLockX(float _fx) { scrollXLock = _fx ; }
+	void			Set_ScrollLockY(float _fy) { scrollYLock = _fy; }
 
 	void			Check_ScrollLock();
 public:
@@ -46,6 +46,9 @@ public:
 
 private:
 	static CScrollMgr*	m_pInstance;
+	
+	bool				isLock = false;
+
 	float				m_fScrollX = 0.f;
 	float				m_fScrollY = 0.f;
 

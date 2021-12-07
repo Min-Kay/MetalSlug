@@ -7,7 +7,7 @@ void HeavyBullet::Initialize()
 	id = OBJ::BULLET;
 	render = RENDER::OBJECT;
 	parentID = OBJ::PLAYER;
-	speed = 10.f;
+	speed = 20.f;
 	info.cx = 80.f;
 	info.cy = 80.f;
 
@@ -16,7 +16,7 @@ void HeavyBullet::Initialize()
 
 	animTimer = GetTickCount(); 
 
-	spread = (rand() % 100) * 0.01f;
+	spread = (rand() % 150) * 0.01f;
 	minus = rand() % 2;
 
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/HeavyBullet_Right.bmp",L"HeavyRight");

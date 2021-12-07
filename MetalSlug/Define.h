@@ -27,6 +27,7 @@
 // Blt Color 
 #define		PLAYER_COLOR	RGB(86, 177, 222)
 #define		ITEM_COLOR		 RGB(0, 248, 0)
+#define		MAP_COLOR		RGB(248,0, 248)
 
 // Key Setting
 #define		VK_ATTACK		'X'

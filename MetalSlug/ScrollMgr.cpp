@@ -25,15 +25,22 @@ void CScrollMgr::Late_Update(void)
 
 void CScrollMgr::Release(void)
 {
-	Init_Scroll(0);
+	Init_Scroll(0,0);
 }
 
 void CScrollMgr::Check_ScrollLock()
 {
-	if (m_fScrollX > 0) m_fScrollX = 0.f;
-	if (m_fScrollX < -scrollXLock) m_fScrollX = -scrollXLock;
 
-	if (m_fScrollY > 0) m_fScrollY = 0.f;
-	if (m_fScrollY < -scrollYLock) m_fScrollY = -scrollYLock;
+	if (0 < m_fScrollX)
+		m_fScrollX = 0.f;
+
+	if (WINCX - scrollXLock > m_fScrollX)
+		m_fScrollX = WINCX - scrollXLock;
+
+	if (0 < m_fScrollY)
+		m_fScrollY = 0.f;
+
+	if (WINCY - scrollYLock > m_fScrollY)
+		m_fScrollY = WINCY - scrollYLock;
 }
 

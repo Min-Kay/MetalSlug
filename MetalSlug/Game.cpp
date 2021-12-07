@@ -12,20 +12,26 @@ void Game::Initialize()
 	checkPoint = false;
 
 	Init_Information();
-	BmpMgr::Get_Instance()->Insert_Bmp(MISSION2_BMP,MISSION2_KEY);
-	BmpMgr::Get_Instance()->Insert_Bmp(STRETCH_BMP, STRETCH_KEY);
+
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/background.bmp", L"background");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Map1-0.bmp",L"Map1-0");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Map1-1.bmp", L"Map1-1");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Map1-2.bmp", L"Map1-2");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Map1-3.bmp", L"Map1-3");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Map1-building.bmp", L"Map1-building");
+
 	ObjPoolMgr::Get_Instance()->Initialize();
 	DataMgr::Get_Instance()->Initialize(); 
-	CScrollMgr::Get_Instance()->Set_ScrollLockX(12879);
-	CScrollMgr::Get_Instance()->Set_ScrollLockY(600);
+	CScrollMgr::Get_Instance()->Set_ScrollLockX(9550);
+	CScrollMgr::Get_Instance()->Set_ScrollLockY(700);
 	CLineMgr::Get_Instance()->Load(STAGE1_SAVE);
-	ObjPoolMgr::Get_Instance()->Spawn_Player(100,100);
+	ObjPoolMgr::Get_Instance()->Spawn_Player(200,100);
 	ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER,300,300,DIR::RIGHT,SOLDIER::PRIVATE);
 	ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 500, 300, DIR::RIGHT, SOLDIER::SERGENT);
 	ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::WEAPON, 300, 300, WEAPON::HEAVY);
 
 
-	ObjPoolMgr::Get_Instance()->Spawn_Block(100, 100, 400, 400, false);
+	//ObjPoolMgr::Get_Instance()->Spawn_Block(100, 100, 400, 400, false);
 
 }
 
@@ -41,7 +47,7 @@ void Game::Late_Update()
 	{
 		if (DataMgr::Get_Instance()->Get_Life() > 0)
 		{
-			ObjPoolMgr::Get_Instance()->Spawn_Player(100, 100);
+			ObjPoolMgr::Get_Instance()->Spawn_Player(200 - CScrollMgr::Get_Instance()->Get_ScrollX(), 100);
 			ObjPoolMgr::Get_Instance()->Set_Player_Dead(false);
 		}
 		else
@@ -56,8 +62,27 @@ void Game::Late_Update()
 
 void Game::Render(HDC _hdc)
 {
-	drawingDC = BmpMgr::Get_Instance()->Find_Image(MISSION2_KEY);
-	StretchBlt(_hdc, CScrollMgr::Get_Instance()->Get_ScrollX(), CScrollMgr::Get_Instance()->Get_ScrollY(), 12879, 654, drawingDC, 0, 0, 4293, 218, SRCCOPY);
+	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
+	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
+
+	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"background");
+	GdiTransparentBlt(_hdc, 0, 0, WINCX, WINCY, drawingDC, 0, 0, 100, 75, MAP_COLOR);
+
+	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-0");
+	GdiTransparentBlt(_hdc, scrollX,  scrollY, 2500, 700, drawingDC, 0, 0, 1000, 280, MAP_COLOR);
+
+	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-1");
+	GdiTransparentBlt(_hdc, scrollX + 2500, scrollY, 2500, 700, drawingDC, 0, 0, 1000, 280, MAP_COLOR);
+
+	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-2");
+	GdiTransparentBlt(_hdc, scrollX + 5000, scrollY, 2500, 700, drawingDC, 0, 0, 1000, 280, MAP_COLOR);
+
+	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-building");
+	GdiTransparentBlt(_hdc, scrollX + 4550, scrollY + 200, 1200, 450, drawingDC, 0, 0, 400, 150, MAP_COLOR);
+
+	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-3");
+	GdiTransparentBlt(_hdc, scrollX + 7500, scrollY, 2050, 700, drawingDC, 0, 0, 820, 280, MAP_COLOR);
+	
 
 	CLineMgr::Get_Instance()->Render(_hdc);
 	ObjPoolMgr::Get_Instance()->Render(_hdc);
@@ -68,6 +93,7 @@ void Game::Render(HDC _hdc)
 void Game::Release()
 {
 	ObjPoolMgr::Get_Instance()->DisableObj();
+	CScrollMgr::Get_Instance()->Init_Scroll(0, 0);
 }
 
 void Game::KeyInput()

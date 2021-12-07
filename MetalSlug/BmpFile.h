@@ -11,7 +11,7 @@
 #define MISSION1_BMP L"../Image/Mission1.bmp"
 #define MISSION1_KEY L"MISSION1"
 
-#define MISSION2_BMP L"../Image/Map.bmp"
+#define MISSION2_BMP L"../Image/Map1.bmp"
 #define MISSION2_KEY L"MISSION2"
 
 #define STRETCH_BMP L"../Image/Stretch.bmp"

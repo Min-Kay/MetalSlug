@@ -17,5 +17,6 @@ public:
 
 protected:
 	HDC drawingDC;
+	HDC stretchDC;
 };
 

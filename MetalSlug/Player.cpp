@@ -32,6 +32,9 @@ void Player::Initialize()
 	jumpY = 0.f;
 	jumpForce = 30.f;
 	jumpTime = 0.f;
+	
+	m_iOffSetX = WINCX >> 1;
+	m_iOffSetY = WINCY >> 1;
 
 	isValid = true; 
 	validTimer = GetTickCount(); 
@@ -63,6 +66,7 @@ int Player::Update()
 void Player::Late_Update()
 {
 	Valid(); 
+	Offset();
 	Check_WeaponState(); 
 }
 
@@ -71,7 +75,7 @@ void Player::Render(HDC _hdc)
 	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
-	Rectangle(_hdc, rect.left + scrollX, rect.top + scrollY, rect.right + scrollX, rect.bottom + scrollY);
+	//Rectangle(_hdc, rect.left + scrollX, rect.top + scrollY, rect.right + scrollX, rect.bottom + scrollY);
 	switch (action)
 	{
 	case ACTION::IDLE:
@@ -145,12 +149,13 @@ void Player::KeyInput()
 	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LEFT))
 	{
 		if (rect.left - speed < 0 - scrollX)
-			return; 
+			return;
 
 		action = ACTION::MOVE;
 		dir = DIR::LEFT;
 		onlySide = DIR::LEFT;
 		info.x -= speed;
+		//CScrollMgr::Get_Instance()->Set_ScrollX(speed);
 	}
 
 
@@ -163,6 +168,7 @@ void Player::KeyInput()
 		dir = DIR::RIGHT;
 		onlySide = DIR::RIGHT;
 		info.x += speed;
+		//CScrollMgr::Get_Instance()->Set_ScrollX(-speed);
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Rollover(VK_JUMP, VK_UP) && !isJump)
@@ -278,6 +284,22 @@ void Player::Valid()
 	{
 		isValid = false;
 		validTimer = GetTickCount();
+	}
+}
+
+void Player::Offset()
+{
+
+	if (m_iOffSetX + 50 < info.x)
+	{
+		CScrollMgr::Get_Instance()->Set_ScrollX(-speed);
+		m_iOffSetX += (int)speed;
+	}
+
+	if (m_iOffSetX - 50 > info.x)
+	{
+		CScrollMgr::Get_Instance()->Set_ScrollX(speed);
+		m_iOffSetX -= (int)speed;
 	}
 }
 
