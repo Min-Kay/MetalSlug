@@ -14,7 +14,7 @@ public:
 
 public:
 	void	KeyInput();
-	void	Jump();
+	virtual void	Gravity();
 	void	Valid();
 
 private:
@@ -26,7 +26,8 @@ private:
 
 public:
 	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir) override;
-
+	void	Set_BoxCollide(bool _bool) { boxCollide = _bool; }
+	void	Set_CollisionY(float _y) { collisionY = _y; }
 public:
 	void	Set_Weapon(Weapon* _wep);
 	void	Check_WeaponState();
@@ -49,11 +50,17 @@ private:
 	float	speed;
 	float	walkSpeed;
 	float	sitSpeed;
+	bool	isSitting;
+	float	sitPos;
+
 	bool	isJump;
 	float	jumpTime;
 	float	jumpY;
 	bool	jumping;
 	float	jumpForce;
+
+	float	collisionY;
+	bool	boxCollide;
 
 	bool	isValid;
 	DWORD	validTimer;
@@ -64,7 +71,7 @@ private:
 
 	DWORD	dyingTimer;
 
-	int		animIndex[ANIM::PLAYER_END]{};
+	int		animIndexs[ANIM::PLAYER_END]{};
 	int		animIndexPos[ANIM::PLAYER_END]{0,2,10,3,8,9,13,5,6,7,11,4,12};
 
 	

@@ -7,6 +7,7 @@
 #include "HeavyBullet.h"
 #include "Soldier.h"
 #include "Items.h"
+#include "Block.h"
 
 ObjPoolMgr* ObjPoolMgr::pInstance = nullptr;
 
@@ -55,6 +56,9 @@ void ObjPoolMgr::Late_Update()
 	CCollisionMgr::Collision_Rect(onScreen[OBJ::ENEMY], onScreen[OBJ::BULLET]);
 	CCollisionMgr::Collision_Rect(onScreen[OBJ::PLAYER], onScreen[OBJ::PROP]);
 	CCollisionMgr::Collision_Rect(onScreen[OBJ::BULLET], onScreen[OBJ::PROP]);
+	CCollisionMgr::Collision_Rect(onScreen[OBJ::BULLET], onScreen[OBJ::BLOCK]);
+	CCollisionMgr::Collision_RectPush(onScreen[OBJ::PLAYER],onScreen[OBJ::ENEMY]);
+	CCollisionMgr::Collision_RectPush(onScreen[OBJ::PLAYER], onScreen[OBJ::BLOCK]);
 
 	for (int i = 0; i < OBJ::END; ++i)
 	{
@@ -273,6 +277,29 @@ void ObjPoolMgr::Spawn_Item(ITEM::ID _item, float _X, float _Y, WEAPON::ID _wep)
 	}
 
 	Add_Object(OBJ::PROP, item[_item].back());
+}
+
+void ObjPoolMgr::Spawn_Block(float _cx, float _cy, float _X, float _Y, bool _Grav)
+{
+	sort(block.begin(), block.end(), CompareDead<Obj*>);
+
+	for (auto& i : block)
+	{
+		if (i->Get_Dead())
+		{
+			i->Set_Pos(_X, _Y);
+			i->Set_Size(_cx,_cy);
+			i->Initialize();
+			i->Update_Rect();
+			i->Set_Dead(false);
+			Add_Object(OBJ::BLOCK, i);
+			return;
+		}
+	}
+	
+	block.push_back(CAbstractFactory<Block>::Create(_X,_Y,_cx,_cy));
+
+	Add_Object(OBJ::BLOCK, block.back());
 }
 
 void ObjPoolMgr::Set_Player_Wep(Weapon* _wep)

@@ -13,9 +13,6 @@ public:
 public:
 	const ITEM::ID& Get_ItemID() const { return item_id; }
 
-public:
-	void	Anim_Counter(int count, float _timer, bool _roop = true, int start = 0);
-	void	Gravity();
 protected:
 	ITEM::ID item_id; 
 	DWORD	animTimer;

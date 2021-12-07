@@ -30,6 +30,17 @@ public:
 		return pObj;
 	}
 
+	static Obj* Create(float _fX, float _fY, float _CX, float _CY)
+	{
+		Obj* pObj = new T;
+		pObj->Set_Pos(_fX, _fY);
+		pObj->Set_Size(_CX, _CY);
+		pObj->Initialize();
+		pObj->Update_Rect();
+
+		return pObj;
+	}
+
 	static Obj* Create(float _fX, float _fY, DIR::ID eDir, float _angle)
 	{
 		Obj* pObj = new T;

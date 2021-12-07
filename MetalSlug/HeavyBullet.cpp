@@ -16,8 +16,7 @@ void HeavyBullet::Initialize()
 
 	animTimer = GetTickCount(); 
 
-	int ran = rand() % 100;
-	spread = ran * 0.01f;
+	spread = (rand() % 100) * 0.01f;
 	minus = rand() % 2;
 
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/HeavyBullet_Right.bmp",L"HeavyRight");
@@ -133,6 +132,9 @@ void HeavyBullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 	case OBJ::PROP:
 		if (static_cast<Item*>(_opponent)->Get_ItemID() == ITEM::ITEMBOX)
 			isDead = true; 
+		break;
+	case OBJ::BLOCK:
+		isDead = true;
 		break;
 	}
 }

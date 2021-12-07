@@ -31,5 +31,8 @@ protected:
 	TCHAR	grenadeCount[10] = L"";
 
 	RECT	uiRect;
+
+	list<POINT> scrollLock;
+	bool	checkPoint;
 };
 

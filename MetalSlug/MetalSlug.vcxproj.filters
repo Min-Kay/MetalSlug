@@ -136,6 +136,9 @@
     <Filter Include="소스 파일\02.Object\04.Prop\01.Item\05.ItemBox">
       <UniqueIdentifier>{09aee3b9-dd29-463b-9853-afc027f6f69a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02.Object\07.Block">
+      <UniqueIdentifier>{af9e6eb9-6203-4a90-85b8-8d466f9a483f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -276,6 +279,9 @@
     <ClInclude Include="ItemBox.h">
       <Filter>소스 파일\02.Object\04.Prop\01.Item\05.ItemBox</Filter>
     </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>소스 파일\02.Object\07.Block</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MetalSlug.rc">
@@ -389,6 +395,9 @@
     </ClCompile>
     <ClCompile Include="ItemBox.cpp">
       <Filter>소스 파일\02.Object\04.Prop\01.Item\05.ItemBox</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>소스 파일\02.Object\07.Block</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

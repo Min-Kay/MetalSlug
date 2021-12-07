@@ -2,7 +2,7 @@
 
 namespace OBJ
 {
-	enum ID {PLAYER,ENEMY,NPC,BULLET,PROP,END};
+	enum ID {PLAYER,ENEMY,NPC,BULLET,PROP,BLOCK,END};
 }
 
 namespace BULLET

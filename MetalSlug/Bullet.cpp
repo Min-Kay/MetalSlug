@@ -71,6 +71,9 @@ void Bullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 		if (static_cast<Item*>(_opponent)->Get_ItemID() == ITEM::ITEMBOX)
 			isDead = true;
 		break;
+	case OBJ::BLOCK:
+		isDead = true;
+		break;
 	}
 }
 

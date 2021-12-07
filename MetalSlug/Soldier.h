@@ -29,11 +29,18 @@ protected:
 
 protected:
 	SOLDIER::CLASS sol_Class;
+	DIR::ID	onlySide;
+
 	bool	ranAway;
 	bool	isJump;
 	float	jumpForce;
 	float	jumpTime; 
 	bool	jumping;
+
+	int		idleNum;
+
+	bool	isDying;
+
 
 	DWORD	fireTime;
 };

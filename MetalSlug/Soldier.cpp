@@ -8,9 +8,12 @@ void Soldier::Initialize()
 	id = OBJ::ENEMY;
 	render = RENDER::OBJECT;
 	dir = DIR::RIGHT;
+	onlySide = dir;
 	sol_Class = SOLDIER::PRIVATE;
 	info.cx = 100.f; 
 	info.cy = 100.f;
+
+	action = ACTION::IDLE;
 
 	speed = 2.f; 
 	hp = 10;
@@ -20,7 +23,17 @@ void Soldier::Initialize()
 	jumpForce = 20.f;
 	jumpTime = 0; 
 	jumping = false;
+	canCollision = false;
 	fireTime = GetTickCount();
+	animIndex = 0; 
+
+	isDying = false;
+
+	idleNum = rand() % 2;
+
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Soldier.bmp",L"Soldier");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Stretch_White.bmp", L"Stretch_White");
+
 }
 
 int Soldier::Update()
@@ -49,15 +62,21 @@ void Soldier::Render(HDC _hdc)
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
 	Rectangle(_hdc,rect.left + scrollX,rect.top,rect.right + scrollX,rect.bottom);
+	Anim_Idle(_hdc);
 	switch (action)
 	{
 		case ACTION::IDLE:
+			Anim_Idle(_hdc);
 			break;
 		case ACTION::MOVE:
+			Anim_Idle(_hdc);
+			//Anim_Move(_hdc);
 			break;
 		case ACTION::JUMP:
+			Anim_Jump(_hdc);
 			break;
 		case ACTION::DIE:
+			Anim_Die(_hdc);
 			break;
 	}
 }
@@ -138,6 +157,42 @@ void Soldier::Jump()
 
 void Soldier::Anim_Idle(HDC _hdc)
 {
+	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
+	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
+
+	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Soldier");
+	stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White");
+	switch (idleNum)
+	{
+	case 0:
+		switch (dir)
+		{
+		case DIR::RIGHT:
+			Anim_Counter(3, 150.f);
+			StretchBlt(stretchDC, 0, 0, 34, 40, drawingDC, animIndex * 34 + 34, 0, -34, 40, SRCCOPY);
+			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx, info.cy, stretchDC, 0, 0, 34, 40, RGB(255, 255, 255));
+			break;
+		case DIR::LEFT:
+			Anim_Counter(3, 150.f);
+			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx, info.cy, drawingDC, animIndex * 34, 0, 34, 40, RGB(255, 255, 255));
+			break;
+		}
+		break;
+	case 1:
+		switch (dir)
+		{
+		case DIR::RIGHT:
+			Anim_Counter(3, 150.f);
+			StretchBlt(stretchDC, 0, 0, 34, 40, drawingDC, animIndex * 34 + 34, 0, -34, 40, SRCCOPY);
+			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx, info.cy, stretchDC, 0, 0, 34, 40, RGB(255, 255, 255));
+			break;
+		case DIR::LEFT:
+			Anim_Counter(3, 150.f);
+			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx, info.cy, drawingDC, animIndex * 34, 0, 34, 40, RGB(255, 255, 255));
+			break;
+		}
+		break;
+	}
 }
 
 void Soldier::Anim_Move(HDC _hdc)
@@ -164,7 +219,7 @@ void Soldier::State_Machine()
 		if (ObjPoolMgr::Get_Instance()->Check_Distance(this) < WINCX - scrollX)
 		{
 			isMove = true;
-			action = ACTION::MOVE;
+			//action = ACTION::MOVE;
 		}
 
 		break;
@@ -174,10 +229,13 @@ void Soldier::State_Machine()
 			if (ObjPoolMgr::Get_Instance()->Get_Player_Info().x < info.x)
 			{
 				info.x += speed * 1.5f;
+				dir = DIR::RIGHT;
 			}
 			else
 			{
 				info.x -= speed * 1.5f;
+				dir = DIR::LEFT;
+
 			}
 		}
 		else
@@ -185,10 +243,14 @@ void Soldier::State_Machine()
 			if (ObjPoolMgr::Get_Instance()->Get_Player_Info().x < info.x)
 			{
 				info.x -= speed;
+				dir = DIR::RIGHT;
+
 			}
 			else if(ObjPoolMgr::Get_Instance()->Get_Player_Info().x > info.x)
 			{
 				info.x += speed;
+				dir = DIR::LEFT;
+
 			}
 			
 		}

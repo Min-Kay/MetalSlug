@@ -8,6 +8,9 @@ void Game::Initialize()
 {
 	isClear = false; 
 	isFail = false;
+
+	checkPoint = false;
+
 	Init_Information();
 	BmpMgr::Get_Instance()->Insert_Bmp(MISSION2_BMP,MISSION2_KEY);
 	BmpMgr::Get_Instance()->Insert_Bmp(STRETCH_BMP, STRETCH_KEY);
@@ -20,6 +23,9 @@ void Game::Initialize()
 	ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER,300,300,DIR::LEFT,SOLDIER::PRIVATE);
 	ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 300, 300, DIR::LEFT, SOLDIER::SERGENT);
 	ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::WEAPON, 300, 300, WEAPON::HEAVY);
+
+
+	ObjPoolMgr::Get_Instance()->Spawn_Block(100, 100, 400, 400, false);
 
 }
 

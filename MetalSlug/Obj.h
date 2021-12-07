@@ -15,6 +15,7 @@ public:
 
 public:
 	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir) { isDead = true; }
+	virtual void Gravity(); 
 
 public:
 	void	Set_Dir(DIR::ID _dir) { dir = _dir; }
@@ -38,9 +39,15 @@ public:
 	const RENDER::ID& Get_RenderId() const { return render; }
 	const float& Get_Angle() const { return angle; }
 
+public:
+	void	Anim_Counter(int count, float _timer, bool _roop = true, int start = 0);
+
 protected:
 	HDC		drawingDC;
 	HDC		stretchDC;
+
+	int		animIndex = 0;
+	DWORD	animTimer;
 
 	INFO	info;
 	RECT	rect;
