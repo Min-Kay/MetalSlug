@@ -23,6 +23,8 @@ void HeavyBullet::Initialize()
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/HeavyBullet_Up.bmp", L"HeavyUp");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/HeavyBullet_Down.bmp", L"HeavyDown");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Stretch_Item.bmp", L"Stretch_Item");
+
+	damage = 5;
 }
 
 int HeavyBullet::Update()

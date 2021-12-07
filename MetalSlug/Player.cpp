@@ -33,8 +33,6 @@ void Player::Initialize()
 	jumpForce = 30.f;
 	jumpTime = 0.f;
 
-	isSitting = false;
-
 	isValid = true; 
 	validTimer = GetTickCount(); 
 	validTick = GetTickCount(); 
@@ -296,23 +294,23 @@ void Player::Anim_Idle(HDC _hdc)
 		switch (dir)
 		{
 		case DIR::RIGHT:
-			Anim_Counter(ANIM::PLAYER_FIRE, 3, 50.f);
+			Anim_Counter(ANIM::PLAYER_FIRE, 3, 30.f);
 			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx * 2, info.cy, drawingDC, animIndexs[ANIM::PLAYER_FIRE] * 200 + 80, animIndexPos[ANIM::PLAYER_FIRE] * 200 + 70, info.cx * 0.5f * 2, info.cy * 0.5f, PLAYER_COLOR);
 			break;
 		case DIR::LEFT:
-			Anim_Counter(ANIM::PLAYER_FIRE, 3, 50.f);
+			Anim_Counter(ANIM::PLAYER_FIRE, 3, 30.f);
 			StretchBlt(stretchDC, 0, 0, info.cx * 0.5f * 2, info.cy * 0.5f, drawingDC, animIndexs[ANIM::PLAYER_FIRE] * 200 + 80 + info.cx, animIndexPos[ANIM::PLAYER_FIRE] * 200 + 70, -(info.cx * 0.5f * 2), info.cy * 0.5f, SRCCOPY);
 			GdiTransparentBlt(_hdc, int(rect.left + scrollX) - info.cx, int(rect.top + scrollY), info.cx * 2, info.cy, stretchDC, 0, 0, info.cx * 0.5f * 2, info.cy * 0.5f, PLAYER_COLOR);
 			break;
 		case DIR::UP:
 			if (onlySide == DIR::RIGHT)
 			{
-				Anim_Counter(ANIM::PLAYER_FIRE, 1, 50.f, true, 7);
+				Anim_Counter(ANIM::PLAYER_FIRE, 1, 30.f, true, 7);
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) - info.cy, info.cx, info.cy * 2, drawingDC, animIndexs[ANIM::PLAYER_FIRE] * 200 + 80, animIndexPos[ANIM::PLAYER_FIRE] * 200 + 70 - info.cy * 0.5f, info.cx * 0.5f, info.cy * 0.5f * 2, PLAYER_COLOR);
 			}
 			else
 			{
-				Anim_Counter(ANIM::PLAYER_FIRE, 1, 50.f, true, 7);
+				Anim_Counter(ANIM::PLAYER_FIRE, 1, 30.f, true, 7);
 				StretchBlt(stretchDC, 0, 0, info.cx * 0.5f, info.cy * 0.5f * 2, drawingDC, animIndexs[ANIM::PLAYER_FIRE] * 200 + 80 + info.cx * 0.5f, animIndexPos[ANIM::PLAYER_FIRE] * 200 + 70 - info.cy * 0.5f, -info.cx * 0.5f, info.cy * 0.5f * 2, SRCCOPY);
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) - info.cy, info.cx, info.cy * 2, stretchDC, 0, 0, info.cx * 0.5f, info.cy * 0.5f * 2, PLAYER_COLOR);
 			}
@@ -320,12 +318,12 @@ void Player::Anim_Idle(HDC _hdc)
 		case DIR::DOWN:
 			if (onlySide == DIR::RIGHT)
 			{
-				Anim_Counter(ANIM::PLAYER_DOWN_FIRE, 3, 50.f);
+				Anim_Counter(ANIM::PLAYER_DOWN_FIRE, 3, 30.f);
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) - init_CY * 0.5f, info.cx * 2, init_CY, drawingDC, animIndexs[ANIM::PLAYER_DOWN_FIRE] * 200 + 80, animIndexPos[ANIM::PLAYER_DOWN_FIRE] * 200 + 70, info.cx * 0.5f * 2, init_CY * 0.5f, PLAYER_COLOR);
 			}
 			else if (onlySide == DIR::LEFT)
 			{
-				Anim_Counter(ANIM::PLAYER_DOWN_FIRE, 3, 50.f);
+				Anim_Counter(ANIM::PLAYER_DOWN_FIRE, 3, 30.f);
 				StretchBlt(stretchDC, 0, 0, info.cx * 0.5f * 2, init_CY * 0.5f, drawingDC, animIndexs[ANIM::PLAYER_DOWN_FIRE] * 200 + 80 + info.cx, animIndexPos[ANIM::PLAYER_DOWN_FIRE] * 200 + 70, -(info.cx * 0.5f * 2), init_CY * 0.5f, SRCCOPY);
 
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX) - info.cx, int(rect.top + scrollY) - init_CY * 0.5f, info.cx * 2, init_CY, stretchDC, 0, 0, info.cx * 0.5f * 2, init_CY * 0.5f, PLAYER_COLOR);
@@ -424,12 +422,12 @@ void Player::Anim_Moving(HDC _hdc)
 		switch (dir)
 		{
 		case DIR::RIGHT:
-			Anim_Counter(ANIM::PLAYER_FIRE, 7, 50.f, true, 11);
+			Anim_Counter(ANIM::PLAYER_FIRE, 7, 30.f, true, 11);
 
 			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx * 2, info.cy, drawingDC, animIndexs[ANIM::PLAYER_FIRE] * 200 + 80, animIndexPos[ANIM::PLAYER_FIRE] * 200 + 70, info.cx * 0.5f * 2, info.cy * 0.5f, PLAYER_COLOR);
 			break;
 		case DIR::LEFT:
-			Anim_Counter(ANIM::PLAYER_FIRE, 7, 50.f, true, 11);
+			Anim_Counter(ANIM::PLAYER_FIRE, 7, 30.f, true, 11);
 
 			StretchBlt(stretchDC, 0, 0, info.cx * 0.5f * 2, info.cy * 0.5f, drawingDC, animIndexs[ANIM::PLAYER_FIRE] * 200 + 80 + info.cx, animIndexPos[ANIM::PLAYER_FIRE] * 200 + 70, -(info.cx * 0.5f * 2), info.cy * 0.5f, SRCCOPY);
 

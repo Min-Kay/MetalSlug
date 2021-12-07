@@ -3,6 +3,7 @@
 #include "Obj.h"
 #include "Enemy.h"
 #include "Player.h"
+#include <typeInfo>
 
 CCollisionMgr::CCollisionMgr()
 {
@@ -44,11 +45,17 @@ void CCollisionMgr::Collision_RectPush(list<Obj*> _Dest, list<Obj*> _Src)
 			RECT rc{};
 			if (IntersectRect(&rc, &Dest->Get_Rect(), &Src->Get_Rect()))
 			{
-				if (static_cast<Enemy*>(Src)->Get_CollMode())
-				{
-					float x = rc.right - rc.left;
-					float y = rc.bottom - rc.top; 
+				float x = rc.right - rc.left;
+				float y = rc.bottom - rc.top;
 
+				if (dynamic_cast<Enemy*>(Src))
+				{
+					if (!static_cast<Enemy*>(Src)->Get_CollMode())
+						break;
+				}
+
+				if (x > y)
+				{
 					if (rc.top < Dest->Get_Rect().bottom && rc.top > Dest->Get_Rect().top)
 					{
 						if (static_cast<Player*>(Dest))
@@ -66,9 +73,33 @@ void CCollisionMgr::Collision_RectPush(list<Obj*> _Dest, list<Obj*> _Src)
 					{
 						Dest->Add_X(-x);
 					}
-					else if (rc.right > Dest->Get_Rect().left && rc.right < Dest->Get_Rect().right)
+					else if (rc.right > Dest->Get_Rect().left&& rc.right < Dest->Get_Rect().right)
 					{
 						Dest->Add_X(x);
+					}
+				}
+				else
+				{
+					if (rc.left < Dest->Get_Rect().right && rc.left > Dest->Get_Rect().left)
+					{
+						Dest->Add_X(-x);
+					}
+					else if (rc.right > Dest->Get_Rect().left&& rc.right < Dest->Get_Rect().right)
+					{
+						Dest->Add_X(x);
+					}
+					else if (rc.top < Dest->Get_Rect().bottom && rc.top > Dest->Get_Rect().top)
+					{
+						if (static_cast<Player*>(Dest))
+						{
+							static_cast<Player*>(Dest)->Set_BoxCollide(true);
+							static_cast<Player*>(Dest)->Set_CollisionY(Dest->Get_Info().y - y);
+						}
+						else
+						{
+							Dest->Add_Y(-y);
+						}
+						continue;
 					}
 				}
 			}

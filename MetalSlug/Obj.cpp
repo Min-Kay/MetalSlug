@@ -38,7 +38,7 @@ void Obj::Update_Rect()
 
 void Obj::Anim_Counter(int count, float _timer, bool _roop, int start)
 {
-	if (animIndex < start)
+	if (animIndex < start || animIndex > start + count)
 		animIndex = start;
 
 	if (animTimer + _timer < GetTickCount())

@@ -76,9 +76,6 @@
     <Filter Include="소스 파일\02.Object\04.Prop\02.Vehicle">
       <UniqueIdentifier>{b484b6e5-30f0-46a4-b700-de89efb83a6d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02.Object\04.Prop\03.Block">
-      <UniqueIdentifier>{6fd81248-e49e-4e78-a396-a6485940dda3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\01.Manager\05.BmpMgr\01.CBitmap">
       <UniqueIdentifier>{67425488-35eb-40b4-a03c-37edb9c61caf}</UniqueIdentifier>
     </Filter>
@@ -87,9 +84,6 @@
     </Filter>
     <Filter Include="소스 파일\02.Object\05.Bullet">
       <UniqueIdentifier>{3f3e72ae-7fe0-4a39-8e74-5872f74c496c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\02.Object\04.Prop\04.Npc">
-      <UniqueIdentifier>{56db95c9-0e96-4c79-9adf-ca19548211a2}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\01.Manager\09.DataMgr">
       <UniqueIdentifier>{8868ca78-9262-4f56-a548-5754530731af}</UniqueIdentifier>
@@ -138,6 +132,12 @@
     </Filter>
     <Filter Include="소스 파일\02.Object\07.Block">
       <UniqueIdentifier>{af9e6eb9-6203-4a90-85b8-8d466f9a483f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\03.Npc">
+      <UniqueIdentifier>{56db95c9-0e96-4c79-9adf-ca19548211a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\02.Enemy\02.Arabian">
+      <UniqueIdentifier>{2cd015a4-8ac6-4fcf-ada8-70ff0c0d8bbe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -282,6 +282,12 @@
     <ClInclude Include="Block.h">
       <Filter>소스 파일\02.Object\07.Block</Filter>
     </ClInclude>
+    <ClInclude Include="Npc.h">
+      <Filter>소스 파일\02.Object\03.Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="Arabian.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MetalSlug.rc">
@@ -398,6 +404,12 @@
     </ClCompile>
     <ClCompile Include="Block.cpp">
       <Filter>소스 파일\02.Object\07.Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Npc.cpp">
+      <Filter>소스 파일\02.Object\03.Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="Arabian.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

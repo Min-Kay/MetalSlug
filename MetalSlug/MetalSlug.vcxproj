@@ -23,13 +23,13 @@
     <ProjectGuid>{E9AB481D-08F8-42A8-BF6E-EB7C3AEFA4A1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>MetalSlug</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="AbstractFactory.h" />
     <ClInclude Include="AmmoBox.h" />
+    <ClInclude Include="Arabian.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="BmpMgr.h" />
     <ClInclude Include="BmpFile.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MetalSlug.h" />
+    <ClInclude Include="Npc.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="ObjPoolMgr.h" />
     <ClInclude Include="Pistol.h" />
@@ -197,6 +199,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AmmoBox.cpp" />
+    <ClCompile Include="Arabian.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="BmpMgr.cpp" />
     <ClCompile Include="Bullet.cpp" />
@@ -218,6 +221,7 @@
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MetalSlug.cpp" />
+    <ClCompile Include="Npc.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="ObjPoolMgr.cpp" />
     <ClCompile Include="Pistol.cpp" />

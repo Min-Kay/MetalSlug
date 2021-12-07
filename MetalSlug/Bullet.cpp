@@ -9,6 +9,7 @@ void Bullet::Initialize()
 	speed = 10.f; 
 	info.cx = 10.f;
 	info.cy = 10.f;
+	damage = 10;
 }
 
 int Bullet::Update()

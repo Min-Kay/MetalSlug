@@ -6,6 +6,7 @@ void ItemBox::Initialize()
 {
 	id = OBJ::PROP;
 	item_id = ITEM::ITEMBOX;
+	render = RENDER::OBJECT;
 	info.cx = 60.f;
 	info.cy = 60.f;
 	isBreaking = false;

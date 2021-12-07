@@ -3,6 +3,7 @@
 void Block::Initialize()
 {
 	isDead = false;
+	haveGravity = false; 
 	id = OBJ::BLOCK;
 }
 

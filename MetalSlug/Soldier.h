@@ -21,11 +21,14 @@ public:
 private:
 	void	Anim_Idle(HDC _hdc);
 	void	Anim_Move(HDC _hdc);
-	void	Anim_Jump(HDC _hdc);
 	void	Anim_Die(HDC _hdc);
 
 protected:
 	virtual void	State_Machine();
+	virtual void	Check_Hp();
+
+public:
+	void	Change_Anim(ACTION::ID _action) { action = _action; animIndex = 0; };
 
 protected:
 	SOLDIER::CLASS sol_Class;
@@ -41,7 +44,10 @@ protected:
 
 	bool	isDying;
 
-
+	bool	attack;
+	bool	isHolding;
+	bool	isHold;
+	bool	isFiring;
 	DWORD	fireTime;
 };
 

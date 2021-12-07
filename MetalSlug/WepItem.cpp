@@ -6,6 +6,7 @@ void WepItem::Initialize()
 {
 	id = OBJ::PROP;
 	item_id = ITEM::WEAPON;
+	render = RENDER::OBJECT;
 	wep_id = WEAPON::HEAVY;
 	info.cx = 50.f;
 	info.cy = 50.f;

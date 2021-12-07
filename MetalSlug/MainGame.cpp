@@ -1,9 +1,11 @@
 #include "MainGame.h"
 #include "Manager.h"
+#include <time.h>
 
 MainGame::MainGame()
 {
 	ZeroMemory(fpsText, sizeof(TCHAR) * 100);
+	srand(unsigned(time(NULL)));
 }
 
 MainGame::~MainGame()

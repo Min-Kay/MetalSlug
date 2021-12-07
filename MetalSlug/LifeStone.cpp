@@ -5,6 +5,7 @@ void LifeStone::Initialize()
 {
 	id = OBJ::PROP;
 	item_id = ITEM::LIFE;
+	render = RENDER::OBJECT;
 	info.cx = 50.f;
 	info.cy = 50.f;
 	isDead = false;

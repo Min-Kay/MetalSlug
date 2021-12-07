@@ -50,8 +50,6 @@ private:
 	float	speed;
 	float	walkSpeed;
 	float	sitSpeed;
-	bool	isSitting;
-	float	sitPos;
 
 	bool	isJump;
 	float	jumpTime;

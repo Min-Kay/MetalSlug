@@ -16,14 +16,16 @@ public:
 	void	Add_HP(int _hp) { hp += _hp; }
 	void	Set_Move(bool _move) { isMove = _move; }
 	void	Set_CollMode(bool _coll) { canCollision = _coll;  }
+	
 public:
 	const int& Get_HP() const {return hp; }
 	const ACTION::ID& Get_Action() const { return action;  }
 	const ENEMY::ID& Get_EnemyID() const { return enemy_id; }
 	const bool& Get_CollMode() const { return canCollision; }
+	const bool& Get_IsAttack() const { return isAttack; }
 	
 public:
-	virtual void	Check_Hp() { if (hp < 0) Set_Dead(true);  }
+	virtual void	Check_Hp() { if (hp <= 0) Set_Dead(true);  }
 	
 protected:
 	ENEMY::ID enemy_id;
@@ -32,6 +34,7 @@ protected:
 	float	speed;
 
 	bool	isMove;
+	bool	isAttack;
 
 	bool	canCollision;
 };
