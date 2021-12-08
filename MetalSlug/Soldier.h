@@ -13,7 +13,6 @@ public:
 	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir);
 public:
 	void Set_Class(SOLDIER::CLASS _sol) { sol_Class = _sol;  }
-	void Jump();
 
 public:
 	const SOLDIER::CLASS& Get_Class() const { return sol_Class; }
@@ -41,8 +40,6 @@ protected:
 	bool	jumping;
 
 	int		idleNum;
-
-	bool	isDying;
 
 	bool	attack;
 	bool	isHolding;

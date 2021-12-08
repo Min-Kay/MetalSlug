@@ -16,7 +16,6 @@ public:
 	void	KeyInput();
 	virtual void	Gravity();
 	void	Valid();
-	void	Offset();
 
 private:
 	void	Anim_Idle(HDC _hdc);
@@ -29,6 +28,7 @@ public:
 	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir) override;
 	void	Set_BoxCollide(bool _bool) { boxCollide = _bool; }
 	void	Set_CollisionY(float _y) { collisionY = _y; }
+
 public:
 	void	Set_Weapon(Weapon* _wep);
 	void	Check_WeaponState();
@@ -61,9 +61,6 @@ private:
 
 	float	collisionY;
 	bool	boxCollide;
-
-	float   m_iOffSetX;
-	float   m_iOffSetY;
 
 	bool	isValid;
 	DWORD	validTimer;

@@ -71,14 +71,7 @@ int HeavyBullet::Update()
 
 void HeavyBullet::Late_Update()
 {
-	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
-	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
-
-	if (0 - scrollX > info.x ||
-		0 - scrollY > info.y ||
-		WINCX - scrollX < info.x ||
-		WINCY - scrollY < info.y)
-		isDead = true;
+	Check_Screen_Out();
 }
 
 void HeavyBullet::Render(HDC _hdc)
@@ -111,8 +104,6 @@ void HeavyBullet::Render(HDC _hdc)
 		GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), init_CX, info.cy, stretchDC, 0, 0, init_CX, info.cy, ITEM_COLOR);
 		break;
 	}
-
-	//Ellipse(_hdc, rect.left, rect.top, rect.right, rect.bottom);
 }
 
 void HeavyBullet::Release()

@@ -58,6 +58,7 @@ void ItemBox::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 	{
 		if (static_cast<Bullet*>(_opponent)->Get_ParentID() == OBJ::PLAYER)
 		{
+			//animIndex = 0;
 			isBreaking = true;
 		}
 	}

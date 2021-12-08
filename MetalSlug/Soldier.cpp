@@ -19,6 +19,7 @@ void Soldier::Initialize()
 	hp = 10;
 	isMove = false;
 	ranAway = false;
+	coll_Attack = false;
 	isJump = false;
 	jumpForce = 20.f;
 	jumpTime = 0; 
@@ -49,7 +50,7 @@ int Soldier::Update()
 		return OBJ_DEAD;
 	
 	State_Machine(); 
-	Jump();
+	Gravity();
 	Update_Rect(); 
 
 	return OBJ_DEFAULT;
@@ -97,51 +98,6 @@ void Soldier::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 			Add_HP(-static_cast<Bullet*>(_opponent)->Get_Damage());
 			break;
 		}
-	}
-}
-
-void Soldier::Jump()
-{
-	if (isDead)
-		return;
-
-	float fY = 0.f;
-	float jumpingState = 0.f;
-	bool lineCol = CLineMgr::Get_Instance()->Collision_Line(info.x, info.y, &fY);
-
-	if (isJump)
-	{
-		jumpingState = (jumpForce * jumpTime - 9.8f * jumpTime * jumpTime * 0.7f) / 2.f;
-		info.y -= jumpingState;
-		jumpTime += 0.2f;
-		jumping = true;
-
-		if (lineCol && info.y >= fY - info.cy * 0.5f && jumpingState < 0)
-		{
-			info.y = fY - info.cy * 0.5f;
-			jumpTime = 0.f;
-			isJump = false;
-		}
-	}
-	else if (lineCol && info.y < fY - info.cy * 0.6f)
-	{
-		jumping = true;
-		info.y += FALL_DOWN;
-	}
-	else if (lineCol && info.y >= fY - info.cy * 0.5f)
-	{
-		jumping = false;
-		info.y = fY - info.cy * 0.5f;
-	}
-	else if (lineCol)
-	{
-		info.y = fY - info.cy * 0.5f;
-		jumping = false;
-	}
-	else
-	{
-		jumping = true;
-		info.y += FALL_DOWN;
 	}
 }
 

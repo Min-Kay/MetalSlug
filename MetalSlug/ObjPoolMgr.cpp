@@ -5,9 +5,10 @@
 #include "AbstractFactory.h"
 #include "Bullet.h"
 #include "HeavyBullet.h"
-#include "Soldier.h"
 #include "Items.h"
 #include "Block.h"
+
+#include "Enemys.h"
 
 ObjPoolMgr* ObjPoolMgr::pInstance = nullptr;
 
@@ -54,6 +55,7 @@ void ObjPoolMgr::Update()
 void ObjPoolMgr::Late_Update()
 {
 	CCollisionMgr::Collision_Rect(onScreen[OBJ::PLAYER], onScreen[OBJ::BULLET]);
+	CCollisionMgr::Collision_Rect(onScreen[OBJ::PLAYER], onScreen[OBJ::ENEMY]);
 	CCollisionMgr::Collision_Rect(onScreen[OBJ::ENEMY], onScreen[OBJ::BULLET]);
 	CCollisionMgr::Collision_Rect(onScreen[OBJ::PLAYER], onScreen[OBJ::PROP]);
 	CCollisionMgr::Collision_Rect(onScreen[OBJ::BULLET], onScreen[OBJ::PROP]);
@@ -205,6 +207,9 @@ void ObjPoolMgr::Spawn_Enemy(ENEMY::ID _enemy, float _X, float _Y, DIR::ID _dir,
 		enemy[_enemy].push_back(temp);
 	}
 		break;
+	case ENEMY::ARABIAN:
+		enemy[_enemy].push_back(CAbstractFactory<Arabian>::Create(_X,_Y,_dir));
+		break;
 	default:
 		return;
 	}
@@ -250,7 +255,7 @@ void ObjPoolMgr::Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _d
 	}
 		break;
 	case BULLET::ROCKET:
-		//bullet[_bullet].push_back(CAbstractFactory<CFlowerBullet>::Create(_X, _Y, _dir));
+
 		break;
 	default:
 		return;

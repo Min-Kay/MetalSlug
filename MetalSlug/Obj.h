@@ -16,6 +16,7 @@ public:
 public:
 	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir) { isDead = true; }
 	virtual void Gravity(); 
+	void	Check_Line_Collision();
 
 public:
 	void	Set_Dir(DIR::ID _dir) { dir = _dir; }
@@ -41,6 +42,7 @@ public:
 
 public:
 	void	Anim_Counter(int count, float _timer, bool _roop = true, int start = 0);
+	void	Check_Screen_Out();
 
 protected:
 	HDC		drawingDC;

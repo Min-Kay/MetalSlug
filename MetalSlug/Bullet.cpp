@@ -43,6 +43,8 @@ int Bullet::Update()
 
 void Bullet::Late_Update()
 {
+	Check_Screen_Out();
+	Check_Line_Collision();
 }
 
 void Bullet::Render(HDC _hdc)

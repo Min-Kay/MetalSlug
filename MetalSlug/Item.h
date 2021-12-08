@@ -15,7 +15,5 @@ public:
 
 protected:
 	ITEM::ID item_id; 
-	DWORD	animTimer;
-	int		animIndex = 0;
 };
 

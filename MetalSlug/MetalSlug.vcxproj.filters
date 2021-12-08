@@ -255,9 +255,6 @@
     <ClInclude Include="Enemy.h">
       <Filter>소스 파일\02.Object\02.Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Soldier.h">
-      <Filter>소스 파일\02.Object\02.Enemy\01.Soldier</Filter>
-    </ClInclude>
     <ClInclude Include="Stage2.h">
       <Filter>소스 파일\01.Manager\06.SceneMgr\01.Scene\02.Game\01.Stage1</Filter>
     </ClInclude>
@@ -286,7 +283,13 @@
       <Filter>소스 파일\02.Object\03.Npc</Filter>
     </ClInclude>
     <ClInclude Include="Arabian.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>소스 파일\02.Object\02.Enemy\02.Arabian</Filter>
+    </ClInclude>
+    <ClInclude Include="Soldier.h">
+      <Filter>소스 파일\02.Object\02.Enemy\01.Soldier</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemys.h">
+      <Filter>소스 파일\02.Object\02.Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -381,9 +384,6 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>소스 파일\02.Object\02.Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Soldier.cpp">
-      <Filter>소스 파일\02.Object\02.Enemy\01.Soldier</Filter>
-    </ClCompile>
     <ClCompile Include="Stage2.cpp">
       <Filter>소스 파일\01.Manager\06.SceneMgr\01.Scene\02.Game\01.Stage1</Filter>
     </ClCompile>
@@ -409,7 +409,10 @@
       <Filter>소스 파일\02.Object\03.Npc</Filter>
     </ClCompile>
     <ClCompile Include="Arabian.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\02.Object\02.Enemy\02.Arabian</Filter>
+    </ClCompile>
+    <ClCompile Include="Soldier.cpp">
+      <Filter>소스 파일\02.Object\02.Enemy\01.Soldier</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Manager.h"
 #include "Weapons.h"
+#include "Enemy.h"
 
 void Player::Initialize()
 {
@@ -32,9 +33,6 @@ void Player::Initialize()
 	jumpY = 0.f;
 	jumpForce = 30.f;
 	jumpTime = 0.f;
-	
-	m_iOffSetX = 200;
-	m_iOffSetY = WINCY >> 1;
 
 	isValid = true; 
 	validTimer = GetTickCount(); 
@@ -66,7 +64,6 @@ int Player::Update()
 void Player::Late_Update()
 {
 	Valid(); 
-	Offset();
 	Check_WeaponState(); 
 }
 
@@ -285,23 +282,6 @@ void Player::Valid()
 		isValid = false;
 		validTimer = GetTickCount();
 	}
-}
-
-void Player::Offset()
-{
-
-	//if (m_iOffSetX + 50 < info.x)
-	//{
-	//	CScrollMgr::Get_Instance()->Set_ScrollX(-speed);
-	//	m_iOffSetX += (int)speed;
-	//}
-
-	//if (m_iOffSetX > info.x && m_iOffSetX < CScrollMgr::Get_Instance()->Get_ScrollLockX())
-	//{
-	//	CScrollMgr::Get_Instance()->Set_ScrollX(-(m_iOffSetX - info.x + 400));
-	//	m_iOffSetX = m_iOffSetX + (m_iOffSetX - info.x) + 400;
-	//}
-
 }
 
 void Player::Anim_Idle(HDC _hdc)
@@ -675,6 +655,13 @@ void Player::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 			Set_Dying(_dir);
 		}
 		break;
+
+	case OBJ::ENEMY:
+		if (static_cast<Enemy*>(_opponent)->Get_CollAttack())
+		{
+			Set_Dying(_dir);
+		}
+		break;
 	}
 }
 
@@ -715,7 +702,7 @@ void Player::Anim_Counter(ANIM::PLAYER _action, int count, float _timer, bool _r
 	}
 }
 
-void Player::Set_Dying(DIR::ID _dir)
+void Player::Set_Dying(DIR::ID _dir = DIR::RIGHT)
 {
 	dir = _dir;
 	action = ACTION::DIE;

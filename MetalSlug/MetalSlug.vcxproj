@@ -160,6 +160,7 @@
     <ClInclude Include="DataMgr.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Enemys.h" />
     <ClInclude Include="Enum.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />

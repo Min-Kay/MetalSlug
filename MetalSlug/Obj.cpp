@@ -28,6 +28,15 @@ void Obj::Gravity()
 	}
 }
 
+void Obj::Check_Line_Collision()
+{
+	float fY = 0.f;
+	bool lineCol = CLineMgr::Get_Instance()->Collision_Line(info.x, info.y, &fY);
+
+	if (lineCol && fY <= info.y)
+		isDead = true;
+}
+
 void Obj::Update_Rect()
 {
 	rect.top = info.y - info.cy * 0.5f;
@@ -52,4 +61,15 @@ void Obj::Anim_Counter(int count, float _timer, bool _roop, int start)
 
 		animTimer = GetTickCount();
 	}
+}
+
+void Obj::Check_Screen_Out()
+{
+	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
+	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
+	if (-scrollX > info.x ||
+		WINCX - scrollX < info.x ||
+		scrollY > info.y ||
+		WINCY + scrollY < info.y)
+		isDead = true;
 }

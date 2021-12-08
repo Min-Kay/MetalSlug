@@ -26,14 +26,17 @@ void Game::Initialize()
 	ObjPoolMgr::Get_Instance()->Spawn_Player(PLAYER_X,100);
 	ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER,300,300,DIR::RIGHT,SOLDIER::PRIVATE);
 	ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 500, 300, DIR::RIGHT, SOLDIER::SERGENT);
+
+	ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 500, 300, DIR::RIGHT, SOLDIER::SERGENT);
+
 	ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::WEAPON, 300, 300, WEAPON::HEAVY);
 
 
 	scrollLock.push_back({ 3000,-60 });
-	scrollLock.push_back({ 5000,-30 });
-	scrollLock.push_back({ 7000,-30 });
-	scrollLock.push_back({ 9000,-30 });
-	scrollLock.push_back({ 9500,-30 });
+	scrollLock.push_back({ 5000,-40 });
+	scrollLock.push_back({ 7000,-40 });
+	scrollLock.push_back({ 9000,-40 });
+	scrollLock.push_back({ 9500,-40 });
 
 
 	CScrollMgr::Get_Instance()->Set_ScrollLockX(scrollLock.front().x);
@@ -154,31 +157,31 @@ void Game::KeyInput()
 
 	if (CKeyMgr::Get_Instance()->Key_Down('3'))
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::WEAPON, rand() % 200 + 100 + scrollX, 200, WEAPON::ROCKET);
+		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::WEAPON, rand() % 200 + 100 - scrollX, 200, WEAPON::ROCKET);
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down('4'))
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::WEAPON, rand() % 200 + 100 + scrollX, 200, WEAPON::HEAVY);
+		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::WEAPON, rand() % 200 + 100 - scrollX, 200, WEAPON::HEAVY);
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down('5'))
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::AMMO, rand() % 200 + 100 + scrollX, 200);
+		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::AMMO, rand() % 200 + 100 - scrollX, 200);
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down('6'))
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::GRENADE, rand() % 200 + 100 + scrollX, 200);
+		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::GRENADE, rand() % 200 + 100 - scrollX, 200);
 	}
 	if (CKeyMgr::Get_Instance()->Key_Down('7'))
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::LIFE, rand() % 200 + 100 + scrollX, 200);
+		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::LIFE, rand() % 200 + 100 - scrollX, 200);
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down('8'))
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::ITEMBOX, rand() % 200 + 100 + scrollX, 200);
+		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::ITEMBOX, rand() % 200 + 100 - scrollX, 200);
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down('0'))
