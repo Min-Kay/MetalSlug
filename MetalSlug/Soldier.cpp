@@ -9,7 +9,7 @@ void Soldier::Initialize()
 	render = RENDER::OBJECT;
 	dir = DIR::RIGHT;
 	onlySide = dir;
-	sol_Class = SOLDIER::PRIVATE;
+	sol_Class = SOLDIER::CLASS(rand() % 2);
 	info.cx = 100.f; 
 	info.cy = 100.f;
 
@@ -39,7 +39,7 @@ void Soldier::Initialize()
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Soldier.bmp",L"Soldier");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Soldier_Idle2.bmp", L"Soldier_Idle2");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Soldier_Hold.bmp", L"Soldier_Hold");
-	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Stretch_White.bmp", L"Stretch_White");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Stretch_White2.bmp", L"Stretch_White2");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Soldier_Fire.bmp",L"Soldier_Fire");
 
 }
@@ -107,7 +107,7 @@ void Soldier::Anim_Idle(HDC _hdc)
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
 	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Soldier");
-	stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White");
+	stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White2");
 
 	if (attack)
 	{
@@ -187,7 +187,7 @@ void Soldier::Anim_Move(HDC _hdc)
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
 	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Soldier");
-	stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White");
+	stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White2");
 
 	switch (dir)
 	{
@@ -209,7 +209,7 @@ void Soldier::Anim_Die(HDC _hdc)
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
 	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Soldier");
-	stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White");
+	stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White2");
 
 	switch (onlySide)
 	{
@@ -237,6 +237,17 @@ void Soldier::State_Machine()
 	{
 	case ACTION::IDLE:
 
+		if (!isMove)
+		{
+			if(ObjPoolMgr::Get_Instance()->Check_Distance(this) < 400.f)
+			{ 
+				isMove = true;
+				Change_Anim(ACTION::MOVE);
+				attack = false;
+			}
+			return;
+		}
+
 		if (attack)
 		{
 			if (ObjPoolMgr::Get_Instance()->Check_Distance(this) > 200 ||
@@ -255,18 +266,22 @@ void Soldier::State_Machine()
 
 				if (ObjPoolMgr::Get_Instance()->Get_Player_Rect().bottom < rect.top)
 				{
+					dir = DIR::UP;
 					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x, info.y - info.cy * 0.5f, DIR::UP, 0, OBJ::ENEMY);
 				}
 				else if (ObjPoolMgr::Get_Instance()->Get_Player_Rect().top > rect.bottom)
 				{
+					dir = DIR::DOWN;
 					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x, info.y + info.cy * 0.5f, DIR::DOWN, 0, OBJ::ENEMY);
 				}
 				else if (ObjPoolMgr::Get_Instance()->Get_Player_Info().x < info.x)
 				{
+					dir = DIR::LEFT;
 					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x - info.cx * 0.5f, info.y, DIR::LEFT, 0, OBJ::ENEMY);
 				}
 				else if (ObjPoolMgr::Get_Instance()->Get_Player_Info().x > info.x)
 				{
+					dir = DIR::RIGHT;
 					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x + info.cx * 0.5f, info.y, DIR::RIGHT, 0, OBJ::ENEMY);
 				}
 				fireTime = GetTickCount();
@@ -278,12 +293,6 @@ void Soldier::State_Machine()
 			}
 		}
 
-		if (!isMove && ObjPoolMgr::Get_Instance()->Check_Distance(this) < 300.f)
-		{
-			isMove = true; 
-			Change_Anim(ACTION::MOVE);
-			attack = false;
-		}
 		break;
 	case ACTION::MOVE:
 		if (sol_Class == SOLDIER::PRIVATE)

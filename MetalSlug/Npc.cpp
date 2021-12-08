@@ -27,7 +27,7 @@ void Npc::Initialize()
 	isMotion = false;
 
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/NPC_Right.bmp", L"NPC");
-	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Stretch_White.bmp", L"Stretch_White");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Stretch_White3.bmp", L"Stretch_White3");
 
 }
 
@@ -44,7 +44,8 @@ int Npc::Update()
 
 void Npc::Late_Update()
 {
-	Check_Screen_Out();
+	if(!isRopped)
+		Check_Screen_Out();
 }
 
 void Npc::Render(HDC _hdc)
@@ -52,7 +53,7 @@ void Npc::Render(HDC _hdc)
 	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
-	Rectangle(_hdc,rect.left + scrollX,rect.top + scrollY,rect.right + scrollX,rect.bottom + scrollY);
+	//Rectangle(_hdc,rect.left + scrollX,rect.top + scrollY,rect.right + scrollX,rect.bottom + scrollY);
 
 	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"NPC");
 	switch (action)
@@ -73,7 +74,7 @@ void Npc::Render(HDC _hdc)
 			else
 			{
 				Anim_Counter(10, 100.f, false, 4);
-				stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White");
+				stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White3");
 				StretchBlt(stretchDC, 0, 0, 200, 200, drawingDC, animIndex * 200 - 200, 200, -200, 200, SRCCOPY);
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX) - info.cx * 1.5f, int(rect.top + scrollY) - info.cy * 1.2f, info.cx * 4.f, info.cy * 4.f, stretchDC, 0, 0, 200, 200, RGB(255, 255, 255));
 			}
@@ -103,7 +104,7 @@ void Npc::Render(HDC _hdc)
 			else
 			{
 				Anim_Counter(10, 200.f, false);
-				stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White");
+				stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White3");
 				StretchBlt(stretchDC, 0, 0, 200, 200, drawingDC, animIndex * 200 - 200, 800, -200, 200, SRCCOPY);
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX) - info.cx * 1.5f, int(rect.top + scrollY) - info.cy * 1.2f, info.cx * 4.f, info.cy * 4.f, stretchDC, 0, 0, 200, 200, RGB(255, 255, 255));
 			}
@@ -149,7 +150,7 @@ void Npc::Render(HDC _hdc)
 			else
 			{
 				Anim_Counter(7, 100.f);
-				stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White");
+				stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White3");
 				StretchBlt(stretchDC, 0, 0, 200, 200, drawingDC, animIndex * 200 - 200, 1200, -200, 200, SRCCOPY);
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX) - info.cx * 1.5f, int(rect.top + scrollY) - info.cy * 1.2f, info.cx * 4.f, info.cy * 4.f, stretchDC, 0, 0, 200, 200, RGB(255, 255, 255));
 			}
@@ -164,7 +165,7 @@ void Npc::Render(HDC _hdc)
 			else
 			{
 				Anim_Counter(12, 100.f);
-				stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White");
+				stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White3");
 				StretchBlt(stretchDC, 0, 0,200, 200, drawingDC, animIndex * 200 - 200, 400, -200, 200, SRCCOPY);
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX) - info.cx * 1.5f, int(rect.top + scrollY) - info.cy * 1.2f, info.cx * 4.f, info.cy * 4.f, stretchDC, 0,0, 200, 200, RGB(255, 255, 255));
 			}

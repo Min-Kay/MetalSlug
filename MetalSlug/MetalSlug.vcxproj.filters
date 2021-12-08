@@ -139,6 +139,12 @@
     <Filter Include="소스 파일\02.Object\02.Enemy\02.Arabian">
       <UniqueIdentifier>{2cd015a4-8ac6-4fcf-ada8-70ff0c0d8bbe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02.Object\02.Enemy\03.ThreeHead">
+      <UniqueIdentifier>{bc4813c4-b753-4980-a254-335b60e5fc82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\02.Enemy\03.ThreeHead\01.Tower">
+      <UniqueIdentifier>{2e060bc2-9d7a-481c-8e53-f1223cb660b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -291,6 +297,12 @@
     <ClInclude Include="Enemys.h">
       <Filter>소스 파일\02.Object\02.Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="ThreeHead.h">
+      <Filter>소스 파일\02.Object\02.Enemy\03.ThreeHead</Filter>
+    </ClInclude>
+    <ClInclude Include="Tower.h">
+      <Filter>소스 파일\02.Object\02.Enemy\03.ThreeHead\01.Tower</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MetalSlug.rc">
@@ -413,6 +425,12 @@
     </ClCompile>
     <ClCompile Include="Soldier.cpp">
       <Filter>소스 파일\02.Object\02.Enemy\01.Soldier</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreeHead.cpp">
+      <Filter>소스 파일\02.Object\02.Enemy\03.ThreeHead</Filter>
+    </ClCompile>
+    <ClCompile Include="Tower.cpp">
+      <Filter>소스 파일\02.Object\02.Enemy\03.ThreeHead\01.Tower</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

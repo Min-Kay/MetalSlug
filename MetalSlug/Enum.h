@@ -2,7 +2,7 @@
 
 namespace OBJ
 {
-	enum ID {PLAYER,ENEMY,NPC,BULLET,PROP,BLOCK,END};
+	enum ID {BLOCK,  NPC, PROP,  ENEMY, BULLET, PLAYER, END};
 }
 
 namespace BULLET
@@ -27,7 +27,7 @@ namespace ITEM
 
 namespace ENEMY
 {
-	enum ID {SOLDIER,ARABIAN,END};
+	enum ID {SOLDIER,ARABIAN,THREEHEAD,END};
 }
 
 namespace SCENE
@@ -71,4 +71,10 @@ namespace ANIM
 namespace SOLDIER
 {
 	enum CLASS { PRIVATE, SERGENT , END };
+}
+
+namespace THREEHEAD
+{
+	enum HEAD {LEFT,MID,RIGHT};
+	enum STATE { NONE, DOOR_OPEN, CURTAIN_OPEN, ATTACK, DESTORY };
 }

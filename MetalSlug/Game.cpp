@@ -3,6 +3,7 @@
 #include "Manager.h"
 #include "AbstractFactory.h"
 #include "Player.h"
+#include "Enemys.h"
 
 Game::Game()
 {
@@ -27,24 +28,18 @@ void Game::Initialize()
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Map1-1.bmp", L"Map1-1");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Map1-2.bmp", L"Map1-2");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Map1-3.bmp", L"Map1-3");
-	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Map1-building.bmp", L"Map1-building");
 
 	ObjPoolMgr::Get_Instance()->Initialize();
 	DataMgr::Get_Instance()->Initialize(); 
 	CLineMgr::Get_Instance()->Load(STAGE1_SAVE);
 	ObjPoolMgr::Get_Instance()->Spawn_Player(PLAYER_X,100);
-	//ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER,300,300,DIR::RIGHT,SOLDIER::PRIVATE);
-	//ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 500, 300, DIR::RIGHT, SOLDIER::SERGENT);
 
-	ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 500, 300, DIR::RIGHT, SOLDIER::SERGENT);
-
-	ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::WEAPON, 300, 300, WEAPON::HEAVY);
-
-
+	scrollLock.push_back({ 2000,-60 });
 	scrollLock.push_back({ 3000,-60 });
-	scrollLock.push_back({ 5000,-40 });
-	scrollLock.push_back({ 7000,-40 });
-	scrollLock.push_back({ 9000,-40 });
+	scrollLock.push_back({ 4600,-60 });
+	scrollLock.push_back({ 5630,-60 });
+	scrollLock.push_back({ 8000,-60 });
+	scrollLock.push_back({ 8800,-40 });
 	scrollLock.push_back({ 9500,-40 });
 
 
@@ -52,7 +47,7 @@ void Game::Initialize()
 	CScrollMgr::Get_Instance()->Set_ScrollY(scrollLock.front().y);
 
 	maxCheckPoint = scrollLock.size();
-
+	Set_CheckPoint_Objects();
 }
 
 void Game::Update()
@@ -90,22 +85,30 @@ void Game::Render(HDC _hdc)
 	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"background");
 	GdiTransparentBlt(_hdc, 0, 0, WINCX, WINCY, drawingDC, 0, 0, 100, 75, MAP_COLOR);
 
-	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-0");
-	GdiTransparentBlt(_hdc, scrollX,  scrollY, 2500, 700, drawingDC, 0, 0, 1000, 280, MAP_COLOR);
+	if (-scrollX < 2500 + WINCX)
+	{
+		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-0");
+		GdiTransparentBlt(_hdc, scrollX, scrollY, 2500, 700, drawingDC, 0, 0, 1000, 280, MAP_COLOR);
+	}
 
-	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-1");
-	GdiTransparentBlt(_hdc, scrollX + 2500, scrollY, 2500, 700, drawingDC, 0, 0, 1000, 280, MAP_COLOR);
+	if (-scrollX > 2500 - WINCX && -scrollX < 5000 + WINCX)
+	{
+		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-1");
+		GdiTransparentBlt(_hdc, scrollX + 2500, scrollY, 2500, 700, drawingDC, 0, 0, 1000, 280, MAP_COLOR);
+	}
 
-	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-2");
-	GdiTransparentBlt(_hdc, scrollX + 5000, scrollY, 2500, 700, drawingDC, 0, 0, 1000, 280, MAP_COLOR);
+	if (-scrollX > 5000 - WINCX && -scrollX < 7500 + WINCX)
+	{
+		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-2");
+		GdiTransparentBlt(_hdc, scrollX + 5000, scrollY, 2500, 700, drawingDC, 0, 0, 1000, 280, MAP_COLOR);
+	}
 
-	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-building");
-	GdiTransparentBlt(_hdc, scrollX + 4600, scrollY + 150, 1100, 450, drawingDC, 0, 0, 400, 150, MAP_COLOR);
-
-	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-3");
-	GdiTransparentBlt(_hdc, scrollX + 7500, scrollY, 2050, 700, drawingDC, 0, 0, 820, 280, MAP_COLOR);
+	if (-scrollX > 7500 - WINCX && -scrollX < 9000 + WINCX)
+	{
+		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-3");
+		GdiTransparentBlt(_hdc, scrollX + 7500, scrollY, 2050, 700, drawingDC, 0, 0, 820, 280, MAP_COLOR);
+	}
 	
-
 	CLineMgr::Get_Instance()->Render(_hdc);
 	ObjPoolMgr::Get_Instance()->Render(_hdc);
 	Render_Information(_hdc); 
@@ -193,7 +196,7 @@ void Game::KeyInput()
 
 	if (CKeyMgr::Get_Instance()->Key_Down('8'))
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 500 - scrollX, 300, DIR::RIGHT, SOLDIER::SERGENT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 500 - scrollX, 300, DIR::RIGHT);
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down('0'))
@@ -339,24 +342,24 @@ void Game::Check_Scrolling()
 	}
 	else if (scrollUpdating)
 	{
-		if (totalX < abs((currPlayerPos + formalX - PLAYER_X)) || totalY <= abs(scrollLock.front().y - formalY))
+		if (totalX < abs((currPlayerPos + formalX - PLAYER_X)) || totalY < abs(scrollLock.front().y - formalY))
 		{
 			if (totalX < abs((currPlayerPos + formalX - PLAYER_X)))
 			{
 				if ((currPlayerPos + formalX - PLAYER_X) < 0)
-					CScrollMgr::Get_Instance()->Set_ScrollX(5.f);
+					CScrollMgr::Get_Instance()->Set_ScrollX(10.f);
 				else if ((currPlayerPos + formalX - PLAYER_X) > 0)
-					CScrollMgr::Get_Instance()->Set_ScrollX(-5.f);
-				totalX += 5.f;
+					CScrollMgr::Get_Instance()->Set_ScrollX(-10.f);
+				totalX += 10.f;
 			}
 
 			if (totalY < abs(scrollLock.front().y - formalY))
 			{
-				if (scrollLock.front().y - formalY > scrollLock.front().y)
-					CScrollMgr::Get_Instance()->Set_ScrollY(5.f);
-				else if (scrollLock.front().y - formalY < scrollLock.front().y)
-					CScrollMgr::Get_Instance()->Set_ScrollY(-5.f);
-				totalY += 5.f;
+				if (scrollLock.front().y > formalY)
+					CScrollMgr::Get_Instance()->Set_ScrollY(10.f);
+				else if (scrollLock.front().y < formalY)
+					CScrollMgr::Get_Instance()->Set_ScrollY(-10.f);
+				totalY += 10.f;
 			}
 		}
 		else
@@ -379,14 +382,32 @@ void Game::Set_CheckPoint_Objects()
 	switch (currCheckPoint)
 	{
 	case 0:
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 500 - scrollX, 300, DIR::RIGHT, SOLDIER::SERGENT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 1200, 300, DIR::LEFT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 1400, 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 1500, 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 1700, 300, DIR::LEFT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 1800, 300, DIR::LEFT);
+		ObjPoolMgr::Get_Instance()->Spawn_Npc(NPC::SLAVE, 1500, 300);
 		break;
 	case 1:
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 500 - scrollX, 300, DIR::RIGHT, SOLDIER::SERGENT);
+		ObjPoolMgr::Get_Instance()->Spawn_Npc(NPC::SLAVE, 2600, 300);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 2500 , 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 2700, 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 2800, 300, DIR::RIGHT);
 		break;
 	case 2:
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 3200, 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 3400, 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 3600, 300, DIR::RIGHT);
 		break;
 	case 3:
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::THREEHEAD, 4650, 300);
+		break;
+	case 4:
+		break;
+	case 5:
+		break;
+	case 6:
 		break;
 	}
 	if(maxCheckPoint > currCheckPoint)
@@ -398,5 +419,6 @@ void Game::Check_Checkpoint_Clear()
 	if (ObjPoolMgr::Get_Instance()->Get_OnScreen_Count() <= 0)
 		checkPoint = true;
 }
+
 
 

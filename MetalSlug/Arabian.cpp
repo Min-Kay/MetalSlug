@@ -39,7 +39,6 @@ int Arabian::Update()
 		return OBJ_DEAD;
 
 	State_Machine();
-
 	Gravity(); 
 	Update_Rect(); 
 	return OBJ_DEFAULT;
@@ -207,12 +206,24 @@ void Arabian::State_Machine()
 	if (isDying)
 		return;
 
+	float disX = abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x);
+	float disY = ObjPoolMgr::Get_Instance()->Get_Player_Info().y - info.y;
+
 	switch (action)
 	{
 	case ACTION::IDLE:
 	{
-		float disX = abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x);
-		float disY = ObjPoolMgr::Get_Instance()->Get_Player_Info().y - info.y;
+		if (!isMove)
+		{
+			if (disX < 400.f)
+			{
+				isMove = true;
+				Change_Anim(ACTION::MOVE);
+				attacking = false;
+			}
+			return;
+		}
+
 		if (!attacking && disX < 70 && disY < -200)
 		{
 			isJump = true;
@@ -243,17 +254,11 @@ void Arabian::State_Machine()
 			coll_Attack = false;
 		}
 
-		if (!isMove && ObjPoolMgr::Get_Instance()->Check_Distance(this) < 250.f)
-		{
-			isMove = true;
-			Change_Anim(ACTION::MOVE);
-			attacking = false;
-		}
 	}
 		break;
 	case ACTION::MOVE:
 
-		if (abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x) < 70)
+		if (disX < 70)
 		{
 			Change_Anim(ACTION::IDLE);
 			attacking = true;
