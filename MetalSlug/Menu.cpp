@@ -20,6 +20,13 @@ void Menu::Update()
 
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_ESCAPE))
 	{
+		BmpMgr::Get_Instance()->Destroy_Instance();
+		ObjPoolMgr::Get_Instance()->Destroy_Instance();
+		CLineMgr::Get_Instance()->Destroy_Instance();
+		CScrollMgr::Get_Instance()->Destroy_Instance();
+		CKeyMgr::Get_Instance()->Destroy_Instance();
+		DataMgr::Get_Instance()->Destroy_Instance();
+		SceneMgr::Get_Instance()->Destroy_Instance();
 		DestroyWindow(g_hwnd);
 		return;
 	}

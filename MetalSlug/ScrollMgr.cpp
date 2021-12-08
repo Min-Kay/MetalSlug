@@ -37,10 +37,10 @@ void CScrollMgr::Check_ScrollLock()
 	if (WINCX - scrollXLock > m_fScrollX)
 		m_fScrollX = WINCX - scrollXLock;
 
-	if (0 < m_fScrollY)
-		m_fScrollY = 0.f;
+	//if (0 < m_fScrollY)
+		//m_fScrollY = 0.f;
 
-	if (WINCY - scrollYLock > m_fScrollY)
+	if (WINCY - scrollYLock < m_fScrollY)
 		m_fScrollY = WINCY - scrollYLock;
 }
 

@@ -23,6 +23,9 @@
 // KEY
 #define		VK_MAX				0xff
 
+// PLAYER POS
+#define		PLAYER_X			300
+
 
 // Blt Color 
 #define		PLAYER_COLOR	RGB(86, 177, 222)

@@ -16,11 +16,14 @@ public:
 	void		Release(void);
 
 public:
-	float			Get_ScrollX() { return m_fScrollX; }
-	float			Get_ScrollY() { return m_fScrollY; }
+	const float&			Get_ScrollX() const { return m_fScrollX; }
+	const float&			Get_ScrollY() const { return m_fScrollY; }
 	void			Set_ScrollX(float _fX) { if(!isLock) m_fScrollX += _fX;  }
 	void			Set_ScrollY(float _fy) { if (!isLock) m_fScrollY += _fy; }
 	void			Init_Scroll(float _fX = 0, float _fY = 0) {m_fScrollX = _fX; m_fScrollY = _fY;}
+
+	const	float&			Get_ScrollLockX() { return scrollXLock; }
+	const	float&			Get_ScrollLockY() { return scrollYLock; }
 
 	void			Set_ScrollLockX(float _fx) { scrollXLock = _fx ; }
 	void			Set_ScrollLockY(float _fy) { scrollYLock = _fy; }

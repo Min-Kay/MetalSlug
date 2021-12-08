@@ -14,13 +14,16 @@ public:
 	void KeyInput();
 
 public:
-	virtual void	Check_GameState();
+	virtual bool	Check_GameState();
 
 public:
 	void	Init_Information(); 
 	void	Render_Information(HDC _hdc);
 	int		Check_Number(TCHAR name);
 	int		Check_NumSize(int i); 
+	void	Check_Scrolling();
+
+
 protected:
 	bool	isClear;
 	bool	isFail;
@@ -34,5 +37,12 @@ protected:
 
 	list<POINT> scrollLock;
 	bool	checkPoint;
+	bool	scrollUpdating;
+
+	float  formalX;
+	float  formalY;
+	float  currPlayerPos;
+	float totalX = 0.f;
+	float totalY = 0.f;
 };
 

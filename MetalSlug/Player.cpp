@@ -33,7 +33,7 @@ void Player::Initialize()
 	jumpForce = 30.f;
 	jumpTime = 0.f;
 	
-	m_iOffSetX = WINCX >> 1;
+	m_iOffSetX = 200;
 	m_iOffSetY = WINCY >> 1;
 
 	isValid = true; 
@@ -155,9 +155,7 @@ void Player::KeyInput()
 		dir = DIR::LEFT;
 		onlySide = DIR::LEFT;
 		info.x -= speed;
-		//CScrollMgr::Get_Instance()->Set_ScrollX(speed);
 	}
-
 
 	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_RIGHT))
 	{
@@ -168,7 +166,9 @@ void Player::KeyInput()
 		dir = DIR::RIGHT;
 		onlySide = DIR::RIGHT;
 		info.x += speed;
-		//CScrollMgr::Get_Instance()->Set_ScrollX(-speed);
+
+		if( PLAYER_X < info.x + CScrollMgr::Get_Instance()->Get_ScrollX())
+			CScrollMgr::Get_Instance()->Set_ScrollX(-speed);
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Rollover(VK_JUMP, VK_UP) && !isJump)
@@ -290,17 +290,18 @@ void Player::Valid()
 void Player::Offset()
 {
 
-	if (m_iOffSetX + 50 < info.x)
-	{
-		CScrollMgr::Get_Instance()->Set_ScrollX(-speed);
-		m_iOffSetX += (int)speed;
-	}
+	//if (m_iOffSetX + 50 < info.x)
+	//{
+	//	CScrollMgr::Get_Instance()->Set_ScrollX(-speed);
+	//	m_iOffSetX += (int)speed;
+	//}
 
-	if (m_iOffSetX - 50 > info.x)
-	{
-		CScrollMgr::Get_Instance()->Set_ScrollX(speed);
-		m_iOffSetX -= (int)speed;
-	}
+	//if (m_iOffSetX > info.x && m_iOffSetX < CScrollMgr::Get_Instance()->Get_ScrollLockX())
+	//{
+	//	CScrollMgr::Get_Instance()->Set_ScrollX(-(m_iOffSetX - info.x + 400));
+	//	m_iOffSetX = m_iOffSetX + (m_iOffSetX - info.x) + 400;
+	//}
+
 }
 
 void Player::Anim_Idle(HDC _hdc)

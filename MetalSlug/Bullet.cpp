@@ -1,15 +1,18 @@
 #include "Bullet.h"
 #include "Items.h"
+#include "Manager.h"
 
 void Bullet::Initialize()
 {
 	id = OBJ::BULLET;
 	render = RENDER::OBJECT;
 	parentID = OBJ::PLAYER;
-	speed = 10.f; 
-	info.cx = 10.f;
-	info.cy = 10.f;
+	speed = 20.f; 
+	info.cx = 30.f;
+	info.cy = 30.f;
 	damage = 10;
+
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/PistolBullet.bmp",L"PistolBullet");
 }
 
 int Bullet::Update()
@@ -40,16 +43,15 @@ int Bullet::Update()
 
 void Bullet::Late_Update()
 {
-	if (0 > info.x ||
-		0 > info.y ||
-		WINCX < info.x ||
-		WINCY < info.y)
-		isDead = true; 
 }
 
 void Bullet::Render(HDC _hdc)
 {
-	Ellipse(_hdc, rect.left, rect.top, rect.right, rect.bottom);
+	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
+	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
+
+	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"PistolBullet");
+	GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx, info.cy, drawingDC, 0, 0, 15, 15, ITEM_COLOR);
 }
 
 void Bullet::Release()

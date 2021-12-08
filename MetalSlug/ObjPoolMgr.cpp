@@ -17,6 +17,7 @@ ObjPoolMgr::ObjPoolMgr()
 
 ObjPoolMgr::~ObjPoolMgr()
 {
+	Release();
 }
 
 void ObjPoolMgr::Initialize()
@@ -86,7 +87,48 @@ void ObjPoolMgr::Render(HDC _hdc)
 
 void ObjPoolMgr::Release()
 {
+	for (int i = 0; i < OBJ::END; ++i)
+	{
+		onScreen[i].clear();
+	}
 
+	for (int i = 0; i < RENDER::END; ++i)
+	{
+		render[i].clear();
+	}
+
+	for (int i = 0; i < ENEMY::END; ++i)
+	{
+		for_each(enemy[i].begin(), enemy[i].end(), CDeleteObj());
+		enemy[i].clear();
+	}
+
+	for (int i = 0; i < BULLET::END; ++i)
+	{
+		for_each(bullet[i].begin(), bullet[i].end(), CDeleteObj());
+		bullet[i].clear();
+	}
+	for (int i = 0; i < ITEM::END; ++i)
+	{
+		for_each(item[i].begin(), item[i].end(), CDeleteObj());
+		item[i].clear();
+	}
+	for (int i = 0; i < NPC::END; ++i)
+	{
+		for_each(npc[i].begin(), npc[i].end(), CDeleteObj());
+		npc[i].clear();
+	}
+
+	for (int i = 0; i < VEHICLE::END; ++i)
+	{
+		for_each(vehicle[i].begin(), vehicle[i].end(), CDeleteObj());
+		vehicle[i].clear();
+	}
+	
+	for_each(block.begin(),block.end(),CDeleteObj());
+	block.clear(); 
+
+	SAFE_DELETE(player);
 }
 
 void ObjPoolMgr::DisableObj()

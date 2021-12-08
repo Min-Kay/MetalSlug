@@ -22,16 +22,22 @@ void Game::Initialize()
 
 	ObjPoolMgr::Get_Instance()->Initialize();
 	DataMgr::Get_Instance()->Initialize(); 
-	CScrollMgr::Get_Instance()->Set_ScrollLockX(9550);
-	CScrollMgr::Get_Instance()->Set_ScrollLockY(700);
 	CLineMgr::Get_Instance()->Load(STAGE1_SAVE);
-	ObjPoolMgr::Get_Instance()->Spawn_Player(200,100);
+	ObjPoolMgr::Get_Instance()->Spawn_Player(PLAYER_X,100);
 	ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER,300,300,DIR::RIGHT,SOLDIER::PRIVATE);
 	ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 500, 300, DIR::RIGHT, SOLDIER::SERGENT);
 	ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::WEAPON, 300, 300, WEAPON::HEAVY);
 
 
-	//ObjPoolMgr::Get_Instance()->Spawn_Block(100, 100, 400, 400, false);
+	scrollLock.push_back({ 3000,-60 });
+	scrollLock.push_back({ 5000,-30 });
+	scrollLock.push_back({ 7000,-30 });
+	scrollLock.push_back({ 9000,-30 });
+	scrollLock.push_back({ 9500,-30 });
+
+
+	CScrollMgr::Get_Instance()->Set_ScrollLockX(scrollLock.front().x);
+	CScrollMgr::Get_Instance()->Set_ScrollY(scrollLock.front().y);
 
 }
 
@@ -47,7 +53,7 @@ void Game::Late_Update()
 	{
 		if (DataMgr::Get_Instance()->Get_Life() > 0)
 		{
-			ObjPoolMgr::Get_Instance()->Spawn_Player(200 - CScrollMgr::Get_Instance()->Get_ScrollX(), 100);
+			ObjPoolMgr::Get_Instance()->Spawn_Player(PLAYER_X - CScrollMgr::Get_Instance()->Get_ScrollX(), 100);
 			ObjPoolMgr::Get_Instance()->Set_Player_Dead(false);
 		}
 		else
@@ -55,7 +61,8 @@ void Game::Late_Update()
 
 	}
 
-	Check_GameState();
+	if (Check_GameState()) return;
+	Check_Scrolling();
 
 	ObjPoolMgr::Get_Instance()->Late_Update();
 }
@@ -78,7 +85,7 @@ void Game::Render(HDC _hdc)
 	GdiTransparentBlt(_hdc, scrollX + 5000, scrollY, 2500, 700, drawingDC, 0, 0, 1000, 280, MAP_COLOR);
 
 	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-building");
-	GdiTransparentBlt(_hdc, scrollX + 4550, scrollY + 200, 1200, 450, drawingDC, 0, 0, 400, 150, MAP_COLOR);
+	GdiTransparentBlt(_hdc, scrollX + 4600, scrollY + 150, 1100, 450, drawingDC, 0, 0, 400, 150, MAP_COLOR);
 
 	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-3");
 	GdiTransparentBlt(_hdc, scrollX + 7500, scrollY, 2050, 700, drawingDC, 0, 0, 820, 280, MAP_COLOR);
@@ -93,11 +100,14 @@ void Game::Render(HDC _hdc)
 void Game::Release()
 {
 	ObjPoolMgr::Get_Instance()->DisableObj();
-	CScrollMgr::Get_Instance()->Init_Scroll(0, 0);
+	CScrollMgr::Get_Instance()->Init_Scroll();
 }
 
 void Game::KeyInput()
 {
+	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
+	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
+
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_F1))
 	{
 		isClear = true;
@@ -144,40 +154,53 @@ void Game::KeyInput()
 
 	if (CKeyMgr::Get_Instance()->Key_Down('3'))
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::WEAPON, rand() % 200 + 100, 300, WEAPON::ROCKET);
+		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::WEAPON, rand() % 200 + 100 + scrollX, 200, WEAPON::ROCKET);
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down('4'))
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::WEAPON, rand() % 200 + 100, 300, WEAPON::HEAVY);
+		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::WEAPON, rand() % 200 + 100 + scrollX, 200, WEAPON::HEAVY);
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down('5'))
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::AMMO, rand() % 200 + 100, 300);
+		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::AMMO, rand() % 200 + 100 + scrollX, 200);
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down('6'))
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::GRENADE, rand() % 200 + 100, 300);
+		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::GRENADE, rand() % 200 + 100 + scrollX, 200);
 	}
 	if (CKeyMgr::Get_Instance()->Key_Down('7'))
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::LIFE, rand() % 200 + 100, 300);
+		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::LIFE, rand() % 200 + 100 + scrollX, 200);
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down('8'))
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::ITEMBOX, rand() % 200 + 100, 300);
+		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::ITEMBOX, rand() % 200 + 100 + scrollX, 200);
+	}
+
+	if (CKeyMgr::Get_Instance()->Key_Down('0'))
+	{
+		checkPoint = true;
 	}
 }
 
-void Game::Check_GameState()
+bool Game::Check_GameState()
 {
 	if (isClear)
+	{
 		SceneMgr::Get_Instance()->Change_Scene(SCENE::GAME1);
-	else if(isFail)
+		return true;
+	}
+	else if (isFail)
+	{
 		SceneMgr::Get_Instance()->Change_Scene(SCENE::MENU);
+		return true;
+	}
+	
+	return false;
 }
 
 void Game::Init_Information()
@@ -281,4 +304,50 @@ int Game::Check_NumSize(int i)
 	else if (i >= 10)
 		return 2;
 	return 1;
+}
+
+void Game::Check_Scrolling()
+{
+	if (checkPoint)
+	{
+		formalX = CScrollMgr::Get_Instance()->Get_ScrollX();
+		formalY = CScrollMgr::Get_Instance()->Get_ScrollY();
+		currPlayerPos = ObjPoolMgr::Get_Instance()->Get_Player_Info().x;
+		if(scrollLock.size() > 1)
+			scrollLock.pop_front();
+
+		CScrollMgr::Get_Instance()->Set_ScrollLockX(scrollLock.front().x);
+
+		scrollUpdating = true;
+		checkPoint = false;
+	}
+	else if (scrollUpdating)
+	{
+		if (totalX < abs((currPlayerPos + formalX - PLAYER_X)) || totalY <= abs(scrollLock.front().y - formalY))
+		{
+			if (totalX < abs((currPlayerPos + formalX - PLAYER_X)))
+			{
+				if ((currPlayerPos + formalX - PLAYER_X) < 0)
+					CScrollMgr::Get_Instance()->Set_ScrollX(5.f);
+				else if ((currPlayerPos + formalX - PLAYER_X) > 0)
+					CScrollMgr::Get_Instance()->Set_ScrollX(-5.f);
+				totalX += 5.f;
+			}
+
+			if (totalY < abs(scrollLock.front().y - formalY))
+			{
+				if (scrollLock.front().y - formalY > scrollLock.front().y)
+					CScrollMgr::Get_Instance()->Set_ScrollY(5.f);
+				else if (scrollLock.front().y - formalY < scrollLock.front().y)
+					CScrollMgr::Get_Instance()->Set_ScrollY(-5.f);
+				totalY += 5.f;
+			}
+		}
+		else
+		{
+			totalX = 0.f;
+			totalY = 0.f;
+			scrollUpdating = false;
+		}
+	}
 }

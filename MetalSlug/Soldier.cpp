@@ -65,7 +65,7 @@ void Soldier::Render(HDC _hdc)
 	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
-	Rectangle(_hdc,rect.left + scrollX,rect.top,rect.right + scrollX,rect.bottom);
+	Rectangle(_hdc,rect.left + scrollX,rect.top + scrollY ,rect.right + scrollX,rect.bottom + scrollY);
 	switch (action)
 	{
 		case ACTION::IDLE:
