@@ -4,6 +4,9 @@ class Game :
 	public Scene
 {
 public:
+	Game();
+	virtual ~Game();
+public:
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void Late_Update() override;
@@ -16,7 +19,6 @@ public:
 public:
 	virtual bool	Check_GameState();
 
-
 public:
 	void	Init_Information(); 
 	void	Render_Information(HDC _hdc);
@@ -26,6 +28,8 @@ public:
 
 	virtual void	Set_CheckPoint_Objects();
 
+
+	void	Check_Checkpoint_Clear();
 
 protected:
 	bool	isClear;

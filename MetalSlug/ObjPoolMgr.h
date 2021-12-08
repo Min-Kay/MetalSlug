@@ -33,6 +33,7 @@ public:
 	const bool& Get_Player_Dead() const { return player_Dead; }
 	const	INFO& Get_Player_Info() const;
 	const	RECT& Get_Player_Rect() const;
+	const int& Get_OnScreen_Count() const { return onScreen[OBJ::ENEMY].size(); }
 
 public:
 	void	Spawn_Player(float _X, float _Y);

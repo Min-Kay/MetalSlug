@@ -4,6 +4,15 @@
 #include "AbstractFactory.h"
 #include "Player.h"
 
+Game::Game()
+{
+}
+
+Game::~Game()
+{
+	Release();
+}
+
 void Game::Initialize()
 {
 	isClear = false; 
@@ -66,6 +75,7 @@ void Game::Late_Update()
 
 	}
 
+	Check_Checkpoint_Clear();
 	if (Check_GameState()) return;
 	Check_Scrolling();
 
@@ -374,8 +384,19 @@ void Game::Set_CheckPoint_Objects()
 	case 1:
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 500 - scrollX, 300, DIR::RIGHT, SOLDIER::SERGENT);
 		break;
+	case 2:
+		break;
+	case 3:
+		break;
 	}
-	++currCheckPoint;
+	if(maxCheckPoint > currCheckPoint)
+		++currCheckPoint;
+}
+
+void Game::Check_Checkpoint_Clear()
+{
+	if (ObjPoolMgr::Get_Instance()->Get_OnScreen_Count() <= 0)
+		checkPoint = true;
 }
 
 
