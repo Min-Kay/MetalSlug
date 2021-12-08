@@ -11,6 +11,9 @@ void WepItem::Initialize()
 	info.cx = 50.f;
 	info.cy = 50.f;
 	isDead = false; 
+	isValid = true;
+	validTime = GetTickCount(); 
+
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Item.bmp",L"Item");
 }
 
@@ -28,6 +31,7 @@ int WepItem::Update()
 
 void WepItem::Late_Update()
 {
+	Valid();
 }
 
 void WepItem::Render(HDC _hdc)
@@ -60,6 +64,9 @@ void WepItem::Release()
 
 void WepItem::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 {
+	if (isDead || isValid)
+		return;
+
 	if (_id == OBJ::PLAYER)
 	{
 		switch (wep_id)

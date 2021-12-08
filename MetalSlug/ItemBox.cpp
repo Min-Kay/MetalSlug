@@ -12,6 +12,11 @@ void ItemBox::Initialize()
 	isBreaking = false;
 	isDead = false;
 	animIndex = 0; 
+
+	isValid = true;
+	validTime = GetTickCount();
+
+
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Item.bmp", L"Item");
 }
 
@@ -27,6 +32,7 @@ int ItemBox::Update()
 
 void ItemBox::Late_Update()
 {
+	Valid(); 
 }
 
 void ItemBox::Render(HDC _hdc)
@@ -51,7 +57,7 @@ void ItemBox::Release()
 
 void ItemBox::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 {
-	if (isBreaking || isDead)
+	if (isBreaking || isDead || isValid)
 		return;
 
 	if (_id == OBJ::BULLET)

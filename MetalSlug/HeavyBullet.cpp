@@ -110,24 +110,3 @@ void HeavyBullet::Release()
 {
 }
 
-void HeavyBullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
-{
-	switch (_id)
-	{
-	case OBJ::PLAYER:
-		if (_opponent->Get_ID() != parentID)
-			isDead = true;
-		break;
-	case OBJ::ENEMY:
-		if (_opponent->Get_ID() != parentID)
-			isDead = true;
-		break;
-	case OBJ::PROP:
-		if (static_cast<Item*>(_opponent)->Get_ItemID() == ITEM::ITEMBOX)
-			isDead = true; 
-		break;
-	case OBJ::BLOCK:
-		isDead = true;
-		break;
-	}
-}

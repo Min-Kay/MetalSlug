@@ -24,8 +24,8 @@ void Game::Initialize()
 	DataMgr::Get_Instance()->Initialize(); 
 	CLineMgr::Get_Instance()->Load(STAGE1_SAVE);
 	ObjPoolMgr::Get_Instance()->Spawn_Player(PLAYER_X,100);
-	ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER,300,300,DIR::RIGHT,SOLDIER::PRIVATE);
-	ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 500, 300, DIR::RIGHT, SOLDIER::SERGENT);
+	//ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER,300,300,DIR::RIGHT,SOLDIER::PRIVATE);
+	//ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 500, 300, DIR::RIGHT, SOLDIER::SERGENT);
 
 	ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 500, 300, DIR::RIGHT, SOLDIER::SERGENT);
 
@@ -41,6 +41,8 @@ void Game::Initialize()
 
 	CScrollMgr::Get_Instance()->Set_ScrollLockX(scrollLock.front().x);
 	CScrollMgr::Get_Instance()->Set_ScrollY(scrollLock.front().y);
+
+	maxCheckPoint = scrollLock.size();
 
 }
 
@@ -176,12 +178,12 @@ void Game::KeyInput()
 	}
 	if (CKeyMgr::Get_Instance()->Key_Down('7'))
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::LIFE, rand() % 200 + 100 - scrollX, 200);
+		ObjPoolMgr::Get_Instance()->Spawn_Npc(NPC::SLAVE, 500 - scrollX, 300);
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down('8'))
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::ITEMBOX, rand() % 200 + 100 - scrollX, 200);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 500 - scrollX, 300, DIR::RIGHT, SOLDIER::SERGENT);
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down('0'))
@@ -323,6 +325,7 @@ void Game::Check_Scrolling()
 
 		scrollUpdating = true;
 		checkPoint = false;
+		Set_CheckPoint_Objects();
 	}
 	else if (scrollUpdating)
 	{
@@ -354,3 +357,25 @@ void Game::Check_Scrolling()
 		}
 	}
 }
+
+void Game::Set_CheckPoint_Objects()
+{
+	if (isClear || isFail || maxCheckPoint < currCheckPoint)
+		return;
+
+	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
+	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
+
+	switch (currCheckPoint)
+	{
+	case 0:
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 500 - scrollX, 300, DIR::RIGHT, SOLDIER::SERGENT);
+		break;
+	case 1:
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 500 - scrollX, 300, DIR::RIGHT, SOLDIER::SERGENT);
+		break;
+	}
+	++currCheckPoint;
+}
+
+

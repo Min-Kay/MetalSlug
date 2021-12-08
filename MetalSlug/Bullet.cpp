@@ -1,6 +1,8 @@
 #include "Bullet.h"
 #include "Items.h"
 #include "Manager.h"
+#include "Enemy.h"
+#include "Npc.h"
 
 void Bullet::Initialize()
 {
@@ -69,7 +71,7 @@ void Bullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 			isDead = true;
 		break;
 	case OBJ::ENEMY:
-		if (_opponent->Get_ID() != parentID)
+		if (_opponent->Get_ID() != parentID && !static_cast<Enemy*>(_opponent)->Get_Dying())
 			isDead = true;
 		break;
 	case OBJ::PROP:
@@ -78,6 +80,9 @@ void Bullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 		break;
 	case OBJ::BLOCK:
 		isDead = true;
+	case OBJ::NPC:
+		if(static_cast<Npc*>(_opponent)->Get_Ropped())
+			isDead = true;
 		break;
 	}
 }

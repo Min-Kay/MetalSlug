@@ -40,6 +40,8 @@ public:
 	void	Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _dir, float _angle = 0, OBJ::ID parent = OBJ::PLAYER);
 	void	Spawn_Item(ITEM::ID _item, float _X, float _Y, WEAPON::ID _wep = WEAPON::HEAVY);
 	void	Spawn_Block(float _cx, float _cy, float _X, float _Y, bool _Grav = true);
+	void	Spawn_Npc(NPC::ID _npc, float _X, float _Y);
+
 
 private:
 	list<Obj*> onScreen[OBJ::END];

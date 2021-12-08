@@ -16,12 +16,15 @@ public:
 public:
 	virtual bool	Check_GameState();
 
+
 public:
 	void	Init_Information(); 
 	void	Render_Information(HDC _hdc);
 	int		Check_Number(TCHAR name);
 	int		Check_NumSize(int i); 
 	void	Check_Scrolling();
+
+	virtual void	Set_CheckPoint_Objects();
 
 
 protected:
@@ -44,5 +47,9 @@ protected:
 	float  currPlayerPos;
 	float totalX = 0.f;
 	float totalY = 0.f;
+
+
+	int	  maxCheckPoint;
+	int	  currCheckPoint = 0;
 };
 

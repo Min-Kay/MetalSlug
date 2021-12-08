@@ -9,6 +9,9 @@ void AmmoBox::Initialize()
 	info.cx = 50.f;
 	info.cy = 50.f;
 	isDead = false; 
+	isValid = true;
+	validTime = GetTickCount();
+
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Item.bmp",L"Item");
 }
 
@@ -24,6 +27,7 @@ int AmmoBox::Update()
 
 void AmmoBox::Late_Update()
 {
+	Valid();
 }
 
 void AmmoBox::Render(HDC _hdc)
@@ -43,6 +47,9 @@ void AmmoBox::Release()
 
 void AmmoBox::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 {
+	if (isDead || isValid)
+		return;
+
 	if (_id == OBJ::PLAYER)
 	{
 		DataMgr::Get_Instance()->Add_Ammo(100);

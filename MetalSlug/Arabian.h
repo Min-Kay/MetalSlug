@@ -21,6 +21,7 @@ protected:
 
 public:
 	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir);
+	virtual void Gravity();
 
 public:
 	void	Change_Anim(ACTION::ID _action) { action = _action; animIndex = 0; };
@@ -29,6 +30,14 @@ private:
 	bool	attacking;
 	
 	DWORD	attackTime;
+
+	bool	falling; 
+
+	bool	isJump;
+	float	jumpTime;
+	float	jumpY;
+	bool	jumping;
+	float	jumpForce;
 	
 };
 

@@ -9,6 +9,10 @@ void LifeStone::Initialize()
 	info.cx = 50.f;
 	info.cy = 50.f;
 	isDead = false;
+
+	isValid = true;
+	validTime = GetTickCount();
+
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Item.bmp", L"Item");
 }
 
@@ -24,6 +28,7 @@ int LifeStone::Update()
 
 void LifeStone::Late_Update()
 {
+	Valid();
 }
 
 void LifeStone::Render(HDC _hdc)
@@ -42,6 +47,9 @@ void LifeStone::Release()
 
 void LifeStone::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 {
+	if (isDead || isValid)
+		return;
+
 	if (_id == OBJ::PLAYER)
 	{
 		DataMgr::Get_Instance()->Add_Life(1);

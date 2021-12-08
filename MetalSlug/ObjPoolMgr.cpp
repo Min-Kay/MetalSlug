@@ -9,6 +9,7 @@
 #include "Block.h"
 
 #include "Enemys.h"
+#include "Npc.h"
 
 ObjPoolMgr* ObjPoolMgr::pInstance = nullptr;
 
@@ -58,8 +59,10 @@ void ObjPoolMgr::Late_Update()
 	CCollisionMgr::Collision_Rect(onScreen[OBJ::PLAYER], onScreen[OBJ::ENEMY]);
 	CCollisionMgr::Collision_Rect(onScreen[OBJ::ENEMY], onScreen[OBJ::BULLET]);
 	CCollisionMgr::Collision_Rect(onScreen[OBJ::PLAYER], onScreen[OBJ::PROP]);
+	CCollisionMgr::Collision_Rect(onScreen[OBJ::PLAYER], onScreen[OBJ::NPC]);
 	CCollisionMgr::Collision_Rect(onScreen[OBJ::BULLET], onScreen[OBJ::PROP]);
 	CCollisionMgr::Collision_Rect(onScreen[OBJ::BULLET], onScreen[OBJ::BLOCK]);
+	CCollisionMgr::Collision_Rect(onScreen[OBJ::BULLET], onScreen[OBJ::NPC]);
 	CCollisionMgr::Collision_RectPush(onScreen[OBJ::PLAYER],onScreen[OBJ::ENEMY]);
 	CCollisionMgr::Collision_RectPush(onScreen[OBJ::PLAYER], onScreen[OBJ::BLOCK]);
 
@@ -182,20 +185,17 @@ void ObjPoolMgr::Spawn_Player(float _X, float _Y)
 void ObjPoolMgr::Spawn_Enemy(ENEMY::ID _enemy, float _X, float _Y, DIR::ID _dir, SOLDIER::CLASS _class)
 {
 	sort(enemy[_enemy].begin(), enemy[_enemy].end(), CompareDead<Obj*>);
-	for (auto& i : enemy[_enemy])
+	if (!enemy[_enemy].empty() && enemy[_enemy].front()->Get_Dead())
 	{
-		if (i->Get_Dead())
-		{
-			i->Initialize();
+		enemy[_enemy].front()->Initialize();
 			if (_enemy == ENEMY::SOLDIER)
-				static_cast<Soldier*>(i)->Set_Class(_class);
-			i->Set_Pos(_X, _Y);
-			i->Set_Dir(_dir);
-			i->Update_Rect();
-			i->Set_Dead(false);
-			Add_Object(OBJ::ENEMY, i);
+				static_cast<Soldier*>(enemy[_enemy].front())->Set_Class(_class);
+			enemy[_enemy].front()->Set_Pos(_X, _Y);
+			enemy[_enemy].front()->Set_Dir(_dir);
+			enemy[_enemy].front()->Update_Rect();
+			enemy[_enemy].front()->Set_Dead(false);
+			Add_Object(OBJ::ENEMY, enemy[_enemy].front());
 			return;
-		}
 	}
 
 	switch (_enemy)
@@ -221,20 +221,17 @@ void ObjPoolMgr::Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _d
 {
 	sort(bullet[_bullet].begin(), bullet[_bullet].end(), CompareDead<Obj*>);
 
-	for (auto& i : bullet[_bullet])
+	if (!bullet[_bullet].empty() && bullet[_bullet].front()->Get_Dead())
 	{
-		if (i->Get_Dead())
-		{
-			i->Initialize();
-			static_cast<Bullet*>(i)->Set_ParentID(_parent);
-			i->Set_Pos(_X, _Y);
-			i->Set_Dir(_dir);
-			i->Set_Angle(_angle);
-			i->Update_Rect();
-			i->Set_Dead(false);
-			Add_Object(OBJ::BULLET, i);
-			return;
-		}
+		bullet[_bullet].front()->Initialize();
+		static_cast<Bullet*>(bullet[_bullet].front())->Set_ParentID(_parent);
+		bullet[_bullet].front()->Set_Pos(_X, _Y);
+		bullet[_bullet].front()->Set_Dir(_dir);
+		bullet[_bullet].front()->Set_Angle(_angle);
+		bullet[_bullet].front()->Update_Rect();
+		bullet[_bullet].front()->Set_Dead(false);
+		Add_Object(OBJ::BULLET, bullet[_bullet].front());
+		return;
 	}
 
 	Obj* temp = nullptr;
@@ -268,19 +265,16 @@ void ObjPoolMgr::Spawn_Item(ITEM::ID _item, float _X, float _Y, WEAPON::ID _wep)
 {
 	sort(item[_item].begin(), item[_item].end(), CompareDead<Obj*>);
 
-	for (auto& i : item[_item])
+	if (!item[_item].empty() && item[_item].front()->Get_Dead())
 	{
-		if (i->Get_Dead())
-		{
-			i->Initialize();
-			if (_item == ITEM::WEAPON)
-				static_cast<WepItem*>(i)->Set_WepID(_wep);
-			i->Set_Pos(_X, _Y);
-			i->Update_Rect();
-			i->Set_Dead(false);
-			Add_Object(OBJ::PROP, i);
-			return;
-		}
+		item[_item].front()->Initialize();
+		if (_item == ITEM::WEAPON)
+			static_cast<WepItem*>(item[_item].front())->Set_WepID(_wep);
+		item[_item].front()->Set_Pos(_X, _Y);
+		item[_item].front()->Update_Rect();
+		item[_item].front()->Set_Dead(false);
+		Add_Object(OBJ::PROP, item[_item].front());
+		return;
 	}
 
 	Obj* temp;
@@ -330,23 +324,50 @@ void ObjPoolMgr::Spawn_Block(float _cx, float _cy, float _X, float _Y, bool _Gra
 {
 	sort(block.begin(), block.end(), CompareDead<Obj*>);
 
-	for (auto& i : block)
+	if (!block.empty() && block.front()->Get_Dead())
 	{
-		if (i->Get_Dead())
-		{
-			i->Set_Pos(_X, _Y);
-			i->Set_Size(_cx,_cy);
-			i->Initialize();
-			i->Update_Rect();
-			i->Set_Dead(false);
-			Add_Object(OBJ::BLOCK, i);
-			return;
-		}
+		block.front()->Set_Pos(_X, _Y);
+		block.front()->Set_Size(_cx,_cy);
+		block.front()->Initialize();
+		block.front()->Update_Rect();
+		block.front()->Set_Dead(false);
+		Add_Object(OBJ::BLOCK, block.front());
+		return;
 	}
 	
 	block.push_back(CAbstractFactory<Block>::Create(_X,_Y,_cx,_cy));
 
 	Add_Object(OBJ::BLOCK, block.back());
+}
+
+void ObjPoolMgr::Spawn_Npc(NPC::ID _npc, float _X, float _Y)
+{
+	sort(npc[_npc].begin(), npc[_npc].end(), CompareDead<Obj*>);
+
+	if(!npc[_npc].empty() && npc[_npc].front()->Get_Dead())
+	{
+		npc[_npc].front()->Set_Pos(_X, _Y);
+		npc[_npc].front()->Initialize();
+		npc[_npc].front()->Update_Rect();
+		npc[_npc].front()->Set_Dead(false);
+		Add_Object(OBJ::NPC, npc[_npc].front());
+		return;
+	}
+
+	switch (_npc)
+	{
+	case NPC::SLAVE:
+		npc[_npc].push_back(CAbstractFactory<Npc>::Create(_X, _Y, DIR::LEFT));
+		break;
+	case NPC::TRAVELER:
+		break;
+	case NPC::END:
+		break;
+	default:
+		return;
+	}
+	
+	Add_Object(OBJ::NPC, npc[_npc].back());
 }
 
 void ObjPoolMgr::Set_Player_Wep(Weapon* _wep)

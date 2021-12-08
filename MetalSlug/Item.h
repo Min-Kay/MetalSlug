@@ -13,7 +13,12 @@ public:
 public:
 	const ITEM::ID& Get_ItemID() const { return item_id; }
 
+	void Valid();
+
 protected:
 	ITEM::ID item_id; 
+
+	bool	isValid;
+	DWORD	validTime;
 };
 
