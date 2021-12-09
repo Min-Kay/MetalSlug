@@ -178,6 +178,7 @@
     <ClInclude Include="LineMgr.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Manager.h" />
+    <ClInclude Include="Masknell.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MetalSlug.h" />
     <ClInclude Include="Npc.h" />
@@ -222,6 +223,7 @@
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="LineMgr.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="Masknell.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MetalSlug.cpp" />
     <ClCompile Include="Npc.cpp" />

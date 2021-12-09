@@ -54,7 +54,7 @@ void Arabian::Render(HDC _hdc)
 	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
-	Rectangle(_hdc, rect.left + scrollX,rect.top + scrollY, rect.right + scrollX, rect.bottom + scrollY );
+	//Rectangle(_hdc, rect.left + scrollX,rect.top + scrollY, rect.right + scrollX, rect.bottom + scrollY );
 
 	switch (action)
 	{
@@ -283,8 +283,9 @@ void Arabian::Check_Hp()
 	if (isDead || isDying)
 		return;
 
-	if (hp <= 0)
+	if ( hp <= 0)
 	{
+		DataMgr::Get_Instance()->Add_Score(100);
 		animIndex = 0;
 		action = ACTION::DIE;
 		isDying = true; 

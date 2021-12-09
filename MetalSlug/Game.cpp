@@ -417,6 +417,8 @@ void Game::Set_CheckPoint_Objects()
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 5600, 300, DIR::RIGHT);
 		break;
 	case 5:
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::MASKNELL, 8700, 200, DIR::LEFT);
+
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 8000, 300, DIR::RIGHT);
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 8000, 300, DIR::RIGHT);
 

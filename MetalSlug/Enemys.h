@@ -4,3 +4,4 @@
 #include "Arabian.h"
 #include "Soldier.h"
 #include "ThreeHead.h"
+#include "Masknell.h"

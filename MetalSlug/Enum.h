@@ -12,7 +12,7 @@ namespace BULLET
 
 namespace VEHICLE
 {
-	enum ID {TANK, CAMEL, END};
+	enum ID {TANK, END};
 }
 
 namespace NPC
@@ -27,7 +27,7 @@ namespace ITEM
 
 namespace ENEMY
 {
-	enum ID {SOLDIER,ARABIAN,THREEHEAD,END};
+	enum ID {SOLDIER,ARABIAN,THREEHEAD,MASKNELL,END};
 }
 
 namespace SCENE

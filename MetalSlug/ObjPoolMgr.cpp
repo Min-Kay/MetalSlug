@@ -210,6 +210,9 @@ void ObjPoolMgr::Spawn_Enemy(ENEMY::ID _enemy, float _X, float _Y, DIR::ID _dir)
 	case ENEMY::THREEHEAD:
 		enemy[_enemy].push_back(CAbstractFactory<ThreeHead>::Create(_X, _Y));
 		break;
+	case ENEMY::MASKNELL:
+		enemy[_enemy].push_back(CAbstractFactory<Masknell>::Create(_X, _Y));
+		break;
 	default:
 		return;
 	}

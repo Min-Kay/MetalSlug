@@ -25,7 +25,7 @@ private:
 protected:
 	virtual void	State_Machine();
 	virtual void	Check_Hp();
-
+	virtual void	Gravity(); 
 public:
 	void	Change_Anim(ACTION::ID _action) { action = _action; animIndex = 0; };
 
@@ -40,6 +40,8 @@ protected:
 	bool	jumping;
 
 	int		idleNum;
+
+	bool	falling;
 
 	bool	attack;
 	bool	isHolding;

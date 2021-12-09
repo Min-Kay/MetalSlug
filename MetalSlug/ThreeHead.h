@@ -34,7 +34,6 @@ private:
 	bool towerOn;
 
 	bool doorOpening;
-
 	
 	Tower* left = nullptr;
 	Tower* mid = nullptr;

@@ -74,6 +74,7 @@ void ThreeHead::Late_Update()
 
 	if (!isDying && AllDestroied())
 	{
+		DataMgr::Get_Instance()->Add_Score(3000);
 		isDying = true;
 		state = THREEHEAD::DESTORY;
 	}
@@ -91,15 +92,15 @@ void ThreeHead::Render(HDC _hdc)
 			GdiTransparentBlt(_hdc, int(info.x - 50.f + scrollX), int(info.y - 50.f + scrollY), 1026, 324, drawingDC, 0, 3394, 380, 120, RGB(0, 255, 0));
 			Anim_Counter(13,100.f,false);
 			if (animIndex < 3)
-				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex , drawingDC, (animIndex % 3) * 160, 2751, 160, 120, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex , drawingDC, (animIndex % 3) * 160, 2741, 160, 120, RGB(0, 255, 0));
 			else if(animIndex < 6)
-				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex, drawingDC, (animIndex % 3) * 160, 2901, 160, 120, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex, drawingDC, (animIndex % 3) * 160, 2991, 160, 120, RGB(0, 255, 0));
 			else if(animIndex < 9)																	 
-				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex, drawingDC, (animIndex % 3) * 160, 3051, 160, 120, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex, drawingDC, (animIndex % 3) * 160, 3041, 160, 120, RGB(0, 255, 0));
 			else if (animIndex < 12)																 
-				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex, drawingDC, (animIndex % 3) * 160, 3301, 160, 120, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex, drawingDC, (animIndex % 3) * 160, 3291, 160, 120, RGB(0, 255, 0));
 			else																					 
-				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex, drawingDC, (animIndex % 3) * 160, 3451, 160, 120, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex, drawingDC, (animIndex % 3) * 160, 3441, 160, 120, RGB(0, 255, 0));
 			if (animIndex == 13)
 			{
 				isDead = true;

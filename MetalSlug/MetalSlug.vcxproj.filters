@@ -145,6 +145,9 @@
     <Filter Include="소스 파일\02.Object\02.Enemy\03.ThreeHead\01.Tower">
       <UniqueIdentifier>{2e060bc2-9d7a-481c-8e53-f1223cb660b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02.Object\02.Enemy\04.Masknell">
+      <UniqueIdentifier>{5b453aa9-7c9c-4a77-96d6-4a3c79a68aa8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -303,6 +306,9 @@
     <ClInclude Include="Tower.h">
       <Filter>소스 파일\02.Object\02.Enemy\03.ThreeHead\01.Tower</Filter>
     </ClInclude>
+    <ClInclude Include="Masknell.h">
+      <Filter>소스 파일\02.Object\02.Enemy\04.Masknell</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MetalSlug.rc">
@@ -431,6 +437,9 @@
     </ClCompile>
     <ClCompile Include="Tower.cpp">
       <Filter>소스 파일\02.Object\02.Enemy\03.ThreeHead\01.Tower</Filter>
+    </ClCompile>
+    <ClCompile Include="Masknell.cpp">
+      <Filter>소스 파일\02.Object\02.Enemy\04.Masknell</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

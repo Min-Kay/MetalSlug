@@ -66,8 +66,9 @@ int Tower::Update()
 
 void Tower::Late_Update()
 {
-	if (hp <= 0)
+	if (!isDying && hp <= 0)
 	{
+		DataMgr::Get_Instance()->Add_Score(500);
 		isDying = true; 
 		state = THREEHEAD::DESTORY;
 		animIndex = 0;
