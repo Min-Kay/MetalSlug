@@ -55,5 +55,8 @@ protected:
 
 	int	  maxCheckPoint;
 	int	  currCheckPoint = 0;
+
+private:
+	bool spawnMidBoss;
 };
 

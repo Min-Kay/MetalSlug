@@ -26,14 +26,15 @@ public:
 	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir) {}
 
 	void	Tower_On();
+	bool	AllDestroied();
 private:
 	THREEHEAD::STATE state;
 	
 	float totalY;
 	bool towerOn;
-	bool isDoorOpened;
-	bool isCurtainOpened;
-	bool opening; 
+
+	bool doorOpening;
+
 	
 	Tower* left = nullptr;
 	Tower* mid = nullptr;

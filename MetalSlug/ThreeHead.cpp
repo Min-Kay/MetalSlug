@@ -34,18 +34,13 @@ void ThreeHead::Initialize()
 	state = THREEHEAD::NONE;
 
 	towerOn = false; 
-	isDoorOpened = false;
-	isCurtainOpened = false;
-	opening = false;
+	doorOpening = false;
 
 	totalY = 0.f;
-
-	info.cx = 100.f; 
-	info.cy = 100.f; 
-
-	left = new Tower(THREEHEAD::LEFT, info.x + 300.f,info.y - 50.f);
-	mid = new Tower(THREEHEAD::MID, info.x + 570.f, info.y - 50.f);
-	right = new Tower(THREEHEAD::RIGHT, info.x + 850.f, info.y - 50.f);
+		
+	left = new Tower(this,THREEHEAD::LEFT, info.x + 300.f,info.y - 50.f);
+	mid = new Tower(this, THREEHEAD::MID, info.x + 570.f, info.y - 50.f);
+	right = new Tower(this, THREEHEAD::RIGHT, info.x + 850.f, info.y - 50.f);
 
 	ObjPoolMgr::Get_Instance()->Add_Object(OBJ::ENEMY,left);
 	ObjPoolMgr::Get_Instance()->Add_Object(OBJ::ENEMY, right);
@@ -66,17 +61,22 @@ int ThreeHead::Update()
 	right->Update();
 	mid->Update();
 
-	Update_Rect();
-
 	return OBJ_DEFAULT;
 }
 
 void ThreeHead::Late_Update()
 {
 	Tower_On();
+	
 	left->	Late_Update();
 	right->	Late_Update();
 	mid->	Late_Update();
+
+	if (!isDying && AllDestroied())
+	{
+		isDying = true;
+		state = THREEHEAD::DESTORY;
+	}
 }
 
 void ThreeHead::Render(HDC _hdc)
@@ -84,48 +84,30 @@ void ThreeHead::Render(HDC _hdc)
 	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
-	Rectangle(_hdc, rect.left + scrollX, rect.top + scrollY,rect.right + scrollX, rect.bottom + scrollY);
-
 	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"MidBoss");
 	switch (state)
 	{
-	case THREEHEAD::NONE:
-		left->Render(_hdc);
-		right->Render(_hdc);
-		mid->Render(_hdc);
-
-		GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), 1026, 324, drawingDC, 0, 30, 380, 120, RGB(0, 255, 0));
-		
-		//타워 랜더
-		//본체 랜더
-		break;
-	case THREEHEAD::DOOR_OPEN:
-		left->Render(_hdc);
-		right->Render(_hdc);
-		mid->Render(_hdc);
-		//타워 랜더
-		//본체 랜더
-		break;
-	case THREEHEAD::CURTAIN_OPEN:
-		left->Render(_hdc);
-		right->Render(_hdc);
-		mid->Render(_hdc);
-		//타워 랜더
-		//본체 랜더
-		break;
-	case THREEHEAD::ATTACK:
-		left->Render(_hdc);
-		right->Render(_hdc);
-		mid->Render(_hdc);
-		//타워 랜더
-		//본체 랜더
-		break;
 	case THREEHEAD::DESTORY:
-		left->Render(_hdc);
-		right->Render(_hdc);
-		mid->Render(_hdc);
-		//타워 랜더
-		//본체 랜더
+			GdiTransparentBlt(_hdc, int(info.x - 50.f + scrollX), int(info.y - 50.f + scrollY), 1026, 324, drawingDC, 0, 3394, 380, 120, RGB(0, 255, 0));
+			Anim_Counter(13,100.f,false);
+			if (animIndex < 3)
+				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex , drawingDC, (animIndex % 3) * 160, 2751, 160, 120, RGB(0, 255, 0));
+			else if(animIndex < 6)
+				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex, drawingDC, (animIndex % 3) * 160, 2901, 160, 120, RGB(0, 255, 0));
+			else if(animIndex < 9)																	 
+				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex, drawingDC, (animIndex % 3) * 160, 3051, 160, 120, RGB(0, 255, 0));
+			else if (animIndex < 12)																 
+				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex, drawingDC, (animIndex % 3) * 160, 3301, 160, 120, RGB(0, 255, 0));
+			else																					 
+				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex, drawingDC, (animIndex % 3) * 160, 3451, 160, 120, RGB(0, 255, 0));
+			if (animIndex == 13)
+			{
+				isDead = true;
+				Release(); 
+			}
+		break;
+	default:
+		GdiTransparentBlt(_hdc, int(info.x - 50.f + scrollX), int(info.y - 50.f + scrollY), 1026, 324, drawingDC, 0, 30, 380, 120, RGB(0, 255, 0));
 		break;
 	}
 }
@@ -147,26 +129,8 @@ void ThreeHead::State_Machine()
 			Send_State(THREEHEAD::DOOR_OPEN);
 		}
 		break;
-	case THREEHEAD::DOOR_OPEN:
-		if (isDoorOpened)
-		{
-			Send_State(THREEHEAD::CURTAIN_OPEN);
-		}
-		break;
-	case THREEHEAD::CURTAIN_OPEN:
-		if (isCurtainOpened)
-		{
-			Send_State(THREEHEAD::ATTACK);
-		}
-		break;
-	case THREEHEAD::ATTACK:
-		if (left->Get_Dying() && right->Get_Dying() && mid->Get_Dying())
-		{
-			isDying = true;
-			Send_State(THREEHEAD::DESTORY);
-		}
-		break;
 	case THREEHEAD::DESTORY:
+		
 		break;
 	}
 }
@@ -184,19 +148,30 @@ void ThreeHead::Send_State(THREEHEAD::STATE _state)
 
 void ThreeHead::Tower_On()
 {
-	if (totalY >= 150.f)
+	if (totalY >= 150.f && !doorOpening)
+	{
+		Send_State(THREEHEAD::DOOR_OPEN);
+		doorOpening = true;
 		return; 
+	}
 
 	if (!towerOn && CScrollMgr::Get_Instance()->Get_ScrollLockX() <= WINCX-CScrollMgr::Get_Instance()->Get_ScrollX())
 		towerOn = true;
 
 	if (towerOn && totalY < 150.f)
 	{
-		CScrollMgr::Get_Instance()->Set_ScrollY(0.5f);
+		CScrollMgr::Get_Instance()->Set_ScrollY(0.6f);
 		left->Add_Y(-3.f);
 		mid->Add_Y(-3.f);
 		right->Add_Y(-3.f);
 		totalY += 3.f;
 	}
+}
+
+bool ThreeHead::AllDestroied()
+{
+	if (left->Get_Dying() && mid->Get_Dying() && right->Get_Dying())
+		return true;
+	return false;
 }
 

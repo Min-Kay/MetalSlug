@@ -70,6 +70,6 @@ void Obj::Check_Screen_Out()
 	if (-scrollX > info.x ||
 		WINCX - scrollX < info.x ||
 		scrollY > info.y ||
-		WINCY + scrollY < info.y)
+		WINCY - scrollY < info.y)
 		isDead = true;
 }

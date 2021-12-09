@@ -1,15 +1,24 @@
 ﻿  Game.cpp
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(46,64): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(47,60): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(91,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(91,27): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(97,43): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(97,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(103,43): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(103,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(109,43): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(109,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(337,65): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\ObjPoolMgr.h(36): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\DataMgr.h(60): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
-  MetalSlug.vcxproj -> C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\Debug\MetalSlug.exe
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(48,64): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(49,60): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(93,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(93,27): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(99,43): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(99,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(105,43): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(105,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(111,51): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(111,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(117,43): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(117,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(345,65): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Obj.cpp
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Obj.cpp(42,20): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Obj.cpp(43,23): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Obj.cpp(44,21): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Obj.cpp(45,22): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  ThreeHead.cpp
+  코드를 생성하고 있습니다...
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\ObjPoolMgr.h(36): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\DataMgr.h(60): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
+  MetalSlug.vcxproj -> C:\Users\민경욱\Desktop\프로젝트\MetalSlug\Debug\MetalSlug.exe
