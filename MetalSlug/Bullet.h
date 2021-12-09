@@ -20,9 +20,6 @@ public:
 	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir);
 
 public:
-	void Anim_Counter(int count, float _timer, bool _roop = true, int start = 0);
-
-public:
 	const int& Get_Damage() const { return damage; }
 	void Set_Damage(int _dam) { damage = _dam; }
 
@@ -30,7 +27,5 @@ protected:
 	float speed;
 	int damage;
 	OBJ::ID parentID;
-	int animIndex = 0;
-	DWORD animTimer;
 };
 

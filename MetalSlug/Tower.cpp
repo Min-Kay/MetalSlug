@@ -1,5 +1,5 @@
 #include "Tower.h"
-#include "Bullet.h"
+#include "Bullets.h"
 #include "Manager.h"
 #include "ThreeHead.h"
 
@@ -357,7 +357,7 @@ void Tower::State_Machine()
 		isMove = true;
 		if (fireTime + 2000.f < GetTickCount())
 		{
-			ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL,info.x,info.y - info.cy,DIR::DOWN,0,OBJ::ENEMY);
+			ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL,info.x,info.y - info.cy,DIR::DOWN,OBJ::ENEMY);
 			fireTime = GetTickCount();
 			firing = true;
 		}

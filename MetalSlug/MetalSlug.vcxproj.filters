@@ -148,6 +148,18 @@
     <Filter Include="소스 파일\02.Object\02.Enemy\04.Masknell">
       <UniqueIdentifier>{5b453aa9-7c9c-4a77-96d6-4a3c79a68aa8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02.Object\05.Bullet\02.Shotgun">
+      <UniqueIdentifier>{6a1eb6bc-5ecb-4874-8c46-88bc12948077}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.Weapon\03.Shotgun">
+      <UniqueIdentifier>{b1b9745f-924d-404f-9d19-101a437b5198}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\05.Bullet\03.Rocket">
+      <UniqueIdentifier>{940f7cf8-0150-472e-8494-cee1569523e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.Weapon\04.Rocket">
+      <UniqueIdentifier>{a0105b60-ff3a-4662-b3c1-c728370a93cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -309,6 +321,21 @@
     <ClInclude Include="Masknell.h">
       <Filter>소스 파일\02.Object\02.Enemy\04.Masknell</Filter>
     </ClInclude>
+    <ClInclude Include="ShotgunBullet.h">
+      <Filter>소스 파일\02.Object\05.Bullet\02.Shotgun</Filter>
+    </ClInclude>
+    <ClInclude Include="Shotgun.h">
+      <Filter>소스 파일\03.Weapon\03.Shotgun</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullets.h">
+      <Filter>소스 파일\02.Object\05.Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="RocketBullet.h">
+      <Filter>소스 파일\02.Object\05.Bullet\03.Rocket</Filter>
+    </ClInclude>
+    <ClInclude Include="RocketLauncher.h">
+      <Filter>소스 파일\03.Weapon\04.Rocket</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MetalSlug.rc">
@@ -440,6 +467,18 @@
     </ClCompile>
     <ClCompile Include="Masknell.cpp">
       <Filter>소스 파일\02.Object\02.Enemy\04.Masknell</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotgunBullet.cpp">
+      <Filter>소스 파일\02.Object\05.Bullet\02.Shotgun</Filter>
+    </ClCompile>
+    <ClCompile Include="Shotgun.cpp">
+      <Filter>소스 파일\03.Weapon\03.Shotgun</Filter>
+    </ClCompile>
+    <ClCompile Include="RocketBullet.cpp">
+      <Filter>소스 파일\02.Object\05.Bullet\03.Rocket</Filter>
+    </ClCompile>
+    <ClCompile Include="RocketLauncher.cpp">
+      <Filter>소스 파일\03.Weapon\04.Rocket</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

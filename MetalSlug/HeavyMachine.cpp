@@ -8,7 +8,6 @@ void HeavyMachine::Initialize()
 	ammo = 200;
 	currCount = 0;
 	fireCount = 5;
-	damage = 10;
 	coolTime = 200.f;
 	timer = GetTickCount(); 
 	interval = GetTickCount();
@@ -29,7 +28,7 @@ bool HeavyMachine::Fire(float _x, float _y, DIR::ID _dir)
 
 	if (isFiring && interval + 75.f < GetTickCount())
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::HEAVY, _x, _y, _dir,angle);
+		ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::HEAVY, _x, _y, _dir);
 		--ammo;
 		++currCount;
 		interval = GetTickCount(); 

@@ -1,7 +1,7 @@
 #include "Soldier.h"
 #include "Include.h"
 #include "Manager.h"
-#include "Weapons.h"
+#include "Bullets.h"
 
 void Soldier::Initialize()
 {
@@ -286,17 +286,17 @@ void Soldier::State_Machine()
 				if (ObjPoolMgr::Get_Instance()->Get_Player_Rect().bottom < rect.top)
 				{
 					dir = DIR::UP;
-					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x, info.y - info.cy * 0.5f, DIR::UP, 0, OBJ::ENEMY);
+					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x, info.y - info.cy * 0.5f, DIR::UP,  OBJ::ENEMY);
 				}
 				else if (ObjPoolMgr::Get_Instance()->Get_Player_Info().x < info.x)
 				{
 					dir = DIR::LEFT;
-					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x - info.cx * 0.5f, info.y, DIR::LEFT, 0, OBJ::ENEMY);
+					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x - info.cx * 0.5f, info.y, DIR::LEFT,  OBJ::ENEMY);
 				}
 				else if (ObjPoolMgr::Get_Instance()->Get_Player_Info().x > info.x)
 				{
 					dir = DIR::RIGHT;
-					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x + info.cx * 0.5f, info.y, DIR::RIGHT, 0, OBJ::ENEMY);
+					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x + info.cx * 0.5f, info.y, DIR::RIGHT, OBJ::ENEMY);
 				}
 				fireTime = GetTickCount();
 			}

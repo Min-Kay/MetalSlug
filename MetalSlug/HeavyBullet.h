@@ -12,6 +12,7 @@ public:
 
 public:
 	const OBJ::ID& Get_ParentID() const { return parentID; }
+	virtual void Update_Rect(); 
 
 private:
 	float	init_CX;

@@ -2,6 +2,7 @@
 #include "Manager.h"
 #include "Weapons.h"
 #include "Enemy.h"
+#include "Bullets.h"
 
 void Player::Initialize()
 {

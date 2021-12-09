@@ -3,11 +3,9 @@
 #include "Player.h"
 #include "Manager.h"
 #include "AbstractFactory.h"
-#include "Bullet.h"
-#include "HeavyBullet.h"
+#include "Bullets.h"
 #include "Items.h"
 #include "Block.h"
-
 #include "Enemys.h"
 #include "Npc.h"
 
@@ -220,7 +218,7 @@ void ObjPoolMgr::Spawn_Enemy(ENEMY::ID _enemy, float _X, float _Y, DIR::ID _dir)
 	Add_Object(OBJ::ENEMY, enemy[_enemy].back());
 }
 
-void ObjPoolMgr::Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _dir, float _angle, OBJ::ID _parent)
+void ObjPoolMgr::Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _dir, OBJ::ID _parent)
 {
 	if (!bullet[_bullet].empty())
 	{
@@ -234,7 +232,6 @@ void ObjPoolMgr::Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _d
 			static_cast<Bullet*>(temp)->Set_ParentID(_parent);
 			temp->Set_Pos(_X, _Y);
 			temp->Set_Dir(_dir);
-			temp->Set_Angle(_angle);
 			temp->Update_Rect();
 			temp->Set_Dead(false);
 			Add_Object(OBJ::BULLET, temp);
@@ -256,9 +253,16 @@ void ObjPoolMgr::Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _d
 	{
 		temp = CAbstractFactory<Bullet>::Create(_X, _Y, _dir);
 		static_cast<Bullet*>(temp)->Set_ParentID(_parent);
-		bullet[_bullet].push_back(CAbstractFactory<HeavyBullet>::Create(_X, _Y, _dir, _angle));
+		bullet[_bullet].push_back(CAbstractFactory<HeavyBullet>::Create(_X, _Y, _dir));
 	}
 		break;
+	case BULLET::SHOTGUN:
+	{
+		temp = CAbstractFactory<Bullet>::Create(_X, _Y, _dir);
+		static_cast<Bullet*>(temp)->Set_ParentID(_parent);
+		bullet[_bullet].push_back(CAbstractFactory<ShotgunBullet>::Create(_X, _Y, _dir));
+	}
+	break;
 	default:
 		return;
 	}
@@ -311,6 +315,11 @@ void ObjPoolMgr::Spawn_Item(ITEM::ID _item, float _X, float _Y, WEAPON::ID _wep)
 		case WEAPON::ROCKET:
 			temp = CAbstractFactory<WepItem>::Create(_X, _Y);
 			static_cast<WepItem*>(temp)->Set_WepID(WEAPON::ROCKET);
+			item[_item].push_back(temp);
+			break;
+		case WEAPON::SHOTGUN:
+			temp = CAbstractFactory<WepItem>::Create(_X, _Y);
+			static_cast<WepItem*>(temp)->Set_WepID(WEAPON::SHOTGUN);
 			item[_item].push_back(temp);
 			break;
 		default:

@@ -24,7 +24,7 @@ void HeavyBullet::Initialize()
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/HeavyBullet_Down.bmp", L"HeavyDown");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Stretch_Item.bmp", L"Stretch_Item");
 
-	damage = 5;
+	damage = 100000;
 }
 
 int HeavyBullet::Update()
@@ -108,5 +108,37 @@ void HeavyBullet::Render(HDC _hdc)
 
 void HeavyBullet::Release()
 {
+}
+
+void HeavyBullet::Update_Rect()
+{
+	switch (dir)
+	{
+	case DIR::UP:
+		rect.left =  info.x - info.cx * 0.5f; 
+		rect.right = info.x + info.cx * 0.5f;
+		rect.top = info.y - init_CY * 0.5f;
+		rect.bottom = info.y + init_CY * 0.5f;
+
+		break;
+	case DIR::DOWN:
+		rect.left = info.x - info.cx * 0.5f;
+		rect.right = info.x + info.cx * 0.5f;
+		rect.top = info.y - init_CY * 0.5f;
+		rect.bottom = info.y + init_CY * 0.5f;
+		break;
+	case DIR::LEFT:
+		rect.left = info.x - init_CX * 0.5f;
+		rect.right = info.x + init_CX * 0.5f;
+		rect.top = info.y - info.cy * 0.5f;
+		rect.bottom = info.y + info.cy * 0.5f;
+		break;
+	case DIR::RIGHT:
+		rect.left = info.x - init_CX * 0.5f;
+		rect.right = info.x + init_CX * 0.5f;
+		rect.top = info.y - info.cy * 0.5f;
+		rect.bottom = info.y + info.cy * 0.5f;
+		break;
+	}
 }
 

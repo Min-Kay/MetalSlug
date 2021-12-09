@@ -1,5 +1,6 @@
 #include "Arabian.h"
 #include "Manager.h"
+#include "Bullets.h"
 
 void Arabian::Initialize()
 {

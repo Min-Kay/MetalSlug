@@ -154,6 +154,7 @@
     <ClInclude Include="BmpMgr.h" />
     <ClInclude Include="BmpFile.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Bullets.h" />
     <ClInclude Include="CBitMap.h" />
     <ClInclude Include="Class.h" />
     <ClInclude Include="CollisionMgr.h" />
@@ -187,9 +188,13 @@
     <ClInclude Include="Pistol.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="RocketBullet.h" />
+    <ClInclude Include="RocketLauncher.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneMgr.h" />
     <ClInclude Include="ScrollMgr.h" />
+    <ClInclude Include="Shotgun.h" />
+    <ClInclude Include="ShotgunBullet.h" />
     <ClInclude Include="Soldier.h" />
     <ClInclude Include="Stage2.h" />
     <ClInclude Include="Struct.h" />
@@ -231,9 +236,13 @@
     <ClCompile Include="ObjPoolMgr.cpp" />
     <ClCompile Include="Pistol.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RocketBullet.cpp" />
+    <ClCompile Include="RocketLauncher.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneMgr.cpp" />
     <ClCompile Include="ScrollMgr.cpp" />
+    <ClCompile Include="Shotgun.cpp" />
+    <ClCompile Include="ShotgunBullet.cpp" />
     <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="Stage2.cpp" />
     <ClCompile Include="ThreeHead.cpp" />

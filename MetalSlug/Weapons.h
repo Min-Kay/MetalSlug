@@ -2,7 +2,5 @@
 #include "Weapon.h"
 #include "Pistol.h"
 #include "HeavyMachine.h"
-
-
-#include "Bullet.h"
-#include "HeavyBullet.h"
+#include "Shotgun.h"
+#include "RocketLauncher.h"

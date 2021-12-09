@@ -40,9 +40,9 @@ void Game::Initialize()
 	scrollLock.push_back({ 3000,-60 });
 	scrollLock.push_back({ 4600,-60 });
 	scrollLock.push_back({ 5630,-60 });
-	scrollLock.push_back({ 8000,-90 });
-	scrollLock.push_back({ 8800,-90 });
-	scrollLock.push_back({ 9500,-90 });
+	scrollLock.push_back({ 8000,-100 });
+	scrollLock.push_back({ 8800,-100 });
+	scrollLock.push_back({ 9500,-100 });
 
 
 	CScrollMgr::Get_Instance()->Set_ScrollLockX(scrollLock.front().x);
@@ -173,9 +173,8 @@ void Game::KeyInput()
 
 	if (CKeyMgr::Get_Instance()->Key_Down('2'))
 	{
-		DataMgr::Get_Instance()->Add_Grenade(-10);
-		DataMgr::Get_Instance()->Add_Life(-10);
-		DataMgr::Get_Instance()->Add_Score(-100);
+		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::WEAPON, rand() % 200 + 100 - scrollX, 200, WEAPON::SHOTGUN);
+
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down('3'))
@@ -392,9 +391,9 @@ void Game::Set_CheckPoint_Objects()
 	case 0:
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 1200, 300, DIR::LEFT);
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 1400, 300, DIR::RIGHT);
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 1500, 300, DIR::RIGHT);
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 1700, 300, DIR::LEFT);
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 1800, 300, DIR::LEFT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 1500, 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 1700, 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 1800, 300, DIR::RIGHT);
 		ObjPoolMgr::Get_Instance()->Spawn_Npc(NPC::SLAVE, 1500, 300);
 		break;
 	case 1:
@@ -404,9 +403,11 @@ void Game::Set_CheckPoint_Objects()
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 2800, 300, DIR::RIGHT);
 		break;
 	case 2:
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 3200, 300, DIR::RIGHT);
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 3400, 300, DIR::RIGHT);
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 3600, 300, DIR::RIGHT);
+
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 3200, 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 3400, 300, DIR::LEFT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 3600, 300, DIR::LEFT);
+	
 		break;
 	case 3:
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::THREEHEAD, 4650, 300);
@@ -417,10 +418,10 @@ void Game::Set_CheckPoint_Objects()
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 5600, 300, DIR::RIGHT);
 		break;
 	case 5:
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::MASKNELL, 8700, 200, DIR::LEFT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 8000, 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 8000, 300, DIR::RIGHT);
 
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 8000, 300, DIR::RIGHT);
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 8000, 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::MASKNELL, 8700, 200, DIR::LEFT);
 
 		break;
 	case 6:

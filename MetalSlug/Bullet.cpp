@@ -9,7 +9,7 @@ void Bullet::Initialize()
 	id = OBJ::BULLET;
 	render = RENDER::OBJECT;
 	parentID = OBJ::PLAYER;
-	speed = 20.f; 
+	speed = 15.f; 
 	info.cx = 30.f;
 	info.cy = 30.f;
 	damage = 10;
@@ -84,23 +84,5 @@ void Bullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 		if(static_cast<Npc*>(_opponent)->Get_Ropped())
 			isDead = true;
 		break;
-	}
-}
-
-void Bullet::Anim_Counter(int count, float _timer, bool _roop, int start)
-{
-	if (animIndex < start)
-		animIndex = start;
-
-	if (animTimer + _timer < GetTickCount())
-	{
-		if (_roop && animIndex >= start + count)
-		{
-			animIndex = start;
-		}
-		else  if (animIndex < start + count)
-			++animIndex;
-
-		animTimer = GetTickCount();
 	}
 }

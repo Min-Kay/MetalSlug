@@ -31,8 +31,6 @@ protected:
 	float coolTime;
 	DWORD timer;
 
-	int damage;
 	int ammo;
-	int speed;
 };
 

@@ -7,7 +7,7 @@ namespace OBJ
 
 namespace BULLET
 {
-	enum ID {PISTOL, HEAVY, ROCKET, END};
+	enum ID {PISTOL, HEAVY, ROCKET, SHOTGUN, END};
 }
 
 namespace VEHICLE
@@ -47,7 +47,7 @@ namespace DIR
 
 namespace WEAPON
 {
-	enum ID {PISTOL, HEAVY, ROCKET, END};
+	enum ID {PISTOL, HEAVY, ROCKET, SHOTGUN, END};
 }
 
 namespace ACTION

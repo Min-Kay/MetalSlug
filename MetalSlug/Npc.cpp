@@ -1,6 +1,7 @@
 #include "Npc.h"
 #include "Manager.h"
 #include "Items.h"
+#include "Bullets.h"
 
 void Npc::Initialize()
 {
