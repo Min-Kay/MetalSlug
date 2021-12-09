@@ -27,17 +27,12 @@ namespace ITEM
 
 namespace ENEMY
 {
-	enum ID {SOLDIER,ARABIAN,THREEHEAD,MASKNELL,END};
+	enum ID {SOLDIER,ARABIAN,THREEHEAD,MASKNELL,SOLDAE, END};
 }
 
 namespace SCENE
 {
 	enum ID {TITLE,MENU,GAME,GAME1,END};
-}
-
-namespace RENDER
-{
-	enum ID {MAP,OBJECT,UI,END};
 }
 
 namespace DIR
@@ -77,4 +72,9 @@ namespace THREEHEAD
 {
 	enum HEAD {LEFT,MID,RIGHT};
 	enum STATE { NONE, DOOR_OPEN, CURTAIN_OPEN, ATTACK, DESTORY };
+}
+
+namespace SOLDAE
+{
+	enum STATE{IDLE, LASER, SUNSHINE, ROOT, FOLLOWER, DIE};
 }

@@ -1,6 +1,7 @@
 #include "Arabian.h"
 #include "Manager.h"
 #include "Bullets.h"
+#include "Player.h"
 
 void Arabian::Initialize()
 {
@@ -8,7 +9,6 @@ void Arabian::Initialize()
 	info.cy = 100.f; 
 	id = OBJ::ENEMY;
 	enemy_id = ENEMY::ARABIAN;
-	render = RENDER::OBJECT;
 	dir = DIR::LEFT;
 	action = ACTION::IDLE; 
 	isDead = false;
@@ -89,12 +89,12 @@ void Arabian::Anim_Idle(HDC _hdc)
 		{
 			Anim_Counter(4, 70.f,false);
 			StretchBlt(stretchDC, 0, 0, 75, 70, drawingDC, animIndex * 75 + 75 - 5, 710, -75, 70, SRCCOPY);
-			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) - info.cy * 0.4f, info.cx * 1.5f, info.cy * 1.5f, stretchDC, 0, 0, 75, 70, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY - info.cy * 0.4f), (int)(info.cx * 1.5f), (int)(info.cy * 1.5f), stretchDC, 0, 0, 75, 70, RGB(255, 255, 255));
 		}
 		else if (dir == DIR::LEFT)
 		{
 			Anim_Counter(4, 70.f, false);
-			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) - info.cy * 0.4f, info.cx * 1.5f, info.cy * 1.5f, drawingDC, animIndex * 75 - 5, 710, 75, 70, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) - info.cy * 0.4f, (int)(info.cx * 1.5f), (int)(info.cy * 1.5f), drawingDC, animIndex * 75 - 5, 710, 75, 70, RGB(255, 255, 255));
 		}
 		if (animIndex == 4)
 		{
@@ -109,12 +109,12 @@ void Arabian::Anim_Idle(HDC _hdc)
 		{
 			Anim_Counter(1, 100.f);
 			StretchBlt(stretchDC, 0, 0, 60, 60, drawingDC, animIndex * 60 + 60, 620, -60, 60, SRCCOPY);
-			GdiTransparentBlt(_hdc, int(rect.left + scrollX) - info.cx * 0.1f, int(rect.top + scrollY) - info.cy * 0.15f, info.cx * 1.2f, info.cy * 1.2f, stretchDC, 0, 0, 60, 60, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, int(rect.left + scrollX - info.cx * 0.1f), int(rect.top + scrollY - info.cy * 0.15f), int(info.cx * 1.2f), int(info.cy * 1.2f), stretchDC, 0, 0, 60, 60, RGB(255, 255, 255));
 		}
 		else if (dir == DIR::LEFT)
 		{
 			Anim_Counter(1, 100.f);
-			GdiTransparentBlt(_hdc, int(rect.left + scrollX) + info.cx * 0.1f, int(rect.top + scrollY) - info.cy * 0.15f, info.cx * 1.2f, info.cy * 1.2f, drawingDC, animIndex * 60, 620, 60, 60, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, int(rect.left + scrollX + info.cx * 0.1f), int(rect.top + scrollY - info.cy * 0.15f), int(info.cx * 1.2f), int(info.cy * 1.2f), drawingDC, animIndex * 60, 620, 60, 60, RGB(255, 255, 255));
 		}
 	}
 	else
@@ -123,14 +123,14 @@ void Arabian::Anim_Idle(HDC _hdc)
 		{
 			Anim_Counter(5, 100.f);
 			StretchBlt(stretchDC, 0, 0, 40, 50, drawingDC, animIndex * 40 + 40 + 5, 25, -40, 50, SRCCOPY);
-			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx , info.cy * 1.1f, stretchDC, 0,0, 40, 50, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), (int)info.cx , int(info.cy * 1.1f), stretchDC, 0,0, 40, 50, RGB(255, 255, 255));
 
 			
 		}
 		else if (dir == DIR::LEFT)
 		{
 			Anim_Counter(5,100.f);
-			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx, info.cy * 1.1f, drawingDC, animIndex * 40 + 5, 25, 40, 50, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), (int)info.cx, int(info.cy * 1.1f), drawingDC, animIndex * 40 + 5, 25, 40, 50, RGB(255, 255, 255));
 
 		}
 	}
@@ -286,6 +286,7 @@ void Arabian::Check_Hp()
 
 	if ( hp <= 0)
 	{
+		falling = false;
 		DataMgr::Get_Instance()->Add_Score(100);
 		animIndex = 0;
 		action = ACTION::DIE;
@@ -295,15 +296,12 @@ void Arabian::Check_Hp()
 
 void Arabian::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 {
-	if (isDead || isDying)
+	if (!coll_Attack)
 		return;
 
-	switch (_id)
+	if (_id == OBJ::PLAYER && !static_cast<Player*>(_opponent)->Get_Dying())
 	{
-	case OBJ::BULLET:
-		if(static_cast<Bullet*>(_opponent)->Get_ParentID() != id)
-			Add_HP(-static_cast<Bullet*>(_opponent)->Get_Damage());
-		break;
+		static_cast<Player*>(_opponent)->Set_Dying();
 	}
 }
 

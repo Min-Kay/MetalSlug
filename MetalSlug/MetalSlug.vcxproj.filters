@@ -160,6 +160,15 @@
     <Filter Include="소스 파일\03.Weapon\04.Rocket">
       <UniqueIdentifier>{a0105b60-ff3a-4662-b3c1-c728370a93cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02.Object\05.Bullet\04.Explosive">
+      <UniqueIdentifier>{961ebbcd-a631-4ff8-bdaf-f99feed069a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\02.Enemy\05.SolDae">
+      <UniqueIdentifier>{98332736-38a6-407a-924d-35154c9c9fa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\05.Bullet\05.SolDaeLaser">
+      <UniqueIdentifier>{7ae78243-24e1-447f-b13c-adb97b2c6ac6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -336,6 +345,15 @@
     <ClInclude Include="RocketLauncher.h">
       <Filter>소스 파일\03.Weapon\04.Rocket</Filter>
     </ClInclude>
+    <ClInclude Include="Explosive.h">
+      <Filter>소스 파일\02.Object\05.Bullet\04.Explosive</Filter>
+    </ClInclude>
+    <ClInclude Include="SolDae.h">
+      <Filter>소스 파일\02.Object\02.Enemy\05.SolDae</Filter>
+    </ClInclude>
+    <ClInclude Include="SolDaeLaser.h">
+      <Filter>소스 파일\02.Object\05.Bullet\05.SolDaeLaser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MetalSlug.rc">
@@ -479,6 +497,15 @@
     </ClCompile>
     <ClCompile Include="RocketLauncher.cpp">
       <Filter>소스 파일\03.Weapon\04.Rocket</Filter>
+    </ClCompile>
+    <ClCompile Include="Explosive.cpp">
+      <Filter>소스 파일\02.Object\05.Bullet\04.Explosive</Filter>
+    </ClCompile>
+    <ClCompile Include="SolDae.cpp">
+      <Filter>소스 파일\02.Object\02.Enemy\05.SolDae</Filter>
+    </ClCompile>
+    <ClCompile Include="SolDaeLaser.cpp">
+      <Filter>소스 파일\02.Object\05.Bullet\05.SolDaeLaser</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

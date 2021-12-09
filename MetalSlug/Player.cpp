@@ -7,7 +7,6 @@
 void Player::Initialize()
 {
 	id = OBJ::PLAYER;
-	render = RENDER::OBJECT; 
 	dir = DIR::RIGHT;
 	onlySide = DIR::RIGHT;
 
@@ -186,7 +185,7 @@ void Player::KeyInput()
 
 	if (CKeyMgr::Get_Instance()->Key_Down('F'))
 	{
-		Set_Dying(dir);
+		Set_Dying();
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_DOWN))
@@ -643,29 +642,6 @@ void Player::Anim_Dying(HDC _hdc)
 	}
 }
 
-void Player::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
-{
-	if (isDying || isDead || isValid)
-		return; 
-
-	switch (_id)
-	{
-	case OBJ::BULLET:
-		if (static_cast<Bullet*>(_opponent)->Get_ParentID() != id)
-		{
-			Set_Dying(_dir);
-		}
-		break;
-
-	case OBJ::ENEMY:
-		if (static_cast<Enemy*>(_opponent)->Get_CollAttack())
-		{
-			Set_Dying(_dir);
-		}
-		break;
-	}
-}
-
 void Player::Set_Weapon(Weapon* _wep)
 {
 	SAFE_DELETE(weapon);  
@@ -703,9 +679,11 @@ void Player::Anim_Counter(ANIM::PLAYER _action, int count, float _timer, bool _r
 	}
 }
 
-void Player::Set_Dying(DIR::ID _dir = DIR::RIGHT)
+void Player::Set_Dying()
 {
-	dir = _dir;
+	if (isValid || isDying)
+		return; 
+
 	action = ACTION::DIE;
 	info.cy = init_CY;
 	isDying = true;

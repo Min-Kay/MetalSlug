@@ -5,7 +5,6 @@
 void HeavyBullet::Initialize()
 {
 	id = OBJ::BULLET;
-	render = RENDER::OBJECT;
 	parentID = OBJ::PLAYER;
 	speed = 20.f;
 	info.cx = 80.f;
@@ -24,7 +23,7 @@ void HeavyBullet::Initialize()
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/HeavyBullet_Down.bmp", L"HeavyDown");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Stretch_Item.bmp", L"Stretch_Item");
 
-	damage = 100000;
+	damage = 7;
 }
 
 int HeavyBullet::Update()

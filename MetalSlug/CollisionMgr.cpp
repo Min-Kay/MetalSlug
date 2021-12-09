@@ -45,8 +45,8 @@ void CCollisionMgr::Collision_RectPush(list<Obj*> _Dest, list<Obj*> _Src)
 			RECT rc{};
 			if (IntersectRect(&rc, &Dest->Get_Rect(), &Src->Get_Rect()))
 			{
-				float x = rc.right - rc.left;
-				float y = rc.bottom - rc.top;
+				float x =float( rc.right - rc.left);
+				float y = float(rc.bottom - rc.top);
 
 				if (dynamic_cast<Enemy*>(Src))
 				{
@@ -117,10 +117,10 @@ DIR::ID CCollisionMgr::Set_Dir(RECT& _coll, const RECT* _target)
 	vector<DISDIR> distance;
 	distance.reserve(4);
 	
-	distance.push_back(DISDIR(abs(_coll.bottom - _target->top), DIR::UP));
-	distance.push_back(DISDIR(abs(_coll.top - _target->bottom), DIR::DOWN));
-	distance.push_back(DISDIR(abs(_coll.left - _target->right), DIR::RIGHT));
-	distance.push_back(DISDIR(abs(_coll.right - _target->left), DIR::LEFT));
+	distance.push_back(DISDIR(abs(float(_coll.bottom - _target->top)), DIR::UP));
+	distance.push_back(DISDIR(abs(float(_coll.top - _target->bottom)), DIR::DOWN));
+	distance.push_back(DISDIR(abs(float(_coll.left - _target->right)), DIR::RIGHT));
+	distance.push_back(DISDIR(abs(float(_coll.right - _target->left)), DIR::LEFT));
 
 	sort(distance.begin(),distance.end(),CDiscmp());
 

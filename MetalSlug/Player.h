@@ -25,7 +25,7 @@ private:
 	void	Anim_Dying(HDC _hdc);
 
 public:
-	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir) override;
+	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir) override {};
 	void	Set_BoxCollide(bool _bool) { boxCollide = _bool; }
 	void	Set_CollisionY(float _y) { collisionY = _y; }
 
@@ -33,7 +33,9 @@ public:
 	void	Set_Weapon(Weapon* _wep);
 	void	Check_WeaponState();
 	void	Anim_Counter(ANIM::PLAYER _action, int count, float _timer, bool _roop = true, int start = 0);
-	void	Set_Dying(DIR::ID _dir);
+	void	Set_Dying();
+
+	const bool& Get_Dying() const { return isDying; };
 
 private:
 	ACTION::ID	action;

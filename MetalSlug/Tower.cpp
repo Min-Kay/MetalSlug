@@ -38,7 +38,6 @@ void Tower::Initialize()
 	animTimer = GetTickCount();
 
 	id = OBJ::ENEMY;
-	render = RENDER::OBJECT;
 	isDead = false;
 
 	info.cx = 100.f;
@@ -80,7 +79,7 @@ void Tower::Render(HDC _hdc)
 	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
-	Rectangle(_hdc, rect.left + scrollX, rect.top + scrollY, rect.right + scrollX, rect.bottom + scrollY);
+	//Rectangle(_hdc, rect.left + scrollX, rect.top + scrollY, rect.right + scrollX, rect.bottom + scrollY);
 	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"MidBoss");
 	switch (state)
 	{
@@ -104,7 +103,7 @@ void Tower::Render(HDC _hdc)
 			case THREEHEAD::LEFT:
 			{
 				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 180, 280, drawingDC, 5, 184, 90, 140, RGB(0, 255, 0));
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 60, 70, drawingDC, 5, 635, 53, 60, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.5f, info.y + scrollY - info.cy * 0.7f, 100, 120, drawingDC, 5, 635, 53, 60, RGB(0, 255, 0));
 				Anim_Counter(15, 100.f, false);
 				float x = info.x + scrollX - info.cx;
 				float y = info.y + scrollY - info.cy * 0.8f;
@@ -122,7 +121,7 @@ void Tower::Render(HDC _hdc)
 			case THREEHEAD::MID:
 			{
 				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 180, 280, drawingDC, 95, 184, 90, 140, RGB(0, 255, 0));
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 60, 70, drawingDC, 5, 635, 53, 60, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.5f, info.y + scrollY - info.cy * 0.7f, 100, 120, drawingDC, 5, 635, 53, 60, RGB(0, 255, 0));
 				Anim_Counter(15, 100.f, false);
 				float x = info.x + scrollX - info.cx;
 				float y = info.y + scrollY - info.cy * 0.8f;
@@ -140,7 +139,7 @@ void Tower::Render(HDC _hdc)
 			case THREEHEAD::RIGHT:
 			{
 				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 180, 280, drawingDC, 185, 184, 90, 140, RGB(0, 255, 0));
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 60, 70, drawingDC, 5, 635, 53, 60, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.5f, info.y + scrollY - info.cy * 0.7f, 100, 120, drawingDC, 5, 635, 53, 60, RGB(0, 255, 0));
 				Anim_Counter(15, 100.f, false);
 
 				float x = info.x + scrollX - info.cx;
@@ -331,18 +330,6 @@ void Tower::Render(HDC _hdc)
 
 void Tower::Release()
 {
-}
-
-void Tower::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
-{
-	if (isDying || !isMove)
-		return;
-
-	if (_id == OBJ::BULLET)
-	{
-		if (static_cast<Bullet*>(_opponent)->Get_ParentID() == OBJ::PLAYER)
-			Add_HP(-static_cast<Bullet*>(_opponent)->Get_Damage());
-	}
 }
 
 void Tower::State_Machine()

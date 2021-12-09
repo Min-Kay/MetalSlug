@@ -20,8 +20,8 @@ public:
 
 public:
 	void	Set_State(THREEHEAD::STATE _state) {state = _state;}
-	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir);
-
+	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir) {}
+	virtual void Add_HP(int _hp) { if (!isMove || isDead || isDying) return; hp += _hp; }
 
 private:
 	void	State_Machine(); 

@@ -11,9 +11,9 @@ public:
     virtual void Release() override;
 
 public:
-    virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir);
     void State_Machine();
     virtual void Gravity();
+    virtual void Add_HP(int _hp) { if (isDying || isDead) return; hp += _hp; }
 
 private:
     bool    isTurning;

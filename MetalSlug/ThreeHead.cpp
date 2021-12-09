@@ -22,7 +22,6 @@ void ThreeHead::Initialize()
 	animTimer = GetTickCount();
 
 	id = OBJ::ENEMY;
-	render = RENDER::OBJECT;
 	isDead = false;
 
 	isMove = false;
@@ -115,6 +114,10 @@ void ThreeHead::Render(HDC _hdc)
 
 void ThreeHead::Release()
 {
+	ObjPoolMgr::Get_Instance()->Delete_Object(OBJ::ENEMY,left);
+	ObjPoolMgr::Get_Instance()->Delete_Object(OBJ::ENEMY, right);
+	ObjPoolMgr::Get_Instance()->Delete_Object(OBJ::ENEMY, mid);
+
 	SAFE_DELETE(left);
 	SAFE_DELETE(right);
 	SAFE_DELETE(mid);
@@ -131,7 +134,7 @@ void ThreeHead::State_Machine()
 		}
 		break;
 	case THREEHEAD::DESTORY:
-		
+
 		break;
 	}
 }

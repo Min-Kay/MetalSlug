@@ -36,9 +36,8 @@ void ObjPoolMgr::Update()
 		list<Obj*>::iterator iter = onScreen[i].begin();
 		for ( ; iter != onScreen[i].end();)
 		{
-			if ((*iter)->Get_Dead() || (!onScreen[OBJ::PLAYER].empty() && ((Get_Player_Info().x > (*iter)->Get_Info().x + WINCX * 2.f) || ((*iter)->Get_Info().x > CScrollMgr::Get_Instance()->Get_ScrollLockX()))))
+			if ((*iter)->Get_Dead())
 			{
-				(*iter)->Set_Dead(true);
 				iter = onScreen[i].erase(iter);
 				continue;
 			}
@@ -69,20 +68,18 @@ void ObjPoolMgr::Late_Update()
 		for (auto& iter : onScreen[i])
 		{
 			iter->Late_Update();
-			render[iter->Get_RenderId()].push_back(iter);
 		}
 	}
 }
 
 void ObjPoolMgr::Render(HDC _hdc)
 {
-	for (int i = 0; i < RENDER::END; ++i)
+	for (int i = 0; i < OBJ::END; ++i)
 	{
-		for (auto& iter : render[i])
+		for (auto& iter : onScreen[i])
 		{
 			iter->Render(_hdc);
 		}
-		render[i].clear(); 
 	}
 }
 
@@ -91,11 +88,6 @@ void ObjPoolMgr::Release()
 	for (int i = 0; i < OBJ::END; ++i)
 	{
 		onScreen[i].clear();
-	}
-
-	for (int i = 0; i < RENDER::END; ++i)
-	{
-		render[i].clear();
 	}
 
 	for (int i = 0; i < ENEMY::END; ++i)
@@ -149,6 +141,14 @@ void ObjPoolMgr::DisableObj()
 void ObjPoolMgr::Add_Object(OBJ::ID _id, Obj* _obj)
 {
 	onScreen[_id].push_back(_obj);
+}
+
+void ObjPoolMgr::Delete_Object(OBJ::ID _id, Obj* _obj)
+{
+	if (find(onScreen[_id].begin(), onScreen[_id].end(), _obj) != onScreen[_id].end())
+	{
+		onScreen[_id].erase(find(onScreen[_id].begin(), onScreen[_id].end(), _obj));
+	}
 }
 
 float ObjPoolMgr::Check_Distance(Obj* _target)
@@ -210,6 +210,9 @@ void ObjPoolMgr::Spawn_Enemy(ENEMY::ID _enemy, float _X, float _Y, DIR::ID _dir)
 		break;
 	case ENEMY::MASKNELL:
 		enemy[_enemy].push_back(CAbstractFactory<Masknell>::Create(_X, _Y));
+		break;
+	case ENEMY::SOLDAE:
+		enemy[_enemy].push_back(CAbstractFactory<SolDae>::Create(_X, _Y));
 		break;
 	default:
 		return;

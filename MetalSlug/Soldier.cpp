@@ -6,7 +6,6 @@
 void Soldier::Initialize()
 {
 	id = OBJ::ENEMY;
-	render = RENDER::OBJECT;
 	dir = DIR::RIGHT;
 	onlySide = dir;
 	sol_Class = SOLDIER::SERGENT;//SOLDIER::CLASS(rand() % 2);
@@ -85,22 +84,6 @@ void Soldier::Render(HDC _hdc)
 
 void Soldier::Release()
 {
-}
-
-void Soldier::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
-{
-	if (isDead || isDying)
-		return;
-
-	switch (_id)
-	{
-	case OBJ::BULLET:
-		if (static_cast<Bullet*>(_opponent)->Get_ParentID() != id)
-		{
-			Add_HP(-static_cast<Bullet*>(_opponent)->Get_Damage());
-			break;
-		}
-	}
 }
 
 void Soldier::Anim_Idle(HDC _hdc)
@@ -383,6 +366,7 @@ void Soldier::Check_Hp()
 	{
 		DataMgr::Get_Instance()->Add_Score(100);
 		isDying = true;
+		falling = false; 
 		animIndex = 0;
 		action = ACTION::DIE;
 	}

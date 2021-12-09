@@ -6,7 +6,6 @@ void ItemBox::Initialize()
 {
 	id = OBJ::PROP;
 	item_id = ITEM::ITEMBOX;
-	render = RENDER::OBJECT;
 	info.cx = 60.f;
 	info.cy = 60.f;
 	isBreaking = false;
@@ -64,7 +63,7 @@ void ItemBox::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 	{
 		if (static_cast<Bullet*>(_opponent)->Get_ParentID() == OBJ::PLAYER)
 		{
-			//animIndex = 0;
+			animIndex = 0;
 			isBreaking = true;
 		}
 	}
@@ -86,7 +85,7 @@ void ItemBox::Anim_Breaking(HDC _hdc)
 		if (pos == -1)
 			pos = 0;
 		ITEM::ID item = box[pos];
-		int wep = rand() % WEAPON::ROCKET + 1;
+		int wep = rand() % WEAPON::SHOTGUN + 1;
 		ObjPoolMgr::Get_Instance()->Spawn_Item(item,info.x,info.y,(WEAPON::ID)wep);
 		isDead = true;
 	}

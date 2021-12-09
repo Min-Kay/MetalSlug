@@ -5,7 +5,6 @@ void AmmoBox::Initialize()
 {
 	id = OBJ::PROP;
 	item_id = ITEM::AMMO;
-	render = RENDER::OBJECT;
 	info.cx = 50.f;
 	info.cy = 50.f;
 	isDead = false; 
@@ -36,7 +35,7 @@ void AmmoBox::Render(HDC _hdc)
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
 	Anim_Counter(5, 100.f, true, 6);
-	GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx, info.cy, drawingDC, animIndex * 35 + 5, 50, 33, 33, ITEM_COLOR);
+	GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), (int)info.cx, (int)info.cy, drawingDC, animIndex * 35 + 5, 50, 33, 33, ITEM_COLOR);
 	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Item");
 	
 }

@@ -45,8 +45,8 @@ void Game::Initialize()
 	scrollLock.push_back({ 9500,-100 });
 
 
-	CScrollMgr::Get_Instance()->Set_ScrollLockX(scrollLock.front().x);
-	CScrollMgr::Get_Instance()->Set_ScrollY(scrollLock.front().y);
+	CScrollMgr::Get_Instance()->Set_ScrollLockX((float)scrollLock.front().x);
+	CScrollMgr::Get_Instance()->Set_ScrollY((float)scrollLock.front().y);
 
 	maxCheckPoint = scrollLock.size();
 	Set_CheckPoint_Objects();
@@ -335,17 +335,19 @@ void Game::Check_Scrolling()
 {
 	if (checkPoint)
 	{
+		Set_CheckPoint_Objects();
+
 		formalX = CScrollMgr::Get_Instance()->Get_ScrollX();
 		formalY = CScrollMgr::Get_Instance()->Get_ScrollY();
 		currPlayerPos = ObjPoolMgr::Get_Instance()->Get_Player_Info().x;
 		if(scrollLock.size() > 1)
 			scrollLock.pop_front();
 
-		CScrollMgr::Get_Instance()->Set_ScrollLockX(scrollLock.front().x);
+		CScrollMgr::Get_Instance()->Set_ScrollLockX((float)scrollLock.front().x);
 
 		scrollUpdating = true;
+	
 		checkPoint = false;
-		Set_CheckPoint_Objects();
 	}
 	else if (scrollUpdating)
 	{
@@ -380,11 +382,14 @@ void Game::Check_Scrolling()
 
 void Game::Set_CheckPoint_Objects()
 {
-	if (isClear || isFail || maxCheckPoint < currCheckPoint)
+	if (isClear || isFail)
 		return;
 
 	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
+
+	if (currCheckPoint == maxCheckPoint && checkPoint)
+		isClear = true;
 
 	switch (currCheckPoint)
 	{
@@ -416,18 +421,18 @@ void Game::Set_CheckPoint_Objects()
 		spawnMidBoss = true;
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 5600, 300, DIR::RIGHT);
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 5600, 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 5900, 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 6200, 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 6700, 300, DIR::RIGHT);
+
 		break;
 	case 5:
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 8000, 300, DIR::RIGHT);
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 8000, 300, DIR::RIGHT);
-
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::MASKNELL, 8700, 200, DIR::LEFT);
 
 		break;
 	case 6:
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 8500, 300, DIR::RIGHT);
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 8500, 300, DIR::RIGHT);
-	
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDAE, 9100, -100, DIR::LEFT);
+
 		break;
 	}
 	if(maxCheckPoint > currCheckPoint)

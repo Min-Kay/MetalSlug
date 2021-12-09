@@ -23,12 +23,14 @@ public:
 
 public:
 	void	Add_Object(OBJ::ID _id, Obj* _obj);
+	void	Delete_Object(OBJ::ID _id, Obj* _obj);
+
 	float	Check_Distance(Obj* _target);
 
 public:
 	void	Set_Player_Dead(bool _bool) { player_Dead = _bool; }
 	void	Set_Player_Wep(Weapon* _wep);
-
+	
 public:
 	const bool& Get_Player_Dead() const { return player_Dead; }
 	const	INFO& Get_Player_Info() const;
@@ -46,7 +48,6 @@ public:
 
 private:
 	list<Obj*> onScreen[OBJ::END];
-	list<Obj*> render[RENDER::END];
 
 	Obj* player; 
 	vector<Obj*> enemy[ENEMY::END];

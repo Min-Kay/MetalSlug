@@ -3,11 +3,11 @@
 #include "Manager.h"
 #include "Enemy.h"
 #include "Npc.h"
+#include "Player.h"
 
 void Bullet::Initialize()
 {
 	id = OBJ::BULLET;
-	render = RENDER::OBJECT;
 	parentID = OBJ::PLAYER;
 	speed = 15.f; 
 	info.cx = 30.f;
@@ -67,12 +67,18 @@ void Bullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 	switch (_id)
 	{
 	case OBJ::PLAYER:
-		if (_opponent->Get_ID() != parentID)
+		if (_opponent->Get_ID() != parentID && !static_cast<Player*>(_opponent)->Get_Dying())
+		{
+			static_cast<Player*>(_opponent)->Set_Dying();
 			isDead = true;
+		}
 		break;
 	case OBJ::ENEMY:
 		if (_opponent->Get_ID() != parentID && !static_cast<Enemy*>(_opponent)->Get_Dying())
+		{
+			static_cast<Enemy*>(_opponent)->Add_HP(-damage);
 			isDead = true;
+		}
 		break;
 	case OBJ::PROP:
 		if (static_cast<Item*>(_opponent)->Get_ItemID() == ITEM::ITEMBOX)
@@ -81,8 +87,11 @@ void Bullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 	case OBJ::BLOCK:
 		isDead = true;
 	case OBJ::NPC:
-		if(static_cast<Npc*>(_opponent)->Get_Ropped())
+		if (static_cast<Npc*>(_opponent)->Get_Ropped())
+		{
+			static_cast<Npc*>(_opponent)->Set_Ropped();
 			isDead = true;
+		}
 		break;
 	}
 }

@@ -5,7 +5,6 @@
 
 void Npc::Initialize()
 {
-	render = RENDER::OBJECT;
 	id = OBJ::NPC;
 	action = ACTION::IDLE;
 	animIndex = 0;
@@ -191,7 +190,7 @@ void Npc::StateMachine()
 			if (pos == -1)
 				pos = 0;
 			ITEM::ID item = box[pos];
-			int wep = rand() % WEAPON::ROCKET + 1;
+			int wep = rand() % WEAPON::SHOTGUN + 1;
 			
 			if (dir == DIR::RIGHT)
 				ObjPoolMgr::Get_Instance()->Spawn_Item(item, info.x + 50.f, info.y, (WEAPON::ID)wep);
@@ -239,22 +238,23 @@ void Npc::StateMachine()
 
 void Npc::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 {
-	if (spawningItem || isDead)
+	if (spawningItem)
 		return;
 
-	if (_id == OBJ::BULLET && isRopped)
-	{
-		if (static_cast<Bullet*>(_opponent)->Get_ParentID() != OBJ::PLAYER)
-			return;
-
-		action = ACTION::IDLE;
-		isRopped = false;
-		isUntied = true;
-	}
-	else if (_id == OBJ::PLAYER && isUntied)
+	if (_id == OBJ::PLAYER && isUntied)
 	{
 		dir = ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x > 0 ? DIR::RIGHT : DIR::LEFT;
 		action = ACTION::IDLE;
 		spawningItem = true;
 	}
+}
+
+void Npc::Set_Ropped()
+{
+	if (!isRopped)
+		return;
+
+	action = ACTION::IDLE;
+	isRopped = false;
+	isUntied = true;
 }

@@ -29,7 +29,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -163,6 +163,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enemys.h" />
     <ClInclude Include="Enum.h" />
+    <ClInclude Include="Explosive.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Grenade.h" />
@@ -195,6 +196,8 @@
     <ClInclude Include="ScrollMgr.h" />
     <ClInclude Include="Shotgun.h" />
     <ClInclude Include="ShotgunBullet.h" />
+    <ClInclude Include="SolDae.h" />
+    <ClInclude Include="SolDaeLaser.h" />
     <ClInclude Include="Soldier.h" />
     <ClInclude Include="Stage2.h" />
     <ClInclude Include="Struct.h" />
@@ -216,6 +219,7 @@
     <ClCompile Include="CollisionMgr.cpp" />
     <ClCompile Include="DataMgr.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Explosive.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Grenade.cpp" />
     <ClCompile Include="GrenadeBox.cpp" />
@@ -243,6 +247,8 @@
     <ClCompile Include="ScrollMgr.cpp" />
     <ClCompile Include="Shotgun.cpp" />
     <ClCompile Include="ShotgunBullet.cpp" />
+    <ClCompile Include="SolDae.cpp" />
+    <ClCompile Include="SolDaeLaser.cpp" />
     <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="Stage2.cpp" />
     <ClCompile Include="ThreeHead.cpp" />

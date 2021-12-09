@@ -12,7 +12,6 @@ void Masknell::Initialize()
 
 	dir = DIR::LEFT;
 	id = OBJ::ENEMY;
-	render = RENDER::OBJECT;
 	isDead = false;
 
 	enemy_id = ENEMY::MASKNELL;
@@ -230,13 +229,13 @@ void Masknell::Render(HDC _hdc)
 			Anim_Counter(5, 20.f, true);
 			if (animIndex < 4)
 			{
-				StretchBlt(stretchDC, 0, 0, 85, 70, drawingDC, 5 + animIndex * 85 + 85, 0, -85, 70, SRCCOPY);
+				StretchBlt(stretchDC, 0, 0, 85, 70, drawingDC,  animIndex * 85 + 85, 0, -85, 70, SRCCOPY);
 
 				GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 170, 150, stretchDC, 0, 0, 85, 70, RGB(255, 255, 255));
 			}
 			else
 			{
-				StretchBlt(stretchDC, 0, 0, 85, 70, drawingDC, 5 + 85, 70, -85, 70, SRCCOPY);
+				StretchBlt(stretchDC, 0, 0, 85, 70, drawingDC,  85, 70, -85, 70, SRCCOPY);
 
 				GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 170, 150, stretchDC, 0, 0, 85, 70, RGB(255, 255, 255));
 			}
@@ -337,11 +336,11 @@ void Masknell::Render(HDC _hdc)
 			Anim_Counter(5, 20.f, true);
 			if (animIndex < 4)
 			{
-				GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 170, 150, drawingDC, 5 + animIndex * 85, 0, 85, 70, RGB(255, 255, 255));
+				GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 170, 150, drawingDC,  animIndex * 85, 0, 85, 70, RGB(255, 255, 255));
 			}
 			else
 			{
-				GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 170, 150, drawingDC, 5, 70, 85, 70, RGB(255, 255, 255));
+				GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 170, 150, drawingDC, 0, 70, 85, 70, RGB(255, 255, 255));
 			}
 		}
 		break;
@@ -350,20 +349,6 @@ void Masknell::Render(HDC _hdc)
 
 void Masknell::Release()
 {
-}
-
-void Masknell::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
-{
-	if (isDead || isDying)
-		return;
-
-	switch (_id)
-	{
-	case OBJ::BULLET:
-		if (static_cast<Bullet*>(_opponent)->Get_ParentID() != id)
-			Add_HP(-static_cast<Bullet*>(_opponent)->Get_Damage());
-		break;
-	}
 }
 
 void Masknell::State_Machine()
@@ -383,7 +368,7 @@ void Masknell::State_Machine()
 	
 	if (attackTime + 2000.f < GetTickCount())
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL,info.x,rect.bottom,DIR::DOWN,OBJ::ENEMY);
+		ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL,info.x, (float)rect.bottom,DIR::DOWN,OBJ::ENEMY);
 		attackTime = GetTickCount();
 	}
 }

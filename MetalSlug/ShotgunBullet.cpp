@@ -1,5 +1,9 @@
 #include "ShotgunBullet.h"
 #include "Manager.h"
+#include "Enemy.h"
+#include "Npc.h"
+#include "Player.h"
+
 void ShotgunBullet::Initialize()
 {
 	damage = 40.f;
@@ -15,7 +19,6 @@ void ShotgunBullet::Initialize()
 
 	dir = DIR::RIGHT;
 	id = OBJ::BULLET;
-	render = RENDER::OBJECT;
 	isDead = false;
 
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Shotgun.bmp",L"Shotgun");
@@ -150,9 +153,41 @@ void ShotgunBullet::Render(HDC _hdc)
 	}
 
 	if (animIndex == 10)
+	{
+		Release();
 		isDead = true;
+	}
 }
 
 void ShotgunBullet::Release()
 {
+	hits.erase(hits.begin(),hits.end());
+	hits.clear();
 }
+
+void ShotgunBullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
+{
+	switch (_id)
+	{
+	case OBJ::ENEMY:
+		if (_id != parentID)
+		{
+			if (find(hits.begin(), hits.end(), _opponent) == hits.end())
+			{
+				static_cast<Enemy*>(_opponent)->Add_HP(-damage);
+				hits.push_back(_opponent);
+			}
+		}
+		break;
+	case OBJ::NPC:
+		static_cast<Npc*>(_opponent)->Set_Ropped();
+		break;
+	case OBJ::PLAYER:
+		if (_id != parentID)
+		{
+			static_cast<Player*>(_opponent)->Set_Dying();
+		}
+		break;
+	}
+}
+

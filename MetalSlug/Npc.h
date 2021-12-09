@@ -16,7 +16,7 @@ private:
 public:
 	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir);
 	const bool& Get_Ropped() const { return isRopped; }
-
+	void Set_Ropped();
 private:
 	ACTION::ID action;
 	bool	isRopped;

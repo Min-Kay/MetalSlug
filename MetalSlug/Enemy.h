@@ -10,10 +10,10 @@ public:
 	virtual void Render(HDC _hdc) PURE;
 	virtual void Release()PURE;
 
-	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir) { isDead = true; }
+	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir) {}
 public:
 	void	Set_HP(int _hp) { hp = _hp; }
-	void	Add_HP(int _hp) { hp += _hp; }
+	virtual void	Add_HP(int _hp) { hp += _hp; }
 	void	Set_Move(bool _move) { isMove = _move; }
 	void	Set_CollMode(bool _coll) { canCollision = _coll; }
 	
