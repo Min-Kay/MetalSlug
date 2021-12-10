@@ -37,9 +37,9 @@ void ThreeHead::Initialize()
 
 	totalY = 0.f;
 		
-	left = new Tower(this,THREEHEAD::LEFT, info.x + 300.f,info.y - 50.f);
-	mid = new Tower(this, THREEHEAD::MID, info.x + 570.f, info.y - 50.f);
-	right = new Tower(this, THREEHEAD::RIGHT, info.x + 850.f, info.y - 50.f);
+	left = new Tower(THREEHEAD::LEFT, info.x + 300.f,info.y - 50.f);
+	mid = new Tower( THREEHEAD::MID, info.x + 570.f, info.y - 50.f);
+	right = new Tower(THREEHEAD::RIGHT, info.x + 850.f, info.y - 50.f);
 
 	ObjPoolMgr::Get_Instance()->Add_Object(OBJ::ENEMY,left);
 	ObjPoolMgr::Get_Instance()->Add_Object(OBJ::ENEMY, right);
@@ -56,20 +56,12 @@ int ThreeHead::Update()
 
 	State_Machine();
 
-	left->Update();
-	right->Update();
-	mid->Update();
-
 	return OBJ_DEFAULT;
 }
 
 void ThreeHead::Late_Update()
 {
 	Tower_On();
-	
-	left->	Late_Update();
-	right->	Late_Update();
-	mid->	Late_Update();
 
 	if (!isDying && AllDestroied())
 	{
@@ -133,9 +125,6 @@ void ThreeHead::State_Machine()
 			Send_State(THREEHEAD::DOOR_OPEN);
 		}
 		break;
-	case THREEHEAD::DESTORY:
-
-		break;
 	}
 }
 
@@ -152,6 +141,9 @@ void ThreeHead::Send_State(THREEHEAD::STATE _state)
 
 void ThreeHead::Tower_On()
 {
+	if (doorOpening)
+		return;
+
 	if (totalY >= 150.f && !doorOpening)
 	{
 		Send_State(THREEHEAD::DOOR_OPEN);

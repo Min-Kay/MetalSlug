@@ -46,7 +46,6 @@ int Bullet::Update()
 void Bullet::Late_Update()
 {
 	Check_Screen_Out();
-	Check_Line_Collision();
 }
 
 void Bullet::Render(HDC _hdc)
@@ -67,14 +66,14 @@ void Bullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 	switch (_id)
 	{
 	case OBJ::PLAYER:
-		if (_opponent->Get_ID() != parentID && !static_cast<Player*>(_opponent)->Get_Dying())
+		if (_id != parentID && !_opponent->Get_Dying())
 		{
 			static_cast<Player*>(_opponent)->Set_Dying();
 			isDead = true;
 		}
 		break;
 	case OBJ::ENEMY:
-		if (_opponent->Get_ID() != parentID && !static_cast<Enemy*>(_opponent)->Get_Dying())
+		if (_id != parentID && !_opponent->Get_Dying())
 		{
 			static_cast<Enemy*>(_opponent)->Add_HP(-damage);
 			isDead = true;

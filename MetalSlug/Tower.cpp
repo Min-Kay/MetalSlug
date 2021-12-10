@@ -7,9 +7,8 @@ Tower::Tower()
 {
 }
 
-Tower::Tower(ThreeHead* _parent, THREEHEAD::HEAD _head, float _X, float _Y)
+Tower::Tower(THREEHEAD::HEAD _head, float _X, float _Y)
 {
-	parent = _parent;
 	head = _head; 
 	info.x = _X;
 	info.y = _Y;
@@ -43,7 +42,6 @@ void Tower::Initialize()
 	info.cx = 100.f;
 	info.cy = 100.f;
 	
-	curtainIdle = false;
 	firing = false;
 	fireTime = GetTickCount();
 
@@ -168,47 +166,17 @@ void Tower::Render(HDC _hdc)
 		{
 		case THREEHEAD::LEFT:
 			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 3, 850, 100, 140, RGB(0, 255, 0));
-			
-			if (curtainIdle)
-			{
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, 150, 1765, 40, 50, RGB(0, 255, 0));
-				curtainIdle = false;
-			}
-			else
-			{
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, 190, 1765, 40, 50, RGB(0, 255, 0));
-				curtainIdle = true;
-			}
+			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, 40 * (animIndex % 2) + 110, 1765, 40, 50, RGB(0, 255, 0));
 			break;
 		case THREEHEAD::MID:
 			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 103, 850, 100, 140, RGB(0, 255, 0));
-			if (curtainIdle)
-			{
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, 150, 1765, 40, 50, RGB(0, 255, 0));
-				curtainIdle = false;
-			}
-			else
-			{
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, 190, 1765, 40, 50, RGB(0, 255, 0));
-				curtainIdle = true;
-			}
+			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, 40 * (animIndex % 2) + 110, 1765, 40, 50, RGB(0, 255, 0));
 			break;
 		case THREEHEAD::RIGHT:
 			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 203, 850, 100, 140, RGB(0, 255, 0));
-			if (curtainIdle)
-			{
-				stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_Item");
-				StretchBlt(stretchDC,0,0,40,50,drawingDC, 190, 1765, -40,50,SRCCOPY);
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, stretchDC, 0, 0, 40, 50, RGB(0, 255, 0));
-				curtainIdle = false;
-			}
-			else
-			{
-				stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_Item");
-				StretchBlt(stretchDC, 0, 0, 40, 50, drawingDC, 230, 1765, -40, 50, SRCCOPY);
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, stretchDC, 0, 0, 40, 50, RGB(0, 255, 0));
-				curtainIdle = true;
-			}
+			stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_Item");
+			StretchBlt(stretchDC, 0, 0, 40, 50, drawingDC, (animIndex % 2) * 40 + 40 + 110, 1765, -40, 50, SRCCOPY);
+			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, stretchDC, 0, 0, 40, 50, RGB(0, 255, 0));
 			break;
 		}
 
@@ -242,16 +210,7 @@ void Tower::Render(HDC _hdc)
 			}
 			else
 			{
-				if (curtainIdle)
-				{
-					GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, 150, 1765, 40, 50, RGB(0, 255, 0));
-					curtainIdle = false;
-				}
-				else
-				{
-					GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, 190, 1765, 40, 50, RGB(0, 255, 0));
-					curtainIdle = true;
-				}
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, 40 * (animIndex % 2) + 110, 1765, 40, 50, RGB(0, 255, 0));
 			}
 			
 			break;
@@ -265,16 +224,7 @@ void Tower::Render(HDC _hdc)
 			}
 			else
 			{
-				if (curtainIdle)
-				{
-					GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, 150, 1765, 40, 50, RGB(0, 255, 0));
-					curtainIdle = false;
-				}
-				else
-				{
-					GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, 190, 1765, 40, 50, RGB(0, 255, 0));
-					curtainIdle = true;
-				}
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, 40 * (animIndex % 2) + 110, 1765, 40, 50, RGB(0, 255, 0));
 			}
 			
 			break;
@@ -284,25 +234,12 @@ void Tower::Render(HDC _hdc)
 			{
 				Anim_Counter(4, 70.f, true);
 				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, animIndex * 39, 1823, 40, 50, RGB(0, 255, 0));
-
-			
 			}
 			else
 			{
-				if (curtainIdle)
-				{
-					stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_Item");
-					StretchBlt(stretchDC, 0, 0, 40, 50, drawingDC, 190, 1765, -40, 50, SRCCOPY);
-					GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, stretchDC, 0, 0, 40, 50, RGB(0, 255, 0));
-					curtainIdle = false;
-				}
-				else
-				{
-					stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_Item");
-					StretchBlt(stretchDC, 0, 0, 40, 50, drawingDC, 230, 1765, -40, 50, SRCCOPY);
-					GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, stretchDC, 0, 0, 40, 50, RGB(0, 255, 0));
-					curtainIdle = true;
-				}
+				stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_Item");
+				StretchBlt(stretchDC, 0, 0, 40, 50, drawingDC, (animIndex % 2) * 40 + 40 + 110, 1765, -40, 50, SRCCOPY);
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, stretchDC, 0, 0, 40, 50, RGB(0, 255, 0));
 			}
 			break;
 		}
@@ -336,15 +273,11 @@ void Tower::State_Machine()
 {
 	switch (state)
 	{
-	case THREEHEAD::NONE:
-		if (!isMove)
-			return;
-		break;
 	case THREEHEAD::ATTACK:
-		isMove = true;
+		if (!isMove) isMove = true;
 		if (fireTime + 2000.f < GetTickCount())
 		{
-			ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL,info.x,info.y - info.cy,DIR::DOWN,OBJ::ENEMY);
+			ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::ENEMYBULLET,info.x,info.y - info.cy,DIR::DOWN,OBJ::ENEMY);
 			fireTime = GetTickCount();
 			firing = true;
 		}

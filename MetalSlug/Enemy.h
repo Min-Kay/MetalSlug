@@ -23,7 +23,7 @@ public:
 	const ENEMY::ID& Get_EnemyID() const { return enemy_id; }
 	const bool& Get_CollMode() const { return canCollision; }
 	const bool& Get_CollAttack() const { return coll_Attack; }
-	const bool& Get_Dying() const { return isDying; }
+
 	
 public:
 	virtual void	Check_Hp() { if (hp <= 0) Set_Dead(true);  }
@@ -36,7 +36,6 @@ protected:
 
 	bool	isMove;
 	bool	coll_Attack;
-	bool	isDying;
 
 	bool	canCollision;
 };

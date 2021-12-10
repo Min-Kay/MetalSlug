@@ -42,7 +42,6 @@ void Soldier::Initialize()
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Soldier_Fire.bmp",L"Soldier_Fire");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Soldier_Fire_Up.bmp", L"Soldier_Fire_Up");
 
-
 }
 
 int Soldier::Update()
@@ -67,7 +66,7 @@ void Soldier::Render(HDC _hdc)
 	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
-	Rectangle(_hdc,rect.left + scrollX,rect.top + scrollY ,rect.right + scrollX,rect.bottom + scrollY);
+	//Rectangle(_hdc,rect.left + scrollX,rect.top + scrollY ,rect.right + scrollX,rect.bottom + scrollY);
 	switch (action)
 	{
 		case ACTION::IDLE:
@@ -242,10 +241,10 @@ void Soldier::State_Machine()
 
 		if (!isMove)
 		{
-			if(ObjPoolMgr::Get_Instance()->Check_Distance(this) < 400.f)
+			if(ObjPoolMgr::Get_Instance()->Check_Distance(this) < 500.f)
 			{ 
 				isMove = true;
-				Change_Anim(ACTION::MOVE);
+				Change_Anim(ACTION::IDLE);
 				attack = false;
 			}
 			return;
@@ -253,7 +252,7 @@ void Soldier::State_Machine()
 
 		if (attack)
 		{
-			if ( (abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x) > 200.f && abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().y - info.y) > 200) || (abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x) > 45 && ObjPoolMgr::Get_Instance()->Get_Player_Rect().bottom < rect.top))
+			if ((abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x) > 300.f && abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().y - info.y) > 200) || (abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x) > 45 && ObjPoolMgr::Get_Instance()->Get_Player_Rect().bottom < rect.top))
 			{
 				Change_Anim(ACTION::MOVE);
 				attack = false;
@@ -269,26 +268,28 @@ void Soldier::State_Machine()
 				if (ObjPoolMgr::Get_Instance()->Get_Player_Rect().bottom < rect.top)
 				{
 					dir = DIR::UP;
-					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x, info.y - info.cy * 0.5f, DIR::UP,  OBJ::ENEMY);
+					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::ENEMYBULLET, info.x, info.y - info.cy * 0.5f, DIR::UP, OBJ::ENEMY);
 				}
 				else if (ObjPoolMgr::Get_Instance()->Get_Player_Info().x < info.x)
 				{
 					dir = DIR::LEFT;
-					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x - info.cx * 0.5f, info.y, DIR::LEFT,  OBJ::ENEMY);
+					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::ENEMYBULLET, info.x - info.cx * 0.5f, info.y, DIR::LEFT, OBJ::ENEMY);
 				}
 				else if (ObjPoolMgr::Get_Instance()->Get_Player_Info().x > info.x)
 				{
 					dir = DIR::RIGHT;
-					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL, info.x + info.cx * 0.5f, info.y, DIR::RIGHT, OBJ::ENEMY);
+					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::ENEMYBULLET, info.x + info.cx * 0.5f, info.y, DIR::RIGHT, OBJ::ENEMY);
 				}
 				fireTime = GetTickCount();
 			}
-			else if(fireTime + 300.f < GetTickCount())
+			else if (fireTime + 300.f < GetTickCount())
 			{
 				isFiring = false;
 				isHolding = true;
 			}
 		}
+		else if (abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x) < 300.f)
+			action = ACTION::MOVE;
 
 		break;
 	case ACTION::MOVE:

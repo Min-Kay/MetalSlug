@@ -20,9 +20,6 @@ int WepItem::Update()
 {
 	if (isDead)
 		return OBJ_DEAD; 
-	if (wep_id)
-	{
-	}
 	Gravity(); 
 	Update_Rect(); 
 	return OBJ_DEFAULT;
@@ -82,9 +79,9 @@ void WepItem::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 			break;
 		case WEAPON::ROCKET:
 			if (DataMgr::Get_Instance()->Get_Weapon()->Get_WepID() != wep_id)
-				ObjPoolMgr::Get_Instance()->Set_Player_Wep(new HeavyMachine);
+				ObjPoolMgr::Get_Instance()->Set_Player_Wep(new RocketLauncher);
 			else
-				DataMgr::Get_Instance()->Add_Ammo(200);
+				DataMgr::Get_Instance()->Add_Ammo(100);
 			break;
 		case WEAPON::SHOTGUN:
 			if (DataMgr::Get_Instance()->Get_Weapon()->Get_WepID() != wep_id)

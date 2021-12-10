@@ -35,8 +35,6 @@ public:
 	void	Anim_Counter(ANIM::PLAYER _action, int count, float _timer, bool _roop = true, int start = 0);
 	void	Set_Dying();
 
-	const bool& Get_Dying() const { return isDying; };
-
 private:
 	ACTION::ID	action;
 	DIR::ID		onlySide;
@@ -45,7 +43,6 @@ private:
 
 	bool	isStab;
 
-	bool	isDying; 
 	bool	isFiring;
 	bool	isGrenading;
 	bool	isStabbing;

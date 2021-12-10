@@ -19,7 +19,7 @@ private:
     bool    isTurning;
     bool    turned;
  
-
+    bool    isFiring;
     DWORD   attackTime;
 
 };

@@ -216,10 +216,10 @@ void Arabian::State_Machine()
 	{
 		if (!isMove)
 		{
-			if (disX < 400.f)
+			if (disX < 500.f)
 			{
 				isMove = true;
-				Change_Anim(ACTION::MOVE);
+				Change_Anim(ACTION::IDLE);
 				attacking = false;
 			}
 			return;
@@ -299,7 +299,7 @@ void Arabian::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 	if (!coll_Attack)
 		return;
 
-	if (_id == OBJ::PLAYER && !static_cast<Player*>(_opponent)->Get_Dying())
+	if (_id == OBJ::PLAYER && !_opponent->Get_Dying())
 	{
 		static_cast<Player*>(_opponent)->Set_Dying();
 	}

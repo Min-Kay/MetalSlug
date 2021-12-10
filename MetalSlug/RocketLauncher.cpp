@@ -3,15 +3,15 @@
 
 void RocketLauncher::Initialize()
 {
-	ammo = 50;
-	wep_id = WEAPON::SHOTGUN;
+	ammo = 100;
+	wep_id = WEAPON::ROCKET;
 	timer = GetTickCount();
 	isFire = false;
 }
 
 bool RocketLauncher::Fire(float _x, float _y, DIR::ID _dir)
 {
-	if (CKeyMgr::Get_Instance()->Key_Down(VK_ATTACK) && timer + 400.f < GetTickCount())
+	if (CKeyMgr::Get_Instance()->Key_Down(VK_ATTACK) && timer + 200.f < GetTickCount())
 	{
 		switch (_dir)
 		{

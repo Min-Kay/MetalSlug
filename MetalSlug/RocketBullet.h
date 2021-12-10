@@ -3,7 +3,9 @@
 class RocketBullet :
     public Bullet
 {
-
+public:
+	RocketBullet() {};
+	virtual ~RocketBullet() { Release(); };
 public:
 	virtual void Initialize() override;
 	virtual int Update() override;
@@ -14,11 +16,19 @@ public:
 public:
 	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir);
 	virtual void Update_Rect();
+
+	void Rocket(); 
+	void ExplodePosing();
 private:
 	float init_CX;
 	float init_CY;
 
 	float accel;
 	float maxSpeed;
+	float blow;
+
+	bool  explosion;
+
+	vector<Obj*> hits; 
 };
 

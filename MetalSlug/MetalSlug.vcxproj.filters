@@ -166,7 +166,13 @@
     <Filter Include="소스 파일\02.Object\02.Enemy\05.SolDae">
       <UniqueIdentifier>{98332736-38a6-407a-924d-35154c9c9fa1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02.Object\05.Bullet\05.SolDaeLaser">
+    <Filter Include="소스 파일\02.Object\05.Bullet\05.EnemyBullet">
+      <UniqueIdentifier>{6943972f-9739-4173-942a-31188a770fdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\05.Bullet\05.EnemyBullet\00.EnemyBullet">
+      <UniqueIdentifier>{4da3104e-dcfc-4364-a91e-d3d0d0056c7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\05.Bullet\05.EnemyBullet\01.SolDaeLaser">
       <UniqueIdentifier>{7ae78243-24e1-447f-b13c-adb97b2c6ac6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -352,7 +358,10 @@
       <Filter>소스 파일\02.Object\02.Enemy\05.SolDae</Filter>
     </ClInclude>
     <ClInclude Include="SolDaeLaser.h">
-      <Filter>소스 파일\02.Object\05.Bullet\05.SolDaeLaser</Filter>
+      <Filter>소스 파일\02.Object\05.Bullet\05.EnemyBullet\01.SolDaeLaser</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBullet.h">
+      <Filter>소스 파일\02.Object\05.Bullet\05.EnemyBullet\00.EnemyBullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -505,7 +514,10 @@
       <Filter>소스 파일\02.Object\02.Enemy\05.SolDae</Filter>
     </ClCompile>
     <ClCompile Include="SolDaeLaser.cpp">
-      <Filter>소스 파일\02.Object\05.Bullet\05.SolDaeLaser</Filter>
+      <Filter>소스 파일\02.Object\05.Bullet\05.EnemyBullet\01.SolDaeLaser</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBullet.cpp">
+      <Filter>소스 파일\02.Object\05.Bullet\05.EnemyBullet\00.EnemyBullet</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

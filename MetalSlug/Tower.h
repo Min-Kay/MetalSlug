@@ -8,7 +8,7 @@ class Tower :
 
 public:
 	Tower();
-	Tower(ThreeHead* _parent, THREEHEAD::HEAD _head, float _X,float _Y);
+	Tower(THREEHEAD::HEAD _head, float _X,float _Y);
 	virtual ~Tower();
 
 public:
@@ -27,13 +27,9 @@ private:
 	void	State_Machine(); 
 
 private:
-	ThreeHead* parent = nullptr;
-
 	THREEHEAD::HEAD head;
 	THREEHEAD::STATE state;
 
-
-	bool curtainIdle;
 	bool firing;
 
 	DWORD fireTime;

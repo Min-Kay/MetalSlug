@@ -109,27 +109,27 @@ void Player::KeyInput()
 		switch (dir)
 		{
 		case DIR::LEFT:
-			isFiring = weapon->Fire(info.x - info.cx * 0.5f, info.y, dir);
+			isFiring = weapon->Fire(rect.left, info.y, dir);
 			break;
 		case DIR::RIGHT:
-			isFiring = weapon->Fire(info.x + info.cx * 0.5f, info.y, dir);
+			isFiring = weapon->Fire(rect.right, info.y, dir);
 			break;
 		case DIR::UP:
-			isFiring = weapon->Fire(info.x, info.y - info.cy * 0.5f, dir);
+			isFiring = weapon->Fire(info.x, rect.top, dir);
 			break;
 		}
 	}
 	else if (jumping && dir == DIR::DOWN)
-		isFiring = weapon->Fire(info.x, info.y + info.cy * 0.5f, dir);
+		isFiring = weapon->Fire(info.x, rect.bottom, dir);
 	else
 	{
 		switch (onlySide)
 		{
 		case DIR::LEFT:
-			isFiring = weapon->Fire(info.x - info.cx * 0.5f, info.y - init_CY * 0.25f, onlySide);
+			isFiring = weapon->Fire(rect.left, info.y - init_CY * 0.25f, onlySide);
 			break;
 		case DIR::RIGHT:
-			isFiring = weapon->Fire(info.x + info.cx * 0.5f, info.y - init_CY * 0.25f, onlySide);
+			isFiring = weapon->Fire(rect.right, info.y - init_CY * 0.25f, onlySide);
 			break;
 		}
 	}
@@ -201,6 +201,7 @@ void Player::KeyInput()
 		{
 			info.cy = 50.f;
 			action = ACTION::IDLE;
+			Update_Rect();
 		}
 	}
 	else

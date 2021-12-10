@@ -59,20 +59,20 @@ void ShotgunBullet::Render(HDC _hdc)
 		Anim_Counter(10,7.f, false);
 		if (animIndex < 3)
 		{
-			GdiTransparentBlt(_hdc, info.x - info.cx * 0.5f + scrollX, info.y - init_CY * 0.5f + scrollY, info.cx, init_CY, drawingDC, 0, 270 - animIndex * 90, 70, 90, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, info.cx, init_CY, drawingDC, 0, 270 - animIndex * 90, 70, 90, RGB(255, 255, 255));
 		}
 		else if (animIndex < 6)
 		{
-			GdiTransparentBlt(_hdc, info.x - info.cx * 0.5f + scrollX, info.y - init_CY * 0.5f + scrollY, info.cx, init_CY, drawingDC, 70, 250 - ( animIndex % 3) * 100, 70, 100, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, info.cx, init_CY, drawingDC, 70, 250 - ( animIndex % 3) * 100, 70, 100, RGB(255, 255, 255));
 
 		}
 		else if (animIndex < 10)
 		{
-			GdiTransparentBlt(_hdc, info.x - info.cx * 0.5f + scrollX, info.y - init_CY * 0.5f + scrollY, info.cx, init_CY, drawingDC, 150, 250 - ( animIndex % 4) * 90, 70, 90, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, info.cx, init_CY, drawingDC, 150, 250 - ( animIndex % 4) * 90, 70, 90, RGB(255, 255, 255));
 		}
 		else
 		{
-			GdiTransparentBlt(_hdc, info.x - info.cx * 0.5f + scrollX, info.y - init_CY * 0.5f + scrollY, info.cx, init_CY, drawingDC, 220, 270 , 70, 90, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, info.cx, init_CY, drawingDC, 220, 270 , 70, 90, RGB(255, 255, 255));
 		}
 
 		break;
@@ -83,20 +83,20 @@ void ShotgunBullet::Render(HDC _hdc)
 		Anim_Counter(10, 7.f, false);
 		if (animIndex < 3)
 		{
-			GdiTransparentBlt(_hdc, info.x - info.cx * 0.5f + scrollX, info.y - init_CY * 0.5f + scrollY, info.cx,init_CY, drawingDC, 280, animIndex * 90, 70, 90, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, info.cx,init_CY, drawingDC, 280, animIndex * 90, 70, 90, RGB(255, 255, 255));
 		}
 		else if (animIndex < 6)
 		{
-			GdiTransparentBlt(_hdc, info.x - init_CX * 0.5f + scrollX, info.y - info.cy * 0.5f + scrollY, info.cx, init_CY, drawingDC, 200, animIndex % 3 * 100,70, 100, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, info.cx, init_CY, drawingDC, 200, animIndex % 3 * 100,70, 100, RGB(255, 255, 255));
 
 		}
 		else if (animIndex < 10)
 		{
-			GdiTransparentBlt(_hdc, info.x - init_CX * 0.5f + scrollX, info.y - info.cy * 0.5f + scrollY, info.cx, init_CY, drawingDC, 120, animIndex % 4 * 90, 70, 90, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, info.cx, init_CY, drawingDC, 120, animIndex % 4 * 90, 70, 90, RGB(255, 255, 255));
 		}
 		else
 		{
-			GdiTransparentBlt(_hdc, info.x - init_CX * 0.5f + scrollX, info.y - info.cy * 0.5f + scrollY, info.cx, init_CY, drawingDC, 80, 90, 70, 90, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, info.cx, init_CY, drawingDC, 80, 90, 70, 90, RGB(255, 255, 255));
 		}
 
 		break;
@@ -107,24 +107,24 @@ void ShotgunBullet::Render(HDC _hdc)
 		if (animIndex < 3)
 		{
 			StretchBlt(stretchDC, 0, 0, 90, 70, drawingDC, 90 * animIndex + 90, 0, -90, 70, SRCCOPY);
-			GdiTransparentBlt(_hdc, info.x - init_CX * 0.5f + scrollX, info.y - info.cy * 0.5f + scrollY, init_CX, info.cy, stretchDC, 0, 0, 90, 70, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, init_CX, info.cy, stretchDC, 0, 0, 90, 70, RGB(255, 255, 255));
 		}
 		else if (animIndex < 6)
 		{
 			StretchBlt(stretchDC, 0, 0, 100, 70, drawingDC, 100 * (animIndex % 3) + 100, 70, -100, 70, SRCCOPY);
-			GdiTransparentBlt(_hdc, info.x - init_CX * 0.5f + scrollX, info.y - info.cy * 0.5f + scrollY, init_CX, info.cy, stretchDC, 0, 0, 100, 70, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, init_CX, info.cy, stretchDC, 0, 0, 100, 70, RGB(255, 255, 255));
 
 		}
 		else if (animIndex < 10)
 		{
 			StretchBlt(stretchDC, 0, 0, 90, 70, drawingDC, 90 * (animIndex % 4) + 90, 150, -90, 70, SRCCOPY);
-			GdiTransparentBlt(_hdc, info.x - init_CX * 0.5f + scrollX, info.y - info.cy * 0.5f + scrollY, init_CX, info.cy, stretchDC, 0, 0, 90, 70, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, init_CX, info.cy, stretchDC, 0, 0, 90, 70, RGB(255, 255, 255));
 		}
 		else
 		{
 			StretchBlt(stretchDC, 0, 0, 90, 70, drawingDC, 90, 220, -90, 70, SRCCOPY);
 
-			GdiTransparentBlt(_hdc, info.x - init_CX * 0.5f + scrollX, info.y - info.cy * 0.5f + scrollY, init_CX, info.cy, stretchDC, 0, 0, 90, 70, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, init_CX, info.cy, stretchDC, 0, 0, 90, 70, RGB(255, 255, 255));
 		}
 
 		
@@ -135,20 +135,20 @@ void ShotgunBullet::Render(HDC _hdc)
 		Anim_Counter(10, 7.f, false);
 		if (animIndex < 3)
 		{
-			GdiTransparentBlt(_hdc, info.x - init_CX * 0.5f + scrollX, info.y - info.cy * 0.5f + scrollY, init_CX, info.cy, drawingDC, 90 * animIndex, 0, 90, 70, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, init_CX, info.cy, drawingDC, 90 * animIndex, 0, 90, 70, RGB(255, 255, 255));
 		}
 		else if (animIndex < 6)
 		{
-			GdiTransparentBlt(_hdc, info.x - init_CX * 0.5f + scrollX, info.y - info.cy * 0.5f + scrollY, init_CX, info.cy, drawingDC, 100 * (animIndex % 3), 70,100, 70, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, init_CX, info.cy, drawingDC, 100 * (animIndex % 3), 70,100, 70, RGB(255, 255, 255));
 
 		}
 		else if (animIndex < 10)
 		{
-			GdiTransparentBlt(_hdc, info.x - init_CX * 0.5f + scrollX, info.y - info.cy * 0.5f + scrollY, init_CX, info.cy, drawingDC, 90 *( animIndex % 4), 150, 90, 70, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, init_CX, info.cy, drawingDC, 90 *( animIndex % 4), 150, 90, 70, RGB(255, 255, 255));
 
 		}
 		else 
-			GdiTransparentBlt(_hdc, info.x - init_CX * 0.5f + scrollX, info.y - info.cy * 0.5f + scrollY, init_CX, info.cy, drawingDC, 90, 220, 90, 70, RGB(255, 255, 255));
+			GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, init_CX, info.cy, drawingDC, 90, 220, 90, 70, RGB(255, 255, 255));
 		break;
 	}
 
@@ -170,7 +170,7 @@ void ShotgunBullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 	switch (_id)
 	{
 	case OBJ::ENEMY:
-		if (_id != parentID)
+		if (_id != parentID && !_opponent->Get_Dying())
 		{
 			if (find(hits.begin(), hits.end(), _opponent) == hits.end())
 			{
@@ -180,13 +180,45 @@ void ShotgunBullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 		}
 		break;
 	case OBJ::NPC:
-		static_cast<Npc*>(_opponent)->Set_Ropped();
+		if(static_cast<Npc*>(_opponent)->Get_Ropped())
+			static_cast<Npc*>(_opponent)->Set_Ropped();
 		break;
 	case OBJ::PLAYER:
-		if (_id != parentID)
+		if (_id != parentID && !_opponent->Get_Dying())
 		{
 			static_cast<Player*>(_opponent)->Set_Dying();
 		}
+		break;
+	}
+}
+
+void ShotgunBullet::Update_Rect()
+{
+	switch (dir)
+	{
+	case DIR::UP:
+		rect.left = info.x - info.cx * 0.5f;
+		rect.right = info.x + info.cx * 0.5f;
+		rect.top = info.y - init_CY * 0.5f;
+		rect.bottom = info.y + init_CY * 0.5f;
+		break;
+	case DIR::DOWN:
+		rect.left = info.x - info.cx * 0.5f;
+		rect.right = info.x + info.cx * 0.5f;
+		rect.top = info.y - init_CY * 0.5f;
+		rect.bottom = info.y + init_CY * 0.5f;
+		break;
+	case DIR::LEFT:
+		rect.left = info.x - init_CX * 0.5f;
+		rect.right = info.x + init_CX * 0.5f;
+		rect.top = info.y - info.cy * 0.5f;
+		rect.bottom = info.y + info.cy * 0.5f;
+		break;
+	case DIR::RIGHT:
+		rect.left = info.x - init_CX * 0.5f;
+		rect.right = info.x + init_CX * 0.5f;
+		rect.top = info.y - info.cy * 0.5f;
+		rect.bottom = info.y + info.cy * 0.5f;
 		break;
 	}
 }

@@ -246,30 +246,25 @@ void ObjPoolMgr::Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _d
 	switch (_bullet)
 	{
 	case BULLET::PISTOL:
-	{
 		temp = CAbstractFactory<Bullet>::Create(_X, _Y, _dir);
-		static_cast<Bullet*>(temp)->Set_ParentID(_parent);
-		bullet[_bullet].push_back(temp);
-	}
 		break;
 	case BULLET::HEAVY:
-	{
-		temp = CAbstractFactory<Bullet>::Create(_X, _Y, _dir);
-		static_cast<Bullet*>(temp)->Set_ParentID(_parent);
-		bullet[_bullet].push_back(CAbstractFactory<HeavyBullet>::Create(_X, _Y, _dir));
-	}
+		temp = CAbstractFactory<HeavyBullet>::Create(_X, _Y, _dir);
 		break;
 	case BULLET::SHOTGUN:
-	{
-		temp = CAbstractFactory<Bullet>::Create(_X, _Y, _dir);
-		static_cast<Bullet*>(temp)->Set_ParentID(_parent);
-		bullet[_bullet].push_back(CAbstractFactory<ShotgunBullet>::Create(_X, _Y, _dir));
-	}
-	break;
+		temp = CAbstractFactory<ShotgunBullet>::Create(_X, _Y, _dir);
+		break;
+	case BULLET::ROCKET:
+		temp = CAbstractFactory<RocketBullet>::Create(_X, _Y, _dir);
+		break;
+	case BULLET::ENEMYBULLET:
+		temp = CAbstractFactory<EnemyBullet>::Create(_X, _Y, _dir);
+		break;
 	default:
 		return;
 	}
-
+	static_cast<Bullet*>(temp)->Set_ParentID(_parent);
+	bullet[_bullet].push_back(temp);
 	Add_Object(OBJ::BULLET, bullet[_bullet].back());
 }
 
@@ -326,7 +321,7 @@ void ObjPoolMgr::Spawn_Item(ITEM::ID _item, float _X, float _Y, WEAPON::ID _wep)
 			item[_item].push_back(temp);
 			break;
 		default:
-			break;
+			return;
 		}
 	}
 		break;

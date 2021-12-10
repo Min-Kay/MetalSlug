@@ -36,6 +36,7 @@ public:
 	const RECT& Get_Rect() const { return rect; }
 	const bool& Get_Dead() const { return isDead; }
 	const OBJ::ID& Get_ID()	const { return id; }
+	const bool& Get_Dying() const { return isDying; }
 
 public:
 	void	Anim_Counter(int count, float _timer, bool _roop = true, int start = 0);
@@ -53,5 +54,6 @@ protected:
 	DIR::ID dir; 
 	OBJ::ID	id;
 	bool	isDead;
+	bool	isDying; 
 };
 

@@ -100,70 +100,70 @@ void Masknell::Render(HDC _hdc)
 				if (animIndex == 0)
 				{
 					StretchBlt(stretchDC,0,0, 60, 70, drawingDC ,65, 577, -60, 70, SRCCOPY);
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 120, 150, stretchDC, 0, 0, 60, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 120, 150, stretchDC, 0, 0, 60, 70, RGB(255, 255, 255));
 				}
 				else if (animIndex == 1)
 				{
 					StretchBlt(stretchDC, 0, 0, 50, 70, drawingDC, 115, 577, -50, 70, SRCCOPY);
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 110, 150, stretchDC, 0, 0, 50, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), 110, 150, stretchDC, 0, 0, 50, 70, RGB(255, 255, 255));
 				}
 
 				else if (animIndex == 2)
 				{
 					StretchBlt(stretchDC, 0, 0, 45, 70, drawingDC, 160, 577, -45, 70, SRCCOPY);
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 105, 150, stretchDC, 0, 0, 45, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 105, 150, stretchDC, 0, 0, 45, 70, RGB(255, 255, 255));
 				}
 
 				else if (animIndex == 3)
 				{
 					StretchBlt(stretchDC, 0, 0, 50, 70, drawingDC, 210, 577, -50, 70, SRCCOPY);
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 110, 150, stretchDC, 0, 0, 50, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY), 110, 150, stretchDC, 0, 0, 50, 70, RGB(255, 255, 255));
 				}
 
 				else if (animIndex == 4)
 				{
 					StretchBlt(stretchDC, 0, 0, 60, 70, drawingDC, 270, 577, -60, 70, SRCCOPY);
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 120, 150, stretchDC, 0, 0, 60, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 120, 150, stretchDC, 0, 0, 60, 70, RGB(255, 255, 255));
 				}
 
 				else if (animIndex == 5)
 				{
 					StretchBlt(stretchDC, 0, 0, 60, 70, drawingDC, 330, 577, -60, 70, SRCCOPY);
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 120, 150, stretchDC, 0, 0, 60, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 120, 150, stretchDC, 0, 0, 60, 70, RGB(255, 255, 255));
 				}
 				else if (animIndex == 6)
 				{
 					StretchBlt(stretchDC, 0, 0, 70, 70, drawingDC, 75, 647, -70, 70, SRCCOPY);
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 140, 150, stretchDC, 0, 0, 70, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 140, 150, stretchDC, 0, 0, 70, 70, RGB(255, 255, 255));
 				}
 				else if (animIndex == 7)
 				{
 					StretchBlt(stretchDC, 0, 0, 55, 70, drawingDC, 130, 647, -55, 70, SRCCOPY);
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 115, 150, stretchDC, 0, 0, 55, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 115, 150, stretchDC, 0, 0, 55, 70, RGB(255, 255, 255));
 				}
 				else if (animIndex == 8)
 				{
 					StretchBlt(stretchDC, 0, 0, 45, 70, drawingDC, 175, 647, -45, 70, SRCCOPY);
 
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 105, 150, stretchDC, 0, 0, 45, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 105, 150, stretchDC, 0, 0, 45, 70, RGB(255, 255, 255));
 				}
 				else if (animIndex == 9)
 				{
 					StretchBlt(stretchDC, 0, 0, 45, 70, drawingDC, 220, 647, -45, 70, SRCCOPY);
 
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 105, 150, stretchDC, 0, 0, 45, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY), 105, 150, stretchDC, 0, 0, 45, 70, RGB(255, 255, 255));
 				}
 				else if (animIndex == 10)
 				{
 					StretchBlt(stretchDC, 0, 0, 50, 70, drawingDC, 270, 647, -50, 70, SRCCOPY);
 
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 110, 150, stretchDC, 0, 0, 50, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 110, 150, stretchDC, 0, 0, 50, 70, RGB(255, 255, 255));
 				}
 				else if (animIndex == 11)
 				{
 					StretchBlt(stretchDC, 0, 0, 70, 70, drawingDC, 340, 647, -70, 70, SRCCOPY);
 
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 140, 150, stretchDC, 0, 0, 70, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY), 140, 150, stretchDC, 0, 0, 70, 70, RGB(255, 255, 255));
 				}
 
 				if (animIndex == 11)
@@ -180,38 +180,38 @@ void Masknell::Render(HDC _hdc)
 				{
 					StretchBlt(stretchDC, 0, 0, 60, 70, drawingDC, 330, 577, -60, 70, SRCCOPY);
 
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 120, 150, stretchDC, 0, 0, 60, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y + scrollY - info.cy * 0.5f), 120, 150, stretchDC, 0, 0, 60, 70, RGB(255, 255, 255));
 				}
 
 				else if (animIndex == 1)
 				{
 					StretchBlt(stretchDC, 0, 0, 60, 70, drawingDC, 270, 577, -60, 70, SRCCOPY);
 
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 120, 150, stretchDC, 0, 0, 60, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 120, 150, stretchDC, 0, 0, 60, 70, RGB(255, 255, 255));
 				}
 				else if (animIndex == 2)
 				{
 					StretchBlt(stretchDC, 0, 0, 50, 70, drawingDC, 210, 577, -50, 70, SRCCOPY);
 
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 110, 150, stretchDC, 0, 0, 50, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 110, 150, stretchDC, 0, 0, 50, 70, RGB(255, 255, 255));
 				}
 				else if (animIndex == 3)
 				{
 					StretchBlt(stretchDC, 0, 0, 45, 70, drawingDC, 160, 577, -45, 70, SRCCOPY);
 
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 105, 150, stretchDC, 0, 0, 45, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 105, 150, stretchDC, 0, 0, 45, 70, RGB(255, 255, 255));
 				}
 				else if (animIndex == 4)
 				{
 					StretchBlt(stretchDC, 0, 0, 50, 70, drawingDC, 115, 577, -50, 70, SRCCOPY);
 
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 110, 150, stretchDC, 0, 0, 50, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY ), 110, 150, stretchDC, 0, 0, 50, 70, RGB(255, 255, 255));
 				}
 				else if (animIndex == 5)
 				{
 					StretchBlt(stretchDC, 0, 0, 60, 70, drawingDC, 65, 577, -60, 70, SRCCOPY);
 
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 120, 150, stretchDC,0, 0, 60, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 120, 150, stretchDC,0, 0, 60, 70, RGB(255, 255, 255));
 				}
 				
 
@@ -231,13 +231,13 @@ void Masknell::Render(HDC _hdc)
 			{
 				StretchBlt(stretchDC, 0, 0, 85, 70, drawingDC,  animIndex * 85 + 85, 0, -85, 70, SRCCOPY);
 
-				GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 170, 150, stretchDC, 0, 0, 85, 70, RGB(255, 255, 255));
+				GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY ), 170, 150, stretchDC, 0, 0, 85, 70, RGB(255, 255, 255));
 			}
 			else
 			{
 				StretchBlt(stretchDC, 0, 0, 85, 70, drawingDC,  85, 70, -85, 70, SRCCOPY);
 
-				GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 170, 150, stretchDC, 0, 0, 85, 70, RGB(255, 255, 255));
+				GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 170, 150, stretchDC, 0, 0, 85, 70, RGB(255, 255, 255));
 			}
 		}
 		break;
@@ -248,33 +248,33 @@ void Masknell::Render(HDC _hdc)
 			{
 				Anim_Counter(11, 20.f, false);
 				if (animIndex == 0)
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 120, 150, drawingDC, 5, 577, 60, 70, RGB(255, 255, 255));
-				else if (animIndex == 1)
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 110, 150, drawingDC, 65, 577, 50, 70, RGB(255, 255, 255));
-
-				else if (animIndex == 2)
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 105, 150, drawingDC, 115, 577, 45, 70, RGB(255, 255, 255));
-
-				else if (animIndex == 3)
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 110, 150, drawingDC, 160, 577, 50, 70, RGB(255, 255, 255));
-
-				else if (animIndex == 4)
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 120, 150, drawingDC, 210, 577, 60, 70, RGB(255, 255, 255));
-
-				else if (animIndex == 5)
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 120, 150, drawingDC, 270, 577, 60, 70, RGB(255, 255, 255));
-				else if (animIndex == 6)
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 140, 150, drawingDC, 5, 647, 70, 70, RGB(255, 255, 255));
-				else if (animIndex == 7)
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 115, 150, drawingDC, 75, 647, 55, 70, RGB(255, 255, 255));
-				else if (animIndex == 8)
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 105, 150, drawingDC, 130, 647, 45, 70, RGB(255, 255, 255));
-				else if (animIndex == 9)
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 105, 150, drawingDC, 175, 647, 45, 70, RGB(255, 255, 255));
-				else if (animIndex == 10)
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 110, 150, drawingDC, 220, 647, 50, 70, RGB(255, 255, 255));
-				else if (animIndex == 11)
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 140, 150, drawingDC, 270, 647, 70, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left  + scrollX ), int(rect.top  + scrollY ), 120, 150, drawingDC, 5, 577, 60, 70, RGB(255, 255, 255));
+				else if (animIndex == 1)									
+					GdiTransparentBlt(_hdc, int(rect.left  + scrollX ), int(rect.top  + scrollY ), 110, 150, drawingDC, 65, 577, 50, 70, RGB(255, 255, 255));
+																			 
+				else if (animIndex == 2)									 
+					GdiTransparentBlt(_hdc, int(rect.left  + scrollX ), int(rect.top  + scrollY ), 105, 150, drawingDC, 115, 577, 45, 70, RGB(255, 255, 255));
+																			
+				else if (animIndex == 3)									
+					GdiTransparentBlt(_hdc, int(rect.left  + scrollX ), int(rect.top  + scrollY ), 110, 150, drawingDC, 160, 577, 50, 70, RGB(255, 255, 255));
+																			 
+				else if (animIndex == 4)		 							
+					GdiTransparentBlt(_hdc, int(rect.left  + scrollX ), int(rect.top  + scrollY ), 120, 150, drawingDC, 210, 577, 60, 70, RGB(255, 255, 255));
+																			 
+				else if (animIndex == 5)		 							 
+					GdiTransparentBlt(_hdc, int(rect.left  + scrollX ), int(rect.top  + scrollY ), 120, 150, drawingDC, 270, 577, 60, 70, RGB(255, 255, 255));
+				else if (animIndex == 6)		 							
+					GdiTransparentBlt(_hdc, int(rect.left  + scrollX ), int(rect.top  + scrollY ), 140, 150, drawingDC, 5, 647, 70, 70, RGB(255, 255, 255));
+				else if (animIndex == 7)		 							
+					GdiTransparentBlt(_hdc, int(rect.left  + scrollX ), int(rect.top  + scrollY ), 115, 150, drawingDC, 75, 647, 55, 70, RGB(255, 255, 255));
+				else if (animIndex == 8)									
+					GdiTransparentBlt(_hdc, int(rect.left  + scrollX ), int(rect.top  + scrollY ), 105, 150, drawingDC, 130, 647, 45, 70, RGB(255, 255, 255));
+				else if (animIndex == 9)		 							 
+					GdiTransparentBlt(_hdc, int(rect.left  + scrollX ), int(rect.top  + scrollY ), 105, 150, drawingDC, 175, 647, 45, 70, RGB(255, 255, 255));
+				else if (animIndex == 10)		 							 
+					GdiTransparentBlt(_hdc, int(rect.left  + scrollX ), int(rect.top  + scrollY ), 110, 150, drawingDC, 220, 647, 50, 70, RGB(255, 255, 255));
+				else if (animIndex == 11)									 
+					GdiTransparentBlt(_hdc, int(rect.left  + scrollX ), int(rect.top  + scrollY ), 140, 150, drawingDC, 270, 647, 70, 70, RGB(255, 255, 255));
 
 				if (animIndex == 11)
 				{
@@ -290,38 +290,38 @@ void Masknell::Render(HDC _hdc)
 				{
 					StretchBlt(stretchDC, 0, 0, 60, 70, drawingDC, 270, 577, 60, 70, SRCCOPY);
 
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 120, 150, stretchDC, 0, 0, 60, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 120, 150, stretchDC, 0, 0, 60, 70, RGB(255, 255, 255));
 				}
 
 				else if (animIndex == 1)
 				{
 					StretchBlt(stretchDC, 0, 0, 60, 70, drawingDC, 210, 577, 60, 70, SRCCOPY);
 
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 120, 150, stretchDC, 0, 0, 60, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 120, 150, stretchDC, 0, 0, 60, 70, RGB(255, 255, 255));
 				}
 				else if (animIndex == 2)
 				{
 					StretchBlt(stretchDC, 0, 0, 50, 70, drawingDC, 160, 577, 50, 70, SRCCOPY);
 
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 110, 150, stretchDC, 0, 0, 50, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY ), 110, 150, stretchDC, 0, 0, 50, 70, RGB(255, 255, 255));
 				}
 				else if (animIndex == 3)
 				{
 					StretchBlt(stretchDC, 0, 0, 45, 70, drawingDC, 115, 577, 45, 70, SRCCOPY);
 
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 105, 150, stretchDC, 0, 0, 45, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 105, 150, stretchDC, 0, 0, 45, 70, RGB(255, 255, 255));
 				}
 				else if (animIndex == 4)
 				{
 					StretchBlt(stretchDC, 0, 0, 50, 70, drawingDC, 65, 577, 50, 70, SRCCOPY);
 
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 110, 150, stretchDC, 0, 0, 50, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY), 110, 150, stretchDC, 0, 0, 50, 70, RGB(255, 255, 255));
 				}
 				else if (animIndex == 5)
 				{
 					StretchBlt(stretchDC, 0, 0, 60, 70, drawingDC, 0, 577, 60, 70, SRCCOPY);
 
-					GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 120, 150, stretchDC, 0, 0, 60, 70, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY), 120, 150, stretchDC, 0, 0, 60, 70, RGB(255, 255, 255));
 				}
 				if (animIndex == 5)
 				{
@@ -336,11 +336,11 @@ void Masknell::Render(HDC _hdc)
 			Anim_Counter(5, 20.f, true);
 			if (animIndex < 4)
 			{
-				GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 170, 150, drawingDC,  animIndex * 85, 0, 85, 70, RGB(255, 255, 255));
+				GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 170, 150, drawingDC,  animIndex * 85, 0, 85, 70, RGB(255, 255, 255));
 			}
 			else
 			{
-				GdiTransparentBlt(_hdc, int(info.x + scrollX - info.cx * 0.5f), int(info.y + scrollY - info.cy * 0.5f), 170, 150, drawingDC, 0, 70, 85, 70, RGB(255, 255, 255));
+				GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 170, 150, drawingDC, 0, 70, 85, 70, RGB(255, 255, 255));
 			}
 		}
 		break;
@@ -368,8 +368,13 @@ void Masknell::State_Machine()
 	
 	if (attackTime + 2000.f < GetTickCount())
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::PISTOL,info.x, (float)rect.bottom,DIR::DOWN,OBJ::ENEMY);
+		isFiring = true;
+		ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::ENEMYBULLET,info.x, (float)rect.bottom,DIR::DOWN,OBJ::ENEMY);
 		attackTime = GetTickCount();
+	}
+	else if (isFiring && attackTime + 200.f < GetTickCount())
+	{
+		isFiring = false;
 	}
 }
 
