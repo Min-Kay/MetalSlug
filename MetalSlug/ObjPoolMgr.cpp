@@ -260,6 +260,9 @@ void ObjPoolMgr::Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _d
 	case BULLET::ENEMYBULLET:
 		temp = CAbstractFactory<EnemyBullet>::Create(_X, _Y, _dir);
 		break;
+	case BULLET::SOLDAEROOT:
+		temp = CAbstractFactory<SolDaeRoot>::Create(_X, _Y, _dir);
+		break;
 	default:
 		return;
 	}

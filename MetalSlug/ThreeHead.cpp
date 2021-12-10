@@ -80,18 +80,18 @@ void ThreeHead::Render(HDC _hdc)
 	switch (state)
 	{
 	case THREEHEAD::DESTORY:
-			GdiTransparentBlt(_hdc, int(info.x - 50.f + scrollX), int(info.y - 50.f + scrollY), 1026, 324, drawingDC, 0, 3394, 380, 120, RGB(0, 255, 0));
+			GdiTransparentBlt(_hdc, int(info.x - 50.f + scrollX), int(info.y - 50.f + scrollY), 1026, 324, drawingDC, 0, 3394, 380, 120, THREEHEAD_COLOR);
 			Anim_Counter(13,100.f,false);
 			if (animIndex < 3)
-				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex , drawingDC, (animIndex % 3) * 160, 2741, 160, 120, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex , drawingDC, (animIndex % 3) * 160, 2741, 160, 120, THREEHEAD_COLOR);
 			else if(animIndex < 6)
-				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex, drawingDC, (animIndex % 3) * 160, 2991, 160, 120, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex, drawingDC, (animIndex % 3) * 160, 2991, 160, 120, THREEHEAD_COLOR);
 			else if(animIndex < 9)																	 
-				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex, drawingDC, (animIndex % 3) * 160, 3041, 160, 120, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex, drawingDC, (animIndex % 3) * 160, 3041, 160, 120, THREEHEAD_COLOR);
 			else if (animIndex < 12)																 
-				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex, drawingDC, (animIndex % 3) * 160, 3291, 160, 120, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex, drawingDC, (animIndex % 3) * 160, 3291, 160, 120, THREEHEAD_COLOR);
 			else																					 
-				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex, drawingDC, (animIndex % 3) * 160, 3441, 160, 120, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, int(info.x + scrollX ), int(info.y  + scrollY - 250.f), 160 * animIndex, 120 * animIndex, drawingDC, (animIndex % 3) * 160, 3441, 160, 120, THREEHEAD_COLOR);
 			if (animIndex == 13)
 			{
 				isDead = true;
@@ -99,7 +99,7 @@ void ThreeHead::Render(HDC _hdc)
 			}
 		break;
 	default:
-		GdiTransparentBlt(_hdc, int(info.x - 50.f + scrollX), int(info.y - 50.f + scrollY), 1026, 324, drawingDC, 0, 30, 380, 120, RGB(0, 255, 0));
+		GdiTransparentBlt(_hdc, int(info.x - 50.f + scrollX), int(info.y - 50.f + scrollY), 1026, 324, drawingDC, 0, 30, 380, 120, THREEHEAD_COLOR);
 		break;
 	}
 }

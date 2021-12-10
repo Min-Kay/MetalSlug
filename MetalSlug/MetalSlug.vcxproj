@@ -199,6 +199,7 @@
     <ClInclude Include="ShotgunBullet.h" />
     <ClInclude Include="SolDae.h" />
     <ClInclude Include="SolDaeLaser.h" />
+    <ClInclude Include="SolDaeRoot.h" />
     <ClInclude Include="Soldier.h" />
     <ClInclude Include="Stage2.h" />
     <ClInclude Include="Struct.h" />
@@ -251,6 +252,7 @@
     <ClCompile Include="ShotgunBullet.cpp" />
     <ClCompile Include="SolDae.cpp" />
     <ClCompile Include="SolDaeLaser.cpp" />
+    <ClCompile Include="SolDaeRoot.cpp" />
     <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="Stage2.cpp" />
     <ClCompile Include="ThreeHead.cpp" />

@@ -55,6 +55,9 @@ int Tower::Update()
 	if (isDead)
 		return OBJ_DEAD;
 
+	if (isDying)
+		return OBJ_DEFAULT;
+
 	State_Machine();
 	Update_Rect(); 
 
@@ -85,13 +88,13 @@ void Tower::Render(HDC _hdc)
 		switch (head)
 		{
 			case THREEHEAD::LEFT:
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 180, 280, drawingDC, 5, 184, 90, 140, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 180, 280, drawingDC, 5, 184, 90, 140, THREEHEAD_COLOR);
 				break;
 			case THREEHEAD::MID:
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 180, 280, drawingDC, 95, 184, 90, 140, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 180, 280, drawingDC, 95, 184, 90, 140, THREEHEAD_COLOR);
 				break;
 			case THREEHEAD::RIGHT:
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 180, 280, drawingDC, 185, 184, 90, 140, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 180, 280, drawingDC, 185, 184, 90, 140, THREEHEAD_COLOR);
 				break;
 		}
 		break;
@@ -100,56 +103,56 @@ void Tower::Render(HDC _hdc)
 		{
 			case THREEHEAD::LEFT:
 			{
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 180, 280, drawingDC, 5, 184, 90, 140, RGB(0, 255, 0));
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.5f, info.y + scrollY - info.cy * 0.7f, 100, 120, drawingDC, 5, 635, 53, 60, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 180, 280, drawingDC, 5, 184, 90, 140, THREEHEAD_COLOR);
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.5f, info.y + scrollY - info.cy * 0.7f, 100, 120, drawingDC, 5, 635, 53, 60, THREEHEAD_COLOR);
 				Anim_Counter(15, 100.f, false);
 				float x = info.x + scrollX - info.cx;
 				float y = info.y + scrollY - info.cy * 0.8f;
 				if (animIndex < 5)
-					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + animIndex * 95, 353, 95, 60, RGB(0, 255, 0));
+					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + animIndex * 95, 353, 95, 60, THREEHEAD_DOOR_COLOR);
 				else if (animIndex < 10)
-					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + (animIndex % 5) * 95, 413, 95, 60, RGB(0, 255, 0));
+					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + (animIndex % 5) * 95, 413, 95, 60, THREEHEAD_DOOR_COLOR);
 				else if (animIndex < 15)
-					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + (animIndex % 5) * 95, 473, 95, 60, RGB(0, 255, 0));
+					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + (animIndex % 5) * 95, 473, 95, 60, THREEHEAD_DOOR_COLOR);
 				else
-					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + (animIndex % 5) * 95, 533, 95, 60, RGB(0, 255, 0));
+					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + (animIndex % 5) * 95, 533, 95, 60, THREEHEAD_DOOR_COLOR);
 
 			}
 			break;
 			case THREEHEAD::MID:
 			{
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 180, 280, drawingDC, 95, 184, 90, 140, RGB(0, 255, 0));
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.5f, info.y + scrollY - info.cy * 0.7f, 100, 120, drawingDC, 5, 635, 53, 60, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 180, 280, drawingDC, 95, 184, 90, 140, THREEHEAD_COLOR);
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.5f, info.y + scrollY - info.cy * 0.7f, 100, 120, drawingDC, 5, 635, 53, 60, THREEHEAD_COLOR);
 				Anim_Counter(15, 100.f, false);
 				float x = info.x + scrollX - info.cx;
 				float y = info.y + scrollY - info.cy * 0.8f;
 				if (animIndex < 5)
-					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + animIndex * 95, 353, 95, 60, RGB(0, 255, 0));
+					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + animIndex * 95, 353, 95, 60, THREEHEAD_DOOR_COLOR);
 				else if (animIndex < 10)
-					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + (animIndex % 5) * 95, 413, 95, 60, RGB(0, 255, 0));
+					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + (animIndex % 5) * 95, 413, 95, 60, THREEHEAD_DOOR_COLOR);
 				else if (animIndex < 15)
-					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + (animIndex % 5) * 95, 473, 95, 60, RGB(0, 255, 0));
+					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + (animIndex % 5) * 95, 473, 95, 60, THREEHEAD_DOOR_COLOR);
 				else
-					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + (animIndex % 5) * 95, 533, 95, 60, RGB(0, 255, 0));
+					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + (animIndex % 5) * 95, 533, 95, 60, THREEHEAD_DOOR_COLOR);
 
 			}
 			break;
 			case THREEHEAD::RIGHT:
 			{
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 180, 280, drawingDC, 185, 184, 90, 140, RGB(0, 255, 0));
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.5f, info.y + scrollY - info.cy * 0.7f, 100, 120, drawingDC, 5, 635, 53, 60, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 180, 280, drawingDC, 185, 184, 90, 140, THREEHEAD_COLOR);
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.5f, info.y + scrollY - info.cy * 0.7f, 100, 120, drawingDC, 5, 635, 53, 60, THREEHEAD_COLOR);
 				Anim_Counter(15, 100.f, false);
 
 				float x = info.x + scrollX - info.cx;
 				float y = info.y + scrollY - info.cy * 0.8f;
 				if (animIndex < 5)
-					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + animIndex * 95, 353, 95, 60, RGB(0, 255, 0));
+					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + animIndex * 95, 353, 95, 60, THREEHEAD_DOOR_COLOR);
 				else if (animIndex < 10)
-					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + (animIndex % 5) * 95, 413, 95, 60, RGB(0, 255, 0));
+					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + (animIndex % 5) * 95, 413, 95, 60, THREEHEAD_DOOR_COLOR);
 				else if (animIndex < 15)	  
-					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + (animIndex % 5) * 95, 473, 95, 60, RGB(0, 255, 0));
+					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + (animIndex % 5) * 95, 473, 95, 60, THREEHEAD_DOOR_COLOR);
 				else						   
-					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + (animIndex % 5) * 95, 533, 95, 60, RGB(0, 255, 0));
+					GdiTransparentBlt(_hdc, x, y, 190, 130, drawingDC, 3 + (animIndex % 5) * 95, 533, 95, 60, THREEHEAD_DOOR_COLOR);
 
 			}
 			break;
@@ -165,29 +168,29 @@ void Tower::Render(HDC _hdc)
 		switch (head)
 		{
 		case THREEHEAD::LEFT:
-			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 3, 850, 100, 140, RGB(0, 255, 0));
-			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, 40 * (animIndex % 2) + 110, 1765, 40, 50, RGB(0, 255, 0));
+			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 3, 850, 100, 140, THREEHEAD_COLOR);
+			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, 40 * (animIndex % 2) + 110, 1765, 40, 50, THREEHEAD_COLOR);
 			break;
 		case THREEHEAD::MID:
-			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 103, 850, 100, 140, RGB(0, 255, 0));
-			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, 40 * (animIndex % 2) + 110, 1765, 40, 50, RGB(0, 255, 0));
+			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 103, 850, 100, 140, THREEHEAD_COLOR);
+			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, 40 * (animIndex % 2) + 110, 1765, 40, 50, THREEHEAD_COLOR);
 			break;
 		case THREEHEAD::RIGHT:
-			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 203, 850, 100, 140, RGB(0, 255, 0));
+			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 203, 850, 100, 140, THREEHEAD_COLOR);
 			stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_Item");
 			StretchBlt(stretchDC, 0, 0, 40, 50, drawingDC, (animIndex % 2) * 40 + 40 + 110, 1765, -40, 50, SRCCOPY);
-			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, stretchDC, 0, 0, 40, 50, RGB(0, 255, 0));
+			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, stretchDC, 0, 0, 40, 50, THREEHEAD_COLOR);
 			break;
 		}
 
 		Anim_Counter(12, 100.f, false);
 		if (animIndex < 7)
 		{
-			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.6f, info.y + scrollY - info.cy * 0.8f, 140, 140, drawingDC, 3 + animIndex * 70, 1021, 70, 70, RGB(0, 255, 0));
+			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.6f, info.y + scrollY - info.cy * 0.8f, 140, 140, drawingDC, 3 + animIndex * 70, 1021, 70, 70, THREEHEAD_COLOR);
 		}
 		else
 		{
-			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.6f, info.y + scrollY - info.cy * 0.8f, 140, 140, drawingDC, 3 + (animIndex % 7) * 70, 1091, 70, 70, RGB(0, 255, 0));
+			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.6f, info.y + scrollY - info.cy * 0.8f, 140, 140, drawingDC, 3 + (animIndex % 7) * 70, 1091, 70, 70, THREEHEAD_COLOR);
 		}
 
 		if (animIndex == 12)
@@ -200,46 +203,48 @@ void Tower::Render(HDC _hdc)
 		switch (head)
 		{
 		case THREEHEAD::LEFT:
-			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 3, 850, 100, 140, RGB(0, 255, 0));
+			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 3, 850, 100, 140, THREEHEAD_COLOR);
 
 			if (firing)
 			{
 				Anim_Counter(4,70.f,true);
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, animIndex * 39, 1823, 40, 50, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, animIndex * 39, 1823, 40, 50, THREEHEAD_COLOR);
 
 			}
 			else
 			{
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, 40 * (animIndex % 2) + 110, 1765, 40, 50, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, 40 * (animIndex % 2) + 110, 1765, 40, 50, THREEHEAD_COLOR);
 			}
 			
 			break;
 		case THREEHEAD::MID:
-			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 103, 850, 100, 140, RGB(0, 255, 0));
+			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 103, 850, 100, 140, THREEHEAD_COLOR);
 			if (firing)
 			{
 				Anim_Counter(4, 70.f, true);
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, animIndex * 39, 1823, 40, 50, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, animIndex * 39, 1823, 40, 50, THREEHEAD_COLOR);
 
 			}
 			else
 			{
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, 40 * (animIndex % 2) + 110, 1765, 40, 50, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, 40 * (animIndex % 2) + 110, 1765, 40, 50, THREEHEAD_COLOR);
 			}
 			
 			break;
 		case THREEHEAD::RIGHT:
-			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 203, 850, 100, 140, RGB(0, 255, 0));
+			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 203, 850, 100, 140, THREEHEAD_COLOR);
 			if (firing)
 			{
 				Anim_Counter(4, 70.f, true);
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, animIndex * 39, 1823, 40, 50, RGB(0, 255, 0));
+				stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_Item");
+				StretchBlt(stretchDC, 0, 0, 40, 50, drawingDC, animIndex * 39, 1823, 40, 50, SRCCOPY);
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, stretchDC, 0, 0, 40, 50, THREEHEAD_COLOR);
 			}
 			else
 			{
 				stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_Item");
 				StretchBlt(stretchDC, 0, 0, 40, 50, drawingDC, (animIndex % 2) * 40 + 40 + 110, 1765, -40, 50, SRCCOPY);
-				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, stretchDC, 0, 0, 40, 50, RGB(0, 255, 0));
+				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, stretchDC, 0, 0, 40, 50, THREEHEAD_COLOR);
 			}
 			break;
 		}
@@ -248,26 +253,22 @@ void Tower::Render(HDC _hdc)
 		switch (head)
 		{
 		case THREEHEAD::LEFT:
-			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 3, 2634, 100, 100, RGB(0, 255, 0));
+			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 3, 2634, 100, 100, THREEHEAD_COLOR);
 
 			break;
 		case THREEHEAD::MID:
-			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 103, 2634, 100, 100, RGB(0, 255, 0));
+			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 103, 2634, 100, 100, THREEHEAD_COLOR);
 
 			break;
 		case THREEHEAD::RIGHT:
-			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 203, 2634, 100, 100, RGB(0, 255, 0));
-
+			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 203, 2634, 100, 100, THREEHEAD_COLOR);
 			break;
 		}
-
 		break;
 	}
 }
 
-void Tower::Release()
-{
-}
+void Tower::Release(){}
 
 void Tower::State_Machine()
 {

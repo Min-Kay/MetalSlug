@@ -108,7 +108,7 @@ void Game::Render(HDC _hdc)
 	if (spawnMidBoss && -scrollX > 5000 - WINCX && -scrollX < 7500 + WINCX)
 	{
 		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"MidBoss");
-		GdiTransparentBlt(_hdc, scrollX + 4650, scrollY + 250, 1026, 324, drawingDC, 0, 3394, 380, 120, RGB(0,255,0));
+		GdiTransparentBlt(_hdc, scrollX + 4650, scrollY + 250, 1026, 324, drawingDC, 0, 3394, 380, 120, THREEHEAD_COLOR);
 	}
 
 	if (-scrollX > 7500 - WINCX && -scrollX < 9000 + WINCX)

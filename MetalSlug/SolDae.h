@@ -17,10 +17,18 @@ public:
 
 private:
 	void	State_Machine(); 
+	void	Idle();
+	void	Laser();
+	void	SunShine();
+	void	Root();
+	void	Follower(); 
+	void	Die();
+	void	ToTheIdle();
 
 private:
 	SOLDAE::STATE state;
 
+private:
 	bool	showTime; 
 	float	showTimeY;
 
@@ -31,7 +39,6 @@ private:
 
 	int		fullGauge;
 
-	bool	isMinus;
 	float	totalIdleY;
 	float	maxIdleY; 
 
@@ -41,6 +48,7 @@ private:
 	float	initX;
 	float	initY;
 
+private:
 	bool	openingSky;
 	bool	crashing;
 	bool	toTheIdle; 
@@ -50,7 +58,14 @@ private:
 
 	SolDaeLaser* laser; 
 
-	DWORD	timer; 
+private:
+	bool	rootMotion;
+	bool	motionEnd;
+
+	int		currRoot;
+	int		maxRoot;
+	DWORD	rootSpawnTimer;
+
 
 	bool	initPos;
 	DWORD	effectTimer; 

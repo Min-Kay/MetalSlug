@@ -31,6 +31,9 @@
 #define		PLAYER_COLOR	RGB(86, 177, 222)
 #define		ITEM_COLOR		 RGB(0, 248, 0)
 #define		MAP_COLOR		RGB(248,0, 248)
+#define		THREEHEAD_COLOR RGB(184,224,232)
+#define		THREEHEAD_DOOR_COLOR RGB(63,72,204)
+
 
 // Key Setting
 #define		VK_ATTACK		'X'

@@ -175,6 +175,9 @@
     <Filter Include="소스 파일\02.Object\05.Bullet\05.EnemyBullet\01.SolDaeLaser">
       <UniqueIdentifier>{7ae78243-24e1-447f-b13c-adb97b2c6ac6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02.Object\05.Bullet\05.EnemyBullet\02.SolDaeRoot">
+      <UniqueIdentifier>{e84fc458-ea67-4acf-92b1-da43d5f1358d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -363,6 +366,9 @@
     <ClInclude Include="EnemyBullet.h">
       <Filter>소스 파일\02.Object\05.Bullet\05.EnemyBullet\00.EnemyBullet</Filter>
     </ClInclude>
+    <ClInclude Include="SolDaeRoot.h">
+      <Filter>소스 파일\02.Object\05.Bullet\05.EnemyBullet\02.SolDaeRoot</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MetalSlug.rc">
@@ -518,6 +524,9 @@
     </ClCompile>
     <ClCompile Include="EnemyBullet.cpp">
       <Filter>소스 파일\02.Object\05.Bullet\05.EnemyBullet\00.EnemyBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="SolDaeRoot.cpp">
+      <Filter>소스 파일\02.Object\05.Bullet\05.EnemyBullet\02.SolDaeRoot</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
