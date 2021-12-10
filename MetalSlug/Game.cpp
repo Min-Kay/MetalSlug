@@ -16,6 +16,9 @@ Game::~Game()
 
 void Game::Initialize()
 {
+	totalX = 0;
+	totalY = 0; 
+
 	isClear = false; 
 	isFail = false;
 	spawnMidBoss = false;
@@ -174,7 +177,6 @@ void Game::KeyInput()
 	if (CKeyMgr::Get_Instance()->Key_Down('2'))
 	{
 		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::WEAPON, rand() % 200 + 100 - scrollX, 200, WEAPON::SHOTGUN);
-
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down('3'))
@@ -234,15 +236,12 @@ void Game::Init_Information()
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Life_Bullet.bmp", L"UI");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/number.bmp", L"NUMBER");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Infinite.bmp", L"Infinite");
-
-
-	uiRect = { 10,10,310,74 };
 }
 
 void Game::Render_Information(HDC _hdc)
 {
 	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"UI");
-	GdiTransparentBlt(_hdc, int(uiRect.left), int(uiRect.top), 300, 64, drawingDC, 0, 0, 300, 64, RGB(0,255,0));
+	GdiTransparentBlt(_hdc, 10, 10, 300, 64, drawingDC, 0, 0, 300, 64, RGB(0,255,0));
 
 	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"BAR");
 	BitBlt(_hdc,17,35,119,12,drawingDC,0,0,SRCCOPY);
@@ -344,37 +343,38 @@ void Game::Check_Scrolling()
 			scrollLock.pop_front();
 
 		CScrollMgr::Get_Instance()->Set_ScrollLockX((float)scrollLock.front().x);
-
 		scrollUpdating = true;
-	
 		checkPoint = false;
 	}
 	else if (scrollUpdating)
 	{
-		if (totalX < abs((currPlayerPos + formalX - PLAYER_X)) || totalY < abs(scrollLock.front().y - formalY))
+		int scrollPosX = (int)abs((currPlayerPos + formalX - PLAYER_X));
+		int scrollPosY = (int)abs(scrollLock.front().y - formalY);
+
+		if (totalX < scrollPosX || totalY < scrollPosY)
 		{
-			if (totalX < abs((currPlayerPos + formalX - PLAYER_X)))
+			if (totalX < scrollPosX)
 			{
 				if ((currPlayerPos + formalX - PLAYER_X) < 0)
 					CScrollMgr::Get_Instance()->Set_ScrollX(10.f);
 				else if ((currPlayerPos + formalX - PLAYER_X) > 0)
 					CScrollMgr::Get_Instance()->Set_ScrollX(-10.f);
-				totalX += 10.f;
+				totalX += 10;
 			}
 
-			if (totalY < abs(scrollLock.front().y - formalY))
+			if (totalY < scrollPosY)
 			{
 				if (scrollLock.front().y > formalY)
 					CScrollMgr::Get_Instance()->Set_ScrollY(10.f);
 				else if (scrollLock.front().y < formalY)
 					CScrollMgr::Get_Instance()->Set_ScrollY(-10.f);
-				totalY += 10.f;
+				totalY += 10;
 			}
 		}
 		else
 		{
-			totalX = 0.f;
-			totalY = 0.f;
+			totalX = 0;
+			totalY = 0;
 			scrollUpdating = false;
 		}
 	}
@@ -424,7 +424,6 @@ void Game::Set_CheckPoint_Objects()
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 5900, 300, DIR::RIGHT);
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 6200, 300, DIR::RIGHT);
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 6700, 300, DIR::RIGHT);
-
 		break;
 	case 5:
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::MASKNELL, 8700, 200, DIR::LEFT);

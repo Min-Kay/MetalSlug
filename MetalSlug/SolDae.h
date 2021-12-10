@@ -21,7 +21,6 @@ private:
 	void	Laser();
 	void	SunShine();
 	void	Root();
-	void	Follower(); 
 	void	Die();
 	void	ToTheIdle();
 
@@ -62,9 +61,12 @@ private:
 	bool	rootMotion;
 	bool	motionEnd;
 
+	DWORD	rootMotionTimer;
+	int		rootAnim;
 	int		currRoot;
 	int		maxRoot;
 	DWORD	rootSpawnTimer;
+
 
 
 	bool	initPos;

@@ -9,7 +9,7 @@ void SolDaeLaser::Initialize()
 	parentID = OBJ::ENEMY; 
 
 	info.cx = 100.f; 
-	info.cy = 500.f;
+	info.cy = 300.f;
 
 	animIndex = 0;
 	animTimer = GetTickCount(); 
@@ -45,19 +45,19 @@ void SolDaeLaser::Render(HDC _hdc)
 	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"SolDae_Laser");
 	if (animIndex < 7)
 	{
-		GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, 100, 600, drawingDC, animIndex * 110, 0, 110, 170, RGB(248, 0, 248));
+		GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, 100, 300, drawingDC, animIndex * 110, 0, 110, 170, RGB(248, 0, 248));
 	}
 	else if (animIndex < 14)
 	{
-		GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, 100, 600, drawingDC, (animIndex % 7) * 110, 170, 110, 170, RGB(248, 0, 248));
+		GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, 100, 300, drawingDC, (animIndex % 7) * 110, 170, 110, 170, RGB(248, 0, 248));
 	}
 	else
 	{
-		GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, 100, 600, drawingDC, (animIndex % 7), 340, 110, 170, RGB(248, 0, 248));
+		GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, 100, 300, drawingDC, (animIndex % 7), 340, 110, 170, RGB(248, 0, 248));
 	}
 	
 	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"SolDae_Laser_Bottom");
-	GdiTransparentBlt(_hdc, rect.left - 20 + scrollX, rect.top + 300 + scrollY, 140, 200, drawingDC, (animIndex % 7) * 95, 0, 95, 70, RGB(248, 0, 248));
+	GdiTransparentBlt(_hdc, rect.left - 20 + scrollX, rect.top + 200 + scrollY, 140, 200, drawingDC, (animIndex % 7) * 95, 0, 95, 70, RGB(248, 0, 248));
 
 	
 }
@@ -78,5 +78,5 @@ void SolDaeLaser::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 void SolDaeLaser::Set_Position()
 {
 	info.x = parent->Get_Info().x;
-	info.y = parent->Get_Info().y + parent->Get_Info().cy;
+	info.y = parent->Get_Info().y + parent->Get_Info().cy * 0.8f;
 }

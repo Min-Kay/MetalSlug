@@ -40,8 +40,6 @@ protected:
 	TCHAR	lifeCount[10] = L"";
 	TCHAR	grenadeCount[10] = L"";
 
-	RECT	uiRect;
-
 	list<POINT> scrollLock;
 	bool	checkPoint;
 	bool	scrollUpdating;
@@ -49,8 +47,8 @@ protected:
 	float  formalX;
 	float  formalY;
 	float  currPlayerPos;
-	float totalX = 0.f;
-	float totalY = 0.f;
+	int totalX;
+	int totalY;
 
 
 	int	  maxCheckPoint;

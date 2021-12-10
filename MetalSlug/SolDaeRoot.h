@@ -15,7 +15,6 @@ public:
 public:
 	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir);
 	void	State_Machine();
-	virtual void Gravity();
 
 public:
 	enum STATE {SPAWN,IDLE,ROOTING,EXPLODE};
@@ -26,5 +25,12 @@ private:
 
 	float totalIdle;
 	float idleSpeed;
+
+	float totalSub;
+	float subSpeed;
+
+	float collY;
+
+	float fallingSpeed; 
 };
 
