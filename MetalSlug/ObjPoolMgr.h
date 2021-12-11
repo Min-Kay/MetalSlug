@@ -42,10 +42,11 @@ public:
 	void	Spawn_Enemy(ENEMY::ID _enemy, float _X, float _Y, DIR::ID _dir = DIR::LEFT );
 	void	Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _dir, OBJ::ID parent = OBJ::PLAYER);
 	void	Spawn_Item(ITEM::ID _item, float _X, float _Y, WEAPON::ID _wep = WEAPON::HEAVY);
-	void	Spawn_Block(float _cx, float _cy, float _X, float _Y, bool _Grav = true);
+	void	Spawn_Block(BLOCK::ID _block, float _X, float _Y, bool _Grav = true);
 	void	Spawn_Npc(NPC::ID _npc, float _X, float _Y);
 
-
+public:
+	const list<Obj*>& Get_OnScreenObj(OBJ::ID _obj) const;
 private:
 	list<Obj*> onScreen[OBJ::END];
 
@@ -54,7 +55,7 @@ private:
 	vector<Obj*> bullet[BULLET::END];
 	vector<Obj*> item[ITEM::END];
 	vector<Obj*> npc[NPC::END];
-	vector<Obj*> block;
+	vector<Obj*> block[BLOCK::END];
 	vector<Obj*> vehicle[VEHICLE::END];
 
 	bool	player_Dead;

@@ -40,7 +40,7 @@ int Masknell::Update()
 	if (isDead)
 		return OBJ_DEAD; 
 
-	if (!isMove && abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x) < WINCX)
+	if (!isMove && abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x) < WINCX - 100)
 		isMove = true;
 
 	State_Machine(); 
@@ -71,8 +71,8 @@ void Masknell::Late_Update()
 		isDying = true;
 	}
 
-	if (-scrollX > rect.left ||
-		WINCX - scrollX < rect.right)
+	if (isMove && (-scrollX > rect.left ||
+		WINCX - scrollX < rect.right))
 	{
 		dir = dir == DIR::RIGHT ? DIR::LEFT : DIR::RIGHT;
 		isTurning = true;
@@ -235,7 +235,7 @@ void Masknell::Render(HDC _hdc)
 			}
 			else
 			{
-				StretchBlt(stretchDC, 0, 0, 85, 70, drawingDC,  85, 70, -85, 70, SRCCOPY);
+				StretchBlt(stretchDC, 0, 0, 85, 70, drawingDC,  100, 65, -85, 70, SRCCOPY);
 
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 170, 150, stretchDC, 0, 0, 85, 70, RGB(255, 255, 255));
 			}
@@ -336,11 +336,11 @@ void Masknell::Render(HDC _hdc)
 			Anim_Counter(5, 20.f, true);
 			if (animIndex < 4)
 			{
-				GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 170, 150, drawingDC,  animIndex * 85, 0, 85, 70, RGB(255, 255, 255));
+				GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 170, 150, drawingDC, animIndex * 85, 0, 85, 70, RGB(255, 255, 255));
 			}
 			else
 			{
-				GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 170, 150, drawingDC, 0, 70, 85, 70, RGB(255, 255, 255));
+				GdiTransparentBlt(_hdc, int(rect.left + scrollX ), int(rect.top + scrollY ), 170, 150, drawingDC, 15, 65, 85, 70, RGB(255, 255, 255));
 			}
 		}
 		break;

@@ -50,7 +50,6 @@ protected:
 	int totalX;
 	int totalY;
 
-
 	int	  maxCheckPoint;
 	int	  currCheckPoint = 0;
 

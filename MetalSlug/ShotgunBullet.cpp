@@ -174,7 +174,7 @@ void ShotgunBullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 		{
 			if (find(hits.begin(), hits.end(), _opponent) == hits.end())
 			{
-				static_cast<Enemy*>(_opponent)->Add_HP(-damage);
+				_opponent->Add_HP(-damage);
 				hits.push_back(_opponent);
 			}
 		}
@@ -186,9 +186,19 @@ void ShotgunBullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 	case OBJ::PLAYER:
 		if (_id != parentID && !_opponent->Get_Dying())
 		{
-			static_cast<Player*>(_opponent)->Set_Dying();
+			_opponent->Set_Dying();
 		}
 		break;
+
+	case OBJ::BLOCK:
+		if (parentID == OBJ::PLAYER && !_opponent->Get_Dying())
+		{
+			if (find(hits.begin(), hits.end(), _opponent) == hits.end())
+			{
+				_opponent->Add_HP(-damage);
+				hits.push_back(_opponent);
+			}
+		}
 	}
 }
 

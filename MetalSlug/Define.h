@@ -26,6 +26,7 @@
 // PLAYER POS
 #define		PLAYER_X			300
 
+#define		LASER_TICK			300.f
 
 // Blt Color 
 #define		PLAYER_COLOR	RGB(86, 177, 222)

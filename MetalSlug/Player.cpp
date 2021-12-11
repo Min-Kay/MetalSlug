@@ -40,9 +40,8 @@ void Player::Initialize()
 	animValidIndex = 0;
 
 	action = ACTION::IDLE;
-	weapon = new Pistol;
-	weapon->Initialize(); 
 
+	Set_Weapon(new Pistol);
 	DataMgr::Get_Instance()->Set_Weapon(weapon);
 
 	BmpMgr::Get_Instance()->Insert_Bmp(PLAYER_BMP, PLAYER_KEY);
@@ -63,7 +62,7 @@ int Player::Update()
 
 void Player::Late_Update()
 {
-	Valid(); 
+	//Valid(); 
 	Check_WeaponState(); 
 }
 
@@ -109,27 +108,43 @@ void Player::KeyInput()
 		switch (dir)
 		{
 		case DIR::LEFT:
-			isFiring = weapon->Fire(rect.left, info.y, dir);
+			isFiring = weapon->Fire(rect.left + 5.f, info.y + 10.f, dir);
 			break;
 		case DIR::RIGHT:
-			isFiring = weapon->Fire(rect.right, info.y, dir);
+			isFiring = weapon->Fire(rect.right - 5.f, info.y + 10.f, dir);
 			break;
 		case DIR::UP:
-			isFiring = weapon->Fire(info.x, rect.top, dir);
+			if (onlySide == DIR::LEFT)
+			{
+				isFiring = weapon->Fire(info.x + 20.f, rect.top - 15.f, dir);
+			}
+			else
+			{
+				isFiring = weapon->Fire(info.x - 20.f, rect.top - 15.f, dir);
+			}
 			break;
 		}
 	}
 	else if (jumping && dir == DIR::DOWN)
-		isFiring = weapon->Fire(info.x, rect.bottom, dir);
+	{
+		if (onlySide == DIR::LEFT)
+		{
+			isFiring = weapon->Fire(info.x + 20.f, rect.bottom + 10.f, dir);
+		}
+		else
+		{
+			isFiring = weapon->Fire(info.x - 20.f, rect.bottom + 10.f, dir);
+		}
+	}
 	else
 	{
 		switch (onlySide)
 		{
 		case DIR::LEFT:
-			isFiring = weapon->Fire(rect.left, info.y - init_CY * 0.25f, onlySide);
+			isFiring = weapon->Fire(rect.left + 5.f, info.y - 5.f, onlySide);
 			break;
 		case DIR::RIGHT:
-			isFiring = weapon->Fire(rect.right, info.y - init_CY * 0.25f, onlySide);
+			isFiring = weapon->Fire(rect.right - 5.f, info.y - 5.f, onlySide);
 			break;
 		}
 	}

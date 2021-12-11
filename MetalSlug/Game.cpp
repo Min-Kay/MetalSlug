@@ -128,6 +128,7 @@ void Game::Render(HDC _hdc)
 
 void Game::Release()
 {
+	CLineMgr::Get_Instance()->Release();
 	ObjPoolMgr::Get_Instance()->DisableObj();
 	CScrollMgr::Get_Instance()->Init_Scroll();
 }
@@ -196,16 +197,16 @@ void Game::KeyInput()
 
 	if (CKeyMgr::Get_Instance()->Key_Down('6'))
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::GRENADE, rand() % 200 + 100 - scrollX, 200);
+		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::WEAPON, rand() % 200 + 100 - scrollX, 200, WEAPON::LASER);
 	}
 	if (CKeyMgr::Get_Instance()->Key_Down('7'))
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Npc(NPC::SLAVE, 500 - scrollX, 300);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SARUBIA, 500 - scrollX, 300, DIR::LEFT);
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down('8'))
 	{
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::ARABIAN, 500 - scrollX, 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Block(BLOCK::CAR, 200 - scrollX, 200);
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down('0'))

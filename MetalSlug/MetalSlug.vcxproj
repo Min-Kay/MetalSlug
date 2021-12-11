@@ -150,11 +150,15 @@
     <ClInclude Include="AbstractFactory.h" />
     <ClInclude Include="AmmoBox.h" />
     <ClInclude Include="Arabian.h" />
+    <ClInclude Include="Bazuka.h" />
+    <ClInclude Include="BazukaBullet.h" />
     <ClInclude Include="Block.h" />
+    <ClInclude Include="Blocks.h" />
     <ClInclude Include="BmpMgr.h" />
     <ClInclude Include="BmpFile.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Bullets.h" />
+    <ClInclude Include="Car.h" />
     <ClInclude Include="CBitMap.h" />
     <ClInclude Include="Class.h" />
     <ClInclude Include="CollisionMgr.h" />
@@ -176,6 +180,8 @@
     <ClInclude Include="ItemBox.h" />
     <ClInclude Include="Items.h" />
     <ClInclude Include="KeyMgr.h" />
+    <ClInclude Include="Laser.h" />
+    <ClInclude Include="LaserBullet.h" />
     <ClInclude Include="LifeStone.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="LineMgr.h" />
@@ -187,11 +193,14 @@
     <ClInclude Include="Npc.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="ObjPoolMgr.h" />
+    <ClInclude Include="Parachute.h" />
     <ClInclude Include="Pistol.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RocketBullet.h" />
     <ClInclude Include="RocketLauncher.h" />
+    <ClInclude Include="Sarubia.h" />
+    <ClInclude Include="SarubiaBullet.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneMgr.h" />
     <ClInclude Include="ScrollMgr.h" />
@@ -214,9 +223,12 @@
   <ItemGroup>
     <ClCompile Include="AmmoBox.cpp" />
     <ClCompile Include="Arabian.cpp" />
+    <ClCompile Include="Bazuka.cpp" />
+    <ClCompile Include="BazukaBullet.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="BmpMgr.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Car.cpp" />
     <ClCompile Include="CBitMap.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />
     <ClCompile Include="DataMgr.cpp" />
@@ -231,6 +243,8 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemBox.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
+    <ClCompile Include="Laser.cpp" />
+    <ClCompile Include="LaserBullet.cpp" />
     <ClCompile Include="LifeStone.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="LineMgr.cpp" />
@@ -241,10 +255,13 @@
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="ObjPoolMgr.cpp" />
+    <ClCompile Include="Parachute.cpp" />
     <ClCompile Include="Pistol.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RocketBullet.cpp" />
     <ClCompile Include="RocketLauncher.cpp" />
+    <ClCompile Include="Sarubia.cpp" />
+    <ClCompile Include="SarubiaBullet.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneMgr.cpp" />
     <ClCompile Include="ScrollMgr.cpp" />

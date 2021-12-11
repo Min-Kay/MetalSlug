@@ -178,6 +178,30 @@
     <Filter Include="소스 파일\02.Object\05.Bullet\05.EnemyBullet\02.SolDaeRoot">
       <UniqueIdentifier>{e84fc458-ea67-4acf-92b1-da43d5f1358d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02.Object\07.Block\01.Car">
+      <UniqueIdentifier>{cae050db-fa86-4e50-a44e-c17685a037ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\02.Enemy\06.Sarubia">
+      <UniqueIdentifier>{3f12298f-6ffe-40cf-bc45-edaf23354728}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\05.Bullet\05.EnemyBullet\03.SarubiaBullet">
+      <UniqueIdentifier>{252333c6-db1c-4f0a-b5fa-8fba75068618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\02.Enemy\07.Bazuka">
+      <UniqueIdentifier>{db990792-db1d-44b4-9362-c58114bd0e16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\02.Enemy\07.Bazuka\00.Parachute">
+      <UniqueIdentifier>{a6bb3542-ec3e-44da-8fb8-e0b376ee95d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\05.Bullet\05.EnemyBullet\04.BazukaBullet">
+      <UniqueIdentifier>{e5863e97-d86b-4c2a-9101-3d1e4a1e0cfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.Weapon\05.Laser">
+      <UniqueIdentifier>{01e2df00-19f0-48fa-8550-df78f5d5215a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\05.Bullet\06.LaserBullet">
+      <UniqueIdentifier>{1866da2e-2412-4baf-8f49-f05d39f2800b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -369,6 +393,33 @@
     <ClInclude Include="SolDaeRoot.h">
       <Filter>소스 파일\02.Object\05.Bullet\05.EnemyBullet\02.SolDaeRoot</Filter>
     </ClInclude>
+    <ClInclude Include="Car.h">
+      <Filter>소스 파일\02.Object\07.Block\01.Car</Filter>
+    </ClInclude>
+    <ClInclude Include="Blocks.h">
+      <Filter>소스 파일\02.Object\07.Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Sarubia.h">
+      <Filter>소스 파일\02.Object\02.Enemy\06.Sarubia</Filter>
+    </ClInclude>
+    <ClInclude Include="SarubiaBullet.h">
+      <Filter>소스 파일\02.Object\05.Bullet\05.EnemyBullet\03.SarubiaBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Bazuka.h">
+      <Filter>소스 파일\02.Object\02.Enemy\07.Bazuka</Filter>
+    </ClInclude>
+    <ClInclude Include="Parachute.h">
+      <Filter>소스 파일\02.Object\02.Enemy\07.Bazuka\00.Parachute</Filter>
+    </ClInclude>
+    <ClInclude Include="BazukaBullet.h">
+      <Filter>소스 파일\02.Object\05.Bullet\05.EnemyBullet\04.BazukaBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Laser.h">
+      <Filter>소스 파일\03.Weapon\05.Laser</Filter>
+    </ClInclude>
+    <ClInclude Include="LaserBullet.h">
+      <Filter>소스 파일\02.Object\05.Bullet\06.LaserBullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MetalSlug.rc">
@@ -527,6 +578,30 @@
     </ClCompile>
     <ClCompile Include="SolDaeRoot.cpp">
       <Filter>소스 파일\02.Object\05.Bullet\05.EnemyBullet\02.SolDaeRoot</Filter>
+    </ClCompile>
+    <ClCompile Include="Car.cpp">
+      <Filter>소스 파일\02.Object\07.Block\01.Car</Filter>
+    </ClCompile>
+    <ClCompile Include="Sarubia.cpp">
+      <Filter>소스 파일\02.Object\02.Enemy\06.Sarubia</Filter>
+    </ClCompile>
+    <ClCompile Include="SarubiaBullet.cpp">
+      <Filter>소스 파일\02.Object\05.Bullet\05.EnemyBullet\03.SarubiaBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Bazuka.cpp">
+      <Filter>소스 파일\02.Object\02.Enemy\07.Bazuka</Filter>
+    </ClCompile>
+    <ClCompile Include="Parachute.cpp">
+      <Filter>소스 파일\02.Object\02.Enemy\07.Bazuka\00.Parachute</Filter>
+    </ClCompile>
+    <ClCompile Include="BazukaBullet.cpp">
+      <Filter>소스 파일\02.Object\05.Bullet\05.EnemyBullet\04.BazukaBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Laser.cpp">
+      <Filter>소스 파일\03.Weapon\05.Laser</Filter>
+    </ClCompile>
+    <ClCompile Include="LaserBullet.cpp">
+      <Filter>소스 파일\02.Object\05.Bullet\06.LaserBullet</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

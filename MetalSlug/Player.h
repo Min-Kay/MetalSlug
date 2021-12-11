@@ -26,14 +26,12 @@ private:
 
 public:
 	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir) override {};
-	void	Set_BoxCollide(bool _bool) { boxCollide = _bool; }
-	void	Set_CollisionY(float _y) { collisionY = _y; }
+	virtual void Set_Dying();
 
 public:
 	void	Set_Weapon(Weapon* _wep);
 	void	Check_WeaponState();
 	void	Anim_Counter(ANIM::PLAYER _action, int count, float _timer, bool _roop = true, int start = 0);
-	void	Set_Dying();
 
 private:
 	ACTION::ID	action;
@@ -58,8 +56,7 @@ private:
 	bool	jumping;
 	float	jumpForce;
 
-	float	collisionY;
-	bool	boxCollide;
+
 
 	bool	isValid;
 	DWORD	validTimer;

@@ -68,7 +68,6 @@ private:
 	DWORD	rootSpawnTimer;
 
 
-
 	bool	initPos;
 	DWORD	effectTimer; 
 

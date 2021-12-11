@@ -4,3 +4,4 @@
 #include "HeavyMachine.h"
 #include "Shotgun.h"
 #include "RocketLauncher.h"
+#include "Laser.h"

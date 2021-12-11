@@ -50,6 +50,10 @@ void WepItem::Render(HDC _hdc)
 		Anim_Counter(3, 100.f, true, 16);
 		GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx, info.cy, drawingDC, animIndex * 25 + 2, 22, 25, 25, ITEM_COLOR);
 		break;
+	case WEAPON::LASER:
+		Anim_Counter(3, 100.f, true, 12);
+		GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx, info.cy, drawingDC, animIndex * 25 + 2, 22, 25, 25, ITEM_COLOR);
+		break;
 	default:
 		Rectangle(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), int(rect.right + scrollX), int(rect.bottom + scrollY));
 		break;
@@ -88,6 +92,12 @@ void WepItem::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 				ObjPoolMgr::Get_Instance()->Set_Player_Wep(new Shotgun);
 			else
 				DataMgr::Get_Instance()->Add_Ammo(50);
+			break;
+		case WEAPON::LASER:
+			if (DataMgr::Get_Instance()->Get_Weapon()->Get_WepID() != wep_id)
+				ObjPoolMgr::Get_Instance()->Set_Player_Wep(new Laser);
+			else
+				DataMgr::Get_Instance()->Add_Ammo(200);
 			break;
 		}
 		isDead = true; 

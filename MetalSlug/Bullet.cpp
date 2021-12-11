@@ -68,14 +68,14 @@ void Bullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 	case OBJ::PLAYER:
 		if (_id != parentID && !_opponent->Get_Dying())
 		{
-			static_cast<Player*>(_opponent)->Set_Dying();
+			_opponent->Set_Dying();
 			isDead = true;
 		}
 		break;
 	case OBJ::ENEMY:
 		if (_id != parentID && !_opponent->Get_Dying())
 		{
-			static_cast<Enemy*>(_opponent)->Add_HP(-damage);
+			_opponent->Add_HP(-damage);
 			isDead = true;
 		}
 		break;
@@ -84,7 +84,11 @@ void Bullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 			isDead = true;
 		break;
 	case OBJ::BLOCK:
-		isDead = true;
+		if (parentID == OBJ::PLAYER && !_opponent->Get_Dying())
+		{
+			_opponent->Add_HP(-damage);
+			isDead = true;
+		}
 	case OBJ::NPC:
 		if (static_cast<Npc*>(_opponent)->Get_Ropped())
 		{

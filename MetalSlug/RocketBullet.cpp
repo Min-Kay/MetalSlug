@@ -105,35 +105,52 @@ void RocketBullet::Release()
 
 void RocketBullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 {
-	if (_id == OBJ::ENEMY && _id != parentID)
+
+	switch (_id)
 	{
-		if (_opponent->Get_Dying())
+	case OBJ::BLOCK:
+		if (parentID == OBJ::PLAYER && !_opponent->Get_Dying())
+		{
+			ExplodePosing();
+			if (find(hits.begin(), hits.end(), _opponent) == hits.end())
+			{
+				hits.push_back(_opponent);
+				_opponent->Add_HP(-damage);
+			}
+		}
+		break;
+	case OBJ::ENEMY:
+		if (_id == parentID || _opponent->Get_Dying())
 			return;
 
 		ExplodePosing();
 		if (find(hits.begin(), hits.end(), _opponent) == hits.end())
 		{
 			hits.push_back(_opponent);
-			static_cast<Enemy*>(_opponent)->Add_HP(-damage);
+			_opponent->Add_HP(-damage);
 		}
-	}
-	else if (_id == OBJ::PLAYER && _id != parentID)
-	{
-		if (_opponent->Get_Dying())
+		break;
+	case OBJ::NPC:
+		if (!static_cast<Npc*>(_opponent)->Get_Ropped())
 			return;
 
-		ExplodePosing();
-		if (find(hits.begin(), hits.end(), _opponent) == hits.end())
-		{
-			hits.push_back(_opponent);
-			static_cast<Player*>(_opponent)->Set_Dying();
-		}
-	}
-	else if (_id == OBJ::NPC && static_cast<Npc*>(_opponent)->Get_Ropped())
-	{
 		ExplodePosing();
 		static_cast<Npc*>(_opponent)->Set_Ropped();
+
+		break;
+	case OBJ::PLAYER:
+		if (_opponent->Get_Dying() || _id == parentID)
+			return;
+
+		ExplodePosing();
+		if (find(hits.begin(), hits.end(), _opponent) == hits.end())
+		{
+			hits.push_back(_opponent);
+			_opponent->Set_Dying();
+		}
+		break;
 	}
+
 }
 
 void RocketBullet::Update_Rect()

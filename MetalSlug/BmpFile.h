@@ -20,6 +20,8 @@
 
 //Save
 #define STAGE1_SAVE L"../Save/Stage1Save.dat"
+#define STAGE2_SAVE L"../Save/Stage2Save.dat"
+
 
 #define PLAYER_ALIVE_BMP L"../Image/Player_Alive.bmp"
 #define PLAYER_ALIVE_KEY L"PLAYERALIVE"

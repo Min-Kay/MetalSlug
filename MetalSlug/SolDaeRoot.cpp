@@ -98,7 +98,7 @@ void SolDaeRoot::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 {
     if (_id == OBJ::PLAYER)
     {
-        static_cast<Player*>(_opponent)->Set_Dying();
+        _opponent->Set_Dying();
     }
 }
 

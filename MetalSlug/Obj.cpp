@@ -10,7 +10,11 @@ void Obj::Gravity()
 	float jumpingState = 0.f;
 	bool lineCol = CLineMgr::Get_Instance()->Collision_Line(info.x, info.y, &fY);
 
-	if (lineCol && info.y < fY - info.cy * 0.6f)
+	if (boxCollide && info.y >= collisionY - info.cy * 0.5f)
+	{
+		info.y = collisionY + 1;
+	}
+	else if (lineCol && info.y < fY - info.cy * 0.6f)
 	{
 		info.y += FALL_DOWN;
 	}

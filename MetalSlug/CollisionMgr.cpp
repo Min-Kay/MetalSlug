@@ -48,25 +48,15 @@ void CCollisionMgr::Collision_RectPush(list<Obj*> _Dest, list<Obj*> _Src)
 				float x =float( rc.right - rc.left);
 				float y = float(rc.bottom - rc.top);
 
-				if (dynamic_cast<Enemy*>(Src))
-				{
-					if (!static_cast<Enemy*>(Src)->Get_CollMode())
-						break;
-				}
+				if (dynamic_cast<Enemy*>(Src) && !static_cast<Enemy*>(Src)->Get_CollMode())
+						continue;
 
 				if (x > y)
 				{
 					if (rc.top < Dest->Get_Rect().bottom && rc.top > Dest->Get_Rect().top)
 					{
-						if (static_cast<Player*>(Dest))
-						{
-							static_cast<Player*>(Dest)->Set_BoxCollide(true);
-							static_cast<Player*>(Dest)->Set_CollisionY(Dest->Get_Info().y - y);
-						}
-						else
-						{
-							Dest->Add_Y(-y);
-						}
+						Dest->Set_BoxCollide(true);
+						Dest->Set_CollisionY(Dest->Get_Info().y - y);
 						continue;
 					}
 					else if (rc.left < Dest->Get_Rect().right && rc.left > Dest->Get_Rect().left)
@@ -90,22 +80,14 @@ void CCollisionMgr::Collision_RectPush(list<Obj*> _Dest, list<Obj*> _Src)
 					}
 					else if (rc.top < Dest->Get_Rect().bottom && rc.top > Dest->Get_Rect().top)
 					{
-						if (static_cast<Player*>(Dest))
-						{
-							static_cast<Player*>(Dest)->Set_BoxCollide(true);
-							static_cast<Player*>(Dest)->Set_CollisionY(Dest->Get_Info().y - y);
-						}
-						else
-						{
-							Dest->Add_Y(-y);
-						}
-						continue;
+						Dest->Set_BoxCollide(true);
+						Dest->Set_CollisionY(Dest->Get_Info().y - y);
 					}
 				}
 			}
-			else if(static_cast<Player*>(Dest))
+			else
 			{
-				static_cast<Player*>(Dest)->Set_BoxCollide(false);
+				Dest->Set_BoxCollide(false);
 			}
 			
 		}

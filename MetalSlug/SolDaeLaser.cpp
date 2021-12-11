@@ -70,8 +70,8 @@ void SolDaeLaser::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 {
 	if (_id == OBJ::PLAYER )
 	{
-		if(!static_cast<Player*>(_opponent)->Get_Dying())
-			static_cast<Player*>(_opponent)->Set_Dying();
+		if(!_opponent->Get_Dying())
+			_opponent->Set_Dying();
 	}
 }
 

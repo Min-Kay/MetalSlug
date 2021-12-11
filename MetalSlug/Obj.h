@@ -15,7 +15,7 @@ public:
 
 public:
 	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir) { isDead = true; }
-	virtual void Gravity(); 
+	virtual void Gravity();
 	void	Check_Line_Collision();
 
 public:
@@ -29,6 +29,10 @@ public:
 	void	Set_Size(float _cx, float _cy) { info.cx = _cx; info.cy = _cy; }
 	void	Set_Dead(bool _dead) { isDead = _dead; }
 	void	Set_ID(OBJ::ID _id) { id = _id; }
+	void	Set_HP(int _hp) { hp = _hp; }
+
+	virtual void	Set_Dying() { isDying = true; }
+	virtual void	Add_HP(int _add) { hp += _add; }
 	virtual void	Update_Rect();
 
 public:
@@ -37,6 +41,12 @@ public:
 	const bool& Get_Dead() const { return isDead; }
 	const OBJ::ID& Get_ID()	const { return id; }
 	const bool& Get_Dying() const { return isDying; }
+
+	const int& Get_HP() const { return hp; }
+
+public:
+	void	Set_BoxCollide(bool _bool) { boxCollide = _bool; }
+	void	Set_CollisionY(float _y) { collisionY = _y; }
 
 public:
 	void	Anim_Counter(int count, float _timer, bool _roop = true, int start = 0);
@@ -55,5 +65,10 @@ protected:
 	OBJ::ID	id;
 	bool	isDead;
 	bool	isDying; 
+
+	int		hp;
+
+	float	collisionY = 0.f;
+	bool	boxCollide = false;
 };
 

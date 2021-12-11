@@ -5,7 +5,7 @@
 #include "AbstractFactory.h"
 #include "Bullets.h"
 #include "Items.h"
-#include "Block.h"
+#include "Blocks.h"
 #include "Enemys.h"
 #include "Npc.h"
 
@@ -60,8 +60,11 @@ void ObjPoolMgr::Late_Update()
 	CCollisionMgr::Collision_Rect(onScreen[OBJ::BULLET], onScreen[OBJ::PROP]);
 	CCollisionMgr::Collision_Rect(onScreen[OBJ::BULLET], onScreen[OBJ::BLOCK]);
 	CCollisionMgr::Collision_Rect(onScreen[OBJ::BULLET], onScreen[OBJ::NPC]);
+
 	CCollisionMgr::Collision_RectPush(onScreen[OBJ::PLAYER],onScreen[OBJ::ENEMY]);
 	CCollisionMgr::Collision_RectPush(onScreen[OBJ::PLAYER], onScreen[OBJ::BLOCK]);
+	CCollisionMgr::Collision_RectPush(onScreen[OBJ::ENEMY], onScreen[OBJ::BLOCK]);
+	CCollisionMgr::Collision_RectPush(onScreen[OBJ::PROP], onScreen[OBJ::BLOCK]);
 
 	for (int i = 0; i < OBJ::END; ++i)
 	{
@@ -118,8 +121,11 @@ void ObjPoolMgr::Release()
 		vehicle[i].clear();
 	}
 	
-	for_each(block.begin(),block.end(),CDeleteObj());
-	block.clear(); 
+	for (int i = 0; i < BLOCK::END; ++i)
+	{
+		for_each(block[i].begin(), block[i].end(), CDeleteObj());
+		block[i].clear();
+	}
 
 	SAFE_DELETE(player);
 }
@@ -206,13 +212,16 @@ void ObjPoolMgr::Spawn_Enemy(ENEMY::ID _enemy, float _X, float _Y, DIR::ID _dir)
 		enemy[_enemy].push_back(CAbstractFactory<Arabian>::Create(_X,_Y,_dir));
 		break;
 	case ENEMY::THREEHEAD:
-		enemy[_enemy].push_back(CAbstractFactory<ThreeHead>::Create(_X, _Y));
+		enemy[_enemy].push_back(CAbstractFactory<ThreeHead>::Create(_X, _Y, _dir));
 		break;
 	case ENEMY::MASKNELL:
-		enemy[_enemy].push_back(CAbstractFactory<Masknell>::Create(_X, _Y));
+		enemy[_enemy].push_back(CAbstractFactory<Masknell>::Create(_X, _Y, _dir));
 		break;
 	case ENEMY::SOLDAE:
-		enemy[_enemy].push_back(CAbstractFactory<SolDae>::Create(_X, _Y));
+		enemy[_enemy].push_back(CAbstractFactory<SolDae>::Create(_X, _Y, _dir));
+		break;
+	case ENEMY::SARUBIA:
+		enemy[_enemy].push_back(CAbstractFactory<Sarubia>::Create(_X, _Y,_dir));
 		break;
 	default:
 		return;
@@ -263,6 +272,9 @@ void ObjPoolMgr::Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _d
 	case BULLET::SOLDAEROOT:
 		temp = CAbstractFactory<SolDaeRoot>::Create(_X, _Y, _dir);
 		break;
+	case BULLET::SARUBIA:
+		temp = CAbstractFactory<SarubiaBullet>::Create(_X, _Y, _dir);
+		break;
 	default:
 		return;
 	}
@@ -304,28 +316,9 @@ void ObjPoolMgr::Spawn_Item(ITEM::ID _item, float _X, float _Y, WEAPON::ID _wep)
 		break;
 	case ITEM::WEAPON:
 	{
-		switch (_wep)
-		{
-		case WEAPON::PISTOL:
-			return;
-		case WEAPON::HEAVY:
-			temp = CAbstractFactory<WepItem>::Create(_X, _Y);
-			static_cast<WepItem*>(temp)->Set_WepID(WEAPON::HEAVY);
-			item[_item].push_back(temp);
-			break;
-		case WEAPON::ROCKET:
-			temp = CAbstractFactory<WepItem>::Create(_X, _Y);
-			static_cast<WepItem*>(temp)->Set_WepID(WEAPON::ROCKET);
-			item[_item].push_back(temp);
-			break;
-		case WEAPON::SHOTGUN:
-			temp = CAbstractFactory<WepItem>::Create(_X, _Y);
-			static_cast<WepItem*>(temp)->Set_WepID(WEAPON::SHOTGUN);
-			item[_item].push_back(temp);
-			break;
-		default:
-			return;
-		}
+		temp = CAbstractFactory<WepItem>::Create(_X, _Y);
+		static_cast<WepItem*>(temp)->Set_WepID(_wep);
+		item[_item].push_back(temp);
 	}
 		break;
 	case ITEM::ITEMBOX:
@@ -338,32 +331,40 @@ void ObjPoolMgr::Spawn_Item(ITEM::ID _item, float _X, float _Y, WEAPON::ID _wep)
 	Add_Object(OBJ::PROP, item[_item].back());
 }
 
-void ObjPoolMgr::Spawn_Block(float _cx, float _cy, float _X, float _Y, bool _Grav)
+void ObjPoolMgr::Spawn_Block(BLOCK::ID _block, float _X, float _Y, bool _Grav)
 {
-	if (!block.empty())
+	if (!block[_block].empty())
 	{
-		sort(block.begin(), block.end(), CompareDead<Obj*>);
-		auto& temp = block.front();
+		sort(block[_block].begin(), block[_block].end(), CompareDead<Obj*>);
+		auto& temp = block[_block].front();
 		if(temp->Get_Dead())
 		{
 			temp->Set_Pos(_X, _Y);
-			temp->Set_Size(_cx, _cy);
 			temp->Initialize();
 			temp->Update_Rect();
+			static_cast<Block*>(temp)->Set_Gravity(_Grav);
 			temp->Set_Dead(false);
 			Add_Object(OBJ::BLOCK, temp);
 			return;
 		}
 	}
-	
-	block.push_back(CAbstractFactory<Block>::Create(_X,_Y,_cx,_cy));
 
-	Add_Object(OBJ::BLOCK, block.back());
+	switch (_block)
+	{
+	case BLOCK::CAR:
+	{
+		Obj* temp = CAbstractFactory<Car>::Create(_X, _Y); 
+		static_cast<Block*>(temp)->Set_Gravity(_Grav);
+		block[_block].push_back(temp);
+	}
+		break;
+	}
+	
+	Add_Object(OBJ::BLOCK, block[_block].back());
 }
 
 void ObjPoolMgr::Spawn_Npc(NPC::ID _npc, float _X, float _Y)
 {
-	
 
 	if(!npc[_npc].empty())
 	{
@@ -394,6 +395,11 @@ void ObjPoolMgr::Spawn_Npc(NPC::ID _npc, float _X, float _Y)
 	}
 	
 	Add_Object(OBJ::NPC, npc[_npc].back());
+}
+
+const list<Obj*>& ObjPoolMgr::Get_OnScreenObj(OBJ::ID _obj) const
+{
+	return onScreen[_obj];
 }
 
 void ObjPoolMgr::Set_Player_Wep(Weapon* _wep)
