@@ -61,11 +61,6 @@ void ObjPoolMgr::Late_Update()
 	CCollisionMgr::Collision_Rect(onScreen[OBJ::BULLET], onScreen[OBJ::BLOCK]);
 	CCollisionMgr::Collision_Rect(onScreen[OBJ::BULLET], onScreen[OBJ::NPC]);
 
-	CCollisionMgr::Collision_RectPush(onScreen[OBJ::PLAYER],onScreen[OBJ::ENEMY]);
-	CCollisionMgr::Collision_RectPush(onScreen[OBJ::PLAYER], onScreen[OBJ::BLOCK]);
-	CCollisionMgr::Collision_RectPush(onScreen[OBJ::ENEMY], onScreen[OBJ::BLOCK]);
-	CCollisionMgr::Collision_RectPush(onScreen[OBJ::PROP], onScreen[OBJ::BLOCK]);
-
 	for (int i = 0; i < OBJ::END; ++i)
 	{
 		for (auto& iter : onScreen[i])
@@ -132,16 +127,39 @@ void ObjPoolMgr::Release()
 
 void ObjPoolMgr::DisableObj()
 {
+	for (int i = 0; i < OBJ::END; ++i)
+	{
+		onScreen[i].erase(onScreen[i].begin(), onScreen[i].end());
+		onScreen[i].clear();
+	}
+
+	for (int i = 0; i < ENEMY::END; ++i)
+	{
+		for_each(enemy[i].begin(), enemy[i].end(), KillObj());
+	}
+
 	for (int i = 0; i < BULLET::END; ++i)
 	{
 		for_each(bullet[i].begin(), bullet[i].end(), KillObj());
 	}
-
-	for (int i = 0; i < OBJ::END; ++i)
+	for (int i = 0; i < ITEM::END; ++i)
 	{
-		onScreen[i].erase(onScreen[i].begin(), onScreen[i].end());
-		onScreen[i].clear(); 
-	}	
+		for_each(item[i].begin(), item[i].end(), KillObj());
+	}
+	for (int i = 0; i < NPC::END; ++i)
+	{
+		for_each(npc[i].begin(), npc[i].end(), KillObj());
+	}
+
+	for (int i = 0; i < VEHICLE::END; ++i)
+	{
+		for_each(vehicle[i].begin(), vehicle[i].end(), KillObj());
+	}
+
+	for (int i = 0; i < BLOCK::END; ++i)
+	{
+		for_each(block[i].begin(), block[i].end(), KillObj());
+	}
 }
 
 void ObjPoolMgr::Add_Object(OBJ::ID _id, Obj* _obj)
@@ -151,9 +169,11 @@ void ObjPoolMgr::Add_Object(OBJ::ID _id, Obj* _obj)
 
 void ObjPoolMgr::Delete_Object(OBJ::ID _id, Obj* _obj)
 {
-	if (find(onScreen[_id].begin(), onScreen[_id].end(), _obj) != onScreen[_id].end())
+	auto iter = find(onScreen[_id].begin(), onScreen[_id].end(), _obj); 
+	if (iter != onScreen[_id].end())
 	{
-		onScreen[_id].erase(find(onScreen[_id].begin(), onScreen[_id].end(), _obj));
+		BlockMgr::Get_Instance()->Delete_Block(*iter);
+		onScreen[_id].erase(iter);
 	}
 }
 
@@ -198,36 +218,45 @@ void ObjPoolMgr::Spawn_Enemy(ENEMY::ID _enemy, float _X, float _Y, DIR::ID _dir)
 			temp->Set_Dir(_dir);
 			temp->Update_Rect();
 			temp->Set_Dead(false);
+			BlockMgr::Get_Instance()->Add_Block(temp);
 			Add_Object(OBJ::ENEMY, temp);
 			return;
 		}
 	}
 	
+	Obj* temp = nullptr;
 	switch (_enemy)
 	{
 	case ENEMY::SOLDIER:
-		enemy[_enemy].push_back(CAbstractFactory<Soldier>::Create(_X, _Y, _dir));
+		temp = CAbstractFactory<Soldier>::Create(_X, _Y, _dir);
 		break;
 	case ENEMY::ARABIAN:
-		enemy[_enemy].push_back(CAbstractFactory<Arabian>::Create(_X,_Y,_dir));
+		temp = CAbstractFactory<Arabian>::Create(_X, _Y, _dir);
 		break;
 	case ENEMY::THREEHEAD:
-		enemy[_enemy].push_back(CAbstractFactory<ThreeHead>::Create(_X, _Y, _dir));
+		temp = CAbstractFactory<ThreeHead>::Create(_X, _Y, _dir);
 		break;
 	case ENEMY::MASKNELL:
-		enemy[_enemy].push_back(CAbstractFactory<Masknell>::Create(_X, _Y, _dir));
+		temp = CAbstractFactory<Masknell>::Create(_X, _Y, _dir);
 		break;
 	case ENEMY::SOLDAE:
-		enemy[_enemy].push_back(CAbstractFactory<SolDae>::Create(_X, _Y, _dir));
+		temp = CAbstractFactory<SolDae>::Create(_X, _Y, _dir);
 		break;
 	case ENEMY::SARUBIA:
-		enemy[_enemy].push_back(CAbstractFactory<Sarubia>::Create(_X, _Y,_dir));
+		temp = CAbstractFactory<Sarubia>::Create(_X, _Y, _dir);
+		break;
+	case ENEMY::BAZUKA:
+		temp = CAbstractFactory<Bazuka>::Create(_X, _Y, _dir);
+		break;
+	case ENEMY::DICOKKA:
+		temp = CAbstractFactory<DiCokka>::Create(_X, _Y, _dir);
 		break;
 	default:
 		return;
 	}
-
-	Add_Object(OBJ::ENEMY, enemy[_enemy].back());
+	BlockMgr::Get_Instance()->Add_Block(temp);
+	enemy[_enemy].push_back(temp);
+	Add_Object(OBJ::ENEMY, temp);
 }
 
 void ObjPoolMgr::Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _dir, OBJ::ID _parent)
@@ -274,6 +303,15 @@ void ObjPoolMgr::Spawn_Bullet(BULLET::ID _bullet, float _X, float _Y, DIR::ID _d
 		break;
 	case BULLET::SARUBIA:
 		temp = CAbstractFactory<SarubiaBullet>::Create(_X, _Y, _dir);
+		break;
+	case BULLET::BAZUKA:
+		temp = CAbstractFactory<BazukaBullet>::Create(_X, _Y, _dir);
+		break;
+	case BULLET::DICOKKA:
+		temp = CAbstractFactory<DiCokkaBullet>::Create(_X, _Y, _dir);
+		break;
+	case BULLET::IRONLIZARD:
+		temp = CAbstractFactory<IronlizardBullet>::Create(_X, _Y, _dir);
 		break;
 	default:
 		return;
@@ -344,28 +382,28 @@ void ObjPoolMgr::Spawn_Block(BLOCK::ID _block, float _X, float _Y, bool _Grav)
 			temp->Update_Rect();
 			static_cast<Block*>(temp)->Set_Gravity(_Grav);
 			temp->Set_Dead(false);
+			BlockMgr::Get_Instance()->Add_Block(temp);
 			Add_Object(OBJ::BLOCK, temp);
 			return;
 		}
 	}
-
+	Obj* temp = nullptr; 
 	switch (_block)
 	{
 	case BLOCK::CAR:
-	{
-		Obj* temp = CAbstractFactory<Car>::Create(_X, _Y); 
-		static_cast<Block*>(temp)->Set_Gravity(_Grav);
-		block[_block].push_back(temp);
-	}
+		temp = CAbstractFactory<Car>::Create(_X, _Y);
 		break;
+	default:
+		return;
 	}
-	
-	Add_Object(OBJ::BLOCK, block[_block].back());
+	static_cast<Block*>(temp)->Set_Gravity(_Grav);
+	block[_block].push_back(temp);
+	BlockMgr::Get_Instance()->Add_Block(temp);
+	Add_Object(OBJ::BLOCK, temp);
 }
 
 void ObjPoolMgr::Spawn_Npc(NPC::ID _npc, float _X, float _Y)
 {
-
 	if(!npc[_npc].empty())
 	{
 		sort(npc[_npc].begin(), npc[_npc].end(), CompareDead<Obj*>);
@@ -387,8 +425,6 @@ void ObjPoolMgr::Spawn_Npc(NPC::ID _npc, float _X, float _Y)
 		npc[_npc].push_back(CAbstractFactory<Npc>::Create(_X, _Y, DIR::LEFT));
 		break;
 	case NPC::TRAVELER:
-		break;
-	case NPC::END:
 		break;
 	default:
 		return;

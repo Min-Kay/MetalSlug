@@ -7,3 +7,5 @@
 #include "Masknell.h"
 #include "SolDae.h"
 #include "Sarubia.h"
+#include "Bazuka.h"
+#include "DiCokka.h"

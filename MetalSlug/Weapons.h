@@ -5,3 +5,4 @@
 #include "Shotgun.h"
 #include "RocketLauncher.h"
 #include "Laser.h"
+#include "Ironlizard.h"

@@ -14,7 +14,11 @@ public:
 	virtual void Render(HDC _hdc) override;
 	virtual void Release() override;
 
+public:
+	virtual bool	Check_GameState();
 	virtual void Set_CheckPoint_Objects(); 
+
+
 private:
 	bool spawnMidBoss;
 

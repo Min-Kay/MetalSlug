@@ -7,3 +7,4 @@
 #include "KeyMgr.h"
 #include "ObjPoolMgr.h"
 #include "LineMgr.h"
+#include "BlockMgr.h"

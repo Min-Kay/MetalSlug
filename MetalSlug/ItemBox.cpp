@@ -83,9 +83,11 @@ void ItemBox::Anim_Breaking(HDC _hdc)
 		ITEM::ID box[ITEM::END - 1] = { ITEM::AMMO,ITEM::GRENADE,ITEM::LIFE,ITEM::WEAPON };
 		int pos = rand() % ITEM::END - 1;
 		if (pos == -1)
-			pos = 0;
+			pos = ITEM::WEAPON;
 		ITEM::ID item = box[pos];
-		int wep = rand() % WEAPON::SHOTGUN + 1;
+		int wep = rand() % WEAPON::IRONLIZARD + 1;
+		if (wep == WEAPON::END)
+			wep = WEAPON::IRONLIZARD;
 		ObjPoolMgr::Get_Instance()->Spawn_Item(item,info.x,info.y,(WEAPON::ID)wep);
 		isDead = true;
 	}

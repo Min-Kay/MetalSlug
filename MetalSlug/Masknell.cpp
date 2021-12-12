@@ -365,6 +365,9 @@ void Masknell::State_Machine()
 		info.x += speed;
 		break;
 	}
+
+	if (isDying)
+		return;
 	
 	if (attackTime + 2000.f < GetTickCount())
 	{

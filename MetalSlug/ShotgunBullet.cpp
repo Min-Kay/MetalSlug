@@ -199,6 +199,7 @@ void ShotgunBullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 				hits.push_back(_opponent);
 			}
 		}
+		break;
 	}
 }
 

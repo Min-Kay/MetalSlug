@@ -153,6 +153,7 @@
     <ClInclude Include="Bazuka.h" />
     <ClInclude Include="BazukaBullet.h" />
     <ClInclude Include="Block.h" />
+    <ClInclude Include="BlockMgr.h" />
     <ClInclude Include="Blocks.h" />
     <ClInclude Include="BmpMgr.h" />
     <ClInclude Include="BmpFile.h" />
@@ -164,6 +165,8 @@
     <ClInclude Include="CollisionMgr.h" />
     <ClInclude Include="DataMgr.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="DiCokka.h" />
+    <ClInclude Include="DiCokkaBullet.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyBullet.h" />
     <ClInclude Include="Enemys.h" />
@@ -176,6 +179,8 @@
     <ClInclude Include="HeavyBullet.h" />
     <ClInclude Include="HeavyMachine.h" />
     <ClInclude Include="Include.h" />
+    <ClInclude Include="Ironlizard.h" />
+    <ClInclude Include="IronlizardBullet.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemBox.h" />
     <ClInclude Include="Items.h" />
@@ -226,12 +231,15 @@
     <ClCompile Include="Bazuka.cpp" />
     <ClCompile Include="BazukaBullet.cpp" />
     <ClCompile Include="Block.cpp" />
+    <ClCompile Include="BlockMgr.cpp" />
     <ClCompile Include="BmpMgr.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="CBitMap.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />
     <ClCompile Include="DataMgr.cpp" />
+    <ClCompile Include="DiCokka.cpp" />
+    <ClCompile Include="DiCokkaBullet.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyBullet.cpp" />
     <ClCompile Include="Explosive.cpp" />
@@ -240,6 +248,8 @@
     <ClCompile Include="GrenadeBox.cpp" />
     <ClCompile Include="HeavyBullet.cpp" />
     <ClCompile Include="HeavyMachine.cpp" />
+    <ClCompile Include="Ironlizard.cpp" />
+    <ClCompile Include="IronlizardBullet.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemBox.cpp" />
     <ClCompile Include="KeyMgr.cpp" />

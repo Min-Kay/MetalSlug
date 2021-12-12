@@ -28,9 +28,6 @@
     <Filter Include="소스 파일\01.Manager\01.ObjPoolMgr">
       <UniqueIdentifier>{1f054931-f6c3-4274-ab30-5e1215532827}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01.Manager\02.MapMgr">
-      <UniqueIdentifier>{5fe33d7a-75d7-4718-9324-6c0085cf0671}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\02.Object\01.Player">
       <UniqueIdentifier>{8e19240f-ed18-4b19-9c2f-63430ffa679e}</UniqueIdentifier>
     </Filter>
@@ -202,6 +199,21 @@
     <Filter Include="소스 파일\02.Object\05.Bullet\06.LaserBullet">
       <UniqueIdentifier>{1866da2e-2412-4baf-8f49-f05d39f2800b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02.Object\02.Enemy\08.DiCokka">
+      <UniqueIdentifier>{8f069d8b-2862-4b9d-b29a-8c957bd6f7d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\05.Bullet\05.EnemyBullet\05.DiCokkaBullet">
+      <UniqueIdentifier>{09932e7f-0796-4be7-b6d1-fa99875f9c4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Manager\10.BlockMgr">
+      <UniqueIdentifier>{661a3238-fa65-4145-a4d3-c78df34d706d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\05.Bullet\07.IronlizardBullet">
+      <UniqueIdentifier>{a0118ce1-a074-4127-b26e-6151b8acb1bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.Weapon\06.Ironlizard">
+      <UniqueIdentifier>{b2ff9162-f9f5-4bcd-9083-cbc28cde0409}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -220,9 +232,6 @@
       <Filter>헤더 파일\Include</Filter>
     </ClInclude>
     <ClInclude Include="Include.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
@@ -420,6 +429,24 @@
     <ClInclude Include="LaserBullet.h">
       <Filter>소스 파일\02.Object\05.Bullet\06.LaserBullet</Filter>
     </ClInclude>
+    <ClInclude Include="DiCokka.h">
+      <Filter>소스 파일\02.Object\02.Enemy\08.DiCokka</Filter>
+    </ClInclude>
+    <ClInclude Include="DiCokkaBullet.h">
+      <Filter>소스 파일\02.Object\05.Bullet\05.EnemyBullet\05.DiCokkaBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockMgr.h">
+      <Filter>소스 파일\01.Manager\10.BlockMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager.h">
+      <Filter>소스 파일\01.Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="IronlizardBullet.h">
+      <Filter>소스 파일\02.Object\05.Bullet\07.IronlizardBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Ironlizard.h">
+      <Filter>소스 파일\03.Weapon\06.Ironlizard</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MetalSlug.rc">
@@ -602,6 +629,21 @@
     </ClCompile>
     <ClCompile Include="LaserBullet.cpp">
       <Filter>소스 파일\02.Object\05.Bullet\06.LaserBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="DiCokka.cpp">
+      <Filter>소스 파일\02.Object\02.Enemy\08.DiCokka</Filter>
+    </ClCompile>
+    <ClCompile Include="DiCokkaBullet.cpp">
+      <Filter>소스 파일\02.Object\05.Bullet\05.EnemyBullet\05.DiCokkaBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockMgr.cpp">
+      <Filter>소스 파일\01.Manager\10.BlockMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="IronlizardBullet.cpp">
+      <Filter>소스 파일\02.Object\05.Bullet\07.IronlizardBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Ironlizard.cpp">
+      <Filter>소스 파일\03.Weapon\06.Ironlizard</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

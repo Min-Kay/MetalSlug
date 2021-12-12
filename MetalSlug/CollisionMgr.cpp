@@ -33,67 +33,6 @@ void CCollisionMgr::Collision_Rect(list<Obj*> _Dest, list<Obj*> _Src)
 	}
 }
 
-void CCollisionMgr::Collision_RectPush(list<Obj*> _Dest, list<Obj*> _Src)
-{
-	for (auto Dest : _Dest)
-	{
-		for (auto Src : _Src)
-		{
-			if (Dest->Get_Dead() || Src->Get_Dead())
-				continue;
-
-			RECT rc{};
-			if (IntersectRect(&rc, &Dest->Get_Rect(), &Src->Get_Rect()))
-			{
-				float x =float( rc.right - rc.left);
-				float y = float(rc.bottom - rc.top);
-
-				if (dynamic_cast<Enemy*>(Src) && !static_cast<Enemy*>(Src)->Get_CollMode())
-						continue;
-
-				if (x > y)
-				{
-					if (rc.top < Dest->Get_Rect().bottom && rc.top > Dest->Get_Rect().top)
-					{
-						Dest->Set_BoxCollide(true);
-						Dest->Set_CollisionY(Dest->Get_Info().y - y);
-						continue;
-					}
-					else if (rc.left < Dest->Get_Rect().right && rc.left > Dest->Get_Rect().left)
-					{
-						Dest->Add_X(-x);
-					}
-					else if (rc.right > Dest->Get_Rect().left&& rc.right < Dest->Get_Rect().right)
-					{
-						Dest->Add_X(x);
-					}
-				}
-				else
-				{
-					if (rc.left < Dest->Get_Rect().right && rc.left > Dest->Get_Rect().left)
-					{
-						Dest->Add_X(-x);
-					}
-					else if (rc.right > Dest->Get_Rect().left&& rc.right < Dest->Get_Rect().right)
-					{
-						Dest->Add_X(x);
-					}
-					else if (rc.top < Dest->Get_Rect().bottom && rc.top > Dest->Get_Rect().top)
-					{
-						Dest->Set_BoxCollide(true);
-						Dest->Set_CollisionY(Dest->Get_Info().y - y);
-					}
-				}
-			}
-			else
-			{
-				Dest->Set_BoxCollide(false);
-			}
-			
-		}
-	}
-}
-
 DIR::ID CCollisionMgr::Set_Dir(RECT& _coll, const RECT* _target)
 {
 	vector<DISDIR> distance;

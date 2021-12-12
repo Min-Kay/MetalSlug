@@ -7,3 +7,6 @@
 #include "EnemyBullet.h"
 #include "SolDaeRoot.h"
 #include "SarubiaBullet.h"
+#include "BazukaBullet.h"
+#include "DiCokkaBullet.h"
+#include "IronlizardBullet.h"

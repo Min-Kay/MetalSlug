@@ -89,6 +89,7 @@ void Bullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 			_opponent->Add_HP(-damage);
 			isDead = true;
 		}
+		break;
 	case OBJ::NPC:
 		if (static_cast<Npc*>(_opponent)->Get_Ropped())
 		{

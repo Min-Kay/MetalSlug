@@ -19,8 +19,6 @@ void Player::Initialize()
 	speed = walkSpeed;
 	sitSpeed = walkSpeed * 0.5f;
 
-	collisionY = 0.f;
-
 	isStab = false;
 
 	isDying = false;
@@ -31,7 +29,7 @@ void Player::Initialize()
 
 	isJump = false;
 	jumpY = 0.f;
-	jumpForce = 30.f;
+	jumpForce = 35.f;
 	jumpTime = 0.f;
 
 	isValid = true; 
@@ -47,6 +45,7 @@ void Player::Initialize()
 	BmpMgr::Get_Instance()->Insert_Bmp(PLAYER_BMP, PLAYER_KEY);
 	BmpMgr::Get_Instance()->Insert_Bmp(STRETCH_BMP, STRETCH_KEY);
 
+	superValid = false;
 }
 
 int Player::Update()
@@ -62,7 +61,7 @@ int Player::Update()
 
 void Player::Late_Update()
 {
-	//Valid(); 
+	Valid(); 
 	Check_WeaponState(); 
 }
 
@@ -103,6 +102,11 @@ void Player::KeyInput()
 
 	action = jumping ? ACTION::JUMP : ACTION::IDLE;
 
+	if (CKeyMgr::Get_Instance()->Key_Down('D'))
+	{
+		superValid = !superValid;
+	}
+
 	if (dir != DIR::DOWN)
 	{
 		switch (dir)
@@ -116,11 +120,11 @@ void Player::KeyInput()
 		case DIR::UP:
 			if (onlySide == DIR::LEFT)
 			{
-				isFiring = weapon->Fire(info.x + 20.f, rect.top - 15.f, dir);
+				isFiring = weapon->Fire(info.x + 20.f, rect.top - 15.f, dynamic_cast<Ironlizard*>(weapon) ? onlySide : dir);
 			}
 			else
 			{
-				isFiring = weapon->Fire(info.x - 20.f, rect.top - 15.f, dir);
+				isFiring = weapon->Fire(info.x - 20.f, rect.top - 15.f, dynamic_cast<Ironlizard*>(weapon) ? onlySide : dir);
 			}
 			break;
 		}
@@ -129,11 +133,11 @@ void Player::KeyInput()
 	{
 		if (onlySide == DIR::LEFT)
 		{
-			isFiring = weapon->Fire(info.x + 20.f, rect.bottom + 10.f, dir);
+			isFiring = weapon->Fire(info.x + 20.f, rect.bottom + 15.f, dynamic_cast<Ironlizard*>(weapon)? onlySide : dir);
 		}
 		else
 		{
-			isFiring = weapon->Fire(info.x - 20.f, rect.bottom + 10.f, dir);
+			isFiring = weapon->Fire(info.x - 20.f, rect.bottom + 15.f, dynamic_cast<Ironlizard*>(weapon) ? onlySide : dir);
 		}
 	}
 	else
@@ -216,7 +220,6 @@ void Player::KeyInput()
 		{
 			info.cy = 50.f;
 			action = ACTION::IDLE;
-			Update_Rect();
 		}
 	}
 	else
@@ -232,36 +235,38 @@ void Player::Gravity()
 		return;
 
 	float fY = 0.f;
+	float blockY = 0.f; 
 	float jumpingState = 0.f;
 	bool lineCol = CLineMgr::Get_Instance()->Collision_Line(info.x,info.y,&fY);
+	bool blockCol = BlockMgr::Get_Instance()->Collision_Block(this,&blockY);
 
 	if (isJump)
 	{
-		if(action != ACTION::DIE)	action = ACTION::JUMP;
+		if (action != ACTION::DIE)	action = ACTION::JUMP;
 		jumpingState = (jumpForce * jumpTime - 9.8f * jumpTime * jumpTime * 0.7f) / 3.f;
 		info.y -= jumpingState;
 		jumpTime += 0.2f;
-		jumping = true; 
+		jumping = true;
 
-		if (lineCol && info.y >= fY - init_CY * 0.5f && jumpingState < 0 )
+		if (lineCol && info.y >= fY - init_CY * 0.5f && jumpingState < 0)
 		{
 			info.y = fY - info.cy * 0.5f;
 			if (action != ACTION::DIE) action = ACTION::IDLE;
 			jumpTime = 0.f;
 			isJump = false;
 		}
-		else if (boxCollide && jumpingState < 0)
+		else if (blockCol && info.y > blockY && jumpingState < 0)
 		{
-			info.y = collisionY + 1;
+			info.y = blockY + 1;
 			if (action != ACTION::DIE) action = ACTION::IDLE;
 			jumpTime = 0.f;
 			isJump = false;
 		}
 	}
-	else if (boxCollide && info.y >= collisionY - info.cy * 0.5f)
+	else if (blockCol && info.y > blockY)
 	{
 		jumping = false;
-		info.y = collisionY + 1;
+		info.y = blockY + 1;
 	}
 	else if (lineCol && info.y < fY - init_CY * 0.6f)
 	{
@@ -697,7 +702,7 @@ void Player::Anim_Counter(ANIM::PLAYER _action, int count, float _timer, bool _r
 
 void Player::Set_Dying()
 {
-	if (isValid || isDying)
+	if (isValid || isDying || superValid)
 		return; 
 
 	action = ACTION::DIE;

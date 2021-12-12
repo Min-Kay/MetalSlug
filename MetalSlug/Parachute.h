@@ -1,7 +1,7 @@
 #pragma once
-#include "Obj.h"
+#include "Enemy.h"
 class Parachute :
-	public Obj
+	public Enemy
 {
 public:
 	virtual void Initialize() override;
@@ -11,6 +11,7 @@ public:
 	virtual void Release() override;
 
 	void Set_Parent(Obj* _parent) { parent = _parent; }
+	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir);
 private:
 	Obj* parent;
 };

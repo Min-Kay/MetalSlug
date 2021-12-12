@@ -225,12 +225,13 @@ void Arabian::State_Machine()
 			return;
 		}
 
-		if (!attacking && disX < 70 && disY < -200)
+		if (disY < -200)
 		{
-			isJump = true;
-			falling = false;
+			Change_Anim(ACTION::MOVE);
+			break;
 		}
-		else if (disX < 70 && abs(disY) <= 100)
+
+		if (disX < 100 && abs(disY) <= 100)
 		{
 			falling = false;
 			attacking = true;
@@ -242,14 +243,14 @@ void Arabian::State_Machine()
 			attacking = false;
 			coll_Attack = false;
 		}
-		else if (disX < 70 && disY > 100)
+		else if (disX < 100 && disY > 100)
 		{
 			falling = true;
 		}
 		else if (attacking)
 		{
 			falling = false;
-			if (disX > 70)
+			if (disX > 100)
 				Change_Anim(ACTION::MOVE);
 			attacking = false;
 			coll_Attack = false;
@@ -259,12 +260,17 @@ void Arabian::State_Machine()
 		break;
 	case ACTION::MOVE:
 
-		if (disX < 70)
+		if (disX < 100 && disY > -200)
 		{
 			Change_Anim(ACTION::IDLE);
 			attacking = true;
 		}
 		
+		if (!attacking && disX < 200 && disY < -200)
+		{
+			isJump = true;
+			falling = false;
+		}
 		if (ObjPoolMgr::Get_Instance()->Get_Player_Info().x > info.x)
 		{
 			info.x += speed;
@@ -311,8 +317,10 @@ void Arabian::Gravity()
 		return;
 
 	float fY = 0.f;
+	float blockY = 0.f;
 	float jumpingState = 0.f;
 	bool lineCol = CLineMgr::Get_Instance()->Collision_Line(info.x, info.y, &fY);
+	bool blockCol = BlockMgr::Get_Instance()->Collision_Block(this, &blockY);
 	
 	if (isJump)
 	{
@@ -327,6 +335,18 @@ void Arabian::Gravity()
 			jumpTime = 0.f;
 			isJump = false;
 		}
+		else if (blockCol && info.y > blockY && jumpingState < 0)
+		{
+			info.y = fY - info.cy * 0.5f;
+			if (action != ACTION::DIE) action = ACTION::IDLE;
+			jumpTime = 0.f;
+			isJump = false;
+			info.y = blockY + 1;
+		}
+	}
+	else if (blockCol && info.y > blockY)
+	{
+		info.y = blockY + 1;
 	}
 	else if (falling)
 	{

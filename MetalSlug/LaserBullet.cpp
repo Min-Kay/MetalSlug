@@ -67,7 +67,6 @@ int LaserBullet::Update()
 
 void LaserBullet::Late_Update()
 {
-	
 	if (formalDir != dir)
 	{
 		diffDir = true; 

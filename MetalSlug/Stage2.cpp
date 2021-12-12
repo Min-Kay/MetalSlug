@@ -39,7 +39,6 @@ void Stage2::Initialize()
 	scrollLock.push_back({ 9500,0 });
 	scrollLock.push_back({ 11591,0 });
 
-
 	CScrollMgr::Get_Instance()->Set_ScrollLockX((float)scrollLock.front().x);
 	CScrollMgr::Get_Instance()->Set_ScrollY((float)scrollLock.front().y);
 
@@ -116,6 +115,21 @@ void Stage2::Release()
 	CScrollMgr::Get_Instance()->Init_Scroll();
 }
 
+bool Stage2::Check_GameState()
+{
+	if (isClear)
+	{
+		SceneMgr::Get_Instance()->Change_Scene(SCENE::MENU);
+		return true;
+	}
+	else if (isFail)
+	{
+		SceneMgr::Get_Instance()->Change_Scene(SCENE::MENU);
+		return true;
+	}
+
+	return false;
+}
 
 void Stage2::Set_CheckPoint_Objects()
 {
@@ -131,17 +145,15 @@ void Stage2::Set_CheckPoint_Objects()
 	switch (currCheckPoint)
 	{
 	case 0:
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 1500, 300, DIR::LEFT);
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 1700, 300, DIR::LEFT);
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 1800, 300, DIR::LEFT);
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 1900, 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 1500, 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 1600, 300, DIR::LEFT);
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 2500, 300, DIR::LEFT);
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 3000, 300, DIR::RIGHT);
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 3100, 300, DIR::LEFT);
 
-		ObjPoolMgr::Get_Instance()->Spawn_Block(BLOCK::CAR, 1500, 300);
+		ObjPoolMgr::Get_Instance()->Spawn_Block(BLOCK::CAR, 1200, 300);
 		ObjPoolMgr::Get_Instance()->Spawn_Block(BLOCK::CAR, 2000, 300);
-		ObjPoolMgr::Get_Instance()->Spawn_Block(BLOCK::CAR, 2200,300);
+		ObjPoolMgr::Get_Instance()->Spawn_Block(BLOCK::CAR, 2300, 300);
 
 		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::ITEMBOX, 1200, 300);
 		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::ITEMBOX, 1700,300);
@@ -155,16 +167,17 @@ void Stage2::Set_CheckPoint_Objects()
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 7500, 300, DIR::RIGHT);
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 8000, 300, DIR::LEFT);
 
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SARUBIA, 8400, 300, DIR::LEFT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::DICOKKA, 8400, 300, DIR::LEFT);
 
 		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::ITEMBOX, 5100, 300);
 		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::ITEMBOX, 6100, 300);
 		ObjPoolMgr::Get_Instance()->Spawn_Item(ITEM::ITEMBOX, 7100, 300);
 		break;
 	case 2:
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 8700, 300, DIR::RIGHT);
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 8900, 300, DIR::RIGHT);
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 9000, 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::BAZUKA, 8800, -50, DIR::LEFT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::BAZUKA, 8900, -50, DIR::LEFT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::BAZUKA, 9000, -50, DIR::LEFT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::BAZUKA, 9100, -50, DIR::LEFT);
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SARUBIA, 9400, 300, DIR::LEFT);
 		break;
 	case 3:

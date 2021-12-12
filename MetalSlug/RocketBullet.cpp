@@ -39,7 +39,10 @@ void RocketBullet::Initialize()
 int RocketBullet::Update()
 {
 	if (isDead)
+	{
+		Release();
 		return OBJ_DEAD;
+	}
 
 	if (!explosion)
 	{
@@ -52,6 +55,7 @@ int RocketBullet::Update()
 
 void RocketBullet::Late_Update()
 {
+	Check_Screen_Out();
 }
 
 void RocketBullet::Render(HDC _hdc)
@@ -105,7 +109,6 @@ void RocketBullet::Release()
 
 void RocketBullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 {
-
 	switch (_id)
 	{
 	case OBJ::BLOCK:

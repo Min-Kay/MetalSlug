@@ -37,6 +37,7 @@ int SarubiaBullet::Update()
 
 void SarubiaBullet::Late_Update()
 {
+	Check_Screen_Out();
 }
 
 void SarubiaBullet::Render(HDC _hdc)

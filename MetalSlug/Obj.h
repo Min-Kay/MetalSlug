@@ -45,10 +45,6 @@ public:
 	const int& Get_HP() const { return hp; }
 
 public:
-	void	Set_BoxCollide(bool _bool) { boxCollide = _bool; }
-	void	Set_CollisionY(float _y) { collisionY = _y; }
-
-public:
 	void	Anim_Counter(int count, float _timer, bool _roop = true, int start = 0);
 	void	Check_Screen_Out();
 
@@ -67,8 +63,5 @@ protected:
 	bool	isDying; 
 
 	int		hp;
-
-	float	collisionY = 0.f;
-	bool	boxCollide = false;
 };
 

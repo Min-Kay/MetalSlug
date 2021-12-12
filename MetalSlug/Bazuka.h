@@ -28,10 +28,6 @@ private:
 	STATE state; 
 	Parachute* para;
 
-	bool	attack;
-	bool	isHolding;
-	bool	isHold;
-	bool	isFiring;
 	DWORD	fireTime; 
 };
 

@@ -8,7 +8,7 @@ void Soldier::Initialize()
 	id = OBJ::ENEMY;
 	dir = DIR::RIGHT;
 	onlySide = dir;
-	sol_Class = SOLDIER::SERGENT;//SOLDIER::CLASS(rand() % 2);
+	sol_Class = SOLDIER::SERGENT;
 	info.cx = 100.f; 
 	info.cy = 100.f;
 
@@ -98,23 +98,21 @@ void Soldier::Anim_Idle(HDC _hdc)
 		if (isFiring)
 		{
 			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Soldier_Fire");
+			Anim_Counter(2, 50.f);
 			if (dir == DIR::RIGHT)
 			{
-				Anim_Counter(2, 50.f);
 				StretchBlt(stretchDC, 0, 0, 60, 50, drawingDC, animIndex * 60 + 60, 0, -60, 50, SRCCOPY);
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) + 15.f, info.cx * 1.2f, info.cy * 0.9f, stretchDC, 0, 0, 60, 50, RGB(255, 255, 255));
 			}
 			else if (dir == DIR::LEFT)
 			{
-				Anim_Counter(2, 50.f);
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) + 15.f, info.cx * 1.2f, info.cy * 0.9f, drawingDC, animIndex * 60, 0, 60, 50, RGB(255, 255, 255));
 			}
 			else if (dir == DIR::UP)
 			{
 				if (onlySide == DIR::RIGHT)
 				{
-					drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Soldier_Fire_Up");
-					Anim_Counter(2, 50.f);
+					drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Soldier_Fire_Up");			
 					StretchBlt(stretchDC, 0, 0, 40, 80, drawingDC, animIndex * 40 + 40 - 5, 0, -40, 80, SRCCOPY);
 					GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) - 40.f, info.cx, info.cy * 1.5f, stretchDC, 0, 0, 40, 80, RGB(255, 255, 255));
 
@@ -122,24 +120,21 @@ void Soldier::Anim_Idle(HDC _hdc)
 				else
 				{
 					drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Soldier_Fire_Up");
-					Anim_Counter(2, 50.f);
-					StretchBlt(stretchDC, 0, 0, 40, 80, drawingDC, animIndex * 40 - 5, 0, 40, 80, SRCCOPY);
-					GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) - 40.f, info.cx, info.cy * 1.5f, stretchDC, 0, 0, 40, 80, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) - 40.f, info.cx, info.cy * 1.5f, drawingDC, animIndex * 40 - 5, 0, 40, 80, RGB(255, 255, 255));
 				}
 			}
 		}
 		else
 		{
 			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Soldier_Hold");
+			Anim_Counter(2, 50.f, false);
 			if (onlySide == DIR::RIGHT)
 			{
-				Anim_Counter(2, 50.f, false);
 				StretchBlt(stretchDC, 0, 0, 45, 50, drawingDC, animIndex * 45 + 45, 0, -45, 50, SRCCOPY);
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) + 15.f, info.cx, info.cy * 0.9f, stretchDC, 0, 0, 45, 50, RGB(255, 255, 255));
 			}
 			else if (onlySide == DIR::LEFT)
 			{
-				Anim_Counter(2, 50.f, false);
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) + 15.f, info.cx, info.cy * 0.9f, drawingDC, animIndex * 45, 0, 45, 50, RGB(255, 255, 255));
 			}
 
@@ -175,7 +170,8 @@ void Soldier::Anim_Idle(HDC _hdc)
 				break;
 			case DIR::LEFT:
 				Anim_Counter(9, 150.f);
-				GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) + 23.f, info.cx, info.cy, drawingDC, animIndex * 40 - 5, 3, 40, 50, RGB(255, 255, 255));
+				StretchBlt(stretchDC, 0, 0, 40, 50, drawingDC, animIndex * 40 - 5, 3, 40, 50, SRCCOPY);
+				GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) + 23.f, info.cx, info.cy, stretchDC, 0, 0, 40, 50, RGB(255, 255, 255));
 				break;
 			}
 			break;
@@ -234,14 +230,15 @@ void Soldier::State_Machine()
 {
 	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
-
+	float playerX = abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x);
+	float playerY = abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().y - info.y);
 	switch (action)
 	{
 	case ACTION::IDLE:
 
 		if (!isMove)
 		{
-			if(ObjPoolMgr::Get_Instance()->Check_Distance(this) < 500.f)
+			if(ObjPoolMgr::Get_Instance()->Check_Distance(this) < 600.f)
 			{ 
 				isMove = true;
 				Change_Anim(ACTION::IDLE);
@@ -252,7 +249,7 @@ void Soldier::State_Machine()
 
 		if (attack)
 		{
-			if ((abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x) > 300.f && abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().y - info.y) > 200) || (abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x) > 45 && ObjPoolMgr::Get_Instance()->Get_Player_Rect().bottom < rect.top))
+			if ((playerX > 350.f && playerY > 200) || (playerX > 45 && ObjPoolMgr::Get_Instance()->Get_Player_Rect().bottom < rect.top))
 			{
 				Change_Anim(ACTION::MOVE);
 				attack = false;
@@ -273,11 +270,13 @@ void Soldier::State_Machine()
 				else if (ObjPoolMgr::Get_Instance()->Get_Player_Info().x < info.x)
 				{
 					dir = DIR::LEFT;
+					onlySide = dir;
 					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::ENEMYBULLET, info.x - info.cx * 0.5f, info.y, DIR::LEFT, OBJ::ENEMY);
 				}
 				else if (ObjPoolMgr::Get_Instance()->Get_Player_Info().x > info.x)
 				{
 					dir = DIR::RIGHT;
+					onlySide = dir;
 					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::ENEMYBULLET, info.x + info.cx * 0.5f, info.y, DIR::RIGHT, OBJ::ENEMY);
 				}
 				fireTime = GetTickCount();
@@ -288,7 +287,7 @@ void Soldier::State_Machine()
 				isHolding = true;
 			}
 		}
-		else if (abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x) < 300.f)
+		else if (playerX < 300.f)
 			action = ACTION::MOVE;
 
 		break;
@@ -310,8 +309,7 @@ void Soldier::State_Machine()
 		}
 		else
 		{
-
-			if (abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x) < 70 && ObjPoolMgr::Get_Instance()->Get_Player_Info().y - info.y > 100)
+			if (playerX < 70 && ObjPoolMgr::Get_Instance()->Get_Player_Info().y - info.y > 100)
 			{
 				falling = true;
 			}
@@ -339,7 +337,7 @@ void Soldier::State_Machine()
 
 		if (sol_Class != SOLDIER::PRIVATE && abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x) < 300)
 		{
-			if (abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x) < 200 && abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().y - info.y) < 100)
+			if (playerX < 200 && playerY < 100)
 			{
 				falling = false;
 				Change_Anim(ACTION::IDLE);
@@ -347,7 +345,7 @@ void Soldier::State_Machine()
 			}
 			else if (ObjPoolMgr::Get_Instance()->Get_Player_Rect().top > rect.bottom)
 				break;	
-			else if(ObjPoolMgr::Get_Instance()->Get_Player_Rect().bottom < rect.top && abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x) < 50)
+			else if(ObjPoolMgr::Get_Instance()->Get_Player_Rect().bottom < rect.top && playerX < 50)
 			{
 				falling = false;
 				Change_Anim(ACTION::IDLE);
@@ -379,13 +377,19 @@ void Soldier::Gravity()
 		return;
 
 	float fY = 0.f;
+	float blockY = 0.f; 
 	float jumpingState = 0.f;
 	bool lineCol = CLineMgr::Get_Instance()->Collision_Line(info.x, info.y, &fY);
+	bool blockCol = BlockMgr::Get_Instance()->Collision_Block(this, &blockY);
 
 	if (falling)
 	{
 		info.y += FALL_DOWN;
 		return;
+	}
+	else if (blockCol && info.y > blockY)
+	{
+		info.y = blockY + 1;
 	}
 	if (lineCol && info.y < fY - info.cy * 0.6f)
 	{

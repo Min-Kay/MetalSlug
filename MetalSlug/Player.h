@@ -56,8 +56,7 @@ private:
 	bool	jumping;
 	float	jumpForce;
 
-
-
+	bool	superValid;
 	bool	isValid;
 	DWORD	validTimer;
 	DWORD	validTick;
@@ -70,7 +69,7 @@ private:
 	int		animIndexs[ANIM::PLAYER_END]{};
 	int		animIndexPos[ANIM::PLAYER_END]{0,2,10,3,8,9,13,5,6,7,11,4,12};
 
-	
 	Weapon* weapon;
+	bool sit;
 };
 

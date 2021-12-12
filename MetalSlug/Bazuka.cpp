@@ -4,6 +4,11 @@
 
 void Bazuka::Initialize()
 {
+	para = new Parachute;
+	para->Initialize();
+	para->Set_Parent(this);
+	ObjPoolMgr::Get_Instance()->Add_Object(OBJ::ENEMY, para);
+
 	id = OBJ::ENEMY;
 	enemy_id = ENEMY::BAZUKA;
 	dir = DIR::RIGHT;
@@ -16,28 +21,20 @@ void Bazuka::Initialize()
 	state = STATE::PARACHUTE;
 
 	isMove = false;
-	coll_Attack = false;
 	jumpForce = 20.f;
 	jumpTime = 0;
 	jumping = false;
+	coll_Attack = false;
 	canCollision = false;
 	falling = false; 
 	fireTime = GetTickCount();
-	canCollision = false;
 	coll_Attack = false;
 
-	attack = false;
 	isDying = false;
-	isFiring = false;
-	isHolding = false;
-	isHold = false;
+	isDead = false;
 
-	para = new Parachute;
-	para->Initialize();
-	para->Set_Parent(this);
-	ObjPoolMgr::Get_Instance()->Add_Object(OBJ::ENEMY,para);
-
-	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Soldier_Bazuka.bmp",L"Bazuka");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Soldier_Bazuka.bmp",L"Soldier_Bazuka");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Soldier.bmp", L"Soldier");
 }
 
 int Bazuka::Update()
@@ -59,35 +56,54 @@ int Bazuka::Update()
 
 void Bazuka::Late_Update()
 {
+	if (isDying || isDead)
+		return; 
+
+	Check_Parachute();
 	if (hp <= 0)
 	{
+		animIndex = 0;
 		isDying = true;
 		state = STATE::DIE;
-		ObjPoolMgr::Get_Instance()->Delete_Object(OBJ::ENEMY, para);
-		SAFE_DELETE(para);
+		if (para)
+		{
+			ObjPoolMgr::Get_Instance()->Delete_Object(OBJ::ENEMY, para);
+			SAFE_DELETE(para);
+		}
 	}
-	Check_Parachute();
 }
 
 void Bazuka::Render(HDC _hdc)
 {
-	
+	float x = CScrollMgr::Get_Instance()->Get_ScrollX();
+	float y = CScrollMgr::Get_Instance()->Get_ScrollY();
+
+	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Soldier_Bazuka");
+	stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White");
+
 	switch (state)
 	{
 	case Bazuka::IDLE:
 		switch (dir)
 		{
-		case DIR::DOWN:
-			break;
 		case DIR::LEFT:
+			Anim_Counter(1,100.f);
+			GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, drawingDC, animIndex * 48 + 3, 398, 48, 48, RGB(255, 255, 255));
 			break;
 		case DIR::RIGHT:
+			Anim_Counter(1, 100.f);
+			StretchBlt(stretchDC, 0, 0, 48, 48, drawingDC, animIndex * 48 + 48 + 3, 398, -48, 48, SRCCOPY);
+			GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, stretchDC, 0, 0, 48, 48, RGB(255, 255, 255));
+			break;
+		case DIR::DOWN:
+			GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx - 10, info.cy, drawingDC, 277, 398, 40, 48, RGB(255, 255, 255));
 			break;
 		case DIR::DOWN_RIGHT:
+			StretchBlt(stretchDC, 0, 0, 48, 48, drawingDC, 148, 398, -48, 48, SRCCOPY);
+			GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, stretchDC, 0, 0, 48, 48, RGB(255, 255, 255));
 			break;
 		case DIR::DOWN_LEFT:
-			break;
-		default:
+			GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, drawingDC, 100, 398, 48, 48, RGB(255, 255, 255));
 			break;
 		}
 		break;
@@ -95,8 +111,13 @@ void Bazuka::Render(HDC _hdc)
 		switch (dir)
 		{
 		case DIR::LEFT:
+			Anim_Counter(10, 100.f);
+			GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, drawingDC, animIndex * 43, 0, 43, 50, RGB(255, 255, 255));
 			break;
 		case DIR::RIGHT:
+			Anim_Counter(10, 100.f);
+			StretchBlt(stretchDC, 0, 0, 43, 50, drawingDC, animIndex * 43 + 43, 0, -43, 50, SRCCOPY);
+			GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, stretchDC, 0, 0, 43, 50, RGB(255, 255, 255));
 			break;
 		}
 		break;
@@ -104,58 +125,30 @@ void Bazuka::Render(HDC _hdc)
 		switch (dir)
 		{
 		case DIR::LEFT:
-			if (isFiring)
-			{
-
-			}
-			else
-			{
-
-			}
+			GdiTransparentBlt(_hdc,rect.left + x, rect.top + y, info.cx, info.cy, drawingDC,0,659,45,50,RGB(255,255,255));
 			break;
 		case DIR::RIGHT:
-			if (isFiring)
-			{
-
-			}
-			else
-			{
-
-			}
+			StretchBlt(stretchDC,0,0,45,50, drawingDC, 45, 659, -45, 50,SRCCOPY);
+			GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, stretchDC, 0, 0, 45, 50, RGB(255, 255, 255));
 			break;
 		case DIR::DOWN:
-			if (isFiring)
-			{
-
-			}
-			else
-			{
-
-			}
+			GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx - 10, info.cy, drawingDC, 364, 659, 40, 50, RGB(255, 255, 255));
 			break;
 		case DIR::DOWN_RIGHT:
-			if (isFiring)
-			{
-
-			}
-			else
-			{
-
-			}
+			StretchBlt(stretchDC, 0, 0, 48, 50, drawingDC, 233, 659, -48, 50, SRCCOPY);
+			GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, stretchDC, 0, 0, 48, 50, RGB(255, 255, 255));
 			break;
 		case DIR::DOWN_LEFT:
-			if (isFiring)
-			{
-
-			}
-			else
-			{
-
-			}
+			GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, drawingDC, 185, 659, 48, 50, RGB(255, 255, 255));
 			break;
 		}
 		break;
 	case Bazuka::DIE:
+		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Soldier");
+		Anim_Counter(10, 70.f, false, 0);
+		GdiTransparentBlt(_hdc, int(rect.left + x), int(rect.top + y), info.cx, info.cy , drawingDC, animIndex * 35 - 2, 1053, 35, 40, RGB(255, 255, 255));
+		if (animIndex == 10)
+			Set_Dead(true);
 		break;
 	}
 }
@@ -166,7 +159,7 @@ void Bazuka::Release()
 
 void Bazuka::Check_Parachute()
 {
-	if (para->Get_Dead())
+	if (para && para->Get_Dead())
 	{
 		ObjPoolMgr::Get_Instance()->Delete_Object(OBJ::ENEMY, para);
 		SAFE_DELETE(para);
@@ -179,20 +172,23 @@ void Bazuka::Gravity()
 		return;
 
 	float fY = 0.f;
+	float blockY = 0.f;
 	float jumpingState = 0.f;
 	bool lineCol = CLineMgr::Get_Instance()->Collision_Line(info.x, info.y, &fY);
+	bool blockCol = BlockMgr::Get_Instance()->Collision_Block(this, &blockY);
 
-	if (para && ((lineCol && info.y >= fY - info.cy * 0.5f ) || (boxCollide && info.y >= collisionY - info.cy * 0.5f)))
+	if (para && ((lineCol && info.y >= fY - info.cy * 0.5f ) || blockCol && info.y > blockY))
 	{
+		ObjPoolMgr::Get_Instance()->Delete_Object(OBJ::ENEMY, para);
 		SAFE_DELETE(para);
 	}
 	else if (para)
 	{
-		info.y += FALL_DOWN * 0.3f;
+		info.y += 0.1f;
 	}
-	else if (boxCollide && info.y >= collisionY - info.cy * 0.5f)
+	else if (blockCol && info.y > blockY)
 	{
-		info.y = collisionY + 1;
+		info.y = blockY + 1;
 	}
 	else if (lineCol && info.y < fY - info.cy * 0.6f)
 	{
@@ -223,44 +219,48 @@ void Bazuka::State_Machine()
 	switch (state)
 	{
 	case Bazuka::IDLE:
-		if (attack)
-		{
 			if (abs(playerX) > 400.f )
 			{
 				action = ACTION::MOVE;
-				attack = false;
-				isFiring = false;
-				isHolding = false;
 				break;
 			}
 
-			if (fireTime + 1000.f < GetTickCount())
+			if (fireTime + 1200.f < GetTickCount())
 			{
-				isFiring = true;
-
-				if (ObjPoolMgr::Get_Instance()->Get_Player_Rect().bottom < rect.top)
+				if (playerX < -100)
 				{
-					dir = DIR::UP;
-					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, info.x, rect.bottom, DIR::UP, OBJ::ENEMY);
+					if (playerY < 100)
+					{
+						dir = DIR::LEFT;
+						ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.left, info.y, DIR::LEFT, OBJ::ENEMY);
+					}
+					else
+					{
+						dir = DIR::DOWN_LEFT;
+						ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.left, rect.bottom, DIR::DOWN_LEFT, OBJ::ENEMY);
+					}
 				}
-				else if (playerX < 0)
+				else if (playerX > 100)
 				{
-					dir = DIR::LEFT;
-					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.left, info.y, DIR::LEFT, OBJ::ENEMY);
+					if (playerY < 100)
+					{
+						dir = DIR::RIGHT;
+						ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.right, info.y, DIR::RIGHT, OBJ::ENEMY);
+					}
+					else
+					{
+						dir = DIR::DOWN_RIGHT;
+						ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.right, rect.bottom, DIR::DOWN_RIGHT, OBJ::ENEMY);
+					}
 				}
-				else if (playerX > 0)
+				else
 				{
-					dir = DIR::RIGHT;
-					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.right, info.y, DIR::RIGHT, OBJ::ENEMY);
+					dir = DIR::DOWN;
+					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, info.x, rect.bottom, DIR::DOWN, OBJ::ENEMY);
 				}
 				fireTime = GetTickCount();
 			}
-			else if (fireTime + 300.f < GetTickCount())
-			{
-				isFiring = false;
-				isHolding = true;
-			}
-		}
+	
 		break;
 	case Bazuka::MOVE:
 		if (abs(playerX) < 100 && playerY > 100)
@@ -286,24 +286,11 @@ void Bazuka::State_Machine()
 			break;
 		}
 
-		if (fireTime + 1000.f < GetTickCount())
+		if (fireTime + 1200.f < GetTickCount())
 		{
 			if (playerX < -100)
 			{
-				if (playerY < 200)
-				{
-					dir = DIR::RIGHT;
-					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA,rect.right,info.y,DIR::RIGHT,OBJ::ENEMY);
-				}
-				else
-				{
-					dir = DIR::DOWN_RIGHT;
-					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.right, rect.bottom, DIR::DOWN_RIGHT, OBJ::ENEMY);
-				}
-			}
-			else if (playerX > 100)
-			{
-				if (playerY < 200)
+				if (playerY < 100)
 				{
 					dir = DIR::LEFT;
 					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.left, info.y, DIR::LEFT, OBJ::ENEMY);
@@ -314,14 +301,26 @@ void Bazuka::State_Machine()
 					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.left, rect.bottom, DIR::DOWN_LEFT, OBJ::ENEMY);
 				}
 			}
+			else if (playerX > 100)
+			{
+				if (playerY < 100)
+				{
+					dir = DIR::RIGHT;
+					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.right, info.y, DIR::RIGHT, OBJ::ENEMY);
+				}
+				else
+				{
+					dir = DIR::DOWN_RIGHT;
+					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.right, rect.bottom, DIR::DOWN_RIGHT, OBJ::ENEMY);
+				}
+			}
 			else
 			{
 				dir = DIR::DOWN;
-				ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, info.x, rect.bottom, DIR::DOWN_LEFT, OBJ::ENEMY);
+				ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, info.x, rect.bottom, DIR::DOWN, OBJ::ENEMY);
 			}
 			fireTime = GetTickCount();
 		}
-		
 		break;
 	case Bazuka::DIE:
 		break;

@@ -186,7 +186,7 @@ void Sarubia::State_Machine()
 
 		if (attackTimer + 5000.f < GetTickCount())
 		{
-			if (fireTimer + 1500.f < GetTickCount())
+			if (fireTimer + 2000.f < GetTickCount())
 			{
 				isFiring = true; 
 				if(dir == DIR::LEFT)
