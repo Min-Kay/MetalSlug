@@ -16,9 +16,9 @@ public:
 	void Valid();
 
 protected:
-	ITEM::ID item_id; 
+	ITEM::ID item_id = ITEM::WEAPON; 
 
-	bool	isValid;
-	DWORD	validTime;
+	bool	isValid = true;
+	DWORD	validTime = GetTickCount();
 };
 

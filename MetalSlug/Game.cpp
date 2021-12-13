@@ -7,6 +7,20 @@
 
 Game::Game()
 {
+	totalX = 0;
+	totalY = 0;
+
+	showResult = false;
+	isClear = false;
+	isFail = false;
+	spawnMidBoss = false;
+	checkPoint = false;
+	scrollUpdating = false;
+	maxCheckPoint = 0;
+	currCheckPoint = 0;
+	formalX = 0.f;
+	formalY = 0.f;
+	currPlayerPos = 0;
 }
 
 Game::~Game()
@@ -23,8 +37,8 @@ void Game::Initialize()
 	isClear = false; 
 	isFail = false;
 	spawnMidBoss = false;
-
 	checkPoint = false;
+	scrollUpdating = false;
 
 	Init_Information();
 
@@ -64,6 +78,10 @@ void Game::Update()
 
 void Game::Late_Update()
 {
+	Check_Checkpoint_Clear();
+	if (Check_GameState()) return;
+	Check_Scrolling();
+
 	if (ObjPoolMgr::Get_Instance()->Get_Player_Dead())
 	{
 		if (DataMgr::Get_Instance()->Get_Life() > 0)
@@ -72,13 +90,12 @@ void Game::Late_Update()
 			ObjPoolMgr::Get_Instance()->Set_Player_Dead(false);
 		}
 		else
+		{
 			isFail = true;
+			showResult = true;
+		}
 
 	}
-
-	Check_Checkpoint_Clear();
-	if (Check_GameState()) return;
-	Check_Scrolling();
 
 	ObjPoolMgr::Get_Instance()->Late_Update();
 }
@@ -90,36 +107,7 @@ void Game::Render(HDC _hdc)
 
 	if (showResult)
 	{
-		HDC mainDC = GetDC(g_hwnd);
-		int size = Check_NumSize(DataMgr::Get_Instance()->Get_Score());
-		int num = 0;
-		DWORD tick = GetTickCount();
-
-		for (int i = 0; i < size; ++i)
-		{
-			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Back");
-			BitBlt(mainDC, 0, 0, WINCX, WINCY, drawingDC, 0, 0, SRCCOPY);
-
-			for (int j = size - 1; j > size - 1 - i; --j)
-			{
-				num = Check_Number(scoreCount[j]);
-				GdiTransparentBlt(mainDC, 50 * (j) + 200, 100, 200, 200, drawingDC, 100 * num, 0, 100, 100, RGB(255, 255, 255));
-			}
-
-			while (tick + 1000.f > GetTickCount())
-			{
-				drawingDC = BmpMgr::Get_Instance()->Find_Image(L"NUMBER");
-				num = rand() % 10;
-				GdiTransparentBlt(mainDC, 50 * (size - 1 - i) + 200, 100, 200, 200, drawingDC, 100 * num, 0, 100, 100, RGB(255, 255, 255));
-			}
-
-			tick = GetTickCount();
-		}
-
-		while(tick + 3000.f > GetTickCount())
-		{	
-		}
-		isClear = true;
+		Show_Result(_hdc);
 	}
 	else 	
 	{
@@ -160,7 +148,6 @@ void Game::Render(HDC _hdc)
 		ObjPoolMgr::Get_Instance()->Render(_hdc);
 		Render_Information(_hdc);
 	}
-
 }
 
 void Game::Release()
@@ -179,11 +166,13 @@ void Game::KeyInput()
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_F1))
 	{
 		isClear = true;
+		showResult = true;
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_F2))
 	{
 		isFail = true;
+		showResult = true;
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Pressing('Q'))
@@ -211,6 +200,8 @@ void Game::KeyInput()
 		DataMgr::Get_Instance()->Add_Grenade(10);
 		DataMgr::Get_Instance()->Add_Life(10);
 		DataMgr::Get_Instance()->Add_Score(100);
+		DataMgr::Get_Instance()->Add_Kill(10);
+
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down('2'))
@@ -256,13 +247,13 @@ void Game::KeyInput()
 
 bool Game::Check_GameState()
 {
-	if (isClear)
+	if (isClear && showResult)
 	{
 		Release();
 		SceneMgr::Get_Instance()->Change_Scene(SCENE::GAME1);
 		return true;
 	}
-	else if (isFail)
+	else if (isFail && showResult)
 	{
 		Release();
 		SceneMgr::Get_Instance()->Change_Scene(SCENE::MENU);
@@ -278,7 +269,10 @@ void Game::Init_Information()
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Life_Bullet.bmp", L"UI");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/number.bmp", L"NUMBER");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Infinite.bmp", L"Infinite");
-	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/back.bmp",L"Back");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/back.bmp", L"Back");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/back2.bmp",L"Back2");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/font.bmp", L"Font");
+
 }
 
 void Game::Render_Information(HDC _hdc)
@@ -432,7 +426,10 @@ void Game::Set_CheckPoint_Objects()
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
 	if (currCheckPoint == maxCheckPoint && checkPoint)
+	{
 		showResult = true;
+		isClear = true;
+	}
 
 	switch (currCheckPoint)
 	{
@@ -481,6 +478,127 @@ void Game::Check_Checkpoint_Clear()
 {
 	if (ObjPoolMgr::Get_Instance()->Get_OnScreen_Count() <= 0)
 		checkPoint = true;
+}
+
+void Game::Show_Result(HDC _hdc)
+{
+	HDC mainDC = GetDC(g_hwnd);
+	HDC subDC = BmpMgr::Get_Instance()->Find_Image(L"Back");
+	HDC backDC = BmpMgr::Get_Instance()->Find_Image(L"Back2");
+	DWORD tick = GetTickCount();
+
+	if (isClear)
+	{
+		int killSize = Check_NumSize(DataMgr::Get_Instance()->Get_Kill());
+		int size = Check_NumSize(DataMgr::Get_Instance()->Get_Score());
+		int num = 0;
+		TCHAR killCount[10] = L"";
+		swprintf_s(killCount, _T("%d"), DataMgr::Get_Instance()->Get_Kill());
+
+		for (int i = 0; i < size;)
+		{
+			BitBlt(backDC, 0, 0, WINCX, WINCY, subDC, 0, 0, SRCCOPY);
+			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Font");
+			GdiTransparentBlt(backDC, 256, 50, 288, 48, drawingDC, 0, 0, 192, 32, RGB(255, 204, 204));
+			GdiTransparentBlt(backDC, 209, 100, 382, 48, drawingDC, 0, 96, 255, 32, RGB(255, 204, 204));
+			GdiTransparentBlt(backDC, 270, 200, 260, 48, drawingDC, 0, 32, 160, 32, RGB(255, 204, 204));
+			GdiTransparentBlt(backDC, 316, 350, 168, 48, drawingDC, 0, 64, 112, 32, RGB(255, 204, 204));
+
+			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"NUMBER");
+
+			for (int j = size - 1; j > size - 1 - i; --j)
+			{
+				num = Check_Number(scoreCount[j]);
+				GdiTransparentBlt(backDC, (50 * j) + 320 - (size * 25), 180, 200, 200, drawingDC, 100 * num, 0, 100, 100, RGB(255, 255, 255));
+			}
+
+			num = rand() % 10;
+			GdiTransparentBlt(backDC, (50 * (size - 1 - i)) + 320 - (size * 25), 180, 200, 200, drawingDC, 100 * num, 0, 100, 100, RGB(255, 255, 255));
+
+			BitBlt(mainDC, 0, 0, WINCX, WINCY, backDC, 0, 0, SRCCOPY);
+
+			if (tick + 1000.f < GetTickCount())
+			{
+				++i;
+				tick = GetTickCount();
+			}
+		}
+
+		tick = GetTickCount();
+
+		for (int i = 0; i < killSize;)
+		{
+			BitBlt(backDC, 0, 0, WINCX, WINCY, subDC, 0, 0, SRCCOPY);
+			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Font");
+			GdiTransparentBlt(backDC, 256, 50, 288, 48, drawingDC, 0, 0, 192, 32, RGB(255, 204, 204));
+			GdiTransparentBlt(backDC, 209, 100, 382, 48, drawingDC, 0, 96, 255, 32, RGB(255, 204, 204));
+			GdiTransparentBlt(backDC, 270, 200, 260, 48, drawingDC, 0, 32, 160, 32, RGB(255, 204, 204));
+			GdiTransparentBlt(backDC, 316, 350, 168, 48, drawingDC, 0, 64, 112, 32, RGB(255, 204, 204));
+
+			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"NUMBER");
+			for (int j = 0; j < size; ++j)
+			{
+				num = Check_Number(scoreCount[size - 1 - j]);
+				GdiTransparentBlt(backDC, (50 * (size - 1 - j)) + 320 - (size * 25), 180, 200, 200, drawingDC, 100 * num, 0, 100, 100, RGB(255, 255, 255));
+			}
+
+			for (int j = killSize - 1; j > killSize - 1 - i; --j)
+			{
+				num = Check_Number(killCount[j]);
+				GdiTransparentBlt(backDC, (50 * j) + 320 - (killSize * 25), 320, 200, 200, drawingDC, 100 * num, 0, 100, 100, RGB(255, 255, 255));
+			}
+
+			num = rand() % 10;
+			GdiTransparentBlt(backDC, (50 * (killSize - 1 - i)) + 320 - (killSize * 25), 320, 200, 200, drawingDC, 100 * num, 0, 100, 100, RGB(255, 255, 255));
+
+			BitBlt(mainDC, 0, 0, WINCX, WINCY, backDC, 0, 0, SRCCOPY);
+
+			if (tick + 1000.f < GetTickCount())
+			{
+				++i;
+				tick = GetTickCount();
+			}
+		}
+
+		tick = GetTickCount();
+
+		while (tick + 2000.f > GetTickCount())
+		{
+			BitBlt(backDC, 0, 0, WINCX, WINCY, subDC, 0, 0, SRCCOPY);
+			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Font");
+			GdiTransparentBlt(backDC, 256, 50, 288, 48, drawingDC, 0, 0, 192, 32, RGB(255, 204, 204));
+			GdiTransparentBlt(backDC, 209, 100, 382, 48, drawingDC, 0, 96, 255, 32, RGB(255, 204, 204));
+			GdiTransparentBlt(backDC, 270, 200, 260, 48, drawingDC, 0, 32, 160, 32, RGB(255, 204, 204));
+			GdiTransparentBlt(backDC, 316, 350, 168, 48, drawingDC, 0, 64, 112, 32, RGB(255, 204, 204));
+
+			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"NUMBER");
+			for (int j = 0; j < killSize; ++j)
+			{
+				num = Check_Number(killCount[killSize - 1 - j]);
+				GdiTransparentBlt(backDC, (50 * (killSize - 1 - j)) + 320 - (killSize * 25), 320, 200, 200, drawingDC, 100 * num, 0, 100, 100, RGB(255, 255, 255));
+			}
+
+			for (int j = 0; j < size; ++j)
+			{
+				num = Check_Number(scoreCount[size - 1 - j]);
+				GdiTransparentBlt(backDC, (50 * (size - 1 - j)) + 320 - (size * 25), 180, 200, 200, drawingDC, 100 * num, 0, 100, 100, RGB(255, 255, 255));
+			}
+			BitBlt(mainDC, 0, 0, WINCX, WINCY, backDC, 0, 0, SRCCOPY);
+		}
+	}
+	else if (isFail)
+	{
+		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Font");
+	
+		while (tick + 2000.f > GetTickCount())
+		{
+			BitBlt(backDC, 0, 0, WINCX, WINCY, subDC, 0, 0, SRCCOPY);
+			GdiTransparentBlt(backDC, 256, 50, 288, 48, drawingDC, 0, 0, 192, 32, RGB(255, 204, 204));
+			GdiTransparentBlt(backDC, 304, 100, 192, 48, drawingDC, 0, 128, 128, 32, RGB(255, 204, 204));
+			BitBlt(mainDC, 0, 0, WINCX, WINCY, backDC, 0, 0, SRCCOPY);
+		}
+	}
+	BitBlt(_hdc, 0, 0, WINCX, WINCY, backDC, 0, 0, SRCCOPY);
 }
 
 

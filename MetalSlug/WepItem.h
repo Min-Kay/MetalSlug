@@ -21,6 +21,6 @@ public:
 	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir); 
 
 private:
-	WEAPON::ID wep_id;
+	WEAPON::ID wep_id = WEAPON::HEAVY;
 };
 

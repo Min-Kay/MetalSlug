@@ -17,17 +17,17 @@ public:
 
 
 public:
-	STATE state; 
+	STATE state = STATE::IDLE; 
 
-	bool isFiring;
-	DWORD attackTimer;
-	DWORD fireTimer; 
-	int	currCount; 
-	int maxCount;
+	bool isFiring = false;
+	DWORD attackTimer = GetTickCount();
+	DWORD fireTimer = GetTickCount();
+	int	currCount = 0;
+	int maxCount = 5;
 
-	DWORD fireEffectTimer;
-	int fireEffectIndex;
-	bool effectEnd;
+	DWORD fireEffectTimer = GetTickCount();
+	int fireEffectIndex = 0;
+	bool effectEnd = false;
 	
 };
 

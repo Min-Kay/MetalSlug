@@ -293,6 +293,7 @@ void Arabian::Check_Hp()
 	if ( hp <= 0)
 	{
 		falling = false;
+		DataMgr::Get_Instance()->Add_Kill(1);
 		DataMgr::Get_Instance()->Add_Score(100);
 		animIndex = 0;
 		action = ACTION::DIE;

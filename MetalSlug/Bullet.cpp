@@ -75,6 +75,7 @@ void Bullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 	case OBJ::ENEMY:
 		if (_id != parentID && !_opponent->Get_Dying())
 		{
+			DataMgr::Get_Instance()->Add_Score(25);
 			_opponent->Add_HP(-damage);
 			isDead = true;
 		}

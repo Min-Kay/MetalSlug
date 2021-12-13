@@ -13,5 +13,5 @@ public:
 	virtual void Add_HP(int _hp) { if (isDead) return; onHit = true; hp += _hp; }
 
 protected:
-	bool onHit;
+	bool onHit = false;
 };

@@ -18,7 +18,6 @@ public:
 	virtual bool	Check_GameState();
 	virtual void Set_CheckPoint_Objects(); 
 
-
 private:
 	bool spawnMidBoss;
 

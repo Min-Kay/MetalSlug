@@ -51,6 +51,7 @@ void GrenadeBox::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 
 	if (_id == OBJ::PLAYER)
 	{
+		DataMgr::Get_Instance()->Add_Score(75);
 		DataMgr::Get_Instance()->Add_Grenade(5);
 		isDead = true;
 	}

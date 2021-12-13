@@ -3,10 +3,10 @@
 
 typedef struct Tick
 {
-	Obj* target;
-	DWORD dealTime;
-	DWORD collTime;
-	float distance;
+	Obj* target = nullptr;
+	DWORD dealTime = GetTickCount();
+	DWORD collTime = GetTickCount();
+	float distance = 0.f;
 
 }TICK;
 
@@ -37,13 +37,13 @@ private:
 private:
 	list<TICK> tick;
 
-	bool	isFiring;
-	bool	listClear;
+	bool	isFiring = false;
+	bool	listClear = false;
 	
-	float maxSize;
-	float renderSize;
+	float maxSize = 0.f;
+	float renderSize = 0.f;
 
-	DIR::ID formalDir;
-	bool	diffDir;
+	DIR::ID formalDir = DIR::RIGHT;
+	bool	diffDir = false;
 };
 

@@ -4,7 +4,7 @@ class RocketBullet :
     public Bullet
 {
 public:
-	RocketBullet() {};
+	RocketBullet();
 	virtual ~RocketBullet() { Release(); };
 public:
 	virtual void Initialize() override;
@@ -20,14 +20,14 @@ public:
 	void Rocket(); 
 	void ExplodePosing();
 private:
-	float init_CX;
-	float init_CY;
+	float init_CX = 0.f;
+	float init_CY = 0.f;
 
-	float accel;
-	float maxSpeed;
-	float blow;
+	float accel = 0.f;
+	float maxSpeed = 0.f;
+	float blow =0.f;
 
-	bool  explosion;
+	bool  explosion = false;
 
 	vector<Obj*> hits; 
 };

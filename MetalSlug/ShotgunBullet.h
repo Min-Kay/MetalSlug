@@ -6,7 +6,7 @@ class ShotgunBullet :
 {
 
 public:
-	ShotgunBullet() {};
+	ShotgunBullet() { init_CX = 0.f; init_CY = 0.f;  };
 	~ShotgunBullet() { Release(); }
 public:
 	virtual void Initialize() override;

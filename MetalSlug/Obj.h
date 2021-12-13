@@ -5,7 +5,9 @@
 
 class Obj
 {
-
+public:
+	Obj();
+	virtual ~Obj() {};
 public:
 	virtual void Initialize()PURE;
 	virtual int Update()PURE;
@@ -49,19 +51,19 @@ public:
 	void	Check_Screen_Out();
 
 protected:
-	HDC		drawingDC;
-	HDC		stretchDC;
+	HDC		drawingDC = NULL;
+	HDC		stretchDC = NULL;
 
 	int		animIndex = 0;
-	DWORD	animTimer;
+	DWORD	animTimer = GetTickCount();
 
-	INFO	info;
-	RECT	rect;
-	DIR::ID dir; 
-	OBJ::ID	id;
-	bool	isDead;
-	bool	isDying; 
+	INFO	info{};
+	RECT	rect{};
+	DIR::ID dir = DIR::RIGHT; 
+	OBJ::ID	id = OBJ::PLAYER;
+	bool	isDead = false;
+	bool	isDying = false; 
 
-	int		hp;
+	int		hp = 0;
 };
 

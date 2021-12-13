@@ -23,14 +23,14 @@ public:
 	void Accelerate();
 
 private:
-	float init_CX;
-	float init_CY;
+	float init_CX = 0.1f;
+	float init_CY = 0.1f;
 
-	float accel;
-	float maxSpeed;
+	float accel = 0.1f;
+	float maxSpeed = 0.1f;
 
-	bool  explosion;
-	bool  isLanded;
+	bool  explosion = false;
+	bool  isLanded = false;
 
 	vector<Obj*> hits;
 };

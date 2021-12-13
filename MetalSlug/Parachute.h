@@ -13,6 +13,6 @@ public:
 	void Set_Parent(Obj* _parent) { parent = _parent; }
 	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir);
 private:
-	Obj* parent;
+	Obj* parent = nullptr;
 };
 

@@ -62,7 +62,6 @@ void WepItem::Render(HDC _hdc)
 		break;
 	}
 
-	if (wep_id) {}
 }
 
 void WepItem::Release()
@@ -76,39 +75,56 @@ void WepItem::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 
 	if (_id == OBJ::PLAYER)
 	{
+		Weapon* wep = nullptr;
 		switch (wep_id)
 		{
 		case WEAPON::HEAVY:
 			if (DataMgr::Get_Instance()->Get_Weapon()->Get_WepID() != wep_id)
-				ObjPoolMgr::Get_Instance()->Set_Player_Wep(new HeavyMachine);
+			{
+				Weapon* wep = new HeavyMachine;
+				ObjPoolMgr::Get_Instance()->Set_Player_Wep(wep);
+			}
 			else
 				DataMgr::Get_Instance()->Add_Ammo(200);
 			break;
 		case WEAPON::ROCKET:
 			if (DataMgr::Get_Instance()->Get_Weapon()->Get_WepID() != wep_id)
-				ObjPoolMgr::Get_Instance()->Set_Player_Wep(new RocketLauncher);
+			{
+				Weapon* wep = new RocketLauncher;
+				ObjPoolMgr::Get_Instance()->Set_Player_Wep(wep);
+			}
 			else
 				DataMgr::Get_Instance()->Add_Ammo(100);
 			break;
 		case WEAPON::SHOTGUN:
 			if (DataMgr::Get_Instance()->Get_Weapon()->Get_WepID() != wep_id)
-				ObjPoolMgr::Get_Instance()->Set_Player_Wep(new Shotgun);
+			{
+				Weapon* wep = new Shotgun;
+				ObjPoolMgr::Get_Instance()->Set_Player_Wep(wep);
+			}
 			else
 				DataMgr::Get_Instance()->Add_Ammo(50);
 			break;
 		case WEAPON::LASER:
 			if (DataMgr::Get_Instance()->Get_Weapon()->Get_WepID() != wep_id)
-				ObjPoolMgr::Get_Instance()->Set_Player_Wep(new Laser);
+			{
+				Weapon* wep = new Laser;
+				ObjPoolMgr::Get_Instance()->Set_Player_Wep(wep);
+			}
 			else
 				DataMgr::Get_Instance()->Add_Ammo(200);
 			break;
 		case WEAPON::IRONLIZARD:
 			if (DataMgr::Get_Instance()->Get_Weapon()->Get_WepID() != wep_id)
-				ObjPoolMgr::Get_Instance()->Set_Player_Wep(new Ironlizard);
+			{
+				Weapon* wep = new Ironlizard;
+				ObjPoolMgr::Get_Instance()->Set_Player_Wep(wep);
+			}
 			else
 				DataMgr::Get_Instance()->Add_Ammo(100);
 			break;
 		}
+		DataMgr::Get_Instance()->Add_Score(50);
 		isDead = true; 
 	}
 }

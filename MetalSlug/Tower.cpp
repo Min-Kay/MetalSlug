@@ -5,10 +5,58 @@
 
 Tower::Tower()
 {
+	head = THREEHEAD::LEFT;
+	state = THREEHEAD::NONE;
+	enemy_id = ENEMY::THREEHEAD;
+	action = ACTION::IDLE;
+	hp = 300;
+	dir = head == THREEHEAD::RIGHT ? DIR::LEFT : DIR::RIGHT;
+
+	isMove = false;
+	coll_Attack = false;
+	isDying = false;
+
+	canCollision = false;
+
+	animIndex = 0;
+	animTimer = GetTickCount();
+
+	id = OBJ::ENEMY;
+	isDead = false;
+
+	info.cx = 100.f;
+	info.cy = 100.f;
+
+	firing = false;
+	fireTime = GetTickCount();
 }
 
 Tower::Tower(THREEHEAD::HEAD _head, float _X, float _Y)
 {
+	state = THREEHEAD::NONE;
+	enemy_id = ENEMY::THREEHEAD;
+	action = ACTION::IDLE;
+	hp = 300;
+	dir = head == THREEHEAD::RIGHT ? DIR::LEFT : DIR::RIGHT;
+
+	isMove = false;
+	coll_Attack = false;
+	isDying = false;
+
+	canCollision = false;
+
+	animIndex = 0;
+	animTimer = GetTickCount();
+
+	id = OBJ::ENEMY;
+	isDead = false;
+
+	info.cx = 100.f;
+	info.cy = 100.f;
+
+	firing = false;
+	fireTime = GetTickCount();
+
 	head = _head; 
 	info.x = _X;
 	info.y = _Y;

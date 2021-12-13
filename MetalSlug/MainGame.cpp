@@ -19,6 +19,9 @@ void MainGame::Initialize()
 	fps = 0; 
 	hMemDC = NULL;
 	hBackBuferDC = NULL;
+	ObjPoolMgr::Get_Instance()->Initialize();
+	CKeyMgr::Get_Instance()->Initialize();
+	DataMgr::Get_Instance()->Initialize();
 	SceneMgr::Get_Instance()->Initialize();
 	BmpMgr::Get_Instance()->Insert_Bmp(BACKBUFFER_BMP,BACKBUFFER_KEY);
 }
@@ -30,8 +33,8 @@ void MainGame::Update()
 
 void MainGame::Late_Update()
 {
-	SceneMgr::Get_Instance()->Late_Update();
 	CScrollMgr::Get_Instance()->Late_Update();
+	SceneMgr::Get_Instance()->Late_Update();
 }
 
 void MainGame::Render()

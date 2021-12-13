@@ -8,7 +8,6 @@ public:
 	virtual bool Fire(float _x, float _y, DIR::ID _dir) override;
 
 private:
-	float angle;
-	bool isFire; 
+	bool isFire = false; 
 };
 

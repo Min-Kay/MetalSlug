@@ -12,8 +12,8 @@ typedef struct tagInfo
 
 typedef struct DisDir
 {
-	float dis;
-	DIR::ID dir;
+	float dis = 0.f;
+	DIR::ID dir = DIR::RIGHT;
 
 	DisDir() {};
 	DisDir(float _dis, DIR::ID _dir) : dis(_dis), dir(_dir) { }

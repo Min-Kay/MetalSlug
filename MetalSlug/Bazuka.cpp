@@ -62,6 +62,8 @@ void Bazuka::Late_Update()
 	Check_Parachute();
 	if (hp <= 0)
 	{
+		DataMgr::Get_Instance()->Add_Kill(1);
+		DataMgr::Get_Instance()->Add_Score(150);
 		animIndex = 0;
 		isDying = true;
 		state = STATE::DIE;

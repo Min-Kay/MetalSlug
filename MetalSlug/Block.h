@@ -15,6 +15,6 @@ public:
     void Set_Gravity(bool _bool) { haveGravity = _bool; }
 
 public:
-    bool    haveGravity;
+    bool    haveGravity = true;
 };
 

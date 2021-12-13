@@ -8,6 +8,8 @@ SceneMgr* SceneMgr::pInstance = nullptr;
 
 SceneMgr::SceneMgr()
 {
+	currScene = SCENE::MENU;
+	scene = nullptr;
 }
 
 SceneMgr::~SceneMgr()

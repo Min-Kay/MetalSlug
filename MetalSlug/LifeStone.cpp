@@ -51,6 +51,7 @@ void LifeStone::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 
 	if (_id == OBJ::PLAYER)
 	{
+		DataMgr::Get_Instance()->Add_Score(200);
 		DataMgr::Get_Instance()->Add_Life(1);
 		isDead = true;
 	}

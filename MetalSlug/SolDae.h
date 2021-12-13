@@ -25,55 +25,55 @@ private:
 	void	ToTheIdle();
 
 private:
-	SOLDAE::STATE state;
+	SOLDAE::STATE state = SOLDAE::IDLE;
 
 private:
-	bool	showTime; 
-	float	showTimeY;
+	bool	showTime = false; 
+	float	showTimeY = 0.f;
 
-	int		rootGauge;
-	int		followerGauge;
-	int		sunshineGauge;
-	int		laserGauge;
+	int		rootGauge = 0;
+	int		followerGauge = 0;
+	int		sunshineGauge = 0;
+	int		laserGauge = 0;
 
-	int		fullGauge;
+	int		fullGauge = 0;
 
-	float	totalIdleY;
-	float	maxIdleY; 
+	float	totalIdleY = 0.f;
+	float	maxIdleY = 0.f;
 
-	float	idleY;
-	float	laserY;
+	float	idleY = 0.f;
+	float	laserY = 0.f;
 
-	float	initX;
-	float	initY;
-
-private:
-	bool	openingSky;
-	bool	crashing;
-	bool	toTheIdle; 
-
-	float	toSky;
-	float	totalSky;
-
-	SolDaeLaser* laser; 
+	float	initX = 0.f;
+	float	initY = 0.f;
 
 private:
-	bool	rootMotion;
-	bool	motionEnd;
+	bool	openingSky = false;
+	bool	crashing = false;
+	bool	toTheIdle = false;
 
-	DWORD	rootMotionTimer;
-	int		rootAnim;
-	int		currRoot;
-	int		maxRoot;
-	DWORD	rootSpawnTimer;
+	float	toSky = 0.f;
+	float	totalSky = 0.f;
+
+	SolDaeLaser* laser = nullptr; 
+
+private:
+	bool	rootMotion = false;
+	bool	motionEnd = false;
+
+	DWORD	rootMotionTimer = GetTickCount();
+	int		rootAnim = 0;
+	int		currRoot = 0;
+	int		maxRoot = 0;
+	DWORD	rootSpawnTimer = GetTickCount();
 
 
-	bool	initPos;
-	DWORD	effectTimer; 
+	bool	initPos = false;
+	DWORD	effectTimer = GetTickCount();
 
-	DWORD	effectStable;
+	DWORD	effectStable = GetTickCount();
 
-	int		effectIndex;
-	int		randomX, randomY, randomCX, randomCY;
+	int		effectIndex = 0;
+	int		randomX = 0, randomY = 0, randomCX = 0, randomCY = 0;
 };
 

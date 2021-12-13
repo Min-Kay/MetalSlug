@@ -24,8 +24,8 @@ public:
 	void Set_Damage(int _dam) { damage = _dam; }
 
 protected:
-	float speed;
-	int damage;
-	OBJ::ID parentID;
+	float speed = 1.0f;
+	int damage = 0;
+	OBJ::ID parentID = OBJ::PLAYER;
 };
 

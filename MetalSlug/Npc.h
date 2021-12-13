@@ -18,24 +18,24 @@ public:
 	const bool& Get_Ropped() const { return isRopped; }
 	void Set_Ropped();
 private:
-	ACTION::ID action;
-	bool	isRopped;
-	bool	isUntied;
+	ACTION::ID action = ACTION::IDLE;
+	bool	isRopped =true;
+	bool	isUntied = false;
 
-	bool	ranout;
-	bool	moving;
+	bool	ranout = false;
+	bool	moving = false;
 
-	bool	spawningItem;
-	bool	spawnTiming;
-	bool	spawned;
+	bool	spawningItem = false;
+	bool	spawnTiming = false;
+	bool	spawned = false;
 
-	bool	thank;
+	bool	thank = false;
 	
-	float	speed;
+	float	speed =0.f;
 
-	float	totalMove;
+	float	totalMove = 0.f;
 
-	DWORD	motionDelay;
-	bool	isMotion;
+	DWORD	motionDelay = GetTickCount();
+	bool	isMotion = false;
 };
 

@@ -6,6 +6,9 @@ class  Player:
 	public Obj
 {
 public:
+	Player();
+	virtual ~Player();
+public:
 	virtual void Initialize() override;
 	virtual int Update() override;
 	virtual void Late_Update() override;
@@ -29,46 +32,47 @@ public:
 
 public:
 	void	Set_Weapon(Weapon* _wep);
+	void	Delete_Weapon() { SAFE_DELETE(weapon) }
 	void	Check_WeaponState();
 	void	Anim_Counter(ANIM::PLAYER _action, int count, float _timer, bool _roop = true, int start = 0);
 
 private:
-	ACTION::ID	action;
-	DIR::ID		onlySide;
+	ACTION::ID	action = ACTION::IDLE;
+	DIR::ID		onlySide = DIR::RIGHT;
 
-	float	init_CY;
+	float	init_CY = 0.f;
 
-	bool	isStab;
+	bool	isStab = false;
 
-	bool	isFiring;
-	bool	isGrenading;
-	bool	isStabbing;
-	bool	canRide; 
+	bool	isFiring = false;
+	bool	isGrenading = false;
+	bool	isStabbing = false;
+	bool	canRide = false;
 
-	float	speed;
-	float	walkSpeed;
-	float	sitSpeed;
+	float	speed = 0.f;
+	float	walkSpeed = 0.f;
+	float	sitSpeed = 0.f;
 
-	bool	isJump;
-	float	jumpTime;
-	float	jumpY;
-	bool	jumping;
-	float	jumpForce;
+	bool	isJump = false;
+	float	jumpTime = 0.f;
+	float	jumpY = 0.f;
+	bool	jumping = false;
+	float	jumpForce = 0.f;
 
-	bool	superValid;
-	bool	isValid;
-	DWORD	validTimer;
-	DWORD	validTick;
+	bool	superValid = false;
+	bool	isValid = false;
+	DWORD	validTimer = GetTickCount();
+	DWORD	validTick = GetTickCount();
 
-	DWORD	animTimer;
-	int		animValidIndex;
+	DWORD	animTimer = GetTickCount();
+	int		animValidIndex = 0;
 
-	DWORD	dyingTimer;
+	DWORD	dyingTimer = GetTickCount();
 
 	int		animIndexs[ANIM::PLAYER_END]{};
 	int		animIndexPos[ANIM::PLAYER_END]{0,2,10,3,8,9,13,5,6,7,11,4,12};
 
-	Weapon* weapon;
-	bool sit;
+	Weapon* weapon = nullptr;
+	bool sit = false;
 };
 

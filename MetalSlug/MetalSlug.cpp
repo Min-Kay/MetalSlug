@@ -119,6 +119,8 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
    RECT		rc = { 0,0, WINCX, WINCY };

@@ -16,7 +16,7 @@ public:
 public:
 	void	Anim_Breaking(HDC _hdc);
 private:
-	bool isBreaking;
+	bool isBreaking = false;
 
 };
 

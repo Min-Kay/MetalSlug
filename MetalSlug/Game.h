@@ -30,6 +30,7 @@ public:
 
 
 	void	Check_Checkpoint_Clear();
+	void	Show_Result(HDC _hdc);
 
 protected:
 	bool	isClear;

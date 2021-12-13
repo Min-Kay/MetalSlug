@@ -5,6 +5,32 @@
 
 ThreeHead::ThreeHead()
 {
+	enemy_id = ENEMY::THREEHEAD;
+	action = ACTION::IDLE;
+	speed = 5.f;
+
+	animIndex = 0;
+	animTimer = GetTickCount();
+
+	id = OBJ::ENEMY;
+	isDead = false;
+
+	isMove = false;
+	coll_Attack = false;
+	isDying = false;
+
+	canCollision = false;
+
+	state = THREEHEAD::NONE;
+
+	towerOn = false;
+	doorOpening = false;
+
+	totalY = 0.f;
+
+	left = nullptr;
+	mid = nullptr;
+	right = nullptr;
 }
 
 ThreeHead::~ThreeHead()
@@ -65,6 +91,7 @@ void ThreeHead::Late_Update()
 
 	if (!isDying && AllDestroied())
 	{
+		DataMgr::Get_Instance()->Add_Kill(3);
 		DataMgr::Get_Instance()->Add_Score(3000);
 		isDying = true;
 		state = THREEHEAD::DESTORY;

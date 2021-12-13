@@ -62,6 +62,8 @@ void Sarubia::Late_Update()
 	{
 		animIndex = 0; 
 		isDying = true;
+		DataMgr::Get_Instance()->Add_Kill(1);
+		DataMgr::Get_Instance()->Add_Score(300);
 		state = STATE::DESTROY;
 	}
 }

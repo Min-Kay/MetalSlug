@@ -20,14 +20,14 @@ public:
 public:
 	enum STATE {IDLE,MOVE,PARACHUTE,DIE};
 private:
-	float	jumpForce;
-	float	jumpTime;
-	bool	jumping;
-	bool	falling;
+	float	jumpForce = 30.f;
+	float	jumpTime =0.f;
+	bool	jumping = false;
+	bool	falling = false;
 
-	STATE state; 
-	Parachute* para;
+	STATE state = PARACHUTE; 
+	Parachute* para = nullptr;
 
-	DWORD	fireTime; 
+	DWORD	fireTime = GetTickCount(); 
 };
 

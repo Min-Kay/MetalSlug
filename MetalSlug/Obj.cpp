@@ -1,6 +1,22 @@
 #include "Obj.h"
 #include "Manager.h"
 
+Obj::Obj()
+{
+	drawingDC = NULL;
+	stretchDC = NULL;
+
+	animIndex = 0;
+	animTimer = GetTickCount();
+
+	dir = DIR::RIGHT;
+	id = OBJ::PLAYER;
+	isDead = false;
+	isDying = false;
+
+	hp = 0;
+}
+
 void Obj::Gravity()
 {
 	if (isDead)

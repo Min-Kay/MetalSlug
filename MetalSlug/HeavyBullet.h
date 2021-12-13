@@ -15,10 +15,10 @@ public:
 	virtual void Update_Rect(); 
 
 private:
-	float	init_CX;
-	float	init_CY;
+	float	init_CX = 0.f;
+	float	init_CY = 0.f;
 
-	float	spread;
-	bool	minus;
+	float	spread = 0.1f;
+	bool	minus = false;
 };
 

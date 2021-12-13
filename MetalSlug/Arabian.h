@@ -28,17 +28,17 @@ public:
 	void	Change_Anim(ACTION::ID _action) { action = _action; animIndex = 0; };
 
 private:
-	bool	attacking;
+	bool	attacking =  false;
 	
-	DWORD	attackTime;
+	DWORD	attackTime = GetTickCount();
 
-	bool	falling; 
+	bool	falling = false; 
 
-	bool	isJump;
-	float	jumpTime;
-	float	jumpY;
-	bool	jumping;
-	float	jumpForce;
+	bool	isJump = false;
+	float	jumpTime = 0.f;
+	float	jumpY = 0.f;
+	bool	jumping = false;
+	float	jumpForce = 40.f;
 	
 };
 

@@ -80,6 +80,7 @@ void ItemBox::Anim_Breaking(HDC _hdc)
 
 	if (animIndex == 10)
 	{
+		DataMgr::Get_Instance()->Add_Score(100);
 		ITEM::ID box[ITEM::END - 1] = { ITEM::AMMO,ITEM::GRENADE,ITEM::LIFE,ITEM::WEAPON };
 		int pos = rand() % ITEM::END - 1;
 		if (pos == -1)

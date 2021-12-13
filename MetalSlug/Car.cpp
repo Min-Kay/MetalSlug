@@ -36,6 +36,7 @@ void Car::Late_Update()
 
 	if (hp <= 0)
 	{
+		DataMgr::Get_Instance()->Add_Score(75);
 		animIndex = 0; 
 		isDying = true;
 	}

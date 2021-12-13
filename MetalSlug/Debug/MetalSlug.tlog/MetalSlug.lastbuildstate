@@ -1,2 +1,2 @@
-PlatformToolSet=v143:VCToolArchitecture=Native32Bit:VCToolsVersion=14.30.30705:TargetPlatformVersion=10.0.19041.0:
-Debug|Win32|C:\Users\민경욱\Desktop\프로젝트\MetalSlug\|
+#TargetFrameworkVersion=v4.0:PlatformToolSet=v142:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=10.0
+Debug|Win32|C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\|

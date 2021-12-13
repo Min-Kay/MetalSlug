@@ -5,7 +5,10 @@
 class Scene
 {
 public:
-	Scene() {};
+	Scene() {
+		drawingDC = NULL; 
+		stretchDC = NULL;
+	};
 	virtual ~Scene() {};
 
 public:

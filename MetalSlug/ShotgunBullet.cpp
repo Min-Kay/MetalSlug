@@ -174,6 +174,7 @@ void ShotgunBullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 		{
 			if (find(hits.begin(), hits.end(), _opponent) == hits.end())
 			{
+				DataMgr::Get_Instance()->Add_Score(25);
 				_opponent->Add_HP(-damage);
 				hits.push_back(_opponent);
 			}

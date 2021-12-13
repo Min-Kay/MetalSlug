@@ -4,6 +4,49 @@
 #include "Enemy.h"
 #include "Bullets.h"
 
+Player::Player()
+{
+	action = ACTION::IDLE;
+	onlySide = DIR::RIGHT;
+
+	init_CY = 0.f;
+
+	isStab = false;
+
+	isFiring = false;
+	isGrenading = false;
+	isStabbing = false;
+	canRide = false;
+
+	speed = 0.f;
+	walkSpeed = 0.f;
+	sitSpeed = 0.f;
+
+	isJump = false;
+	jumpTime = 0.f;
+	jumpY = 0.f;
+	jumping = false;
+	jumpForce = 0.f;
+
+	superValid = false;
+	isValid = false;
+	validTimer = GetTickCount();
+	validTick = GetTickCount();
+
+	animTimer = GetTickCount();
+	animValidIndex = 0;
+
+	dyingTimer = GetTickCount();
+
+	weapon = nullptr;
+	sit = false;
+}
+
+Player::~Player()
+{
+	SAFE_DELETE(weapon);
+}
+
 void Player::Initialize()
 {
 	id = OBJ::PLAYER;
@@ -39,7 +82,8 @@ void Player::Initialize()
 
 	action = ACTION::IDLE;
 
-	Set_Weapon(new Pistol);
+	Weapon* wep = new Pistol;
+	Set_Weapon(wep);
 	DataMgr::Get_Instance()->Set_Weapon(weapon);
 
 	BmpMgr::Get_Instance()->Insert_Bmp(PLAYER_BMP, PLAYER_KEY);
@@ -624,7 +668,7 @@ void Player::Anim_Dying(HDC _hdc)
 	Anim_Counter(ANIM::PLAYER_DIE, 12, 70.f, false);
 	if (animIndexs[ANIM::PLAYER_DIE] == 12 && dyingTimer + 1000.f < GetTickCount())
 	{
-		Set_Dead(true);
+		isDead = true; 
 		ObjPoolMgr::Get_Instance()->Set_Player_Dead(true);
 		DataMgr::Get_Instance()->Add_Life(-1);
 	}

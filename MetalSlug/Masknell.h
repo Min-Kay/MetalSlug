@@ -16,11 +16,11 @@ public:
     virtual void Add_HP(int _hp) { if (isDying || isDead) return; hp += _hp; }
 
 private:
-    bool    isTurning;
-    bool    turned;
+    bool    isTurning = false;
+    bool    turned =false ;
  
-    bool    isFiring;
-    DWORD   attackTime;
+    bool    isFiring = false;
+    DWORD   attackTime = GetTickCount();
 
 };
 

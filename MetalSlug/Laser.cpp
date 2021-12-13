@@ -4,6 +4,8 @@
 
 Laser::Laser()
 {
+	bullet = nullptr;
+	tickTimer = GetTickCount();
 }
 
 Laser::~Laser()

@@ -14,7 +14,7 @@ public:
 	virtual void Release() override;
 
 private:
-	DWORD	m_LogoTimer;
-	bool	isShow;
+	DWORD	m_LogoTimer = GetTickCount();
+	bool	isShow = false;
 };
 

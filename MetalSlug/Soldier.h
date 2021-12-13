@@ -32,23 +32,23 @@ public:
 	void	Change_Anim(ACTION::ID _action) { action = _action; animIndex = 0; };
 
 protected:
-	SOLDIER::CLASS sol_Class;
-	DIR::ID	onlySide;
+	SOLDIER::CLASS sol_Class = SOLDIER::SERGENT;
+	DIR::ID	onlySide = DIR::RIGHT;
 
-	bool	ranAway;
-	bool	isJump;
-	float	jumpForce;
-	float	jumpTime; 
-	bool	jumping;
+	bool	ranAway = false;
+	bool	isJump =false ;
+	float	jumpForce = 0.f;
+	float	jumpTime = 0.f;
+	bool	jumping = false;
 
-	int		idleNum;
+	int		idleNum = 0;
 
-	bool	falling;
+	bool	falling = false;
 
-	bool	attack;
-	bool	isHolding;
-	bool	isHold;
-	bool	isFiring;
-	DWORD	fireTime;
+	bool	attack = false;
+	bool	isHolding = false;
+	bool	isHold = false;
+	bool	isFiring = false;
+	DWORD	fireTime = GetTickCount();
 };
 

@@ -66,8 +66,10 @@ void Masknell::Late_Update()
 		isDead = true;
 	}
 
-	if (hp <= 0)
+	if (!isDying && hp <= 0)
 	{
+		DataMgr::Get_Instance()->Add_Kill(1);
+		DataMgr::Get_Instance()->Add_Score(300);
 		isDying = true;
 	}
 

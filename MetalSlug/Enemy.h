@@ -22,13 +22,13 @@ public:
 	const bool& Get_CollAttack() const { return coll_Attack; }
 	
 protected:
-	ENEMY::ID enemy_id;
-	ACTION::ID action;
-	float	speed;
+	ENEMY::ID enemy_id = ENEMY::SOLDIER;
+	ACTION::ID action = ACTION::IDLE;
+	float	speed = 0.f;
 
-	bool	isMove;
-	bool	coll_Attack;
+	bool	isMove =false;
+	bool	coll_Attack =false;
 
-	bool	canCollision;
+	bool	canCollision = false;
 };
 

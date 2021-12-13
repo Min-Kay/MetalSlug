@@ -4,6 +4,18 @@
 #include "Player.h"
 #include "Npc.h"
 
+RocketBullet::RocketBullet()
+{
+	init_CX = 0.f;
+	init_CY = 0.f;
+
+	accel = 0.f;
+	maxSpeed = 0.f;
+	blow = 0.f;
+
+	explosion = false;
+}
+
 void RocketBullet::Initialize()
 {
 	damage = 20.f;
@@ -129,6 +141,7 @@ void RocketBullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 		ExplodePosing();
 		if (find(hits.begin(), hits.end(), _opponent) == hits.end())
 		{
+			DataMgr::Get_Instance()->Add_Score(25);
 			hits.push_back(_opponent);
 			_opponent->Add_HP(-damage);
 		}

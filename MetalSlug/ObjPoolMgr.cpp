@@ -13,6 +13,8 @@ ObjPoolMgr* ObjPoolMgr::pInstance = nullptr;
 
 ObjPoolMgr::ObjPoolMgr()
 {
+	player = nullptr;
+	player_Dead = false;
 }
 
 ObjPoolMgr::~ObjPoolMgr()
@@ -83,6 +85,8 @@ void ObjPoolMgr::Render(HDC _hdc)
 
 void ObjPoolMgr::Release()
 {
+	SAFE_DELETE(player);
+
 	for (int i = 0; i < OBJ::END; ++i)
 	{
 		onScreen[i].clear();
@@ -121,8 +125,6 @@ void ObjPoolMgr::Release()
 		for_each(block[i].begin(), block[i].end(), CDeleteObj());
 		block[i].clear();
 	}
-
-	SAFE_DELETE(player);
 }
 
 void ObjPoolMgr::DisableObj()
@@ -160,6 +162,8 @@ void ObjPoolMgr::DisableObj()
 	{
 		for_each(block[i].begin(), block[i].end(), KillObj());
 	}
+
+	SAFE_DELETE(player);
 }
 
 void ObjPoolMgr::Add_Object(OBJ::ID _id, Obj* _obj)
@@ -460,7 +464,6 @@ const RECT& ObjPoolMgr::Get_Player_Rect() const
 	RECT rect{};
 	if (onScreen[OBJ::PLAYER].empty())
 		return rect;
-
 
 	return onScreen[OBJ::PLAYER].front()->Get_Rect();
 }

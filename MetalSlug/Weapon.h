@@ -6,7 +6,16 @@
 class Weapon
 {
 public:
-	Weapon() {};
+	Weapon() {
+		isFire = false;
+
+		wep_id = WEAPON::HEAVY;
+
+		coolTime = 0.f;
+		timer = GetTickCount();
+
+		ammo = 0;
+	};
 	virtual ~Weapon() {};
 
 public:

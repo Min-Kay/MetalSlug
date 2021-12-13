@@ -227,6 +227,7 @@ void SolDae::Render(HDC _hdc)
 		if (animIndex == 5)
 		{
 			isDead = true;
+			DataMgr::Get_Instance()->Add_Kill(1);
 			DataMgr::Get_Instance()->Add_Score(10000);
 		}
 		Anim_Counter(5, 2500.f, false);

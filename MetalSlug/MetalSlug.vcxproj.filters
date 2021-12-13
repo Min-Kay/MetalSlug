@@ -214,6 +214,9 @@
     <Filter Include="소스 파일\03.Weapon\06.Ironlizard">
       <UniqueIdentifier>{b2ff9162-f9f5-4bcd-9083-cbc28cde0409}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02.Object\02.Enemy\09.MissileEnemy">
+      <UniqueIdentifier>{cdf3e243-33ef-4214-8a0c-ecaf260571cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -447,6 +450,9 @@
     <ClInclude Include="Ironlizard.h">
       <Filter>소스 파일\03.Weapon\06.Ironlizard</Filter>
     </ClInclude>
+    <ClInclude Include="MissileEnemy.h">
+      <Filter>소스 파일\02.Object\02.Enemy\09.MissileEnemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MetalSlug.rc">
@@ -644,6 +650,9 @@
     </ClCompile>
     <ClCompile Include="Ironlizard.cpp">
       <Filter>소스 파일\03.Weapon\06.Ironlizard</Filter>
+    </ClCompile>
+    <ClCompile Include="MissileEnemy.cpp">
+      <Filter>소스 파일\02.Object\02.Enemy\09.MissileEnemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

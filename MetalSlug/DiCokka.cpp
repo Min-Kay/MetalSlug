@@ -58,6 +58,8 @@ void DiCokka::Late_Update()
 
 	if (hp <= 0)
 	{
+		DataMgr::Get_Instance()->Add_Kill(1);
+		DataMgr::Get_Instance()->Add_Score(250);
 		animIndex = 0;
 		state = STATE::DESTROY;
 		isDying = true;

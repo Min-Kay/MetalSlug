@@ -5,6 +5,14 @@
 
 LaserBullet::LaserBullet()
 {
+	isFiring = false;
+	listClear = false;
+
+	maxSize = 0.f;
+	renderSize = 0.f;
+
+	formalDir = DIR::RIGHT;
+	diffDir = false;
 }
 LaserBullet::~LaserBullet()
 {
@@ -244,6 +252,7 @@ void LaserBullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 
 				if (i.dealTime + LASER_TICK < i.collTime)
 				{
+					
 					i.dealTime = i.collTime;
 					i.target->Add_HP(-damage);
 				}
@@ -296,6 +305,7 @@ void LaserBullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 
 				if (i.dealTime + LASER_TICK < i.collTime)
 				{
+					DataMgr::Get_Instance()->Add_Score(25);
 					i.dealTime = i.collTime;
 					i.target->Add_HP(-damage);
 				}
@@ -311,6 +321,7 @@ void LaserBullet::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 		temp.dealTime = GetTickCount();
 		temp.collTime = temp.dealTime;
 		temp.distance = distance;
+		DataMgr::Get_Instance()->Add_Score(25);
 		_opponent->Add_HP(-damage);
 		tick.push_back(temp);
 	}

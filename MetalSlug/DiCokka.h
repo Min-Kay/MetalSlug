@@ -15,14 +15,14 @@ public:
 public:
 	enum STATE {IDLE,MOVE,DESTROY};
 private:
-	STATE state;
-	int currCount;
-	int maxCount;
-	bool isFiring;
-	bool isTurning; 
-	bool fire;
-	DWORD	attackTimer;
-	DWORD	fireTimer;
-	DWORD	fireEffectTimer;
+	STATE state = STATE::IDLE;
+	int currCount = 0;
+	int maxCount = 3;
+	bool isFiring = false;
+	bool isTurning = false;
+	bool fire = false;
+	DWORD	attackTimer = GetTickCount();
+	DWORD	fireTimer = GetTickCount();
+	DWORD	fireEffectTimer = GetTickCount();
 };
 

@@ -18,10 +18,10 @@ private:
 	void	Set_Position();
 
 private:
-	Obj* parent;
+	Obj* parent = nullptr;
 	
-	float	totalCY;
-	float	increaseCY;
+	float	totalCY = 0.f;
+	float	increaseCY = 0.f;
 
 };
 

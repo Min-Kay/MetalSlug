@@ -7,6 +7,20 @@
 
 Stage2::Stage2()
 {
+	totalX = 0;
+	totalY = 0;
+
+	showResult = false;
+	isClear = false;
+	isFail = false;
+	spawnMidBoss = false;
+	checkPoint = false;
+	scrollUpdating = false;
+	maxCheckPoint = 0;
+	currCheckPoint = 0;
+	formalX = 0.f;
+	formalY = 0.f;
+	currPlayerPos = 0;
 }
 
 Stage2::~Stage2()
@@ -19,7 +33,7 @@ void Stage2::Initialize()
 	isClear = false;
 	isFail = false;
 	spawnMidBoss = false;
-
+	showResult = false;
 	checkPoint = false;
 
 	Init_Information();
@@ -54,6 +68,10 @@ void Stage2::Update()
 
 void Stage2::Late_Update()
 {
+	Check_Checkpoint_Clear();
+	if (Check_GameState()) return;
+	Check_Scrolling();
+
 	if (ObjPoolMgr::Get_Instance()->Get_Player_Dead())
 	{
 		if (DataMgr::Get_Instance()->Get_Life() > 0)
@@ -62,14 +80,12 @@ void Stage2::Late_Update()
 			ObjPoolMgr::Get_Instance()->Set_Player_Dead(false);
 		}
 		else
+		{
+			showResult = true;
 			isFail = true;
+		}
 
 	}
-
-	Check_Checkpoint_Clear();
-	if (Check_GameState()) return;
-	Check_Scrolling();
-
 	ObjPoolMgr::Get_Instance()->Late_Update();
 }
 
@@ -78,34 +94,40 @@ void Stage2::Render(HDC _hdc)
 	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
-	if (-scrollX <= 2700 + WINCX)
+	if (showResult)
 	{
-		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map2-0");
-		GdiTransparentBlt(_hdc, scrollX, scrollY, 2700, 600, drawingDC, 0, 0, 1000, 218, MAP_COLOR);
+		Show_Result(_hdc);
 	}
-
-	if (-scrollX > 2700 - WINCX && -scrollX <= 5400 + WINCX)
+	else
 	{
-		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map2-1");
-		GdiTransparentBlt(_hdc, scrollX + 2700, scrollY, 2700, 600, drawingDC, 0, 0, 1000, 218, MAP_COLOR);
+		if (-scrollX <= 2700 + WINCX)
+		{
+			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map2-0");
+			GdiTransparentBlt(_hdc, scrollX, scrollY, 2700, 600, drawingDC, 0, 0, 1000, 218, MAP_COLOR);
+		}
+
+		if (-scrollX > 2700 - WINCX && -scrollX <= 5400 + WINCX)
+		{
+			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map2-1");
+			GdiTransparentBlt(_hdc, scrollX + 2700, scrollY, 2700, 600, drawingDC, 0, 0, 1000, 218, MAP_COLOR);
+		}
+
+		if (-scrollX > 5400 - WINCX && -scrollX <= 8100 + WINCX)
+		{
+			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map2-2");
+			GdiTransparentBlt(_hdc, scrollX + 5400, scrollY, 2700, 600, drawingDC, 0, 0, 1000, 218, MAP_COLOR);
+		}
+
+		if (-scrollX > 8100 - WINCX)
+		{
+			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map2-3");
+			GdiTransparentBlt(_hdc, scrollX + 8100, scrollY, 3491, 600, drawingDC, 0, 0, 1293, 218, MAP_COLOR);
+		}
+
+		CLineMgr::Get_Instance()->Render(_hdc);
+		ObjPoolMgr::Get_Instance()->Render(_hdc);
+		Render_Information(_hdc);
 	}
-
-	if (-scrollX > 5400 - WINCX && -scrollX <= 8100 + WINCX)
-	{
-		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map2-2");
-		GdiTransparentBlt(_hdc, scrollX + 5400, scrollY, 2700, 600, drawingDC, 0, 0, 1000, 218, MAP_COLOR);
-	}
-
-	if (-scrollX > 8100 - WINCX)
-	{
-		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map2-3");
-		GdiTransparentBlt(_hdc, scrollX + 8100, scrollY, 3491, 600, drawingDC, 0, 0, 1293, 218, MAP_COLOR);
-	}
-
-	CLineMgr::Get_Instance()->Render(_hdc);
-	ObjPoolMgr::Get_Instance()->Render(_hdc);
-	Render_Information(_hdc);
-
 }
 
 void Stage2::Release()
@@ -140,7 +162,10 @@ void Stage2::Set_CheckPoint_Objects()
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
 	if (currCheckPoint == maxCheckPoint && checkPoint)
+	{
+		showResult = true;
 		isClear = true;
+	}
 
 	switch (currCheckPoint)
 	{

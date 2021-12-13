@@ -29,7 +29,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -195,6 +195,7 @@
     <ClInclude Include="Masknell.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MetalSlug.h" />
+    <ClInclude Include="MissileEnemy.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="ObjPoolMgr.h" />
@@ -262,6 +263,7 @@
     <ClCompile Include="Masknell.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MetalSlug.cpp" />
+    <ClCompile Include="MissileEnemy.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="ObjPoolMgr.cpp" />

@@ -20,17 +20,17 @@ public:
 	enum STATE {SPAWN,IDLE,ROOTING,EXPLODE};
 
 private:
-	STATE state;
-	DWORD idleTimer;
+	STATE state = STATE::SPAWN;
+	DWORD idleTimer = GetTickCount();
 
-	float totalIdle;
-	float idleSpeed;
+	float totalIdle = 0.f;
+	float idleSpeed = 0.f;
 
-	float totalSub;
-	float subSpeed;
+	float totalSub = 0.f;
+	float subSpeed = 0.f;
 
-	float collY;
+	float collY = 0.f;
 
-	float fallingSpeed; 
+	float fallingSpeed = 0.f;
 };
 
