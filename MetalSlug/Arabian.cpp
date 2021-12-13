@@ -175,7 +175,7 @@ void Arabian::Anim_Die(HDC _hdc)
 
 	if (dir == DIR::RIGHT)
 	{
-		Anim_Counter(13, 70.f, false);
+		Anim_Counter(13, 50.f, false);
 		if (animIndex < 6)
 		{
 			StretchBlt(stretchDC, 0, 0, 35, 45, drawingDC, animIndex * 35 + 35 + 10, 1045, -35, 45, SRCCOPY);

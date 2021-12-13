@@ -212,12 +212,12 @@ void Soldier::Anim_Die(HDC _hdc)
 	switch (onlySide)
 	{
 	case DIR::RIGHT:
-		Anim_Counter(10, 70.f, false, 0);
+		Anim_Counter(10, 30.f, false);
 		StretchBlt(stretchDC, 0, 0, 35, 40, drawingDC, animIndex * 35 + 35 - 2, 1053, -35, 40, SRCCOPY);
 		GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) + 15.f, info.cx * 0.8f, info.cy * 0.9f, stretchDC, 0, 0, 35, 40, RGB(255, 255, 255));
 		break;
 	case DIR::LEFT:
-		Anim_Counter(10, 70.f, false, 0);
+		Anim_Counter(10, 30.f, false);
 		GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) + 15.f, info.cx * 0.8f, info.cy * 0.9f, drawingDC, animIndex * 35 - 2, 1053, 35, 40, RGB(255, 255, 255));
 		break;
 	}

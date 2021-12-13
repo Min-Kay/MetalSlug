@@ -45,3 +45,10 @@ bool Laser::Fire(float _x, float _y, DIR::ID _dir)
 
 	return false;
 }
+
+void Laser::Set_Fire(bool _bool)
+{
+	if (bullet) 
+		bullet->Pressing(false); 
+	isFire = _bool;
+}

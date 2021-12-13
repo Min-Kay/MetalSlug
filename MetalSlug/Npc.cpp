@@ -61,19 +61,19 @@ void Npc::Render(HDC _hdc)
 	case ACTION::IDLE:
 		if (isRopped)
 		{
-			Anim_Counter(5,100.f);
+			Anim_Counter(5,50.f);
 			GdiTransparentBlt(_hdc, int(rect.left + scrollX) - info.cx * 1.5f, int(rect.top + scrollY) - info.cy * 1.2f, info.cx * 4.f, info.cy * 4.f, drawingDC, animIndex * 200 , 0, 200, 200, RGB(255, 255, 255));
 		}
 		else if (thank)
 		{
 			if (dir == DIR::RIGHT)
 			{
-				Anim_Counter(10, 100.f, false, 4);
+				Anim_Counter(10, 50.f, false, 4);
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX) - info.cx * 1.5f, int(rect.top + scrollY) - info.cy * 1.2f, info.cx * 4.f, info.cy * 4.f, drawingDC, animIndex * 200, 200, 200, 200, RGB(255, 255, 255));
 			}
 			else
 			{
-				Anim_Counter(10, 100.f, false, 4);
+				Anim_Counter(10, 50.f, false, 4);
 				stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White3");
 				StretchBlt(stretchDC, 0, 0, 200, 200, drawingDC, animIndex * 200 - 200, 200, -200, 200, SRCCOPY);
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX) - info.cx * 1.5f, int(rect.top + scrollY) - info.cy * 1.2f, info.cx * 4.f, info.cy * 4.f, stretchDC, 0, 0, 200, 200, RGB(255, 255, 255));
@@ -98,12 +98,12 @@ void Npc::Render(HDC _hdc)
 		{
 			if (dir == DIR::RIGHT)
 			{
-				Anim_Counter(10, 200.f, false);
+				Anim_Counter(10, 50.f, false);
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX) - info.cx * 1.5f, int(rect.top + scrollY) - info.cy * 1.2f, info.cx * 4.f, info.cy * 4.f, drawingDC, animIndex * 200, 800, 200, 200, RGB(255, 255, 255));
 			}
 			else
 			{
-				Anim_Counter(10, 200.f, false);
+				Anim_Counter(10, 50.f, false);
 				stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White3");
 				StretchBlt(stretchDC, 0, 0, 200, 200, drawingDC, animIndex * 200 - 200, 800, -200, 200, SRCCOPY);
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX) - info.cx * 1.5f, int(rect.top + scrollY) - info.cy * 1.2f, info.cx * 4.f, info.cy * 4.f, stretchDC, 0, 0, 200, 200, RGB(255, 255, 255));
@@ -128,7 +128,7 @@ void Npc::Render(HDC _hdc)
 		}
 		else if (isUntied)
 		{
-			Anim_Counter(5, 100.f , false);
+			Anim_Counter(5, 50.f, false);
 			GdiTransparentBlt(_hdc, int(rect.left + scrollX) - info.cx * 1.5f, int(rect.top + scrollY) - info.cy * 1.2f, info.cx * 4.f, info.cy * 4.f, drawingDC, animIndex * 200, 200, 200, 200, RGB(255, 255, 255));
 
 			if (animIndex == 5)
@@ -144,12 +144,12 @@ void Npc::Render(HDC _hdc)
 		{
 			if (dir == DIR::RIGHT)
 			{
-				Anim_Counter(7, 100.f);
+				Anim_Counter(7, 50.f);
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX) - info.cx * 1.5f, int(rect.top + scrollY) - info.cy * 1.2f, info.cx * 4.f, info.cy * 4.f, drawingDC, animIndex * 200, 1200, 200, 200, RGB(255, 255, 255));
 			}
 			else
 			{
-				Anim_Counter(7, 100.f);
+				Anim_Counter(7, 50.f);
 				stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White3");
 				StretchBlt(stretchDC, 0, 0, 200, 200, drawingDC, animIndex * 200 - 200, 1200, -200, 200, SRCCOPY);
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX) - info.cx * 1.5f, int(rect.top + scrollY) - info.cy * 1.2f, info.cx * 4.f, info.cy * 4.f, stretchDC, 0, 0, 200, 200, RGB(255, 255, 255));
@@ -159,12 +159,12 @@ void Npc::Render(HDC _hdc)
 		{
 			if (dir == DIR::RIGHT)
 			{
-				Anim_Counter(12, 100.f);
+				Anim_Counter(12, 50.f);
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX) - info.cx * 1.5f, int(rect.top + scrollY) - info.cy * 1.2f, info.cx * 4.f, info.cy * 4.f, drawingDC, animIndex * 200, 400, 200, 200, RGB(255, 255, 255));
 			}
 			else
 			{
-				Anim_Counter(12, 100.f);
+				Anim_Counter(12, 50.f);
 				stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White3");
 				StretchBlt(stretchDC, 0, 0,200, 200, drawingDC, animIndex * 200 - 200, 400, -200, 200, SRCCOPY);
 				GdiTransparentBlt(_hdc, int(rect.left + scrollX) - info.cx * 1.5f, int(rect.top + scrollY) - info.cy * 1.2f, info.cx * 4.f, info.cy * 4.f, stretchDC, 0,0, 200, 200, RGB(255, 255, 255));

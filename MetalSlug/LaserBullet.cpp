@@ -19,7 +19,7 @@ void LaserBullet::Initialize()
 	damage = 10;
 	info.cx = 15.f;
 	info.cy = 15.f;
-	maxSize = 700.f;
+	maxSize = 600.f;
 	renderSize = -1.f; 
 	isFiring = false;
 	listClear = false;

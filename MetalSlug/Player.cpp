@@ -95,12 +95,14 @@ void Player::Release()
 void Player::KeyInput()
 {
 	if (isDead || isDying)
+	{
+		weapon->Set_Fire(false);
 		return;
+	}
 
 	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
-	action = jumping ? ACTION::JUMP : ACTION::IDLE;
 
 	if (CKeyMgr::Get_Instance()->Key_Down('D'))
 	{
@@ -152,6 +154,8 @@ void Player::KeyInput()
 			break;
 		}
 	}
+
+	action = jumping ? ACTION::JUMP : ACTION::IDLE;
 
 	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_UP))
 	{
@@ -413,26 +417,6 @@ void Player::Anim_Idle(HDC _hdc)
 	}
 }
 
-void Player::Anim_Spawning(HDC _hdc)
-{
-	
-	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
-	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
-
-	drawingDC = BmpMgr::Get_Instance()->Find_Image(PLAYER_ALIVE_KEY);
-
-	GdiTransparentBlt(_hdc,int(rect.left + scrollX),int(rect.top + scrollY), 42, 245,drawingDC,42,245,42,245, PLAYER_COLOR);
-
-	if (animTimer + 300.f < GetTickCount())
-	{
-		if (animValidIndex == 8)
-			return;
-
-		++animValidIndex;
-		animTimer = GetTickCount();
-	}
-}
-
 void Player::Anim_Moving(HDC _hdc)
 {
 	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
@@ -473,11 +457,11 @@ void Player::Anim_Moving(HDC _hdc)
 		switch (dir)
 		{
 		case DIR::RIGHT:
-			Anim_Counter(ANIM::PLAYER_MOVE, 11, 50.f);
+			Anim_Counter(ANIM::PLAYER_MOVE, 11, 30.f);
 			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx, info.cy, drawingDC, animIndexs[ACTION::MOVE] * 200 + 80, animIndexPos[ACTION::MOVE] * 200 + 70, info.cx * 0.5f, info.cy * 0.5f, PLAYER_COLOR);
 			break;
 		case DIR::LEFT:
-			Anim_Counter(ANIM::PLAYER_MOVE, 11, 50.f);
+			Anim_Counter(ANIM::PLAYER_MOVE, 11, 30.f);
 			StretchBlt(stretchDC, 0, 0, info.cx * 0.5f, info.cy * 0.5f, drawingDC, animIndexs[ACTION::MOVE] * 200 + 80 + info.cx * 0.5f, animIndexPos[ACTION::MOVE] * 200 + 70, -info.cx * 0.5f, info.cy * 0.5f, SRCCOPY);
 			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx, info.cy, stretchDC, 0, 0, info.cx * 0.5f, info.cy * 0.5f, PLAYER_COLOR);
 			break;

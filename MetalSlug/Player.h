@@ -19,7 +19,6 @@ public:
 
 private:
 	void	Anim_Idle(HDC _hdc);
-	void	Anim_Spawning(HDC _hdc);
 	void	Anim_Moving(HDC _hdc);
 	void	Anim_Jumping(HDC _hdc);
 	void	Anim_Dying(HDC _hdc);

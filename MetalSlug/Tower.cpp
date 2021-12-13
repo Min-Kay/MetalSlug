@@ -105,7 +105,7 @@ void Tower::Render(HDC _hdc)
 			{
 				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 180, 280, drawingDC, 5, 184, 90, 140, THREEHEAD_COLOR);
 				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.5f, info.y + scrollY - info.cy * 0.7f, 100, 120, drawingDC, 5, 635, 53, 60, THREEHEAD_COLOR);
-				Anim_Counter(15, 100.f, false);
+				Anim_Counter(15, 50.f, false);
 				float x = info.x + scrollX - info.cx;
 				float y = info.y + scrollY - info.cy * 0.8f;
 				if (animIndex < 5)
@@ -123,7 +123,7 @@ void Tower::Render(HDC _hdc)
 			{
 				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 180, 280, drawingDC, 95, 184, 90, 140, THREEHEAD_COLOR);
 				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.5f, info.y + scrollY - info.cy * 0.7f, 100, 120, drawingDC, 5, 635, 53, 60, THREEHEAD_COLOR);
-				Anim_Counter(15, 100.f, false);
+				Anim_Counter(15, 50.f, false);
 				float x = info.x + scrollX - info.cx;
 				float y = info.y + scrollY - info.cy * 0.8f;
 				if (animIndex < 5)
@@ -141,7 +141,7 @@ void Tower::Render(HDC _hdc)
 			{
 				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 180, 280, drawingDC, 185, 184, 90, 140, THREEHEAD_COLOR);
 				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.5f, info.y + scrollY - info.cy * 0.7f, 100, 120, drawingDC, 5, 635, 53, 60, THREEHEAD_COLOR);
-				Anim_Counter(15, 100.f, false);
+				Anim_Counter(15, 50.f, false);
 
 				float x = info.x + scrollX - info.cx;
 				float y = info.y + scrollY - info.cy * 0.8f;
@@ -183,7 +183,7 @@ void Tower::Render(HDC _hdc)
 			break;
 		}
 
-		Anim_Counter(12, 100.f, false);
+		Anim_Counter(12, 50.f, false);
 		if (animIndex < 7)
 		{
 			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.6f, info.y + scrollY - info.cy * 0.8f, 140, 140, drawingDC, 3 + animIndex * 70, 1021, 70, 70, THREEHEAD_COLOR);
@@ -207,7 +207,7 @@ void Tower::Render(HDC _hdc)
 
 			if (firing)
 			{
-				Anim_Counter(4,70.f,true);
+				Anim_Counter(4,50.f,true);
 				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, animIndex * 39, 1823, 40, 50, THREEHEAD_COLOR);
 
 			}
@@ -221,7 +221,7 @@ void Tower::Render(HDC _hdc)
 			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 103, 850, 100, 140, THREEHEAD_COLOR);
 			if (firing)
 			{
-				Anim_Counter(4, 70.f, true);
+				Anim_Counter(4, 50.f, true);
 				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, animIndex * 39, 1823, 40, 50, THREEHEAD_COLOR);
 
 			}
@@ -235,7 +235,7 @@ void Tower::Render(HDC _hdc)
 			GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.9f, info.y + scrollY - info.cy, 200, 280, drawingDC, 203, 850, 100, 140, THREEHEAD_COLOR);
 			if (firing)
 			{
-				Anim_Counter(4, 70.f, true);
+				Anim_Counter(4, 50.f, true);
 				stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_Item");
 				StretchBlt(stretchDC, 0, 0, 40, 50, drawingDC, animIndex * 39  + 40 , 1823, -40, 50, SRCCOPY);
 				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, stretchDC, 0, 0, 40, 50, THREEHEAD_COLOR);

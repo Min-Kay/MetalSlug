@@ -18,6 +18,8 @@ public:
 public:
 	void	Set_Ammo(int _ammo) { ammo = _ammo; }
 	void	Add_Ammo(int _ammo) { ammo += _ammo; }
+	
+	virtual void	Set_Fire(bool _bool) { isFire = _bool; }
 
 public:
 	const int& Get_Ammo() const { return ammo; }

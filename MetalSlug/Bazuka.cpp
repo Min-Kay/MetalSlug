@@ -219,7 +219,7 @@ void Bazuka::State_Machine()
 	switch (state)
 	{
 	case Bazuka::IDLE:
-			if (abs(playerX) > 400.f )
+			if (abs(playerX) > 350.f )
 			{
 				action = ACTION::MOVE;
 				break;
@@ -255,19 +255,27 @@ void Bazuka::State_Machine()
 				}
 				else
 				{
-					dir = DIR::DOWN;
-					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, info.x, rect.bottom, DIR::DOWN, OBJ::ENEMY);
+					if (playerY < 100)
+					{
+						dir = DIR::DOWN;
+						ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, info.x, rect.bottom, DIR::DOWN, OBJ::ENEMY);
+					}
+					else if (abs(playerX) < 50 && playerX > -50)
+					{
+						dir = DIR::RIGHT;
+						ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.right, info.y, DIR::RIGHT, OBJ::ENEMY);
+					}
+					else if (abs(playerX) < 50 && playerX < 50)
+					{
+						dir = DIR::LEFT;
+						ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.right, info.y, DIR::RIGHT, OBJ::ENEMY);
+					}
 				}
 				fireTime = GetTickCount();
 			}
 	
 		break;
 	case Bazuka::MOVE:
-		if (abs(playerX) < 100 && playerY > 100)
-			falling = true;
-		else if (playerY < 100)
-			falling = false;
-
 		if (playerX < 0)
 		{
 			info.x -= speed;
