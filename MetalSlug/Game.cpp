@@ -19,6 +19,7 @@ void Game::Initialize()
 	totalX = 0;
 	totalY = 0; 
 
+	showResult = false;
 	isClear = false; 
 	isFail = false;
 	spawnMidBoss = false;
@@ -87,42 +88,66 @@ void Game::Render(HDC _hdc)
 	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
-	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"background");
-	GdiTransparentBlt(_hdc, 0, 0, WINCX, WINCY, drawingDC, 0, 0, 100, 75, MAP_COLOR);
-
-	if (-scrollX < 2500 + WINCX)
+	/*if (showResult)
 	{
-		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-0");
-		GdiTransparentBlt(_hdc, scrollX, scrollY, 2500, 700, drawingDC, 0, 0, 1000, 280, MAP_COLOR);
-	}
+		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Back");
+		GdiTransparentBlt(_hdc, 0, 0, WINCX, WINCY, drawingDC, 0, 0, WINCX, WINCY, MAP_COLOR);
 
-	if (-scrollX > 2500 - WINCX && -scrollX < 5000 + WINCX)
-	{
-		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-1");
-		GdiTransparentBlt(_hdc, scrollX + 2500, scrollY, 2500, 700, drawingDC, 0, 0, 1000, 280, MAP_COLOR);
-	}
+		int size = Check_NumSize(DataMgr::Get_Instance()->Get_Score());
 
-	if (-scrollX > 5000 - WINCX && -scrollX < 7500 + WINCX)
-	{
-		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-2");
-		GdiTransparentBlt(_hdc, scrollX + 5000, scrollY, 2500, 700, drawingDC, 0, 0, 1000, 280, MAP_COLOR);
-	}
+		for (score = 0; score < DataMgr::Get_Instance()->Get_Score(); ++score)
+		{
+			swprintf_s(currScoreCount, _T("%d"), score);
+			for (int i = 0; i < size; ++i)
+			{
+				int num = Check_Number(currScoreCount[size - 1]);
+				drawingDC = BmpMgr::Get_Instance()->Find_Image(L"NUMBER");
+				GdiTransparentBlt(_hdc, 20 * (size - 1 - i) + 70 - ((size - i) * 20), -25, 200, 200, drawingDC, 100 * num, 0, 100, 100, RGB(255, 255, 255));
 
-	if (spawnMidBoss && -scrollX > 5000 - WINCX && -scrollX < 7500 + WINCX)
-	{
-		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"MidBoss");
-		GdiTransparentBlt(_hdc, scrollX + 4650, scrollY + 250, 1026, 324, drawingDC, 0, 3394, 380, 120, THREEHEAD_COLOR);
-	}
+			}
+		}
 
-	if (-scrollX > 7500 - WINCX && -scrollX < 9000 + WINCX)
+		isClear = true;
+	}*/
+ 
 	{
-		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-3");
-		GdiTransparentBlt(_hdc, scrollX + 7500, scrollY, 2050, 700, drawingDC, 0, 0, 820, 280, MAP_COLOR);
+		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"background");
+		GdiTransparentBlt(_hdc, 0, 0, WINCX, WINCY, drawingDC, 0, 0, 100, 75, MAP_COLOR);
+
+		if (-scrollX < 2500 + WINCX)
+		{
+			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-0");
+			GdiTransparentBlt(_hdc, scrollX, scrollY, 2500, 700, drawingDC, 0, 0, 1000, 280, MAP_COLOR);
+		}
+
+		if (-scrollX > 2500 - WINCX && -scrollX < 5000 + WINCX)
+		{
+			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-1");
+			GdiTransparentBlt(_hdc, scrollX + 2500, scrollY, 2500, 700, drawingDC, 0, 0, 1000, 280, MAP_COLOR);
+		}
+
+		if (-scrollX > 5000 - WINCX && -scrollX < 7500 + WINCX)
+		{
+			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-2");
+			GdiTransparentBlt(_hdc, scrollX + 5000, scrollY, 2500, 700, drawingDC, 0, 0, 1000, 280, MAP_COLOR);
+		}
+
+		if (spawnMidBoss && -scrollX > 5000 - WINCX && -scrollX < 7500 + WINCX)
+		{
+			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"MidBoss");
+			GdiTransparentBlt(_hdc, scrollX + 4650, scrollY + 250, 1026, 324, drawingDC, 0, 3394, 380, 120, THREEHEAD_COLOR);
+		}
+
+		if (-scrollX > 7500 - WINCX && -scrollX < 9000 + WINCX)
+		{
+			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Map1-3");
+			GdiTransparentBlt(_hdc, scrollX + 7500, scrollY, 2050, 700, drawingDC, 0, 0, 820, 280, MAP_COLOR);
+		}
+
+		CLineMgr::Get_Instance()->Render(_hdc);
+		ObjPoolMgr::Get_Instance()->Render(_hdc);
+		Render_Information(_hdc);
 	}
-	
-	CLineMgr::Get_Instance()->Render(_hdc);
-	ObjPoolMgr::Get_Instance()->Render(_hdc);
-	Render_Information(_hdc); 
 
 }
 
@@ -241,6 +266,7 @@ void Game::Init_Information()
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Life_Bullet.bmp", L"UI");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/number.bmp", L"NUMBER");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Infinite.bmp", L"Infinite");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/back.bmp",L"Back");
 }
 
 void Game::Render_Information(HDC _hdc)

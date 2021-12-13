@@ -33,7 +33,11 @@ public:
 
 protected:
 	bool	isClear;
+	bool	showResult;
 	bool	isFail;
+
+	int		score = 0;
+	TCHAR	currScoreCount[10] = L"";
 
 	TCHAR	scoreCount[10] = L"";
 	TCHAR	bulletCount[10] = L"";

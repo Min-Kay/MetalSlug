@@ -29,7 +29,7 @@ void Player::Initialize()
 
 	isJump = false;
 	jumpY = 0.f;
-	jumpForce = 35.f;
+	jumpForce = 30.f;
 	jumpTime = 0.f;
 
 	isValid = true; 
