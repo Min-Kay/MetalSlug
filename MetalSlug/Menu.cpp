@@ -20,6 +20,7 @@ void Menu::Update()
 
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_ESCAPE))
 	{
+		BlockMgr::Get_Instance()->Destroy_Instance();
 		BmpMgr::Get_Instance()->Destroy_Instance();
 		ObjPoolMgr::Get_Instance()->Destroy_Instance();
 		CLineMgr::Get_Instance()->Destroy_Instance();

@@ -88,28 +88,40 @@ void Game::Render(HDC _hdc)
 	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
-	/*if (showResult)
+	if (showResult)
 	{
-		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Back");
-		GdiTransparentBlt(_hdc, 0, 0, WINCX, WINCY, drawingDC, 0, 0, WINCX, WINCY, MAP_COLOR);
-
+		HDC mainDC = GetDC(g_hwnd);
 		int size = Check_NumSize(DataMgr::Get_Instance()->Get_Score());
+		int num = 0;
+		DWORD tick = GetTickCount();
 
-		for (score = 0; score < DataMgr::Get_Instance()->Get_Score(); ++score)
+		for (int i = 0; i < size; ++i)
 		{
-			swprintf_s(currScoreCount, _T("%d"), score);
-			for (int i = 0; i < size; ++i)
-			{
-				int num = Check_Number(currScoreCount[size - 1]);
-				drawingDC = BmpMgr::Get_Instance()->Find_Image(L"NUMBER");
-				GdiTransparentBlt(_hdc, 20 * (size - 1 - i) + 70 - ((size - i) * 20), -25, 200, 200, drawingDC, 100 * num, 0, 100, 100, RGB(255, 255, 255));
+			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Back");
+			BitBlt(mainDC, 0, 0, WINCX, WINCY, drawingDC, 0, 0, SRCCOPY);
 
+			for (int j = size - 1; j > size - 1 - i; --j)
+			{
+				num = Check_Number(scoreCount[j]);
+				GdiTransparentBlt(mainDC, 50 * (j) + 200, 100, 200, 200, drawingDC, 100 * num, 0, 100, 100, RGB(255, 255, 255));
 			}
+
+			while (tick + 1000.f > GetTickCount())
+			{
+				drawingDC = BmpMgr::Get_Instance()->Find_Image(L"NUMBER");
+				num = rand() % 10;
+				GdiTransparentBlt(mainDC, 50 * (size - 1 - i) + 200, 100, 200, 200, drawingDC, 100 * num, 0, 100, 100, RGB(255, 255, 255));
+			}
+
+			tick = GetTickCount();
 		}
 
+		while(tick + 3000.f > GetTickCount())
+		{	
+		}
 		isClear = true;
-	}*/
- 
+	}
+	else 	
 	{
 		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"background");
 		GdiTransparentBlt(_hdc, 0, 0, WINCX, WINCY, drawingDC, 0, 0, 100, 75, MAP_COLOR);
@@ -420,7 +432,7 @@ void Game::Set_CheckPoint_Objects()
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
 	if (currCheckPoint == maxCheckPoint && checkPoint)
-		isClear = true;
+		showResult = true;
 
 	switch (currCheckPoint)
 	{

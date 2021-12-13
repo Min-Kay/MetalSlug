@@ -49,7 +49,7 @@ void MainGame::Render()
 
 	if (frameTime + 1000 < GetTickCount())
 	{
-		swprintf_s(fpsText, L"FPS : %d / x: %1f / y: %1f", fps, CScrollMgr::Get_Instance()->Get_ScrollX(), CScrollMgr::Get_Instance()->Get_ScrollY());
+		swprintf_s(fpsText, L"FPS : %d / x: %.1f / y: %.1f", fps, CScrollMgr::Get_Instance()->Get_ScrollX(), CScrollMgr::Get_Instance()->Get_ScrollY());
 
 		SetWindowText(g_hwnd, fpsText);
 		frameTime = GetTickCount();
@@ -59,6 +59,7 @@ void MainGame::Render()
 
 void MainGame::Release()
 {
+	BlockMgr::Get_Instance()->Destroy_Instance();
 	BmpMgr::Get_Instance()->Destroy_Instance();
 	ObjPoolMgr::Get_Instance()->Destroy_Instance();
 	CLineMgr::Get_Instance()->Destroy_Instance();
