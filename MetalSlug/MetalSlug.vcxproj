@@ -220,6 +220,7 @@
     <ClInclude Include="Struct.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThreeHead.h" />
+    <ClInclude Include="ThreeHeadBullet.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="Tower.h" />
     <ClInclude Include="Weapon.h" />
@@ -285,6 +286,7 @@
     <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="Stage2.cpp" />
     <ClCompile Include="ThreeHead.cpp" />
+    <ClCompile Include="ThreeHeadBullet.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="Tower.cpp" />
     <ClCompile Include="Weapon.cpp" />

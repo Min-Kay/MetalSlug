@@ -217,6 +217,9 @@
     <Filter Include="소스 파일\02.Object\02.Enemy\09.MissileEnemy">
       <UniqueIdentifier>{cdf3e243-33ef-4214-8a0c-ecaf260571cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02.Object\05.Bullet\05.EnemyBullet\06.ThreeHeadBullet">
+      <UniqueIdentifier>{7dd6a1ab-1857-43b5-91ed-0293d035f1c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -453,6 +456,9 @@
     <ClInclude Include="MissileEnemy.h">
       <Filter>소스 파일\02.Object\02.Enemy\09.MissileEnemy</Filter>
     </ClInclude>
+    <ClInclude Include="ThreeHeadBullet.h">
+      <Filter>소스 파일\02.Object\05.Bullet\05.EnemyBullet\06.ThreeHeadBullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MetalSlug.rc">
@@ -653,6 +659,9 @@
     </ClCompile>
     <ClCompile Include="MissileEnemy.cpp">
       <Filter>소스 파일\02.Object\02.Enemy\09.MissileEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreeHeadBullet.cpp">
+      <Filter>소스 파일\02.Object\05.Bullet\05.EnemyBullet\06.ThreeHeadBullet</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
