@@ -214,11 +214,20 @@
     <Filter Include="소스 파일\03.Weapon\06.Ironlizard">
       <UniqueIdentifier>{b2ff9162-f9f5-4bcd-9083-cbc28cde0409}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02.Object\02.Enemy\09.MissileEnemy">
-      <UniqueIdentifier>{cdf3e243-33ef-4214-8a0c-ecaf260571cb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\02.Object\05.Bullet\05.EnemyBullet\06.ThreeHeadBullet">
       <UniqueIdentifier>{7dd6a1ab-1857-43b5-91ed-0293d035f1c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\02.Enemy\09.Kessi">
+      <UniqueIdentifier>{2601959c-3d48-4aec-ba24-15f7b1325481}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\02.Enemy\09.Kessi\01.Rosin">
+      <UniqueIdentifier>{bafa0f2c-4810-4c6a-8a8b-c659682615f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\02.Enemy\09.Kessi\02.FixedBazuka">
+      <UniqueIdentifier>{c5b3dca4-07d5-4890-99b9-8cf0df91d8f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Object\02.Enemy\09.Kessi\03.Burst">
+      <UniqueIdentifier>{f6ac4e8d-7e51-48ad-99cf-0b5e4845b334}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -453,11 +462,20 @@
     <ClInclude Include="Ironlizard.h">
       <Filter>소스 파일\03.Weapon\06.Ironlizard</Filter>
     </ClInclude>
-    <ClInclude Include="MissileEnemy.h">
-      <Filter>소스 파일\02.Object\02.Enemy\09.MissileEnemy</Filter>
-    </ClInclude>
     <ClInclude Include="ThreeHeadBullet.h">
       <Filter>소스 파일\02.Object\05.Bullet\05.EnemyBullet\06.ThreeHeadBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Kessi.h">
+      <Filter>소스 파일\02.Object\02.Enemy\09.Kessi</Filter>
+    </ClInclude>
+    <ClInclude Include="FixedBazuka.h">
+      <Filter>소스 파일\02.Object\02.Enemy\09.Kessi\02.FixedBazuka</Filter>
+    </ClInclude>
+    <ClInclude Include="Rosin.h">
+      <Filter>소스 파일\02.Object\02.Enemy\09.Kessi\01.Rosin</Filter>
+    </ClInclude>
+    <ClInclude Include="Burst.h">
+      <Filter>소스 파일\02.Object\02.Enemy\09.Kessi\03.Burst</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -657,11 +675,20 @@
     <ClCompile Include="Ironlizard.cpp">
       <Filter>소스 파일\03.Weapon\06.Ironlizard</Filter>
     </ClCompile>
-    <ClCompile Include="MissileEnemy.cpp">
-      <Filter>소스 파일\02.Object\02.Enemy\09.MissileEnemy</Filter>
-    </ClCompile>
     <ClCompile Include="ThreeHeadBullet.cpp">
       <Filter>소스 파일\02.Object\05.Bullet\05.EnemyBullet\06.ThreeHeadBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Kessi.cpp">
+      <Filter>소스 파일\02.Object\02.Enemy\09.Kessi</Filter>
+    </ClCompile>
+    <ClCompile Include="FixedBazuka.cpp">
+      <Filter>소스 파일\02.Object\02.Enemy\09.Kessi\02.FixedBazuka</Filter>
+    </ClCompile>
+    <ClCompile Include="Rosin.cpp">
+      <Filter>소스 파일\02.Object\02.Enemy\09.Kessi\01.Rosin</Filter>
+    </ClCompile>
+    <ClCompile Include="Burst.cpp">
+      <Filter>소스 파일\02.Object\02.Enemy\09.Kessi\03.Burst</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

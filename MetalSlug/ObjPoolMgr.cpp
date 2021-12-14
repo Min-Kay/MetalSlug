@@ -217,9 +217,9 @@ void ObjPoolMgr::Spawn_Enemy(ENEMY::ID _enemy, float _X, float _Y, DIR::ID _dir)
 		auto& temp = enemy[_enemy].front(); 
 		if(temp->Get_Dead())
 		{
-			temp->Initialize();
 			temp->Set_Pos(_X, _Y);
 			temp->Set_Dir(_dir);
+			temp->Initialize();
 			temp->Update_Rect();
 			temp->Set_Dead(false);
 			BlockMgr::Get_Instance()->Add_Block(temp);
@@ -254,6 +254,9 @@ void ObjPoolMgr::Spawn_Enemy(ENEMY::ID _enemy, float _X, float _Y, DIR::ID _dir)
 		break;
 	case ENEMY::DICOKKA:
 		temp = CAbstractFactory<DiCokka>::Create(_X, _Y, _dir);
+		break;
+	case ENEMY::KESSI:
+		temp = CAbstractFactory<Kessi>::Create(_X, _Y, _dir);
 		break;
 	default:
 		return;

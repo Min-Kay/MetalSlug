@@ -206,7 +206,7 @@ void Stage2::Set_CheckPoint_Objects()
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SARUBIA, 9400, 300, DIR::LEFT);
 		break;
 	case 3:
-		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SARUBIA, 11000, 300, DIR::LEFT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::KESSI, 11200, -200, DIR::LEFT);
 		break;
 	}
 	if (maxCheckPoint > currCheckPoint)

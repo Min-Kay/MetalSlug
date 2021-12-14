@@ -33,5 +33,10 @@ private:
 	bool firing;
 
 	DWORD fireTime;
+
+	int	effectIndex;
+	DWORD fireEffectTime;
+
+	list<Obj*> bullets;
 };
 

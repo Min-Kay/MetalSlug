@@ -159,6 +159,7 @@
     <ClInclude Include="BmpFile.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Bullets.h" />
+    <ClInclude Include="Burst.h" />
     <ClInclude Include="Car.h" />
     <ClInclude Include="CBitMap.h" />
     <ClInclude Include="Class.h" />
@@ -172,6 +173,7 @@
     <ClInclude Include="Enemys.h" />
     <ClInclude Include="Enum.h" />
     <ClInclude Include="Explosive.h" />
+    <ClInclude Include="FixedBazuka.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Grenade.h" />
@@ -184,6 +186,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemBox.h" />
     <ClInclude Include="Items.h" />
+    <ClInclude Include="Kessi.h" />
     <ClInclude Include="KeyMgr.h" />
     <ClInclude Include="Laser.h" />
     <ClInclude Include="LaserBullet.h" />
@@ -195,7 +198,6 @@
     <ClInclude Include="Masknell.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MetalSlug.h" />
-    <ClInclude Include="MissileEnemy.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="ObjPoolMgr.h" />
@@ -205,6 +207,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RocketBullet.h" />
     <ClInclude Include="RocketLauncher.h" />
+    <ClInclude Include="Rosin.h" />
     <ClInclude Include="Sarubia.h" />
     <ClInclude Include="SarubiaBullet.h" />
     <ClInclude Include="Scene.h" />
@@ -236,6 +239,7 @@
     <ClCompile Include="BlockMgr.cpp" />
     <ClCompile Include="BmpMgr.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Burst.cpp" />
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="CBitMap.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />
@@ -245,6 +249,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyBullet.cpp" />
     <ClCompile Include="Explosive.cpp" />
+    <ClCompile Include="FixedBazuka.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Grenade.cpp" />
     <ClCompile Include="GrenadeBox.cpp" />
@@ -254,6 +259,7 @@
     <ClCompile Include="IronlizardBullet.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemBox.cpp" />
+    <ClCompile Include="Kessi.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="Laser.cpp" />
     <ClCompile Include="LaserBullet.cpp" />
@@ -264,7 +270,6 @@
     <ClCompile Include="Masknell.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MetalSlug.cpp" />
-    <ClCompile Include="MissileEnemy.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="ObjPoolMgr.cpp" />
@@ -273,6 +278,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RocketBullet.cpp" />
     <ClCompile Include="RocketLauncher.cpp" />
+    <ClCompile Include="Rosin.cpp" />
     <ClCompile Include="Sarubia.cpp" />
     <ClCompile Include="SarubiaBullet.cpp" />
     <ClCompile Include="Scene.cpp" />

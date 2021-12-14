@@ -28,7 +28,6 @@ void Bazuka::Initialize()
 	canCollision = false;
 	falling = false; 
 	fireTime = GetTickCount();
-	coll_Attack = false;
 
 	isDying = false;
 	isDead = false;
@@ -186,7 +185,7 @@ void Bazuka::Gravity()
 	}
 	else if (para)
 	{
-		info.y += 0.1f;
+		info.y += 0.2f;
 	}
 	else if (blockCol && info.y > blockY)
 	{

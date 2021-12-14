@@ -2,6 +2,7 @@
 #include "Bullets.h"
 #include "Manager.h"
 #include "ThreeHead.h"
+#include "AbstractFactory.h"
 
 Tower::Tower()
 {
@@ -29,6 +30,9 @@ Tower::Tower()
 
 	firing = false;
 	fireTime = GetTickCount();
+
+	effectIndex = 0;
+	fireEffectTime = GetTickCount();
 }
 
 Tower::Tower(THREEHEAD::HEAD _head, float _X, float _Y)
@@ -114,6 +118,21 @@ int Tower::Update()
 
 void Tower::Late_Update()
 {
+	auto iter = bullets.begin();
+	for (; iter != bullets.end();)
+	{
+		if ((*iter)->Get_Dead() || isDying)
+		{
+			ObjPoolMgr::Get_Instance()->Delete_Object(OBJ::BULLET,*iter);
+			delete *iter;
+			iter = bullets.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
+	}
+
 	if (!isDying && hp <= 0)
 	{
 		DataMgr::Get_Instance()->Add_Score(500);
@@ -258,6 +277,14 @@ void Tower::Render(HDC _hdc)
 				Anim_Counter(4,50.f,true);
 				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, animIndex * 39, 1823, 40, 50, THREEHEAD_COLOR);
 
+				GdiTransparentBlt(_hdc, info.x + scrollX - 50.f, info.y  + scrollY - 50.f,100,100,drawingDC,(effectIndex % 6) * 65, 1986 + 50 * int(effectIndex/5),65,50, THREEHEAD_COLOR);
+				if (fireEffectTime + 30.f < GetTickCount())
+				{
+					++effectIndex;
+					if (effectIndex > 25)
+						effectIndex = 0;
+					fireEffectTime = GetTickCount();
+				}
 			}
 			else
 			{
@@ -271,7 +298,14 @@ void Tower::Render(HDC _hdc)
 			{
 				Anim_Counter(4, 50.f, true);
 				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, drawingDC, animIndex * 39, 1823, 40, 50, THREEHEAD_COLOR);
-
+				GdiTransparentBlt(_hdc, info.x + scrollX - 50.f, info.y + scrollY - 50.f, 100, 100, drawingDC, (effectIndex % 6) * 65, 1986 + 50 * int(effectIndex / 6), 65, 50, THREEHEAD_COLOR);
+				if (fireEffectTime + 30.f < GetTickCount())
+				{
+					++effectIndex;
+					if (effectIndex > 25)
+						effectIndex = 0;
+					fireEffectTime = GetTickCount();
+				}
 			}
 			else
 			{
@@ -287,6 +321,16 @@ void Tower::Render(HDC _hdc)
 				stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_Item");
 				StretchBlt(stretchDC, 0, 0, 40, 50, drawingDC, animIndex * 39  + 40 , 1823, -40, 50, SRCCOPY);
 				GdiTransparentBlt(_hdc, info.x + scrollX - info.cx * 0.3f, info.y + scrollY - info.cy * 0.6f, 70, 100, stretchDC, 0, 0, 40, 50, THREEHEAD_COLOR);
+
+				StretchBlt(stretchDC, 0, 0, 65, 50, drawingDC, (effectIndex % 6) * 65 + 65, 1986 + 50 * int(effectIndex / 6), -65, 50, SRCCOPY);
+				GdiTransparentBlt(_hdc, info.x + scrollX - 50.f, info.y + scrollY - 50.f, 100, 100, stretchDC, 0, 0, 65, 50, THREEHEAD_COLOR);
+				if (fireEffectTime + 30.f < GetTickCount())
+				{
+					++effectIndex;
+					if (effectIndex > 25)
+						effectIndex = 0;
+					fireEffectTime = GetTickCount();
+				}
 			}
 			else
 			{
@@ -316,21 +360,67 @@ void Tower::Render(HDC _hdc)
 	}
 }
 
-void Tower::Release(){}
+void Tower::Release()
+{
+	for (auto& i : bullets)
+		ObjPoolMgr::Get_Instance()->Delete_Object(OBJ::BULLET, i);
+
+	for_each(bullets.begin(),bullets.end(),CDeleteObj());
+	
+	bullets.clear();
+}
 
 void Tower::State_Machine()
 {
 	switch (state)
 	{
 	case THREEHEAD::ATTACK:
-		if (!isMove) isMove = true;
-		if (fireTime + 2000.f < GetTickCount())
+		if (!isMove)
 		{
-			ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::ENEMYBULLET,info.x,info.y - info.cy,DIR::DOWN,OBJ::ENEMY);
+			isMove = true;
 			fireTime = GetTickCount();
+		}
+
+		if (isMove && fireTime + 2500.f < GetTickCount())
+		{
+			DIR::ID bulletDir;
+
+			switch (head)
+			{
+			case THREEHEAD::LEFT:
+			case THREEHEAD::MID:
+				bulletDir = DIR::RIGHT;
+				break;
+			case THREEHEAD::RIGHT:
+				bulletDir = DIR::LEFT;
+				break;
+			}
+			for (int i = 0; i < 6; ++i)
+			{
+				Obj* bullet;
+				if (bulletDir == DIR::RIGHT)
+				{
+					bullet = CAbstractFactory<ThreeHeadBullet>::Create(info.x + (i % 3) * 25.f, info.y - info.cy * 0.3f * (i % 2), bulletDir);
+				}
+				else
+				{
+					bullet = CAbstractFactory<ThreeHeadBullet>::Create(info.x - (i % 3) * 25.f, info.y - info.cy * 0.3f * (i % 2), bulletDir);
+				}
+			
+				static_cast<ThreeHeadBullet*>(bullet)->Set_ParentID(OBJ::ENEMY);
+				if(!ObjPoolMgr::Get_Instance()->Get_OnScreenObj(OBJ::PLAYER).empty())
+					static_cast<ThreeHeadBullet*>(bullet)->Set_Target(ObjPoolMgr::Get_Instance()->Get_OnScreenObj(OBJ::PLAYER).front());
+
+				ObjPoolMgr::Get_Instance()->Add_Object(OBJ::BULLET,bullet);
+				bullets.push_back(bullet);
+			}
+
+			fireTime = GetTickCount();
+			fireEffectTime = GetTickCount();
+			effectIndex = 0;
 			firing = true;
 		}
-		else if (fireTime + 700.f < GetTickCount())
+		else if (fireTime + 1000.f < GetTickCount())
 		{
 			firing = false;
 		}

@@ -305,24 +305,6 @@ void SolDae::Idle()
 		motionEnd = false;
 		rootMotionTimer = GetTickCount();
 	}
-	/*else if (sunshineGauge >= fullGauge)
-	{
-		if (idleY < 0) idleY *= -1.f;
-		state = SOLDAE::SUNSHINE;
-		sunshineGauge = 0;
-		rootGauge = rootGauge >> 1;
-		followerGauge = followerGauge >> 1;
-		laserGauge = laserGauge >> 1;
-	}
-	else if (followerGauge >= fullGauge)
-	{
-		if (idleY < 0) idleY *= -1.f;
-		state = SOLDAE::FOLLOWER;
-		followerGauge = 0;
-		rootGauge = rootGauge >> 1;
-		sunshineGauge = sunshineGauge >> 1;
-		laserGauge = laserGauge >> 1;
-	}*/
 	else if (laserGauge >= fullGauge)
 	{
 		if (idleY < 0) idleY *= -1.f;
