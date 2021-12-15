@@ -124,7 +124,7 @@ void Tower::Late_Update()
 		if ((*iter)->Get_Dead() || isDying)
 		{
 			ObjPoolMgr::Get_Instance()->Delete_Object(OBJ::BULLET,*iter);
-			delete *iter;
+			SAFE_DELETE(*iter);
 			iter = bullets.erase(iter);
 		}
 		else
@@ -381,7 +381,7 @@ void Tower::State_Machine()
 			fireTime = GetTickCount();
 		}
 
-		if (isMove && fireTime + 2500.f < GetTickCount())
+		if (isMove && fireTime + 3000.f < GetTickCount())
 		{
 			DIR::ID bulletDir;
 
