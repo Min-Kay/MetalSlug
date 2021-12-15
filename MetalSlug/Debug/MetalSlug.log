@@ -1,9 +1,14 @@
-﻿  ThreeHead.cpp
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\ThreeHead.cpp(153,100): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\ThreeHead.cpp(153,90): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\ThreeHead.cpp(153,79): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\ThreeHead.cpp(153,49): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\ThreeHead.cpp(160,22): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\ThreeHead.cpp(161,20): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\ThreeHead.cpp(162,20): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  Game.cpp
+C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(122,37): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(122,28): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(128,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(128,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(134,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(134,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(140,52): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(140,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(146,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(146,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\ObjPoolMgr.h(40): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
+C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\DataMgr.h(65): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
   MetalSlug.vcxproj -> C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\Debug\MetalSlug.exe

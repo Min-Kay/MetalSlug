@@ -30,6 +30,7 @@ void Arabian::Initialize()
 
 
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Arabian.bmp",L"Arabian");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Arabian_Die.bmp", L"Arabian_Die");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Stretch_White.bmp", L"Stretch_White");
 
 }
@@ -170,36 +171,23 @@ void Arabian::Anim_Die(HDC _hdc)
 	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
-	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Arabian");
+	drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Arabian_Die");
 	stretchDC = BmpMgr::Get_Instance()->Find_Image(L"Stretch_White");
-
+	
+	Anim_Counter(13, 30.f, false);
 	if (dir == DIR::RIGHT)
 	{
-		Anim_Counter(13, 50.f, false);
-		if (animIndex < 6)
-		{
-			StretchBlt(stretchDC, 0, 0, 35, 45, drawingDC, animIndex * 35 + 35 + 10, 1045, -35, 45, SRCCOPY);
-			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx * 0.8f, info.cy, stretchDC, 0, 0, 35, 45, RGB(255, 255, 255));
-		}
-		else
-		{
-			StretchBlt(stretchDC, 0, 0, 45, 45, drawingDC, animIndex * 45 + 45 + 20, 1045, -45, 45, SRCCOPY);
-			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx * 0.8f, info.cy, stretchDC, 0, 0, 45, 45, RGB(255, 255, 255));
-		}
+		StretchBlt(stretchDC, 0, 0, 50, 50, drawingDC, animIndex * 50, 0, -50, 50, SRCCOPY);
+		GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx, info.cy, stretchDC, 0, 0, 50, 50, RGB(255, 255, 255));
+
 	}
 	else if (dir == DIR::LEFT)
 	{
-		Anim_Counter(13, 50.f,false);
-		if(animIndex < 6)
-			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx * 0.8f, info.cy , drawingDC, animIndex * 35 + 10, 1045, 35, 45, RGB(255, 255, 255));
-		else 
-			GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx * 0.8f, info.cy, drawingDC, animIndex * 45 + 20, 1045, 45, 45, RGB(255, 255, 255));
-
+		GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY), info.cx, info.cy , drawingDC, animIndex * 50, 0, 50, 50, RGB(255, 255, 255));
 	}
 
 	if (animIndex == 13)
 		isDead = true;
-
 }
 
 void Arabian::State_Machine()

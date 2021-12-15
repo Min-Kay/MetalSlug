@@ -358,7 +358,13 @@ int Game::Check_Number(TCHAR name)
 
 int Game::Check_NumSize(int i)
 {
-	if (i >= 10000)
+	if (i >= 10000000)
+		return 8;
+	else if (i >= 1000000)
+		return 7;
+	else if (i >= 100000)
+		return 6;
+	else if (i >= 10000)
 		return 5;
 	else if (i >= 1000)
 		return 4;

@@ -96,21 +96,24 @@ void Kessi::Late_Update()
 	if (isDying || isDead)
 		return;
 
-	auto iter = props.begin();
-	for (; iter != props.end();)
+	if (!props.empty())
 	{
-		if ((*iter)->Get_Dead())
+		auto iter = props.begin();
+		for (; iter != props.end();)
 		{
-			ObjPoolMgr::Get_Instance()->Delete_Object(OBJ::ENEMY, *iter);
-			SAFE_DELETE(*iter);
-			iter = props.erase(iter);
-		}
-		else
-		{
-			++iter;
+			if ((*iter)->Get_Dead())
+			{
+				ObjPoolMgr::Get_Instance()->Delete_Object(OBJ::ENEMY, *iter);
+				SAFE_DELETE(*iter);
+				iter = props.erase(iter);
+			}
+			else
+			{
+				++iter;
+			}
 		}
 	}
-
+	
 	for (int i = 0; i < 2; ++i)
 	{
 		bazuka[i]->Set_Pos(info.x - 100 + (i * 200.f), info.y - 47.f);
@@ -120,6 +123,7 @@ void Kessi::Late_Update()
 
 	if (hp <= 0)
 	{
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_ATTACK);
 		list_Release();
 		DataMgr::Get_Instance()->Add_Score(5000);
 		DataMgr::Get_Instance()->Add_Kill(1);
