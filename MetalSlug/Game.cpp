@@ -464,6 +464,12 @@ void Game::Set_CheckPoint_Objects()
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 6300, 300, DIR::LEFT);
 		break;
 	case 5:
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 7100, 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 7200, 300, DIR::LEFT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 7300, 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 7500, 300, DIR::LEFT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 7520, 300, DIR::RIGHT);
+		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::SOLDIER, 7620, 300, DIR::LEFT);
 		ObjPoolMgr::Get_Instance()->Spawn_Enemy(ENEMY::MASKNELL, 8700, 200, DIR::LEFT);
 		break;
 	case 6:

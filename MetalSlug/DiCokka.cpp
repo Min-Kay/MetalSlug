@@ -32,6 +32,8 @@ void DiCokka::Initialize()
 	currCount = 0;
 
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/DiCokka.bmp",L"DiCokka");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/DiCokka_Die.bmp", L"DiCokka_Die");
+
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Stretch_White.bmp", L"Stretch_White");
 }
 
@@ -88,31 +90,31 @@ void DiCokka::Render(HDC _hdc)
 			case DIR::LEFT:
 				if (animIndex < 4)
 				{
-					GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, drawingDC, animIndex * 72, 237, 72, 60, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, drawingDC, animIndex * 72, 238, 72, 60, RGB(255, 255, 255));
 				}
 				else if (animIndex < 7)
 				{
-					GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, drawingDC, 290 + (animIndex % 4) * 65, 235, 65, 60, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, drawingDC, 290 + (animIndex % 4) * 65, 236, 65, 60, RGB(255, 255, 255));
 				}
 				else
 				{
-					GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, drawingDC, (animIndex % 7) * 72, 297, 72, 60, RGB(255, 255, 255));
+					GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, drawingDC, (animIndex % 7) * 72, 298, 72, 60, RGB(255, 255, 255));
 				}
 				break;
 			case DIR::RIGHT:
 				if (animIndex < 4)
 				{
-					StretchBlt(stretchDC, 0, 0, 72, 60, drawingDC, animIndex * 72 + 72, 237, -72, 60, SRCCOPY);
+					StretchBlt(stretchDC, 0, 0, 72, 60, drawingDC, animIndex * 72 + 72, 238, -72, 60, SRCCOPY);
 					GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, stretchDC, 0, 0, 72, 60, RGB(255, 255, 255));
 				}
 				else if (animIndex < 7)
 				{
-					StretchBlt(stretchDC, 0, 0, 65, 60, drawingDC, (animIndex % 4) * 65 + 290 + 65, 235, -65, 60, SRCCOPY);
+					StretchBlt(stretchDC, 0, 0, 65, 60, drawingDC, (animIndex % 4) * 65 + 290 + 65, 236, -65, 60, SRCCOPY);
 					GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, stretchDC, 0, 0, 65, 60, RGB(255, 255, 255));
 				}
 				else
 				{
-					StretchBlt(stretchDC, 0, 0, 72, 60, drawingDC, (animIndex % 7) * 72 + 72, 297, -72, 60, SRCCOPY);
+					StretchBlt(stretchDC, 0, 0, 72, 60, drawingDC, (animIndex % 7) * 72 + 72, 298, -72, 60, SRCCOPY);
 					GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, stretchDC, 0, 0, 72, 60, RGB(255, 255, 255));
 				}
 				break;
@@ -200,33 +202,19 @@ void DiCokka::Render(HDC _hdc)
 		}
 		break;
 	case DiCokka::DESTROY:
-		Anim_Counter(5, 100.f,false);
+		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"DiCokka_Die");
+		Anim_Counter(12, 100.f,false);
 		switch (dir)
 		{
 		case DIR::LEFT:
-			if (animIndex < 2)
-			{
-				GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, drawingDC, animIndex * 72 + 4, 675, 72, 65, RGB(255, 255, 255));
-			}
-			else
-			{
-				GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, drawingDC, animIndex * 80, 675, 80, 65, RGB(255, 255, 255));
-			}
+				GdiTransparentBlt(_hdc, rect.left + x - 75.f, rect.top + y - 25.f, 300, 200, drawingDC, animIndex * 300, 0, 300, 200, RGB(255, 255, 255));
 			break;
 		case DIR::RIGHT:
-			if (animIndex < 2)
-			{
-				StretchBlt(stretchDC, 0, 0, 72, 65, drawingDC, animIndex * 72 + 72 + 4, 680, -72, 65, SRCCOPY);
-				GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, stretchDC, 0, 0, 72, 65, RGB(255, 255, 255));
-			}
-			else
-			{
-				StretchBlt(stretchDC, 0, 0, 80, 65, drawingDC, animIndex * 80 + 80, 680, -80, 65, SRCCOPY);
-				GdiTransparentBlt(_hdc, rect.left + x, rect.top + y, info.cx, info.cy, stretchDC, 0, 0, 80, 65, RGB(255, 255, 255));
-			}
+				StretchBlt(stretchDC, 0, 0, 300, 200, drawingDC, animIndex * 300 + 300, 0, -300, 200, SRCCOPY);
+				GdiTransparentBlt(_hdc, rect.left + x - 75.f, rect.top + y - 25.f , 300, 200, stretchDC, 0, 0, 300, 200, RGB(255, 255, 255));
 			break;
 		}
-		if (animIndex == 5)
+		if (animIndex == 12)
 			isDead = true; 
 		break;
 	}

@@ -91,7 +91,9 @@ void Rosin::Render(HDC _hdc)
 		Anim_Counter(23,50.f,false);
 		GdiTransparentBlt(_hdc, rect.left + x - 25.f, rect.top + y - 25.f, 200, 200, drawingDC, 0 + 200 * animIndex, 0, 200, 200, RGB(86, 177, 222));
 		if (animIndex == 23)
+		{
 			isDead = true; 
+		}
 	}
 }
 

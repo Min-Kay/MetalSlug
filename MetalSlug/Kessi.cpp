@@ -101,14 +101,16 @@ void Kessi::Late_Update()
 
 	for (int i = 0; i < 2; ++i)
 	{
-		bazuka[i]->Set_Pos(info.x - 100 + (i * 200.f), info.y - 50.f);
+		bazuka[i]->Set_Pos(info.x - 100 + (i * 200.f), info.y - 47.f);
 		if(burst[i])
-			burst[i]->Set_Pos(info.x - 200 + (i * 400.f), info.y + 150.f);
+			burst[i]->Set_Pos(info.x - 200 + (i * 385.f), info.y + 150.f);
 	}
 
 	if (hp <= 0)
 	{
 		list_Release();
+		DataMgr::Get_Instance()->Add_Score(5000);
+		DataMgr::Get_Instance()->Add_Kill(1);
 		isInit = false; 
 		idleTime = GetTickCount();
 		state = STATE::DESTROY;
@@ -185,6 +187,10 @@ void Kessi::State_Machine()
 
 			if (abs(init_y - info.y) < 50.f && abs(init_x - info.x) < 50.f)
 			{
+				for (int i = 0; i < 2; ++i)
+				{
+					static_cast<FixedBazuka*>(bazuka[i])->Set_Move();
+				}
 				isInit = true;
 			}
 			return;
@@ -206,12 +212,13 @@ void Kessi::State_Machine()
 		{
 			state = STATE::ROSIN;
 			rosinGauge = 0;
-			burstGauge >> 3;
+			burstGauge *= 0.5f;
 		}
-		else if (burstGauge > 10000)
+		
+		if (burstGauge > 10000)
 		{
 			state = STATE::BURST;
-			rosinGauge >> 3;
+			rosinGauge *= 0.5f;
 			burstGauge = 0;
 		}
 		break;
@@ -223,6 +230,11 @@ void Kessi::State_Machine()
 			{
 				burst[i] = new Burst;
 				burst[i]->Initialize();
+				if(i == 0)
+					burst[i]->Set_Dir(DIR::LEFT);
+				else 
+					burst[i]->Set_Dir(DIR::RIGHT);
+
 				ObjPoolMgr::Get_Instance()->Add_Object(OBJ::ENEMY, burst[i]);
 			}
 		}
@@ -278,7 +290,7 @@ void Kessi::State_Machine()
 			++rosinCount;
 			rosinTime = GetTickCount();
 
-			if (rosinCount > maxCount)
+			if (rosinCount >= maxCount)
 			{
 				rosinCount = 0;
 				state = STATE::IDLE;

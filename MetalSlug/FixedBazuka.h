@@ -12,7 +12,7 @@ public:
 
 public:
 	void Attack();
-
+	void Set_Move() { isMove = true; fireTime = GetTickCount(); }
 private:
 	DWORD	fireTime = GetTickCount();
 };

@@ -23,8 +23,6 @@ int FixedBazuka::Update()
 
 	if (!isMove)
 	{
-		if (CScrollMgr::Get_Instance()->Get_ScrollLockX() <= WINCX - CScrollMgr::Get_Instance()->Get_ScrollX())
-			isMove = true;
 		return OBJ_DEFAULT;
 	}
 
@@ -83,51 +81,49 @@ void FixedBazuka::Attack()
 	float playerX = ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x;
 	float playerY = ObjPoolMgr::Get_Instance()->Get_Player_Info().y - info.y;
 
-	if (fireTime + 1500.f < GetTickCount())
+	if (playerX < -100)
 	{
-		if (playerX < -100)
-		{
-			if (playerY < 100)
-			{
-				dir = DIR::LEFT;
-				ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.left, info.y, DIR::LEFT, OBJ::ENEMY);
-			}
-			else
-			{
-				dir = DIR::DOWN_LEFT;
-				ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.left, rect.bottom, DIR::DOWN_LEFT, OBJ::ENEMY);
-			}
-		}
-		else if (playerX > 100)
-		{
-			if (playerY < 100)
-			{
-				dir = DIR::RIGHT;
-				ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.right, info.y, DIR::RIGHT, OBJ::ENEMY);
-			}
-			else
-			{
-				dir = DIR::DOWN_RIGHT;
-				ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.right, rect.bottom, DIR::DOWN_RIGHT, OBJ::ENEMY);
-			}
-		}
+		if (playerY < 100)
+			dir = DIR::LEFT;
 		else
+			dir = DIR::DOWN_LEFT;
+	}
+	else if (playerX > 100)
+	{
+		if (playerY < 100)
+			dir = DIR::RIGHT;
+		else
+			dir = DIR::DOWN_RIGHT;
+	}
+	else
+	{
+		if (playerY > 100)
+			dir = DIR::DOWN;
+		else if (abs(playerX) < 50 && playerX > -50)
+			dir = DIR::RIGHT;
+		else if (abs(playerX) < 50 && playerX < 50)
+			dir = DIR::LEFT;
+	}
+
+	if (fireTime + 3500.f < GetTickCount())
+	{
+		switch (dir)
 		{
-			if (playerY > 100)
-			{
-				dir = DIR::DOWN;
-				ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, info.x, rect.bottom, DIR::DOWN, OBJ::ENEMY);
-			}
-			else if (abs(playerX) < 50 && playerX > -50)
-			{
-				dir = DIR::RIGHT;
-				ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.right, info.y, DIR::RIGHT, OBJ::ENEMY);
-			}
-			else if (abs(playerX) < 50 && playerX < 50)
-			{
-				dir = DIR::LEFT;
-				ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.right, info.y, DIR::RIGHT, OBJ::ENEMY);
-			}
+		case DIR::DOWN:
+			ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, info.x, rect.bottom, DIR::DOWN, OBJ::ENEMY);
+			break;
+		case DIR::LEFT:
+			ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.left, info.y, DIR::LEFT, OBJ::ENEMY);
+			break;
+		case DIR::RIGHT:
+			ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.right, info.y, DIR::RIGHT, OBJ::ENEMY);
+			break;
+		case DIR::DOWN_RIGHT:
+			ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.right, rect.bottom, DIR::DOWN_RIGHT, OBJ::ENEMY);
+			break;
+		case DIR::DOWN_LEFT:
+			ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::BAZUKA, rect.left, rect.bottom, DIR::DOWN_LEFT, OBJ::ENEMY);
+			break;
 		}
 		fireTime = GetTickCount();
 	}

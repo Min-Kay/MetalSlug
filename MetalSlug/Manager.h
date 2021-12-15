@@ -8,3 +8,4 @@
 #include "ObjPoolMgr.h"
 #include "LineMgr.h"
 #include "BlockMgr.h"
+#include "SoundMgr.h"
