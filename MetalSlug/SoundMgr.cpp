@@ -38,7 +38,7 @@ void CSoundMgr::Release()
 }
 
 
-void CSoundMgr::PlaySound(TCHAR * pSoundKey, CHANNELID eID, float fVolume)
+void CSoundMgr::PlaySound(const TCHAR * pSoundKey, CHANNELID eID, float fVolume)
 {
 	map<TCHAR*, FMOD_SOUND*>::iterator iter; 
 
@@ -62,7 +62,7 @@ void CSoundMgr::PlaySound(TCHAR * pSoundKey, CHANNELID eID, float fVolume)
 	FMOD_System_Update(m_pSystem);
 }
 
-void CSoundMgr::PlayBGM(TCHAR * pSoundKey, float fVolume)
+void CSoundMgr::PlayBGM(const TCHAR * pSoundKey, float fVolume)
 {
 	map<TCHAR*, FMOD_SOUND*>::iterator iter;
 

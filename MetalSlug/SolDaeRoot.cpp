@@ -134,6 +134,8 @@ void SolDaeRoot::State_Machine()
 
         if (lineCol &&  info.y >= collY - info.cy * 0.5f)
         {
+            CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_BULLET);
+            CSoundMgr::Get_Instance()->PlaySound(L"Explode2.wav", CSoundMgr::ENEMY_BULLET, 2.0f);
             state = SolDaeRoot::EXPLODE; 
             break;
         }

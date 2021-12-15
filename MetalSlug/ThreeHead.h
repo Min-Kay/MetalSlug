@@ -35,6 +35,16 @@ private:
 
 	bool doorOpening;
 	
+	DWORD dyingTimer;
+	DWORD effectTimer;
+	DWORD effectStable;
+	int effectIndex;
+
+	float	randomX;
+	float	randomY;
+	float	randomCX;
+	float	randomCY;
+
 	Tower* left = nullptr;
 	Tower* mid = nullptr;
 	Tower* right = nullptr;

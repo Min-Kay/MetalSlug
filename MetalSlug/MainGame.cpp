@@ -62,6 +62,7 @@ void MainGame::Render()
 
 void MainGame::Release()
 {
+	CSoundMgr::Get_Instance()->Destroy_Instance();
 	BlockMgr::Get_Instance()->Destroy_Instance();
 	BmpMgr::Get_Instance()->Destroy_Instance();
 	ObjPoolMgr::Get_Instance()->Destroy_Instance();

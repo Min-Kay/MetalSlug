@@ -67,7 +67,19 @@ void Kessi::Initialize()
 		}
 	}
 
+	effectTimer = GetTickCount();
+	effectStable = GetTickCount();
+	dyingTimer = GetTickCount();
+	effectIndex = 0;
+
+	randomX = 0;
+	randomY = 0;
+	randomCX = 0;
+	randomCY = 0;
+
+
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Kessi.bmp",L"Kessi");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/medium_explosion.bmp", L"medium_explosion");
 }
 
 int Kessi::Update()
@@ -144,6 +156,33 @@ void Kessi::Render(HDC _hdc)
 		break;
 	case Kessi::DESTROY:
 		GdiTransparentBlt(_hdc, rect.left + x , rect.top + y, info.cx, info.cy + 100.f, drawingDC, 280, 0, 280, 140, RGB(0, 248, 0));
+
+		if (effectTimer + 300.f > GetTickCount())
+		{
+			if (effectStable + 20.f < GetTickCount())
+			{
+
+				if (effectIndex < 27)
+					++effectIndex;
+				effectStable = GetTickCount();
+			}
+			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"medium_explosion");
+			GdiTransparentBlt(_hdc, rect.left + randomX + x, rect.top + randomY + y, randomCX, randomCY, drawingDC, effectIndex * 50, 0, 50, 50, RGB(255, 0, 255));
+		}
+		else if (effectTimer + 300.f < GetTickCount())
+		{
+			CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_DIE);
+			CSoundMgr::Get_Instance()->PlaySound(L"Kessi_Rosin_Explode.wav", CSoundMgr::ENEMY_DIE, 1.0f);
+			randomX = rand() % (int)(info.cx) - info.cx * 0.5f;
+			randomY = rand() % (int)(info.cy) - info.cy * 0.5f;
+			randomCX = 100 + rand() % 100;
+			randomCY = 120 + rand() % 100;
+			effectIndex = 0;
+			effectTimer = GetTickCount();
+		}
+
+
+
 		if (idleTime + 3000.f < GetTickCount())
 		{
 			isDead = true; 
@@ -169,7 +208,11 @@ void Kessi::State_Machine()
 		if (!isMove)
 		{
 			if (CScrollMgr::Get_Instance()->Get_ScrollLockX() <= WINCX - x)
+			{
+				CSoundMgr::Get_Instance()->StopSound(CSoundMgr::BGM);
+				CSoundMgr::Get_Instance()->PlayBGM(L"Boss2.mp3", 1.f);
 				isMove = true;
+			}
 			return;
 		}
 
@@ -210,6 +253,9 @@ void Kessi::State_Machine()
 
 		if (rosinGauge > 10000)
 		{
+			CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_ATTACK);
+			CSoundMgr::Get_Instance()->PlaySound(L"Kessi_Rosin.wav",CSoundMgr::ENEMY_ATTACK,1.0f);
+
 			state = STATE::ROSIN;
 			rosinGauge = 0;
 			burstGauge *= 0.5f;
@@ -217,6 +263,8 @@ void Kessi::State_Machine()
 		
 		if (burstGauge > 10000)
 		{
+			CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_ATTACK);
+			CSoundMgr::Get_Instance()->PlaySound(L"Kessi_Burst.wav", CSoundMgr::ENEMY_ATTACK, 1.0f);
 			state = STATE::BURST;
 			rosinGauge *= 0.5f;
 			burstGauge = 0;

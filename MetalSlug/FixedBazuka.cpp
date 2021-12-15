@@ -107,6 +107,8 @@ void FixedBazuka::Attack()
 
 	if (fireTime + 3500.f < GetTickCount())
 	{
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_ATTACK);
+		CSoundMgr::Get_Instance()->PlaySound(L"Rocket_Shoot.wav", CSoundMgr::ENEMY_ATTACK, 2.f);
 		switch (dir)
 		{
 		case DIR::DOWN:

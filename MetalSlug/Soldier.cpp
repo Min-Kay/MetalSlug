@@ -102,11 +102,11 @@ void Soldier::Anim_Idle(HDC _hdc)
 			if (dir == DIR::RIGHT)
 			{
 				StretchBlt(stretchDC, 0, 0, 60, 50, drawingDC, animIndex * 60 + 60, 0, -60, 50, SRCCOPY);
-				GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) + 15.f, info.cx * 1.2f, info.cy * 0.9f, stretchDC, 0, 0, 60, 50, RGB(255, 255, 255));
+				GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) + 15.f, info.cx * 1.2f, info.cy, stretchDC, 0, 0, 60, 50, RGB(255, 255, 255));
 			}
 			else if (dir == DIR::LEFT)
 			{
-				GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) + 15.f, info.cx * 1.2f, info.cy * 0.9f, drawingDC, animIndex * 60, 0, 60, 50, RGB(255, 255, 255));
+				GdiTransparentBlt(_hdc, int(rect.left + scrollX), int(rect.top + scrollY) + 15.f, info.cx * 1.2f, info.cy, drawingDC, animIndex * 60, 0, 60, 50, RGB(255, 255, 255));
 			}
 			else if (dir == DIR::UP)
 			{
@@ -261,7 +261,8 @@ void Soldier::State_Machine()
 			if (fireTime + 1000.f < GetTickCount())
 			{
 				isFiring = true;
-
+				CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_ATTACK);
+				CSoundMgr::Get_Instance()->PlaySound(L"Pistol_Shoot.wav", CSoundMgr::ENEMY_ATTACK, 2.0f);
 				if (ObjPoolMgr::Get_Instance()->Get_Player_Rect().bottom < rect.top)
 				{
 					dir = DIR::UP;
@@ -363,6 +364,16 @@ void Soldier::Check_Hp()
 
 	if (hp <= 0)
 	{
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_DIE);
+		switch (rand() % 2)
+		{
+		case 0:
+			CSoundMgr::Get_Instance()->PlaySound(L"Soldier_Die.wav", CSoundMgr::ENEMY_DIE, 1.0f);
+			break;
+		case 1:
+			CSoundMgr::Get_Instance()->PlaySound(L"Soldier_Die2.wav", CSoundMgr::ENEMY_DIE, 1.0f);
+			break;
+		}
 		DataMgr::Get_Instance()->Add_Kill(1);
 		DataMgr::Get_Instance()->Add_Score(100);
 		isDying = true;

@@ -69,7 +69,7 @@ void SolDae::Initialize()
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/SolDae2.bmp", L"SolDae2");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/SolDae_Root_Motion.bmp",L"SolDae_Root_Motion");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/SolDae_Die.bmp", L"SolDae_Die");
-	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/SolDae_Die_Effect.bmp", L"SolDae_Die_Effect");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/medium_explosion.bmp", L"medium_explosion");
 }
 
 int SolDae::Update()
@@ -78,7 +78,11 @@ int SolDae::Update()
 		return OBJ_DEAD;
 
 	if (!isMove && CScrollMgr::Get_Instance()->Get_ScrollLockX() <= WINCX - CScrollMgr::Get_Instance()->Get_ScrollX())
+	{
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::BGM);
+		CSoundMgr::Get_Instance()->PlayBGM(L"Boss.mp3", 1.f);
 		isMove = true;
+	}
 
 	State_Machine();
 	Update_Rect();
@@ -205,17 +209,20 @@ void SolDae::Render(HDC _hdc)
 
 		if (effectTimer + 300.f > GetTickCount())
 		{
-			if (effectStable + 30.f < GetTickCount())
+			if (effectStable + 20.f < GetTickCount())
 			{
-				if (effectIndex < 13)
+
+				if (effectIndex < 27)
 					++effectIndex;
 				effectStable = GetTickCount();
 			}
-			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"SolDae_Die_Effect");
-			GdiTransparentBlt(_hdc, rect.left+ randomX + scrollX, rect.top + randomY + scrollY, randomCX, randomCY, drawingDC, effectIndex * 45 + 5, 0, 45, 60, RGB(0, 248, 0));
+			drawingDC = BmpMgr::Get_Instance()->Find_Image(L"medium_explosion");
+			GdiTransparentBlt(_hdc, rect.left+ randomX + scrollX, rect.top + randomY + scrollY, randomCX, randomCY, drawingDC, effectIndex * 50, 0, 50, 50, RGB(255, 0, 255));
 		}
 		else if (effectTimer + 300.f < GetTickCount())
 		{
+			CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_DIE);
+			CSoundMgr::Get_Instance()->PlaySound(L"Kessi_Rosin_Explode.wav", CSoundMgr::ENEMY_DIE, 1.0f);
 			randomX = rand() % (int)(info.cx) - info.cx * 0.5f;
 			randomY = rand() % (int)(info.cy) - info.cy * 0.5f;
 			randomCX = 100 + rand() % 100;

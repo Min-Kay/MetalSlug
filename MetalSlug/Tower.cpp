@@ -135,6 +135,8 @@ void Tower::Late_Update()
 
 	if (!isDying && hp <= 0)
 	{
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_DIE);
+		CSoundMgr::Get_Instance()->PlaySound(L"Kessi_Rosin_Explode.wav", CSoundMgr::ENEMY_DIE, 1.0f);
 		DataMgr::Get_Instance()->Add_Score(500);
 		isDying = true; 
 		state = THREEHEAD::DESTORY;
@@ -395,6 +397,8 @@ void Tower::State_Machine()
 				bulletDir = DIR::LEFT;
 				break;
 			}
+			CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_ATTACK);
+			CSoundMgr::Get_Instance()->PlaySound(L"Rocket_Shoot.wav", CSoundMgr::ENEMY_ATTACK, 2.f);
 			for (int i = 0; i < 6; ++i)
 			{
 				Obj* bullet;
@@ -414,7 +418,7 @@ void Tower::State_Machine()
 				ObjPoolMgr::Get_Instance()->Add_Object(OBJ::BULLET,bullet);
 				bullets.push_back(bullet);
 			}
-
+			
 			fireTime = GetTickCount();
 			fireEffectTime = GetTickCount();
 			effectIndex = 0;

@@ -14,6 +14,9 @@ bool Shotgun::Fire(float _x, float _y, DIR::ID _dir)
 {
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_ATTACK) && timer + 500.f < GetTickCount())
 	{
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::WEAPON);
+		CSoundMgr::Get_Instance()->PlaySound(L"Shotgun_Shoot.wav",CSoundMgr::WEAPON,1.5f);
+	
 		switch (_dir)
 		{
 		case DIR::UP:

@@ -48,5 +48,15 @@ private:
 
 	float burstMove = 0.f;
 	float burstSpeed = 2.5f; 
+
+	DWORD dyingTimer;
+	DWORD effectTimer;
+	DWORD effectStable;
+	int effectIndex;
+
+	float	randomX;
+	float	randomY;
+	float	randomCX;
+	float	randomCY;
 };
   

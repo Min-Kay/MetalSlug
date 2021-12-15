@@ -29,6 +29,7 @@ void IronlizardBullet::Initialize()
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Ironlizard.bmp",L"Ironlizard");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Ironlizard_Explode.bmp", L"Ironlizard_Explode");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Stretch_Item.bmp", L"Stretch_Item");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/medium_explosion.bmp", L"medium_explosion");
 }
 
 int IronlizardBullet::Update()
@@ -77,10 +78,10 @@ void IronlizardBullet::Render(HDC _hdc)
 	}
 	else
 	{
-		Anim_Counter(10, 30.f,false);
-		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Ironlizard_Explode");
-		GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, init_CX, init_CY, drawingDC, animIndex * 52, 0, 52, 75, RGB(0, 248, 0));
-		if (animIndex == 10)
+		Anim_Counter(27, 20.f,false);
+		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"medium_explosion");
+		GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, init_CX, init_CY, drawingDC, animIndex * 50, 0, 50, 50, RGB(255, 0, 255));
+		if (animIndex == 27)
 		{
 			Release();
 			isDead = true; 
@@ -201,6 +202,8 @@ void IronlizardBullet::ExplodePosing()
 {
 	if (!explosion)
 	{
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::BULLET);
+		CSoundMgr::Get_Instance()->PlaySound(L"Rocket_Explode.wav", CSoundMgr::BULLET, 2.f);
 		switch (dir)
 		{
 		case DIR::LEFT:

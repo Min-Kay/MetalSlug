@@ -60,6 +60,9 @@ void DiCokka::Late_Update()
 
 	if (hp <= 0)
 	{
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_DIE);
+		CSoundMgr::Get_Instance()->PlaySound(L"Explode.wav", CSoundMgr::ENEMY_DIE, 0.5f);
+
 		DataMgr::Get_Instance()->Add_Kill(1);
 		DataMgr::Get_Instance()->Add_Score(250);
 		animIndex = 0;
@@ -266,6 +269,9 @@ void DiCokka::State_Machine()
 
 			if (currCount < maxCount && fireTimer + 700.f < GetTickCount())
 			{
+				CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_ATTACK);
+				CSoundMgr::Get_Instance()->PlaySound(L"Rocket_Shoot.wav", CSoundMgr::ENEMY_ATTACK, 2.f);
+
 				if (dir == DIR::RIGHT)
 				{
 					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::DICOKKA,rect.right,rect.top + 25.f,dir,OBJ::ENEMY);

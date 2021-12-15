@@ -27,6 +27,8 @@ bool Laser::Fire(float _x, float _y, DIR::ID _dir)
 {
 	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_ATTACK))
 	{
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::WEAPON);
+		CSoundMgr::Get_Instance()->PlaySound(L"Laser_Shoot.wav", CSoundMgr::WEAPON, 2.f);
 		bullet->Set_Pos(_x,_y);
 		bullet->Set_Dir(_dir);
 		bullet->Pressing(true);

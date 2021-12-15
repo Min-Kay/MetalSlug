@@ -58,6 +58,8 @@ void Stage2::Initialize()
 
 	maxCheckPoint = scrollLock.size();
 	Set_CheckPoint_Objects();
+	CSoundMgr::Get_Instance()->StopSound(CSoundMgr::BGM);
+	CSoundMgr::Get_Instance()->PlayBGM(L"Stage2.wav",1.0f);
 }
 
 void Stage2::Update()

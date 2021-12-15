@@ -55,11 +55,13 @@ int Sarubia::Update()
 
 void Sarubia::Late_Update()
 {
-	if (isDying)
+	if (isDying || isDead)
 		return;
 
 	if (hp <= 0)
 	{
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_DIE);
+		CSoundMgr::Get_Instance()->PlaySound(L"Kessi_Rosin_Explode.wav", CSoundMgr::ENEMY_DIE, 1.0f);
 		animIndex = 0; 
 		isDying = true;
 		DataMgr::Get_Instance()->Add_Kill(1);
@@ -190,6 +192,10 @@ void Sarubia::State_Machine()
 		{
 			if (fireTimer + 2000.f < GetTickCount())
 			{
+				CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_ATTACK);
+				CSoundMgr::Get_Instance()->PlaySound(L"Rocket_Shoot.wav", CSoundMgr::ENEMY_ATTACK, 2.f);
+
+
 				isFiring = true; 
 				if(dir == DIR::LEFT)
 					ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::SARUBIA,rect.left, rect.top + 50.f,dir,OBJ::ENEMY);

@@ -21,6 +21,7 @@ public:
 	virtual void Gravity();
 	virtual void Update_Rect();
 	virtual void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir);
+	void Explode();
 private:
 	Parachute* para = nullptr; 
 	bool explode = false; 

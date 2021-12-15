@@ -7,6 +7,8 @@ void Menu::Initialize()
 	m_LogoTimer = GetTickCount(); 
 	BmpMgr::Get_Instance()->Insert_Bmp(LOGO_BMP,LOGO_KEY);
 	isShow = false; 
+	CSoundMgr::Get_Instance()->StopSound(CSoundMgr::BGM);
+	CSoundMgr::Get_Instance()->PlayBGM(L"Menu.mp3",0.7f);
 }
 
 void Menu::Update()
@@ -14,12 +16,14 @@ void Menu::Update()
 
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_RETURN))
 	{
+		CSoundMgr::Get_Instance()->PlaySound(L"Ok.mp3", CSoundMgr::UI, 1.0f);
 		SceneMgr::Get_Instance()->Change_Scene(SCENE::GAME);
 		return;
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_ESCAPE))
 	{
+		CSoundMgr::Get_Instance()->Destroy_Instance();
 		BlockMgr::Get_Instance()->Destroy_Instance();
 		BmpMgr::Get_Instance()->Destroy_Instance();
 		ObjPoolMgr::Get_Instance()->Destroy_Instance();

@@ -111,6 +111,12 @@ void Player::Late_Update()
 
 void Player::Render(HDC _hdc)
 {
+	if (isValid && validTick + 100.f < GetTickCount())
+	{
+		validTick = GetTickCount();
+		return;
+	}
+
 	float scrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
 	float scrollY = CScrollMgr::Get_Instance()->Get_ScrollY();
 
@@ -122,7 +128,7 @@ void Player::Render(HDC _hdc)
 		break;
 	case ACTION::JUMP:
 		Anim_Jumping(_hdc);
-		break; 
+		break;
 	case ACTION::MOVE:
 		Anim_Moving(_hdc);
 		break;
@@ -733,6 +739,8 @@ void Player::Set_Dying()
 	if (isValid || isDying || superValid)
 		return; 
 
+	CSoundMgr::Get_Instance()->StopSound( CSoundMgr::PLAYER);
+	CSoundMgr::Get_Instance()->PlaySound(L"Player_Die.wav", CSoundMgr::PLAYER, 2.f);
 	action = ACTION::DIE;
 	info.cy = init_CY;
 	isDying = true;

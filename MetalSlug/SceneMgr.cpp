@@ -3,6 +3,7 @@
 #include "Title.h"
 #include "Game.h"
 #include "Stage2.h"
+#include "SoundMgr.h"
 
 SceneMgr* SceneMgr::pInstance = nullptr;
 
@@ -19,6 +20,7 @@ SceneMgr::~SceneMgr()
 
 void SceneMgr::Initialize()
 {
+	CSoundMgr::Get_Instance()->Initialize();
 	currScene = SCENE::MENU;
 	scene = new Menu;
 	scene->Initialize();
@@ -59,9 +61,6 @@ void SceneMgr::Change_Scene(SCENE::ID _id)
 	
 	switch (_id)
 	{
-	case SCENE::TITLE:
-		scene = new Title;
-		break;
 	case SCENE::MENU:
 		scene = new Menu;
 		break;

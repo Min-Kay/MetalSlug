@@ -68,6 +68,8 @@ void Game::Initialize()
 
 	maxCheckPoint = scrollLock.size();
 	Set_CheckPoint_Objects();
+	CSoundMgr::Get_Instance()->StopSound(CSoundMgr::BGM);
+	CSoundMgr::Get_Instance()->PlayBGM(L"Stage1.mp3",0.7f);
 }
 
 void Game::Update()
@@ -493,8 +495,11 @@ void Game::Show_Result(HDC _hdc)
 	HDC backDC = BmpMgr::Get_Instance()->Find_Image(L"Back2");
 	DWORD tick = GetTickCount();
 
+	CSoundMgr::Get_Instance()->StopSound(CSoundMgr::BGM);
+
 	if (isClear)
 	{
+		CSoundMgr::Get_Instance()->PlayBGM(L"Clear.mp3", 1.0f);
 		int killSize = Check_NumSize(DataMgr::Get_Instance()->Get_Kill());
 		int size = Check_NumSize(DataMgr::Get_Instance()->Get_Score());
 		int num = 0;
@@ -594,9 +599,11 @@ void Game::Show_Result(HDC _hdc)
 	}
 	else if (isFail)
 	{
+		CSoundMgr::Get_Instance()->PlayBGM(L"GameOver.mp3", 1.0f);
+
 		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Font");
 	
-		while (tick + 2000.f > GetTickCount())
+		while (tick + 7000.f > GetTickCount())
 		{
 			BitBlt(backDC, 0, 0, WINCX, WINCY, subDC, 0, 0, SRCCOPY);
 			GdiTransparentBlt(backDC, 256, 50, 288, 48, drawingDC, 0, 0, 192, 32, RGB(255, 204, 204));

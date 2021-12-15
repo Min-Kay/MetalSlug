@@ -292,6 +292,16 @@ void Arabian::Check_Hp()
 
 	if ( hp <= 0)
 	{
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_DIE);
+		switch (rand() % 2)
+		{
+		case 0:
+			CSoundMgr::Get_Instance()->PlaySound(L"Soldier_Die.wav", CSoundMgr::ENEMY_DIE, 1.0f);
+			break;
+		case 1:
+			CSoundMgr::Get_Instance()->PlaySound(L"Soldier_Die2.wav", CSoundMgr::ENEMY_DIE, 1.0f);
+			break;
+		}
 		falling = false;
 		DataMgr::Get_Instance()->Add_Kill(1);
 		DataMgr::Get_Instance()->Add_Score(100);

@@ -82,33 +82,53 @@ void WepItem::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 			if (DataMgr::Get_Instance()->Get_Weapon()->Get_WepID() != wep_id)
 			{
 				Weapon* wep = new HeavyMachine;
+				CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ITEM);
+				CSoundMgr::Get_Instance()->PlaySound(L"HeavyMachine_Item.mp3", CSoundMgr::ITEM, 1.0f);
 				ObjPoolMgr::Get_Instance()->Set_Player_Wep(wep);
 			}
-			else
+			else {
+				CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ITEM);
+				CSoundMgr::Get_Instance()->PlaySound(L"AmmoItem.wav", CSoundMgr::ITEM, 2.0f);
 				DataMgr::Get_Instance()->Add_Ammo(200);
+			}
 			break;
 		case WEAPON::ROCKET:
 			if (DataMgr::Get_Instance()->Get_Weapon()->Get_WepID() != wep_id)
 			{
 				Weapon* wep = new RocketLauncher;
+				CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ITEM);
+				CSoundMgr::Get_Instance()->PlaySound(L"Rocket_Item.mp3", CSoundMgr::ITEM, 1.0f);
+
 				ObjPoolMgr::Get_Instance()->Set_Player_Wep(wep);
 			}
-			else
+			else {
+				CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ITEM);
+				CSoundMgr::Get_Instance()->PlaySound(L"AmmoItem.wav", CSoundMgr::ITEM, 2.0f);
 				DataMgr::Get_Instance()->Add_Ammo(100);
+			}
 			break;
 		case WEAPON::SHOTGUN:
 			if (DataMgr::Get_Instance()->Get_Weapon()->Get_WepID() != wep_id)
 			{
 				Weapon* wep = new Shotgun;
+				CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ITEM);
+				CSoundMgr::Get_Instance()->PlaySound(L"Shotgun_Item.mp3", CSoundMgr::ITEM, 1.0f);
+
 				ObjPoolMgr::Get_Instance()->Set_Player_Wep(wep);
 			}
-			else
+			else {
+				CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ITEM);
+				CSoundMgr::Get_Instance()->PlaySound(L"AmmoItem.wav", CSoundMgr::ITEM, 2.0f);
 				DataMgr::Get_Instance()->Add_Ammo(50);
+			}
 			break;
 		case WEAPON::LASER:
 			if (DataMgr::Get_Instance()->Get_Weapon()->Get_WepID() != wep_id)
 			{
 				Weapon* wep = new Laser;
+				CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ITEM);
+				CSoundMgr::Get_Instance()->PlaySound(L"Laser_Item.mp3", CSoundMgr::ITEM, 1.0f);
+
 				ObjPoolMgr::Get_Instance()->Set_Player_Wep(wep);
 			}
 			else
@@ -118,10 +138,16 @@ void WepItem::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 			if (DataMgr::Get_Instance()->Get_Weapon()->Get_WepID() != wep_id)
 			{
 				Weapon* wep = new Ironlizard;
+				CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ITEM);
+				CSoundMgr::Get_Instance()->PlaySound(L"Ironlizard_Item.mp3", CSoundMgr::ITEM, 1.0f);
+
 				ObjPoolMgr::Get_Instance()->Set_Player_Wep(wep);
 			}
-			else
+			else {
+				CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ITEM);
+				CSoundMgr::Get_Instance()->PlaySound(L"AmmoItem.wav", CSoundMgr::ITEM, 2.0f);
 				DataMgr::Get_Instance()->Add_Ammo(100);
+			}
 			break;
 		}
 		DataMgr::Get_Instance()->Add_Score(50);

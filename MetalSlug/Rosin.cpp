@@ -70,8 +70,7 @@ void Rosin::Late_Update()
 
 	if (hp <= 0)
 	{
-		isDying = true; 
-		explode = true; 
+		Explode();
 	}
 }
 
@@ -135,8 +134,7 @@ void Rosin::Gravity()
 	}
 	else if (blockCol && info.y > blockY)
 	{
-		isDying = true;
-		explode = true;
+		Explode();
 		info.y = blockY + 1;
 	}
 	else if (lineCol && info.y < fY - info.cy * 0.6f)
@@ -145,14 +143,12 @@ void Rosin::Gravity()
 	}
 	else if (lineCol && info.y >= fY - info.cy * 0.5f)
 	{
-		isDying = true;
-		explode = true;
+		Explode();
 		info.y = fY - info.cy * 0.5f;
 	}
 	else if (lineCol)
 	{
-		isDying = true;
-		explode = true;
+		Explode();
 		info.y = fY - info.cy * 0.5f;
 	}
 	else
@@ -183,8 +179,18 @@ void Rosin::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 {
 	if (_id == OBJ::PLAYER)
 	{
-		isDying = true; 
-		explode = true;
+		Explode();
 		_opponent->Set_Dying();
 	}
+}
+
+void Rosin::Explode()
+{
+	if (explode)
+		return;
+
+	CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_BULLET);
+	CSoundMgr::Get_Instance()->PlaySound(L"Kessi_Rosin_Explode.wav", CSoundMgr::ENEMY_BULLET, 1.0f);
+	isDying = true;
+	explode = true;
 }

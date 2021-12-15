@@ -51,6 +51,8 @@ void GrenadeBox::Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir)
 
 	if (_id == OBJ::PLAYER)
 	{
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ITEM);
+		CSoundMgr::Get_Instance()->PlaySound(L"AmmoItem.wav", CSoundMgr::ITEM, 2.0f);
 		DataMgr::Get_Instance()->Add_Score(75);
 		DataMgr::Get_Instance()->Add_Grenade(5);
 		isDead = true;

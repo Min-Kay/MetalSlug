@@ -13,6 +13,8 @@ bool Ironlizard::Fire(float _x, float _y, DIR::ID _dir)
 {
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_ATTACK) && timer + 100.f < GetTickCount())
 	{
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::WEAPON);
+		CSoundMgr::Get_Instance()->PlaySound(L"Ironlizard_Shoot.wav", CSoundMgr::WEAPON, 2.f);
 		switch (_dir)
 		{
 		case DIR::RIGHT:

@@ -41,7 +41,10 @@ int Masknell::Update()
 		return OBJ_DEAD; 
 
 	if (!isMove && abs(ObjPoolMgr::Get_Instance()->Get_Player_Info().x - info.x) < WINCX - 100)
+	{
+		CSoundMgr::Get_Instance()->PlaySound(L"Masknell.wav", CSoundMgr::ENEMY, 2.0f);
 		isMove = true;
+	}
 
 	State_Machine(); 
 
@@ -373,6 +376,8 @@ void Masknell::State_Machine()
 	
 	if (attackTime + 2000.f < GetTickCount())
 	{
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_ATTACK);
+		CSoundMgr::Get_Instance()->PlaySound(L"Pistol_Shoot.wav", CSoundMgr::ENEMY_ATTACK, 2.0f);
 		isFiring = true;
 		ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::ENEMYBULLET,info.x, (float)rect.bottom,DIR::DOWN,OBJ::ENEMY);
 		attackTime = GetTickCount();
@@ -403,6 +408,9 @@ void Masknell::Gravity()
 	else if (lineCol)
 	{
 		info.y = fY - info.cy * 0.5f;
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY);
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_DIE);
+		CSoundMgr::Get_Instance()->PlaySound(L"Explode2.wav", CSoundMgr::ENEMY_DIE, 1.0f);
 		isDead = true;
 	}
 	else

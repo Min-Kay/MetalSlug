@@ -1,1 +1,9 @@
-﻿  MetalSlug.vcxproj -> C:\Users\민경욱\Desktop\프로젝트\MetalSlug\Debug\MetalSlug.exe
+﻿  ThreeHead.cpp
+C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\ThreeHead.cpp(153,100): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\ThreeHead.cpp(153,90): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\ThreeHead.cpp(153,79): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\ThreeHead.cpp(153,49): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\ThreeHead.cpp(160,22): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\ThreeHead.cpp(161,20): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\ThreeHead.cpp(162,20): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  MetalSlug.vcxproj -> C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\Debug\MetalSlug.exe

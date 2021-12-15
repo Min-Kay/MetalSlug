@@ -45,7 +45,7 @@ void RocketBullet::Initialize()
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Rocket_Up.bmp", L"Rocket_Up");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Rocket_Down.bmp", L"Rocket_Down");
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Stretch_Item.bmp", L"Stretch_Item");
-	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Explosion.bmp" , L"Explosion");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/medium_explosion.bmp" , L"medium_explosion");
 }
 
 int RocketBullet::Update()
@@ -102,10 +102,10 @@ void RocketBullet::Render(HDC _hdc)
 	}
 	else
 	{
-		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"Explosion");
-		Anim_Counter(8,30.f,false);
-		GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, init_CX, init_CY, drawingDC, 32 * animIndex + 11, 0, 32, 50, RGB(0, 248, 0));
-		if (animIndex == 8)
+		drawingDC = BmpMgr::Get_Instance()->Find_Image(L"medium_explosion");
+		Anim_Counter(27,20.f,false);
+		GdiTransparentBlt(_hdc, rect.left + scrollX, rect.top + scrollY, init_CX, init_CY, drawingDC, 50 * animIndex, 0, 50, 50, RGB(255, 0, 255));
+		if (animIndex == 27)
 		{
 			Release();
 			isDead = true;
@@ -241,6 +241,8 @@ void RocketBullet::ExplodePosing()
 {
 	if (!explosion)
 	{
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::BULLET);
+		CSoundMgr::Get_Instance()->PlaySound(L"Rocket_Explode.wav", CSoundMgr::BULLET,2.f);
 		switch (dir)
 		{
 		case DIR::UP:

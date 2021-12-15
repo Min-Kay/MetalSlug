@@ -46,6 +46,15 @@ void ThreeHead::Initialize()
 
 	animIndex = 0;
 	animTimer = GetTickCount();
+	effectTimer = GetTickCount();
+	effectStable = GetTickCount();
+	dyingTimer = GetTickCount();
+	effectIndex = 0; 
+
+	randomX = 0;
+	randomY = 0;
+	randomCX = 0;
+	randomCY = 0;
 
 	id = OBJ::ENEMY;
 	isDead = false;
@@ -72,6 +81,7 @@ void ThreeHead::Initialize()
 	ObjPoolMgr::Get_Instance()->Add_Object(OBJ::ENEMY, mid);
 
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/MidBoss.bmp",L"MidBoss");
+	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/medium_explosion.bmp", L"medium_explosion");
 	
 }
 
@@ -91,6 +101,9 @@ void ThreeHead::Late_Update()
 
 	if (!isDying && AllDestroied())
 	{
+		dyingTimer = GetTickCount();
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_DIE);
+		CSoundMgr::Get_Instance()->PlaySound(L"Kessi_Rosin_Explode.wav", CSoundMgr::ENEMY_DIE, 1.0f);
 		DataMgr::Get_Instance()->Add_Kill(3);
 		DataMgr::Get_Instance()->Add_Score(3000);
 		isDying = true;
@@ -128,8 +141,30 @@ void ThreeHead::Render(HDC _hdc)
 
 			}
 
+			if (effectTimer + 300.f > GetTickCount())
+			{
+				if (effectStable + 20.f < GetTickCount())
+				{
+					if (effectIndex < 27)
+						++effectIndex;
+					effectStable = GetTickCount();
+				}
+				drawingDC = BmpMgr::Get_Instance()->Find_Image(L"medium_explosion");
+				GdiTransparentBlt(_hdc, rect.left + randomX + scrollX, rect.top + randomY + scrollY, randomCX, randomCY, drawingDC, effectIndex * 50, 0, 50, 50, RGB(255, 0, 255));
+			}
+			else if (effectTimer + 300.f < GetTickCount())
+			{
+				CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_DIE);
+				CSoundMgr::Get_Instance()->PlaySound(L"Kessi_Rosin_Explode.wav", CSoundMgr::ENEMY_DIE, 1.0f);
+				randomX = rand() % (int)(1200) - 600 * 0.5f;
+				randomY = rand() % (int)(200);
+				randomCX = 100 + rand() % 100;
+				randomCY = 120 + rand() % 100;
+				effectIndex = 0;
+				effectTimer = GetTickCount();
+			}
 
-			if (animIndex == 9)
+			if (animIndex == 9 && dyingTimer + 2000.f < GetTickCount())
 			{
 				isDead = true;
 				Release(); 
@@ -188,8 +223,12 @@ void ThreeHead::Tower_On()
 		return; 
 	}
 
-	if (!towerOn && CScrollMgr::Get_Instance()->Get_ScrollLockX() <= WINCX-CScrollMgr::Get_Instance()->Get_ScrollX())
+	if (!towerOn && CScrollMgr::Get_Instance()->Get_ScrollLockX() <= WINCX - CScrollMgr::Get_Instance()->Get_ScrollX())
+	{
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY);
+		CSoundMgr::Get_Instance()->PlaySound(L"Kessi_Burst.wav", CSoundMgr::ENEMY, 1.0f);
 		towerOn = true;
+	}
 
 	if (towerOn && totalY < 150.f)
 	{

@@ -111,6 +111,9 @@ void Npc::Render(HDC _hdc)
 
 			if (animIndex == 9 && !spawned)
 			{
+				CSoundMgr::Get_Instance()->StopSound(CSoundMgr::NPC);
+				CSoundMgr::Get_Instance()->PlaySound(L"Thank.mp3",CSoundMgr::NPC,1.0f);
+
 				spawnTiming = true;
 			}
 

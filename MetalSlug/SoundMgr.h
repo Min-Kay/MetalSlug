@@ -18,7 +18,7 @@ public:
 		}
 	}
 public:
-	enum CHANNELID {BGM, PLAYER, MONSTER, EFFECT, UI, MAXCHANNEL};
+	enum CHANNELID {BGM, PLAYER, WEAPON, NPC, BULLET, ENEMY,ENEMY_ATTACK,ENEMY_BULLET,ENEMY_DIE, EFFECT, UI, ITEM, EXPLODE, MAXCHANNEL};
 private:
 	CSoundMgr();
 	~CSoundMgr();
@@ -28,8 +28,8 @@ public:
 
 	void Release(); 
 public:
-	void PlaySound(TCHAR* pSoundKey, CHANNELID eID, float fVolume);
-	void PlayBGM(TCHAR* pSoundKey, float fVolume);
+	void PlaySound(const TCHAR* pSoundKey, CHANNELID eID, float fVolume);
+	void PlayBGM(const TCHAR* pSoundKey, float fVolume);
 	void StopSound(CHANNELID eID);
 	void StopAll();
 	void SetChannelVolume(CHANNELID eID, float fVolume);

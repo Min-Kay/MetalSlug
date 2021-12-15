@@ -61,6 +61,8 @@ void Bazuka::Late_Update()
 	Check_Parachute();
 	if (hp <= 0)
 	{
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_DIE);
+		CSoundMgr::Get_Instance()->PlaySound(L"Soldier_Die.wav", CSoundMgr::ENEMY_DIE, 1.0f);
 		DataMgr::Get_Instance()->Add_Kill(1);
 		DataMgr::Get_Instance()->Add_Score(150);
 		animIndex = 0;
@@ -297,6 +299,9 @@ void Bazuka::State_Machine()
 
 		if (fireTime + 1200.f < GetTickCount())
 		{
+			CSoundMgr::Get_Instance()->StopSound(CSoundMgr::ENEMY_ATTACK);
+			CSoundMgr::Get_Instance()->PlaySound(L"Rocket_Shoot.wav", CSoundMgr::ENEMY_ATTACK, 2.f);
+
 			if (playerX < -100)
 			{
 				if (playerY < 100)

@@ -13,6 +13,9 @@ bool RocketLauncher::Fire(float _x, float _y, DIR::ID _dir)
 {
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_ATTACK) && timer + 200.f < GetTickCount())
 	{
+
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::WEAPON);
+		CSoundMgr::Get_Instance()->PlaySound(L"Rocket_Shoot.wav",CSoundMgr::WEAPON,2.f);
 		switch (_dir)
 		{
 		case DIR::UP:

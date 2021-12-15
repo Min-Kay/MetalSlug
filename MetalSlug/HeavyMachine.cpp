@@ -28,6 +28,9 @@ bool HeavyMachine::Fire(float _x, float _y, DIR::ID _dir)
 
 	if (isFiring && interval + 75.f < GetTickCount())
 	{
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::WEAPON);
+			CSoundMgr::Get_Instance()->PlaySound(L"Pistol_Shoot.wav", CSoundMgr::WEAPON, 2.0f);
+
 		ObjPoolMgr::Get_Instance()->Spawn_Bullet(BULLET::HEAVY, _x, _y, _dir);
 		--ammo;
 		++currCount;

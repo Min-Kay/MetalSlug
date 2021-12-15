@@ -29,7 +29,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -110,6 +110,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>fmodex_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -227,7 +228,6 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThreeHead.h" />
     <ClInclude Include="ThreeHeadBullet.h" />
-    <ClInclude Include="Title.h" />
     <ClInclude Include="Tower.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="Weapons.h" />
@@ -297,7 +297,6 @@
     <ClCompile Include="Stage2.cpp" />
     <ClCompile Include="ThreeHead.cpp" />
     <ClCompile Include="ThreeHeadBullet.cpp" />
-    <ClCompile Include="Title.cpp" />
     <ClCompile Include="Tower.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WepItem.cpp" />
