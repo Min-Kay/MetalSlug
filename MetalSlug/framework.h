@@ -14,6 +14,9 @@
 #include <memory.h>
 #include <tchar.h>
 
+#include "fmod.h"
+#include <io.h>
+
 #include <list>
 #include <vector>
 #include <map>

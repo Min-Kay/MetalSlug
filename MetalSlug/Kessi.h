@@ -47,6 +47,6 @@ private:
 	bool burstOn = false;
 
 	float burstMove = 0.f;
-	float burstSpeed = 5.f; 
+	float burstSpeed = 2.5f; 
 };
-
+  

@@ -34,15 +34,6 @@
     <Filter Include="소스 파일\02.Object\02.Enemy">
       <UniqueIdentifier>{4fa1eafd-58c5-4a06-8b62-816231de7ad0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01.Manager\03.CollisonMgr">
-      <UniqueIdentifier>{5ada3eaf-a61d-40a4-9c2d-8b879bf39ced}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01.Manager\04.ScrollMgr">
-      <UniqueIdentifier>{19729785-9aa7-4b31-b5b8-4f575b6af38e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01.Manager\05.BmpMgr">
-      <UniqueIdentifier>{0f498587-61e7-4dd8-ad1d-32144f96135d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\02.Object\04.Prop">
       <UniqueIdentifier>{797ac8b7-2280-49dc-a737-eb31a4a10b9c}</UniqueIdentifier>
     </Filter>
@@ -52,44 +43,11 @@
     <Filter Include="소스 파일\00.Main\01.MainGame">
       <UniqueIdentifier>{3b9d87df-3838-42c0-b902-7888ed4995b5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01.Manager\06.SceneMgr">
-      <UniqueIdentifier>{fc56e429-ae1c-43d1-9940-914a275fad35}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01.Manager\06.SceneMgr\01.Scene">
-      <UniqueIdentifier>{58dde41c-f22c-41fd-b099-1bfcc6fb627a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01.Manager\06.SceneMgr\01.Scene\01.Menu">
-      <UniqueIdentifier>{08e31c7c-ac37-4ef6-aa50-3b4689f73f08}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01.Manager\06.SceneMgr\01.Scene\02.Game">
-      <UniqueIdentifier>{e0ed132d-d1d4-41ea-b12f-55a81a0b30be}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01.Manager\06.SceneMgr\01.Scene\03.Title">
-      <UniqueIdentifier>{be7dfc37-b5d6-4a7e-9d81-3a54a8414798}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01.Manager\07.KeyMgr">
-      <UniqueIdentifier>{80b006bc-a095-4399-9ab0-e6389cbf4247}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\02.Object\04.Prop\02.Vehicle">
       <UniqueIdentifier>{b484b6e5-30f0-46a4-b700-de89efb83a6d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01.Manager\05.BmpMgr\01.CBitmap">
-      <UniqueIdentifier>{67425488-35eb-40b4-a03c-37edb9c61caf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01.Manager\08.LineMgr">
-      <UniqueIdentifier>{3134275d-d028-4821-a307-36fda987c6cf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\02.Object\05.Bullet">
       <UniqueIdentifier>{3f3e72ae-7fe0-4a39-8e74-5872f74c496c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01.Manager\09.DataMgr">
-      <UniqueIdentifier>{8868ca78-9262-4f56-a548-5754530731af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01.Manager\08.LineMgr\01.Line">
-      <UniqueIdentifier>{bafa3a6b-87ef-46ac-8e42-c8a18d28e230}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01.Manager\06.SceneMgr\01.Scene\02.Game\01.Stage1">
-      <UniqueIdentifier>{f984788e-72c8-4521-9ff2-8093df5bb843}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\03.Weapon">
       <UniqueIdentifier>{343ef793-91fb-4586-a1e6-7b7f149ea685}</UniqueIdentifier>
@@ -205,9 +163,6 @@
     <Filter Include="소스 파일\02.Object\05.Bullet\05.EnemyBullet\05.DiCokkaBullet">
       <UniqueIdentifier>{09932e7f-0796-4be7-b6d1-fa99875f9c4c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01.Manager\10.BlockMgr">
-      <UniqueIdentifier>{661a3238-fa65-4145-a4d3-c78df34d706d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\02.Object\05.Bullet\07.IronlizardBullet">
       <UniqueIdentifier>{a0118ce1-a074-4127-b26e-6151b8acb1bb}</UniqueIdentifier>
     </Filter>
@@ -228,6 +183,54 @@
     </Filter>
     <Filter Include="소스 파일\02.Object\02.Enemy\09.Kessi\03.Burst">
       <UniqueIdentifier>{f6ac4e8d-7e51-48ad-99cf-0b5e4845b334}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Manager\02.SoundMgr">
+      <UniqueIdentifier>{32cc88db-13f1-4dd3-8c4f-5dad20ab5c88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Manager\10.BlockMgr">
+      <UniqueIdentifier>{661a3238-fa65-4145-a4d3-c78df34d706d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Manager\03.CollisonMgr">
+      <UniqueIdentifier>{5ada3eaf-a61d-40a4-9c2d-8b879bf39ced}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Manager\04.ScrollMgr">
+      <UniqueIdentifier>{19729785-9aa7-4b31-b5b8-4f575b6af38e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Manager\05.BmpMgr">
+      <UniqueIdentifier>{0f498587-61e7-4dd8-ad1d-32144f96135d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Manager\05.BmpMgr\01.CBitmap">
+      <UniqueIdentifier>{67425488-35eb-40b4-a03c-37edb9c61caf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Manager\06.SceneMgr">
+      <UniqueIdentifier>{fc56e429-ae1c-43d1-9940-914a275fad35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Manager\06.SceneMgr\01.Scene">
+      <UniqueIdentifier>{58dde41c-f22c-41fd-b099-1bfcc6fb627a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Manager\06.SceneMgr\01.Scene\01.Menu">
+      <UniqueIdentifier>{08e31c7c-ac37-4ef6-aa50-3b4689f73f08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Manager\06.SceneMgr\01.Scene\02.Game">
+      <UniqueIdentifier>{e0ed132d-d1d4-41ea-b12f-55a81a0b30be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Manager\06.SceneMgr\01.Scene\02.Game\01.Stage1">
+      <UniqueIdentifier>{f984788e-72c8-4521-9ff2-8093df5bb843}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Manager\06.SceneMgr\01.Scene\03.Title">
+      <UniqueIdentifier>{be7dfc37-b5d6-4a7e-9d81-3a54a8414798}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Manager\07.KeyMgr">
+      <UniqueIdentifier>{80b006bc-a095-4399-9ab0-e6389cbf4247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Manager\08.LineMgr">
+      <UniqueIdentifier>{3134275d-d028-4821-a307-36fda987c6cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Manager\08.LineMgr\01.Line">
+      <UniqueIdentifier>{bafa3a6b-87ef-46ac-8e42-c8a18d28e230}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Manager\09.DataMgr">
+      <UniqueIdentifier>{8868ca78-9262-4f56-a548-5754530731af}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -477,6 +480,9 @@
     <ClInclude Include="Burst.h">
       <Filter>소스 파일\02.Object\02.Enemy\09.Kessi\03.Burst</Filter>
     </ClInclude>
+    <ClInclude Include="SoundMgr.h">
+      <Filter>소스 파일\01.Manager\02.SoundMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MetalSlug.rc">
@@ -689,6 +695,9 @@
     </ClCompile>
     <ClCompile Include="Burst.cpp">
       <Filter>소스 파일\02.Object\02.Enemy\09.Kessi\03.Burst</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundMgr.cpp">
+      <Filter>소스 파일\01.Manager\02.SoundMgr</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

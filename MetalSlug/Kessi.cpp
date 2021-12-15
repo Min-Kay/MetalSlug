@@ -67,16 +67,6 @@ void Kessi::Initialize()
 		}
 	}
 
-	if (!burst[0])
-	{
-		for (int i = 0; i < 2; ++i)
-		{
-			burst[i] = new Burst;
-			burst[i]->Initialize();
-			ObjPoolMgr::Get_Instance()->Add_Object(OBJ::ENEMY, bazuka[i]);
-		}
-	}
-
 	BmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Kessi.bmp",L"Kessi");
 }
 
@@ -94,10 +84,26 @@ void Kessi::Late_Update()
 	if (isDying || isDead)
 		return;
 
+	auto iter = props.begin();
+	for (; iter != props.end();)
+	{
+		if ((*iter)->Get_Dead())
+		{
+			ObjPoolMgr::Get_Instance()->Delete_Object(OBJ::ENEMY, *iter);
+			SAFE_DELETE(*iter);
+			iter = props.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
+	}
+
 	for (int i = 0; i < 2; ++i)
 	{
-		bazuka[i]->Set_Pos(info.x - 100 + (i * 200.f), info.y - 75.f);
-		burst[i]->Set_Pos(info.x - 150 + (i * 300.f), info.y + 100.f);
+		bazuka[i]->Set_Pos(info.x - 100 + (i * 200.f), info.y - 50.f);
+		if(burst[i])
+			burst[i]->Set_Pos(info.x - 200 + (i * 400.f), info.y + 150.f);
 	}
 
 	if (hp <= 0)
@@ -202,13 +208,24 @@ void Kessi::State_Machine()
 			rosinGauge = 0;
 			burstGauge >> 3;
 		}
-		/*else if (burstGauge > 10000)
+		else if (burstGauge > 10000)
 		{
 			state = STATE::BURST;
-			rosinGauge >> 2;
-		}*/
+			rosinGauge >> 3;
+			burstGauge = 0;
+		}
 		break;
 	case Kessi::BURST:
+
+		if (!burst[0])
+		{
+			for (int i = 0; i < 2; ++i)
+			{
+				burst[i] = new Burst;
+				burst[i]->Initialize();
+				ObjPoolMgr::Get_Instance()->Add_Object(OBJ::ENEMY, burst[i]);
+			}
+		}
 
 		if (!burstOn)
 		{
@@ -222,17 +239,15 @@ void Kessi::State_Machine()
 			info.y = init_y; 
 		}
 
-		if (static_cast<Burst*>(burst[0])->Get_Maintain())
+		if (static_cast<Burst*>(burst[0])->Get_Spawning())
 		{
 			info.x += burstSpeed;
-			burstMove += burstSpeed;
 			
-			if (burstMove > WINCX >> 2)
+			if (info.x > WINCX-x ||
+				info.x < -x )
 			{
-				burstMove = 0.f;
 				burstSpeed *= -1.f;
 			}
-
 		}
 
 		if (!static_cast<Burst*>(burst[0])->Get_Active())
@@ -289,6 +304,8 @@ void Kessi::list_Release()
 {
 	for (int i = 0; i < 2; ++i)
 	{
+		ObjPoolMgr::Get_Instance()->Delete_Object(OBJ::ENEMY, burst[i]);
+		SAFE_DELETE(burst[i]);
 		ObjPoolMgr::Get_Instance()->Delete_Object(OBJ::ENEMY, bazuka[i]);
 		SAFE_DELETE(bazuka[i]);
 	}

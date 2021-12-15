@@ -16,8 +16,10 @@ public:
 public:
 	void Set_Active();
 	const bool& Get_Active() const { return active; }
-	const bool& Get_Maintain() const { return maintain; }
+	const bool& Get_Spawning() const { return spawning; }
 	void Set_Collision(OBJ::ID _id, Obj* _opponent, DIR::ID _dir);
+
+	virtual void Update_Rect(); 
 private:
 	bool active;
 	bool spawning;

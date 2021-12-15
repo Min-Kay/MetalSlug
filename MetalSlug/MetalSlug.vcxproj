@@ -29,7 +29,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -90,10 +90,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>framework.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>fmodex_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -219,6 +221,7 @@
     <ClInclude Include="SolDaeLaser.h" />
     <ClInclude Include="SolDaeRoot.h" />
     <ClInclude Include="Soldier.h" />
+    <ClInclude Include="SoundMgr.h" />
     <ClInclude Include="Stage2.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="targetver.h" />
@@ -290,6 +293,7 @@
     <ClCompile Include="SolDaeLaser.cpp" />
     <ClCompile Include="SolDaeRoot.cpp" />
     <ClCompile Include="Soldier.cpp" />
+    <ClCompile Include="SoundMgr.cpp" />
     <ClCompile Include="Stage2.cpp" />
     <ClCompile Include="ThreeHead.cpp" />
     <ClCompile Include="ThreeHeadBullet.cpp" />
