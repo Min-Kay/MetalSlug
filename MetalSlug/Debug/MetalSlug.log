@@ -1,14 +1,94 @@
-﻿  Game.cpp
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(122,37): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(122,28): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(128,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(128,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(134,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(134,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(140,52): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(140,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(146,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\Game.cpp(146,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\ObjPoolMgr.h(40): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
-C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\MetalSlug\DataMgr.h(65): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
-  MetalSlug.vcxproj -> C:\Users\admin\Desktop\수업\쥬신\API 시연회\MetalSlug\Debug\MetalSlug.exe
+﻿  Bazuka.cpp
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(108,70): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(108,61): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(108,52): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(108,38): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(113,70): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(113,61): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(113,52): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(113,38): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(116,75): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(116,65): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(116,52): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(116,38): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(120,70): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(120,61): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(120,52): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(120,38): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(123,70): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(123,61): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(123,52): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(123,38): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(132,70): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(132,61): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(132,52): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(132,38): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(137,70): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(137,61): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(137,52): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(137,38): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(145,69): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(145,60): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(145,51): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(145,37): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(149,70): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(149,61): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(149,52): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(149,38): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(152,75): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(152,65): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(152,52): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(152,38): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(156,70): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(156,61): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(156,52): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(156,38): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(159,70): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(159,61): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(159,52): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(159,38): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(166,79): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(166,70): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(252,68): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(257,79): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(257,68): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(265,68): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(270,80): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(270,68): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(278,76): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(283,68): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(288,68): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(324,67): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(329,78): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(329,67): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(337,67): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(342,79): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(342,67): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Bazuka.cpp(348,74): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Game.cpp
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(122,37): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(122,28): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(128,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(128,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(134,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(134,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(140,52): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(140,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(146,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Game.cpp(146,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  ObjPoolMgr.cpp
+  Stage2.cpp
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Stage2.cpp(108,37): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Stage2.cpp(108,28): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Stage2.cpp(114,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Stage2.cpp(114,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Stage2.cpp(120,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Stage2.cpp(120,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Stage2.cpp(126,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\Stage2.cpp(126,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\ObjPoolMgr.cpp(460): warning C4172: 지역 변수 또는 임시: info의 주소를 반환하고 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\ObjPoolMgr.cpp(469): warning C4172: 지역 변수 또는 임시: rect의 주소를 반환하고 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\DataMgr.h(65): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
+C:\Users\민경욱\Desktop\프로젝트\MetalSlug\MetalSlug\ObjPoolMgr.h(40): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
+  MetalSlug.vcxproj -> C:\Users\민경욱\Desktop\프로젝트\MetalSlug\Debug\MetalSlug.exe

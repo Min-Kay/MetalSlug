@@ -6,6 +6,10 @@ class Parachute;
 class Bazuka :
 	public Enemy
 {
+
+public:
+	Bazuka();
+	virtual ~Bazuka();
 public:
 	virtual void Initialize() override;
 	virtual int Update() override;

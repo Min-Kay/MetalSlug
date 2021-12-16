@@ -2,6 +2,20 @@
 #include "Parachute.h"
 #include "Manager.h"
 
+Bazuka::Bazuka()
+{
+	para = nullptr;
+}
+
+Bazuka::~Bazuka()
+{
+	if (para)
+	{
+		ObjPoolMgr::Get_Instance()->Delete_Object(OBJ::ENEMY, para);
+		SAFE_DELETE(para);
+	}
+}
+
 void Bazuka::Initialize()
 {
 	para = new Parachute;
